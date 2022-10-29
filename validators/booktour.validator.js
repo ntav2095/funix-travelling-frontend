@@ -1,15 +1,5 @@
 const { body } = require("express-validator");
 
-// tourId
-// gender
-// name
-// email
-// phone
-// address
-// departureDay
-// adult
-// child
-
 const genders = ["mr", "mrs", "miss"];
 
 module.exports = [
