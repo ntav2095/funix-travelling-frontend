@@ -6,8 +6,10 @@ const tourController = require("../controllers/tour.controller");
 
 // validators
 const bookTourValidator = require("../validators/booktour.validator");
+const reviewTourValidator = require("../validators/reviewTour.validator");
 
 // routes
 router.post("/book", bookTourValidator, tourController.bookTour);
+router.post("/review", reviewTourValidator, tourController.addReview);
 
 module.exports = router;
