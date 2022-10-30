@@ -10,6 +10,7 @@ const BookTour = new Schema({
   },
   customerInfor: {
     gender: {
+      // mr | mrs | miss
       type: String,
       required: true,
     },
