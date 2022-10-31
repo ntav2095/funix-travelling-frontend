@@ -37,7 +37,7 @@ app.use("/tour", tourRouter);
 app.use("/blog", blogRouter);
 
 // port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 //connect database and port
 mongoose
