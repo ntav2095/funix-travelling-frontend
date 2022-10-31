@@ -11,7 +11,11 @@ const Blogs = new Schema(
       type: String,
       required: true,
     },
-    content: [],
+    content: {
+      type: String,
+      required: true,
+    },
+    image: [],
   },
   { timestamps: true }
 );
