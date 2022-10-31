@@ -1,9 +1,9 @@
 // import "tour.css";
 
-import Header from "../Compomentchung/HeaderCompoment";
-import Tour from "../Compomentchung/TourCompoment";
+
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-function Thongtinlienhe() {
+import Header from "../../layout/HeaderCompoment";
+function CamnangTour() {
   return (
     <>
       <div className="Navbar_header">
@@ -16,4 +16,4 @@ function Thongtinlienhe() {
   );
 }
 
-export default Thongtinlienhe;
+export default CamnangTour;

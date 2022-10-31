@@ -1,8 +1,9 @@
 // import "tour.css";
 
-import Header from "../Compomentchung/HeaderCompoment";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
+import Header from "../../layout/HeaderCompoment";
 
-function TourDetail() {
+function VISA() {
   return (
     <>
       <div className="Navbar_header">
@@ -15,4 +16,4 @@ function TourDetail() {
   );
 }
 
-export default TourDetail;
+export default VISA;

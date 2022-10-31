@@ -1,4 +1,6 @@
+import './HeaderComponent.css'
 import React, { Component } from "react";
+import SearchCompoment from './seachCompoment'
 import {
   Navbar,
   NavbarBrand,
@@ -25,6 +27,7 @@ class Header extends Component {
   }
 
   render() {
+    console.log(this.props.style)
     return (
       <React.Fragment>
         <Navbar dark expand="lg ">
@@ -44,19 +47,22 @@ class Header extends Component {
                   <NavLink
                     className="nav-link"
                     to="/"
-                    style={{ color: "#ccc " }}
+                    style={{ 
+                      color: this.props.style?this.props.style:'black' 
+                    }}
                   >
                     TRANG CHỦ
                   </NavLink>
-                </NavItem>
-                <NavDropdown title="GIỚI THIỆU" id="basic-nav-dropdown">
+                </NavItem >
+                <NavItem style={{ color: this.props.style?this.props.style:'black' }}>
+                <NavDropdown title="GIỚI THIỆU"  id="basic-nav-dropdown">
                   <NavDropdown.Item href="#action/3.1">
-                    <NavLink className="nav-link" to="/TONGQUAN">
+                    <NavLink className="nav-link" style={{ color: this.props.style?this.props.style:'black' }} to="/TONGQUAN">
                       TỔNG QUAN CÔNG TY
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">
-                    <NavLink className="nav-link" to="/LIENHE">
+                    <NavLink className="nav-link" style={{ color: this.props.style?this.props.style:'black' }} to="/LIENHE">
                       THÔNG TIN LIÊN HỆ
                     </NavLink>
                   </NavDropdown.Item>
@@ -64,22 +70,23 @@ class Header extends Component {
                     Something
                   </NavDropdown.Item> */}
                 </NavDropdown>
-
+                </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/TOURSLIST">
+                  <NavLink className="nav-link" style={{ color: this.props.style?this.props.style:'black' }} to="/TOURSLIST">
                     DANH SÁCH TOURS
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/VISA">
+                  <NavLink className="nav-link" style={{ color: this.props.style?this.props.style:'black' }} to="/VISA">
                     DỊCH VỤ VISA
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/CAMNANG">
+                  <NavLink className="nav-link" style={{ color: this.props.style?this.props.style:'black' }} to="/CAMNANG">
                     CẨM NANG DU LỊCH
                   </NavLink>
                 </NavItem>
+                <SearchCompoment />
               </Nav>
             </Collapse>
           </div>

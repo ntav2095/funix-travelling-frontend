@@ -1,9 +1,10 @@
 // import "tour.css";
 
-import Header from "../Compomentchung/HeaderCompoment";
-import Tour from "../Compomentchung/TourCompoment";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
-function TongquanCT() {
+import Header from "../../layout/HeaderCompoment";
+
+
+
+function TourDetail() {
   return (
     <>
       <div className="Navbar_header">
@@ -16,4 +17,4 @@ function TongquanCT() {
   );
 }
 
-export default TongquanCT;
+export default TourDetail;

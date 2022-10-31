@@ -1,8 +1,10 @@
 // import "tour.css";
 
-import Header from "../Compomentchung/HeaderCompoment";
-import Tour from "../Compomentchung/TourCompoment";
+
+
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import Tour from "../../Compoment/toursComponent/TourCompoment";
+import Header from "../../layout/HeaderCompoment";
 function DANHSACHTOURS() {
   return (
     <>
