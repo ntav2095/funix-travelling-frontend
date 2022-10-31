@@ -1,38 +1,213 @@
-.App {
+.body_container {
+  margin-left: auto;
+  margin-right: auto;
+}
+/* header trang chủ */
+.Navbar_header {
+  position: relative !important;
+  z-index: 1;
+}
+.container {
+  display: contents;
+}
+.Navbar_header-slider {
+  position: absolute !important;
+  z-index: 2;
+}
+nav.navbar.navbar-expand-md.navbar-light.bg-light {
+  display: contents;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link,
+.navbar-nav .show > .nav-link {
+  color: #ccc !important;
+}
+.navbar-nav .nav-link.active:hover,
+.navbar-nav .nav-link:hover,
+.navbar-nav .show > .nav-link:hover {
+  color: #ccc !important;
+}
+a.dropdown-item {
+  color: #adb5bd !important;
+}
+.container {
+  margin-left: 10%;
+}
+.slider {
+  width: 200px;
+  height: 500px;
+}
+
+.span.carousel-control-next-icon:hover() {
+  opacity: 1;
+}
+.carousel-control-next,
+.carousel-control-prev {
+  opacity: 0;
+}
+.carousel-caption {
+  bottom: 35% !important;
+  right: 0;
+  left: 13% !important;
+  font-family: "roboto";
+  /* font-weight: 500; */
+}
+.carousel-caption.h3 {
+  font-size: 2em !important ;
+}
+
+#slider_h3 {
+  /* display: flex; */
+  color: #fff !important;
+
+  animation-name: example;
+  animation-duration: 3s;
+}
+#slider_h3:hover {
+  /* display: flex; */
+  color: #fff !important;
+
+  animation-name: example;
+  animation-duration: 3s;
+}
+@keyframes example {
+  0% {
+    opacity: 0;
+    /* top: 0%; */
+  }
+  50% {
+    opacity: 0.5;
+    /* top: 34.7%; */
+  }
+  100% {
+    opacity: 1;
+    /* bottom: 35%; */
+  }
+}
+.button {
+  background-color: brown;
+}
+.carousel-indicators [data-bs-target] {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50%;
+}
+
+nav.navbar.navbar-expand-lg.navbar-dark {
+  padding-left: 6rem;
+  font-size: 1.1rem;
+  padding-top: 15px;
+}
+/* chi tiết tour*/
+#chitiet {
+  text-align: center;
+  padding-left: 30px !important;
+  display: block;
+  text-transform: uppercase;
+  line-height: 20px !important;
+  color: #fff;
+  background-color: #ff5a00;
+  padding: 9px 17px;
+  width: 100%;
+}
+#chitiet-gia-tien {
+  color: red !important;
+  line-height: 20px;
+  border-radius: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+  text-align: center;
+  margin: 0px 0px;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+}
+div#Body-content\ {
+  padding: 2em 8em;
+  background-color: rgb(20 2 2 / 16%);
+  background-image: url("sec_inbound_tour_bg.jpg");
+}
+
+h1#Body-content_tour {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*footer*/
+.footer {
+  background-color: #0d293a;
+  color: #f1f1f1;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.footer-title {
+  font-size: 19px;
+  /* padding-bottom: 20px; */
+  color: #faab3b;
+  margin-bottom: 14px;
+  font-weight: 600;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.footer h3 {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: #fff;
+}
+.footer ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.footer svg {
+  margin-right: 5px;
+}
+.footer-hotline {
+  font-weight: bold;
+  color: #ffff15;
+  margin-bottom: 0px;
+}
+.footer-social-share {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 6px;
+  margin-top: 7px;
+}
+.footer-social-share li {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: black;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  font-size: 16px;
+}
+.footer-social-share svg {
+  margin: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.footer a {
+  text-decoration: none;
+  color: #f1f1f1;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.footer a:hover {
+  color: #fff;
+}
+.footer-menu li {
+  padding: 5px 0;
+}
+.footer-menu li + li {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+/* content giới thiệu*/
+div#row-159726792 {
+  padding: 8em;
+}
+.footer.pt-5.pb-3 {
+  padding: 8em;
+}
+.dropdown-menu.show {
+  background: none;
+  border: none;
+}
+a.dropdown-item {
+  color: #ffffffcc;
+}
+a {
+  text-decoration: none !important;
 }
