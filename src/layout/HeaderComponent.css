@@ -1,13 +1,17 @@
-
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link,
 .navbar-nav .show > .nav-link {
   font-size: 1em;
   font-weight: 600;
-  color: rgb(0, 0, 0) ;
+  color: rgb(0, 0, 0);
 }
 .navbar-nav .nav-link.active:hover,
 .navbar-nav .nav-link:hover,
 .navbar-nav .show > .nav-link:hover {
   color: rgb(53, 49, 49) !important ;
+}
+.Navbar_header.navbar {
+}
+.carousel-inner {
+  /* position: relative; */
 }
