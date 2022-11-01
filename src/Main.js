@@ -8,7 +8,7 @@ import Thongtinlienhe from "./page/gioithieu/ThongtinlienheCompoment";
 import TongquanCT from "./page/gioithieu/TongquanCompoment";
 import VISA from "./page/Divuvisa/VisaCompoment";
 import CamnangTour from "./page/camnangdulich/CamnangCompoment";
-import TourDetail from "./page/danhsachtours/Tourdetailcopoment";
+import TourDetail from "./pages/TourDetail/Tourdetailcopoment";
 import IndividualIntervalsExample from "./Compoment/HomeComponent/SLIDERCOmpoment";
 import Home from "./page/trangchu/TrangchuCompoment";
 class Main extends Component {
@@ -27,7 +27,7 @@ class Main extends Component {
           <Route path="/TONGQUAN" element={<TongquanCT />} />
           <Route path="/VISA" element={<VISA />} />
           <Route path="/CAMNANG" element={<CamnangTour />} />
-          <Route path="/TOURSLIST/:a/e" element={<TourDetail />} />
+          <Route path="/TOURSLIST/:id" element={<TourDetail />} />
         </Routes>
         <Footer />
       </div>

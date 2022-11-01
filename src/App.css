@@ -6,6 +6,7 @@
 .Navbar_header {
   position: relative !important;
   z-index: 1;
+  margin-top: -83px;
 }
 .container {
   display: contents;
@@ -13,6 +14,11 @@
 .Navbar_header-slider {
   position: absolute !important;
   z-index: 2;
+}
+
+.navbar {
+  height: 83px;
+  z-index: 999;
 }
 nav.navbar.navbar-expand-md.navbar-light.bg-light {
   display: contents;
@@ -116,7 +122,7 @@ nav.navbar.navbar-expand-lg.navbar-dark {
 div#Body-content\ {
   padding: 2em 8em;
   background-color: rgb(20 2 2 / 16%);
-  background-image: url("sec_inbound_tour_bg.jpg");
+  background-image: url("/src/assets/images/sec_inbound_tour_bg.jpg");
 }
 
 h1#Body-content_tour {

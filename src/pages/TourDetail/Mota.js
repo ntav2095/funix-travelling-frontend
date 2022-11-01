@@ -6,7 +6,7 @@ const panes = [
     menuItem: "Mô tả",
     render: () => (
       <Tab.Pane attached={false}>
-        <div class="lich_trinh_title other_news_title">
+        <div className="lich_trinh_title other_news_title">
           <span>
             Đài Loan hòn đảo xinh đẹp ở phía Đông Nam Trung Quốc. Bên cạnh các
             di tích lịch sử văn hóa đa sắc màu, du khách còn bị níu chân bởi nền
@@ -24,12 +24,12 @@ const panes = [
     render: () => (
       <Tab.Pane attached={false}>
         <div
-          class="woocommerce-Tabs-panel woocommerce-Tabs-panel--lich-trinh panel entry-content "
+          className="woocommerce-Tabs-panel woocommerce-Tabs-panel--lich-trinh panel entry-content "
           id="tab-lich-trinh"
           role="tabpanel"
           aria-labelledby="tab-title-lich-trinh"
         >
-          <h2 class="yikes-custom-woo-tab-title yikes-custom-woo-tab-title-lich-trinh">
+          <h2 className="yikes-custom-woo-tab-title yikes-custom-woo-tab-title-lich-trinh">
             Lịch Trình
           </h2>
           <p>
@@ -207,12 +207,12 @@ const panes = [
     render: () => (
       <Tab.Pane attached={false}>
         <div
-          class="woocommerce-Tabs-panel woocommerce-Tabs-panel--quy-dinh-tour panel entry-content "
+          className="woocommerce-Tabs-panel woocommerce-Tabs-panel--quy-dinh-tour panel entry-content "
           id="tab-quy-dinh-tour"
           role="tabpanel"
           aria-labelledby="tab-title-quy-dinh-tour"
         >
-          <h2 class="yikes-custom-woo-tab-title yikes-custom-woo-tab-title-quy-dinh-tour">
+          <h2 className="yikes-custom-woo-tab-title yikes-custom-woo-tab-title-quy-dinh-tour">
             Quy định Tour
           </h2>
           <p>
@@ -249,12 +249,12 @@ const panes = [
       <Tab.Pane attached={false}>
         {" "}
         <div
-          class="woocommerce-Tabs-panel woocommerce-Tabs-panel--gia-bao-gom panel entry-content "
+          className="woocommerce-Tabs-panel woocommerce-Tabs-panel--gia-bao-gom panel entry-content "
           id="tab-gia-bao-gom"
           role="tabpanel"
           aria-labelledby="tab-title-gia-bao-gom"
         >
-          <h2 class="yikes-custom-woo-tab-title yikes-custom-woo-tab-title-gia-bao-gom">
+          <h2 className="yikes-custom-woo-tab-title yikes-custom-woo-tab-title-gia-bao-gom">
             Giá bao gồm
           </h2>
           <p>

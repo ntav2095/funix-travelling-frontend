@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SearchCompoment from "./seachCompoment";
+import Search from "./Search";
 import {
   Navbar,
   NavbarBrand,
@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 // css
-import "./HeaderComponent.css";
+import "./Navbar.css";
 
 class Header extends Component {
   constructor(props) {
@@ -23,7 +23,6 @@ class Header extends Component {
       search: "",
     };
   }
-
   toggleNav() {
     this.setState({
       isNavOpen: !this.state.isNavOpen,
@@ -31,7 +30,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log(this.props.style);
     return (
       <React.Fragment>
         <Navbar dark expand="lg ">
@@ -108,7 +106,7 @@ class Header extends Component {
                     style={{
                       color: this.props.style ? this.props.style : "black",
                     }}
-                    to="/VISA"
+                    to="/dich-vu-visa"
                   >
                     DỊCH VỤ VISA
                   </NavLink>
@@ -124,7 +122,7 @@ class Header extends Component {
                     CẨM NANG DU LỊCH
                   </NavLink>
                 </NavItem>
-                <SearchCompoment />
+                <Search />
               </Nav>
             </Collapse>
           </div>
