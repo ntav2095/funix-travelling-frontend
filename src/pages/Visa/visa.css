@@ -1,0 +1,89 @@
+.visa-content-feature ul li {
+  font-size: 15px;
+  color: #1d1d1d;
+  font-family: "os_regular";
+  margin-bottom: 15px;
+}
+.visa-info-feature ul li {
+  display: inline-block;
+  font-size: 14px;
+  color: #1d1d1d;
+  font-family: "os_regular";
+  padding: 20px 15px;
+}
+.visa-info-feature ul li:first-child {
+  padding-left: 0px;
+}
+.type-visa.box-rating-comment p {
+  display: block;
+  line-height: 32px;
+  margin: 20px 0px;
+  color: #00b874;
+}
+#xem-chi-tiet:hover {
+  color: #00b874;
+  cursor: pointer;
+}
+#visa-item-box-services
+  .visa-single-services-main
+  .content-services-main
+  ul
+  li {
+  background: #fff;
+  padding: 25px 20px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  border: solid 1px #e6e6e6;
+}
+.btn-open-book-visa {
+  border-radius: 5px;
+  background-color: #f98713;
+  border: 0px;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 14px;
+  font-family: "os_bold";
+  min-width: 140px;
+  outline: 0;
+  margin-left: 30%;
+  margin-top: 3%;
+}
+.box-top {
+  grid-template-columns: auto auto;
+}
+.price-current {
+  font-size: 20px;
+  color: #ff9000;
+  margin-left: 30%;
+  margin-top: 5%;
+  font-family: "os_bold";
+}
+.chi-tiet-dich-vu {
+  padding: 5px;
+
+  list-style: none;
+}
+.chi-tiet-dich-vu li {
+  background: #fff;
+  padding: 25px 20px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  border: solid 1px #e6e6e6;
+  list-style: none;
+}
+.col-sm-9 {
+  background: whitesmoke;
+  border-radius: 8px;
+  border: 1px solid;
+}
+.dich-vu {
+  background-color: rgb(244, 244, 244);
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid floralwhite;
+}
+
+h3.title-name {
+  font-size: 18px;
+}
