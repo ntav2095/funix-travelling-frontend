@@ -2,12 +2,12 @@ import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
 import Header from "../../layout/HeaderCompoment";
 import Tour from "../toursComponent/TourCompoment";
-function IndividualIntervalsExample() {
+function Sliderheader() {
   return (
     <>
       <div className="Navbar_header">
         <div className="Navbar_header-slider">
-          <Header style='white' />
+          <Header style="white" />
         </div>
         <Carousel>
           <Carousel.Item>
@@ -118,9 +118,8 @@ function IndividualIntervalsExample() {
           </div>
         </div>
       </div>
-     
     </>
   );
 }
 
-export default IndividualIntervalsExample;
+export default Sliderheader;
