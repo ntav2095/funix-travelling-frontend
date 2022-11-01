@@ -11,7 +11,11 @@ function TourDetail() {
         <div className="navbar">
           <Header />
         </div>
-        <div id="Body-content "></div>
+        <div id="Body-content ">
+
+
+          
+        </div>
       </div>
     </>
   );

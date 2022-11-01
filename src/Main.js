@@ -27,7 +27,7 @@ class Main extends Component {
           <Route path="/TONGQUAN" element={<TongquanCT />} />
           <Route path="/VISA" element={<VISA />} />
           <Route path="/CAMNANG" element={<CamnangTour />} />
-          <Route path="/TOURSLIST/:a/e" element={<TourDetail />} />
+          <Route path="/TOURSLIST/:Id" element={<TourDetail />} />
         </Routes>
         <Footer />
       </div>
