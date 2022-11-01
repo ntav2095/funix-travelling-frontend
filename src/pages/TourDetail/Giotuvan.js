@@ -44,7 +44,7 @@ function Goituvan() {
           </Carousel>
         </Col>
         <Col>
-          <div class="form-tu-van">
+          <div className="form-tu-van">
             <h3>Gọi để tư vấn</h3>
             <Row className="mb-3 lich-dang-ky">
               <Col>
@@ -77,16 +77,16 @@ function Goituvan() {
               </Col>
             </Row>
 
-            <div class="gia-form-tu-van">
-              <p class="gia-chuan">
-                <span class="tien">3,000,000</span>
+            <div className="gia-form-tu-van">
+              <p className="gia-chuan">
+                <span className="tien">3,000,000</span>
                 <span> đồng</span>
               </p>
             </div>
-            <a href="#dattour" class="a-dat-tour">
+            <a href="#dattour" className="a-dat-tour">
               Đặt Tour ngay
             </a>
-            <div class="form-goi-lai">
+            <div className="form-goi-lai">
               <p>Liên hệ càng sớm - Giá càng rẻ</p>
               <p>
                 <img src="/asscets/img/duanmoi.png" alt="Second slide" />
@@ -96,7 +96,10 @@ function Goituvan() {
                 phút !
               </p>
               <p>
-                <span class="wpcf7-form-control-wrap" data-name="dien-thoai">
+                <span
+                  className="wpcf7-form-control-wrap"
+                  data-name="dien-thoai"
+                >
                   <input
                     type="tel"
                     name="dien-thoai"
@@ -109,7 +112,7 @@ function Goituvan() {
                 <input
                   type="submit"
                   value="Yêu cầu gọi lại"
-                  class="with100 mt-2"
+                  className="with100 mt-2"
                 />
               </p>
             </div>
