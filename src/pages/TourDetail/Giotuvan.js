@@ -1,7 +1,4 @@
-// import "tour.css";
 import "./tour.css";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
-import Header from "../../layout/HeaderCompoment";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";

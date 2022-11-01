@@ -1,19 +1,12 @@
-// import "tour.css";
+//
+import Layout from "../../layout/Default";
 
-import Breadcrumb from "react-bootstrap/Breadcrumb";
-import Header from "../../layout/HeaderCompoment";
-
-function VISA() {
+function Visa() {
   return (
-    <>
-      <div className="Navbar_header">
-        <div className="navbar">
-          <Header />
-        </div>
-        <div id="Body-content "></div>
-      </div>
-    </>
+    <Layout>
+      <div id="Body-content "></div>
+    </Layout>
   );
 }
 
-export default VISA;
+export default Visa;

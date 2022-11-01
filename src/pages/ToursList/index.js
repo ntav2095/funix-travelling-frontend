@@ -1,6 +1,6 @@
 import Layout from "../../layout/Default";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import Tour from "../../Compoment/toursComponent/TourCompoment";
+import Tour from "../../components/toursComponent/TourCompoment";
 
 function ToursList() {
   return (
