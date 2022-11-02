@@ -6,9 +6,17 @@ import React, { useState } from "react";
 import Xemchitiet1 from "./xemchitiet1";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Collapse, Button, CardBody, Card, Input } from "reactstrap";
+import Datvisa from "./datve";
 function Visa() {
   const [isOpen1, setIsOpen] = useState(false);
-  const toggle1 = () => setIsOpen(!isOpen1);
+  const [Chon, setchon] = useState("CHỌN");
+  const toggle1 = () => {
+    setIsOpen(!isOpen1);
+    if (Chon == "CHỌN") {
+      setchon("HỦY");
+    } else setchon("CHỌN");
+  };
+
   return (
     <Layout>
       <div id="Body-content ">
@@ -154,10 +162,16 @@ function Visa() {
                       <div class="box-action">
                         <button
                           onClick={toggle1}
-                          style={{ marginBottom: "1rem" }}
+                          // onClick={chon}
+                          style={{
+                            marginBottom: "1rem",
+                            backgroundColor:
+                              Chon == "HỦY" ? "rgb(244,244,244)" : "",
+                            color: Chon == "HỦY" ? "black" : "",
+                          }}
                           class="btn-open-book-visa type-2"
                         >
-                          Chọn
+                          {Chon}
                         </button>
                       </div>
                     </Col>
@@ -169,64 +183,7 @@ function Visa() {
                     <Xemchitiet1 />
                   </div>
                   <Collapse isOpen={isOpen1}>
-                    <Card>
-                      <CardBody>
-                        <div class="type-0 box-book">
-                          <div class="divided"></div>
-                          <form method="post" action="">
-                            <Row class="box-content">
-                              <Col class="box-form">
-                                <Row>
-                                  <Col className="box-info-date">
-                                    <label>Chọn ngày nhập cảnh</label>
-                                    <Input
-                                      id="exampleDate"
-                                      name="date"
-                                      placeholder="date placeholder"
-                                      type="date"
-                                    />
-                                    <div className="box-count-date"></div>
-                                  </Col>
-                                  <Col id="box-info-customer">
-                                    <label>Áp dụng cho</label>
-                                    <div id="box-count-customer">
-                                      <span
-                                        onclick="APPS_POST_VISA.post_visa_system_count_customer({type:'minus',index:0})"
-                                        className="minus type-icon disabled"
-                                      >
-                                        <span className="fas fa-minus"></span>
-                                      </span>
-                                      <span className="type-text">1 khách</span>
-                                      <span
-                                        onclick="APPS_POST_VISA.post_visa_system_count_customer({type:'plus',index:0})"
-                                        className="plus type-icon"
-                                      >
-                                        <span className="fas fa-plus"></span>
-                                      </span>
-                                    </div>
-                                  </Col>
-                                </Row>
-                              </Col>
-                              <Col className="box-book">
-                                <Row>
-                                  <Col id="box-info-price">
-                                    <label>Tổng tiền</label>
-                                    <div className="info-title">
-                                      <span className="price">5,800,000</span>{" "}
-                                      VNĐ/
-                                      <span className="count">1</span> khách
-                                    </div>
-                                  </Col>
-                                  <Col id="box-btn-submit">
-                                    <button type="submit">Đặt Ngay</button>
-                                  </Col>
-                                </Row>
-                              </Col>
-                            </Row>
-                          </form>
-                        </div>
-                      </CardBody>
-                    </Card>
+                    <Datvisa />
                   </Collapse>
                 </div>
               </li>
