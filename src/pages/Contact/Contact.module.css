@@ -1,0 +1,91 @@
+.contact {
+  display: flex;
+}
+
+@media only screen and (max-width: 550px) {
+  .contact {
+    flex-direction: column;
+  }
+}
+
+.contact > * {
+  flex: 1;
+  padding: 0px 15px 30px;
+  color: #777;
+  font-size: 16px;
+}
+
+.contact p {
+  margin-bottom: 20px;
+}
+
+.companyInfo h2 {
+  color: #555;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.companyInfo h3 {
+  font-size: 16px;
+  margin-bottom: 7px;
+}
+
+.companyInfo p {
+  display: flex;
+  align-items: center;
+}
+
+.companyInfo p span {
+  padding-left: 6px;
+}
+
+.companyInfo svg {
+  width: 18px;
+}
+
+/* form  */
+.form label {
+  display: block;
+  width: 100%;
+  margin-bottom: 13px;
+  height: 75px;
+}
+
+.form .label {
+  margin-bottom: 2px;
+  color: #222;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form label input,
+.form label textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid #ccc;
+  outline: none;
+  margin-bottom: 2px;
+  padding: 4px 11px;
+}
+
+.form label p:last-child {
+  color: red;
+  font-size: 13px;
+  margin: 0;
+}
+
+.form button {
+  margin-top: 24px;
+  background: #2d9ad9;
+  padding: 8px 16px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.form button:hover {
+  box-shadow: inset 0 0 0 100px rgb(0 0 0 / 20%);
+}
