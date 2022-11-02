@@ -6,6 +6,7 @@ import ToursList from "./pages/ToursList";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Visa from "./pages/Visa";
+import VisaService from "./pages/VisaService";
 import TravelHandbook from "./pages/TravelHandbook";
 import TravelHandbookDetail from "./pages/TravelHandbookDetail";
 import TourDetail from "./pages/TourDetail";
@@ -23,7 +24,8 @@ function App() {
         <Route path="/danh-sach-tour" element={<ToursList />} />
         <Route path="/lien-he" element={<Contact />} />
         <Route path="/ve-cong-ty" element={<About />} />
-        <Route path="/dich-vu-visa" element={<Visa />} />
+        <Route path="/dich-vu-visa/1" element={<Visa />} />
+        <Route path="/dich-vu-visa" element={<VisaService />} />
         <Route path="/cam-nang-du-lich" element={<TravelHandbook />} />
         <Route
           path="/cam-nang-du-lich/:id"

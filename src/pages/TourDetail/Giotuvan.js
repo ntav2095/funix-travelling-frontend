@@ -12,7 +12,7 @@ function Goituvan() {
   return (
     <Container id="Goi-tu-van" >
       <Row>
-        {/* <Col xs={8}>
+        {/*<Col xs={8}>
           <Carousel>
             <Carousel.Item>
               <img

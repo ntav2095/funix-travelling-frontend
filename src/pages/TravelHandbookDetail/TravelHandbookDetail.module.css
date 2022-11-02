@@ -1,37 +1,136 @@
 @import url("http://fonts.cdnfonts.com/css/utm-avo");
 
-.travelHandbookDetail {
+.story article p {
+  margin-bottom: 1.3em;
+}
+
+.story article h3 {
+  font-size: 1.25em;
+  color: #555;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.storyHeader {
+  padding: 24px;
+}
+
+.storyHeader h1 {
+  color: #555;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  text-rendering: optimizeSpeed;
+  font-size: 24px;
+}
+
+.storyHeader .date {
+  font-size: 13px;
+  color: #777;
+}
+
+.storyHeader .date a,
+span {
+  color: #334862;
+}
+
+.storyContent {
+  padding: 0 24px 24px;
+}
+
+.travelHandbookDetail aside {
+  padding-bottom: 16px;
+}
+
+.travelHandbookDetail aside h2 {
+  color: #777;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.travelHandbookDetail ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.travelHandbookDetail aside li {
+  border-bottom: 1px solid #ececec;
+}
+
+/* related stories  */
+.relatedStories {
+  border-top: 1px solid #ececec;
+  padding-top: 24px;
+}
+
+.relatedStoriesTitle {
+  font-size: 18px;
+  color: #777;
+  padding-bottom: 8px;
+  font-weight: 600;
+  margin-bottom: 0 !important;
+}
+
+.relatedStories ul {
   display: flex;
-}
-
-.contact {
-  background: #2d9ad9;
-  padding: 10px;
-  width: 290px;
-  margin-bottom: 1.5em;
-}
-
-.contact .slogan {
-  color: white;
-  padding: 5px 0px;
+  gap: 30px;
+  justify-content: space-between;
+  list-style-type: none;
   margin: 0;
-  font-family: "UTM Avo", sans-serif !important;
+  padding: 0;
+}
+
+@media screen and (max-width: 850px) {
+  .relatedStories ul {
+    flex-wrap: wrap;
+  }
+
+  .relatedStories ul li {
+    width: calc(50% - 15px);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .relatedStories ul {
+    flex-wrap: wrap;
+  }
+
+  .relatedStories ul li {
+    width: 100%;
+  }
+}
+
+.relatedStory a {
   display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-.contact .phoneNumber {
+.relatedStory .image {
   width: 100%;
+  height: 0;
+  padding-top: 56%;
+  background-position: center;
+  background-size: cover;
 }
 
-.contact .phoneNumber img {
-  width: 100%;
+.relatedStory .textBox {
+  padding: 15px 15px 20px;
+  text-align: center;
 }
 
-.contact button {
-  width: 100%;
-  background: #ff9729 !important;
-  color: #fff;
-  border: none;
+.relatedStory h4 {
+  color: #555;
+  font-size: 17px;
+  min-height: 42px;
+  line-height: 1.3;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  font-weight: 600;
+}
+
+.relatedStory .date {
+  font-size: 12px;
+  color: #777;
+  margin: 0;
 }

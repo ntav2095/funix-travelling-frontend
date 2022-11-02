@@ -1,52 +1,54 @@
-import Layout from "../../layout/Default";
+// main
+import { Link } from "react-router-dom";
 
-// assets
-import { phoneNumber as phoneNumberImg } from "../../assets/images";
+// components
+import Layout from "../../layout/Default";
 
 // css
 import classes from "./TravelHandbookDetail.module.css";
 
 // mock
-import story from "../../mock/story.mock";
+import { story, relatedStories } from "./mock";
 
 function TravelHandbookDetail() {
   return (
-    <Layout>
-      <div className={classes.travelHandbookDetail}>
-        <div className={classes.story}>
+    <Layout sidebarRight primary>
+      <div className={classes.story}>
+        <div className={classes.storyHeader}>
           <h1>{story.title}</h1>
-
-          <p
-            className={classes.date}
-          >{`Posted on ${story.date} by ${story.author}`}</p>
-
-          <div className={classes.storyContent}>
-            <p>{story.content}</p>
-          </div>
-
-          <div className={classes.relatedStories}></div>
+          <p className={classes.date}>
+            Posted on <span>{story.date}</span> by{" "}
+            <Link to="/">{story.author}</Link>
+          </p>
         </div>
 
-        <div className={classes.sidebar}>
-          <div className={classes.contact}>
-            <p className={classes.slogan}>Liên hệ càng sớm - Giá càng rẻ</p>
-            <div className={classes.phoneNumber}>
-              <img src={phoneNumberImg} alt="phone numbers" />
-            </div>
+        <div className={classes.storyContent}>
+          <div>{story.content}</div>
+        </div>
 
-            <p className="alternative">
-              Hoặc để lại số điện thoại, chúng tôi sẽ gọi lại cho bạn sau ít
-              phút !
-            </p>
+        <div className={classes.relatedStories}>
+          <p className={classes.relatedStoriesTitle}>Bài viết liên quan</p>
+          <ul>
+            {relatedStories.map((item) => (
+              <li key={item.id} className={classes.relatedStory}>
+                <Link to="/">
+                  <div className={classes.relatedStory}>
+                    <div
+                      className={classes.image}
+                      style={{ backgroundImage: `url(${item.image})` }}
+                    >
+                      {/* <img src={item.image} alt={item.title} /> */}
+                    </div>
 
-            <input type="number" placeholder="Số điện thoại của tôi là" />
-
-            <button>YÊU CẦU GỌI LẠI</button>
-          </div>
-
-          <div className={classes.tours}></div>
-
-          <div className={classes.stories}></div>
+                    <div className={classes.textBox}>
+                      <h4>{item.title}</h4>
+                      <p className={classes.date}>{item.date}</p>
+                    </div>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </Layout>
