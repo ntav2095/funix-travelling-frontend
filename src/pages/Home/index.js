@@ -1,5 +1,5 @@
-import Sliderheader from "../../Compoments/HomeComponent/SLIDERCOmpoment";
-import Tour from "../../Compoment/toursComponent/TourCompoment";
+import Sliderheader from "../../components/HomeComponent/SLIDERCOmpoment";
+import Tour from "../../components/toursComponent/TourCompoment";
 import Layout from "../../layout/Default";
 
 function Home() {

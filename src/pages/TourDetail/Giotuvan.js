@@ -1,17 +1,18 @@
-// import "tour.css";
+import React from "react";
 import "./tour.css";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
-import Header from "../../layout/HeaderCompoment";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Carousel from "react-bootstrap/Carousel";
+import BookingModal from './modalBooking'
 import Button from "react-bootstrap/Button";
 function Goituvan() {
+  const [modalShow, setModalShow] = React.useState(false)
+  console.log(modalShow)
   return (
-    <Container id="Goi-tu-van">
+    <Container id="Goi-tu-van" >
       <Row>
-        <Col xs={8}>
+        {/* <Col xs={8}>
           <Carousel>
             <Carousel.Item>
               <img
@@ -43,7 +44,7 @@ function Goituvan() {
             </Carousel.Item>
           </Carousel>
         </Col>
-        <Col>
+        <Col> */}
           <div className="form-tu-van">
             <h3>Gọi để tư vấn</h3>
             <Row className="mb-3 lich-dang-ky">
@@ -83,9 +84,14 @@ function Goituvan() {
                 <span> đồng</span>
               </p>
             </div>
-            <a href="#dattour" className="a-dat-tour">
-              Đặt Tour ngay
-            </a>
+            <button  className="a-dat-tour" onClick={()=>setModalShow(true)}>
+              Đặt Tour ngay 
+            </button>
+            <BookingModal
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+            />
+
             <div className="form-goi-lai">
               <p>Liên hệ càng sớm - Giá càng rẻ</p>
               <p>
@@ -117,7 +123,7 @@ function Goituvan() {
               </p>
             </div>
           </div>
-        </Col>
+        {/* </Col> */}
       </Row>
     </Container>
   );

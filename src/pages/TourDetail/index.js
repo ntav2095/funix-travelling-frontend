@@ -1,13 +1,34 @@
 import Goituvan from "./Giotuvan";
 import Mota from "./Mota";
 import Layout from "../../layout/Default";
+import SlideImage from "./slideimage";
+import img1 from '../../assets/images/sec_inbound_tour_bg.jpg'
+import img2 from '../../assets/images/sec_inbound_tour_bg.jpg'
+import img3 from '../../assets/images/sec_inbound_tour_bg.jpg'
+import img4 from '../../assets/images/sec_inbound_tour_bg.jpg'
+import { Row } from "react-bootstrap";
+
+const imageArr=[
+  { src: img1, caption: "Caption one" },
+  { src: img2, caption: "Caption two" },
+  { src: img3, caption: "Caption three" },
+  { src: img4, caption: "Caption four" }
+]
+
 
 function TourDetail() {
   return (
     <Layout>
-      <div id="Body-content ">
+      <div className="tour-detail">
+      <Row>
+        <div style={{width:'70%'}}>
+        <SlideImage  input={imageArr} ratio={`3:2`} mode={`manual`}/>
+        </div>
+        <div style={{width:'30%'}}>
         <Goituvan />
-        <Mota />
+        </div>
+      </Row>
+      <Mota />
       </div>
     </Layout>
   );

@@ -75,3 +75,13 @@ input.with100.mt-2 {
   background: LEMONCHIFFON;
   border-radius: 2px;
 }
+
+
+/* index.js */
+.tour-detail{
+  padding: 2em 8em;
+  background: rgb(255, 255, 255);
+}
+
+
+/* -------------------------------------- */
