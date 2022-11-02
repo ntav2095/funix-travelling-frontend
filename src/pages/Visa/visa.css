@@ -1,12 +1,12 @@
 .visa-content-feature ul li {
-  font-size: 15px;
+  font-size: 18px;
   color: #1d1d1d;
   font-family: "os_regular";
   margin-bottom: 15px;
 }
 .visa-info-feature ul li {
   display: inline-block;
-  font-size: 14px;
+  font-size: 18px;
   color: #1d1d1d;
   font-family: "os_regular";
   padding: 20px 15px;
@@ -82,8 +82,67 @@
   padding: 5px;
   border-radius: 8px;
   border: 1px solid floralwhite;
+  margin-top: 25px;
 }
 
 h3.title-name {
   font-size: 18px;
+}
+.box-form {
+  display: inline-block;
+}
+#box-btn-submit > button {
+  border-radius: 5px;
+  background-color: #ec4325;
+  color: #ffffff;
+  font-family: "os_bold";
+  font-size: 14px;
+  text-transform: uppercase;
+  line-height: 40px;
+  min-width: 140px;
+  outline: 0;
+  border: 0px;
+
+  border: 0px;
+}
+.box-info-customer.col {
+  font-size: 15px;
+  color: #191919;
+  font-family: "os_semi_bold";
+  user-select: none;
+  margin-left: 8em;
+}
+span.fas {
+  border: 1px solid;
+  border-radius: 50%;
+  background-color: #d4d4d5;
+  font-size: 10px;
+  padding: 3px;
+  margin: 5px;
+  cursor: pointer;
+}
+.box-info-customer > label {
+  margin-left: 10px;
+}
+#box-info-price .col {
+  text-align: left;
+  margin-right: 100px;
+  min-width: 200px;
+  font-family: "os_semi_bold";
+}
+.info-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+div#box-info-customer {
+  margin-left: 4em;
+}
+div#box-info-customer label {
+  margin-left: 0.5em;
+}
+.type-0.box-book {
+  font-size: 16px;
+}
+span.type-text {
+  font-weight: bold;
 }

@@ -7,16 +7,16 @@ import Tab from "react-bootstrap/Tab";
 
 import "./visa.css";
 function Xemchitiet1(args) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen1, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle1 = () => setIsOpen(!isOpen1);
 
   return (
     <React.StrictMode>
-      <p onClick={toggle} style={{ marginBottom: "1rem" }} id="xem-chi-tiet">
+      <p onClick={toggle1} style={{ marginBottom: "1rem" }} id="xem-chi-tiet">
         Xem chi tiết <i class="fas fa-chevron-down"></i>
       </p>
-      <Collapse isOpen={isOpen} {...args}>
+      <Collapse isOpen={isOpen1} {...args}>
         <Card>
           <CardBody>
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
