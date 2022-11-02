@@ -2,29 +2,57 @@
 import { Col, Container, Row } from "react-bootstrap";
 import Layout from "../../layout/Default";
 import "./visa.css";
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import Xemchitiet1 from "./xemchitiet1";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Collapse, Button, CardBody, Card, Input } from "reactstrap";
+import {
+  Collapse,
+  Button,
+  CardBody,
+  Card,
+  Input,
+  Image,
+  CardImg,
+} from "reactstrap";
+import { visaBanner } from "../../assets/images";
+
 import Datvisa from "./datve";
 function Visa() {
-  const [isOpen1, setIsOpen] = useState(false);
-  const [Chon, setchon] = useState("CHỌN");
+  const [isOpen1, setIsOpen1] = useState(false);
+  const [Chon1, setchon1] = useState("CHỌN");
   const toggle1 = () => {
-    setIsOpen(!isOpen1);
-    if (Chon == "CHỌN") {
-      setchon("HỦY");
-    } else setchon("CHỌN");
+    setIsOpen1(!isOpen1);
+    if (Chon1 === "CHỌN") {
+      setchon1("HỦY");
+    } else setchon1("CHỌN");
   };
-
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [Chon2, setchon2] = useState("CHỌN");
+  const toggle2 = () => {
+    setIsOpen2(!isOpen2);
+    if (Chon2 === "CHỌN") {
+      setchon2("HỦY");
+    } else setchon2("CHỌN");
+  };
+  const [isOpen3, setIsOpen3] = useState(false);
+  const [Chon3, setchon3] = useState("CHỌN");
+  const toggle3 = () => {
+    setIsOpen3(!isOpen3);
+    if (Chon3 === "CHỌN") {
+      setchon3("HỦY");
+    } else setchon3("CHỌN");
+  };
   return (
     <Layout>
-      <div id="Body-content ">
+      <div className="banner-1">
+        <img className="banner" src={visaBanner} alt="Visa banner" />
+      </div>
+      <div id="Body-content-1">
         <Container>
           <Row>
             <Col>
               <div>
-                <span> Dịch Vụ Làm Visa Ý </span>
                 <div className="clearfix"></div>
                 <div className="col-lg-8 col-md-8">
                   <h1>Dịch Vụ Làm Visa Ý</h1>
@@ -139,16 +167,20 @@ function Visa() {
             </Col>
           </Row>
         </Container>
-        <Container>
+      </div>
+      <div id="Body-content-2">
+        <Container className="Body-content-2">
           <div className="dich-vu">
             <h2>Chọn gói dịch vụ</h2>
             <ul className="chi-tiet-dich-vu">
               <li>
-                <div class="box-top">
+                <div className="box-top">
                   <Row style={{ width: "100%" }}>
-                    <Col lg="4">
-                      <div class="box-info">
-                        <h3 class="title-name">Visa Ý (Trẻ em dưới 6 tuổi)</h3>
+                    <Col lg="4" id="box-info">
+                      <div className="box-info">
+                        <h3 className="title-name">
+                          Visa Ý (Trẻ em dưới 6 tuổi)
+                        </h3>
                       </div>
                     </Col>
 
@@ -166,12 +198,12 @@ function Visa() {
                           style={{
                             marginBottom: "1rem",
                             backgroundColor:
-                              Chon == "HỦY" ? "rgb(244,244,244)" : "",
-                            color: Chon == "HỦY" ? "black" : "",
+                              Chon1 == "HỦY" ? "rgb(244,244,244)" : "",
+                            color: Chon1 == "HỦY" ? "black" : "",
                           }}
                           class="btn-open-book-visa type-2"
                         >
-                          {Chon}
+                          {Chon1}
                         </button>
                       </div>
                     </Col>
@@ -183,6 +215,98 @@ function Visa() {
                     <Xemchitiet1 />
                   </div>
                   <Collapse isOpen={isOpen1}>
+                    <Datvisa />
+                  </Collapse>
+                </div>
+              </li>
+              <li>
+                <div className="box-top">
+                  <Row style={{ width: "100%" }}>
+                    <Col lg="4" id="box-info">
+                      <div className="box-info">
+                        <h3 className="title-name">
+                          Visa Ý (Trẻ em dưới 6 tuổi)
+                        </h3>
+                      </div>
+                    </Col>
+
+                    <Col lg="4" class="info-price">
+                      <div class="box-action">
+                        <div class="price-old"></div>
+                        <div class="price-current">6,032,000 VNĐ</div>
+                      </div>
+                    </Col>
+                    <Col>
+                      <div class="box-action">
+                        <button
+                          onClick={toggle2}
+                          // onClick={chon}
+                          style={{
+                            marginBottom: "1rem",
+                            backgroundColor:
+                              Chon2 === "HỦY" ? "rgb(244,244,244)" : "",
+                            color: Chon2 === "HỦY" ? "black" : "",
+                          }}
+                          class="btn-open-book-visa type-2"
+                        >
+                          {Chon2}
+                        </button>
+                      </div>
+                    </Col>
+                  </Row>
+                  <div
+                    onclick="toggle_tab_info_price('.box-bottom.type-2')"
+                    class="box-readmore"
+                  >
+                    <Xemchitiet1 />
+                  </div>
+                  <Collapse isOpen={isOpen2}>
+                    <Datvisa />
+                  </Collapse>
+                </div>
+              </li>
+              <li>
+                <div className="box-top">
+                  <Row style={{ width: "100%" }}>
+                    <Col lg="4" id="box-info">
+                      <div className="box-info">
+                        <h3 className="title-name">
+                          Visa Ý (Trẻ em dưới 6 tuổi)
+                        </h3>
+                      </div>
+                    </Col>
+
+                    <Col lg="4" class="info-price">
+                      <div class="box-action">
+                        <div class="price-old"></div>
+                        <div class="price-current">6,032,000 VNĐ</div>
+                      </div>
+                    </Col>
+                    <Col>
+                      <div class="box-action">
+                        <button
+                          onClick={toggle3}
+                          // onClick={chon}
+                          style={{
+                            marginBottom: "1rem",
+                            backgroundColor:
+                              Chon3 === "HỦY" ? "rgb(244,244,244)" : "",
+                            color: Chon3 === "HỦY" ? "black" : "",
+                          }}
+                          class="btn-open-book-visa type-2"
+                        >
+                          {Chon3}
+                        </button>
+                      </div>
+                    </Col>
+                  </Row>
+                  <div
+                    onclick="toggle_tab_info_price('.box-bottom.type-2')"
+                    class="box-readmore"
+                  >
+                    <Xemchitiet1 />
+                  </div>
+                  <Collapse isOpen={isOpen3}>
                     <Datvisa />
                   </Collapse>
                 </div>

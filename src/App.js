@@ -24,7 +24,7 @@ function App() {
         <Route path="/danh-sach-tour" element={<ToursList />} />
         <Route path="/lien-he" element={<Contact />} />
         <Route path="/ve-cong-ty" element={<About />} />
-        <Route path="/dich-vu-visa/:id" element={<Visa />} />
+        <Route path="/dich-vu-visa/1" element={<Visa />} />
         <Route path="/dich-vu-visa" element={<VisaService />} />
         <Route path="/cam-nang-du-lich" element={<TravelHandbook />} />
         <Route

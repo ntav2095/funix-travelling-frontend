@@ -79,7 +79,7 @@ function Datvisa(args) {
                     </div>
                   </Col>
                   <Col id="box-btn-submit">
-                    <button type="submit">Đặt Ngay</button>
+                    <button>Đặt Ngay</button>
                   </Col>
                 </Row>
               </Col>

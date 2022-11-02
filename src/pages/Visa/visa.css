@@ -1,3 +1,10 @@
+#Body-content-1 {
+  max-width: 1170px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 25px 15px;
+}
+
 .visa-content-feature ul li {
   font-size: 18px;
   color: #1d1d1d;
@@ -23,6 +30,10 @@
 #xem-chi-tiet:hover {
   color: #00b874;
   cursor: pointer;
+}
+#xem-chi-tiet {
+  font-size: 20px;
+  color: #f98713;
 }
 #visa-item-box-services
   .visa-single-services-main
@@ -57,7 +68,7 @@
   color: #ff9000;
   margin-left: 30%;
   margin-top: 5%;
-  font-family: "os_bold";
+  font-weight: bold;
 }
 .chi-tiet-dich-vu {
   padding: 5px;
@@ -68,9 +79,24 @@
   background: #fff;
   padding: 25px 20px;
   margin-bottom: 30px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: solid 1px #e6e6e6;
-  list-style: none;
+  max-width: 1170px;
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 30px;
+}
+.dich-vu h2 {
+  color: #15284a;
+  font-size: 28px;
+  font-family: "os_bold";
+  border-bottom: 4px solid #0090fe;
+  margin: 0px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 5em;
+  display: inline-block;
+  padding-bottom: 10px;
 }
 .col-sm-9 {
   background: whitesmoke;
@@ -79,14 +105,20 @@
 }
 .dich-vu {
   background-color: rgb(244, 244, 244);
-  padding: 5px;
+
   border-radius: 8px;
   border: 1px solid floralwhite;
-  margin-top: 25px;
 }
 
-h3.title-name {
-  font-size: 18px;
+.box-info {
+  font-size: 15px;
+  color: #1d1d1d;
+  font-family: "os_semi_bold";
+  margin-top: 15px;
+}
+#box-info {
+  justify-content: center;
+  align-items: center;
 }
 .box-form {
   display: inline-block;
@@ -145,4 +177,20 @@ div#box-info-customer label {
 }
 span.type-text {
   font-weight: bold;
+}
+.box-top .title-name {
+}
+.content-services-main ul li {
+  background: #fff;
+  padding: 25px 20px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  border: solid 1px #e6e6e6;
+}
+.box-banner-default {
+}
+.banner-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

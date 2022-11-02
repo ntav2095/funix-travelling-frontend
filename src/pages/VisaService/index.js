@@ -5,10 +5,9 @@ import Layout from "../../layout/Default";
 import { phoneNumber, visaBanner, worldMap } from "../../assets/images";
 import Slider from "react-slick";
 import styles from "./Visa.module.css";
-import { reasons, steps, visaProducts, searchResults } from "./mock";
+import { reasons, steps, visaProducts } from "./mock";
 import settings from "./responsiveCarousel";
-import { Link } from "react-router-dom";
-import { earth } from "../../assets/svgs";
+
 import SignupConsultModal from "./SignupConsultModal";
 import { useState } from "react";
 
