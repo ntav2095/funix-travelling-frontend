@@ -67,7 +67,7 @@ function SignupConsultModal({ handleClose, show }) {
                   <ErrorMessage name="fullname" component="p" />
                 </label>
                 <label>
-                  <p className={styles.label}>Họ Và tên</p>
+                  <p className={styles.label}>Email</p>
                   <Field type="email" name="email" />
                   <ErrorMessage name="email" component="p" />
                 </label>
