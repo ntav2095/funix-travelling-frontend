@@ -39,7 +39,7 @@ function BookingModal(props) {
     .then(data=>data)
     .catch(err=>console.log(err))
 
-    await axios.post('https://formspree.io/f/meqdpnoq',new FormData(e.target))
+    await axios.post('https://formspree.io/f/mgeqpdao',new FormData(e.target))
     .then(d=>d.json())
     .then(data=>data)
     .catch(err=>console.log(err))
