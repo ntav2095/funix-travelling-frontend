@@ -5,7 +5,7 @@ import Tour from "../../components/toursComponent/TourCompoment";
 function ToursList() {
   return (
     <Layout>
-      <div id="Body-content ">
+      <div id="Body-content">
         <Breadcrumb>
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item active>DANH SÁCH TOURS</Breadcrumb.Item>

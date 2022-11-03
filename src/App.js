@@ -13,9 +13,6 @@ import TourDetail from "./pages/TourDetail";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 
-// css
-import "./App.css";
-
 function App() {
   return (
     <>

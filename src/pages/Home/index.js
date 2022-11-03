@@ -6,7 +6,7 @@ function Home() {
   return (
     <Layout>
       <Sliderheader />
-      <div id="Body-content ">
+      <div id="Body-content">
         <h1 id="Body-content_tour">Tour Trong Nước</h1>
         <Tour />
       </div>
