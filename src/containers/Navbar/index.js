@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import Search from "./Search";
 import {
   Navbar,
@@ -7,36 +6,141 @@ import {
   NavbarToggler,
   Collapse,
   NavItem,
+  DropdownMenu,
+  DropdownToggle,
+  UncontrolledDropdown,
+  DropdownItem,
 } from "reactstrap";
+import "./reponsi.css";
 import { NavLink } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
-
-// css
+import React, { useState, Component } from "react";
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
 import "./Navbar.css";
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.toggleNav = this.toggleNav.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.handleShow = this.handleShow.bind(this);
+
     this.state = {
       isNavOpen: false,
       search: "",
+      show: false,
     };
+  }
+  handleClose() {
+    this.setState({
+      show: !this.state.show,
+    });
+  }
+  handleShow() {
+    this.setState({
+      show: !this.state.show,
+    });
   }
   toggleNav() {
     this.setState({
       isNavOpen: !this.state.isNavOpen,
     });
   }
-
   render() {
     return (
       <React.Fragment>
-        <Navbar dark expand="lg ">
+        <Navbar dark expand="lg">
           <div className="container">
-            <NavbarToggler onClick={this.toggleNav} />
+            <NavbarToggler onClick={this.handleShow} />
+            <Offcanvas show={this.state.show} onHide={this.handleClose}>
+              <Offcanvas.Header closeButton></Offcanvas.Header>
+              <Offcanvas.Body>
+                <Nav navbar>
+                  <NavItem className="nav-bar-offcanvat">
+                    <NavLink
+                      className="nav-link"
+                      to="/"
+                      style={{
+                        color: this.props.style ? this.props.style : "black",
+                      }}
+                    >
+                      TRANG CHỦ
+                    </NavLink>
+                  </NavItem>
+                  <NavItem
+                    className="nav-bar-offcanvat"
+                    style={{
+                      color: this.props.style ? this.props.style : "black",
+                    }}
+                  >
+                    <NavLink
+                      className="nav-link"
+                      style={{
+                        color: this.props.style ? this.props.style : "black",
+                      }}
+                      to="/ve-cong-ty"
+                    >
+                      TỔNG QUAN CÔNG TY
+                    </NavLink>
+                  </NavItem>
+                  <NavItem
+                    className="nav-bar-offcanvat"
+                    style={{
+                      color: this.props.style ? this.props.style : "black",
+                    }}
+                  >
+                    <NavLink
+                      className="nav-link"
+                      style={{
+                        color: this.props.style ? this.props.style : "black",
+                      }}
+                      to="/lien-he"
+                    >
+                      THÔNG TIN LIÊN HỆ
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="nav-bar-offcanvat">
+                    <NavLink
+                      className="nav-link"
+                      style={{
+                        color: this.props.style ? this.props.style : "black",
+                      }}
+                      to="/danh-sach-tour"
+                    >
+                      DANH SÁCH TOURS
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="nav-bar-offcanvat">
+                    <NavLink
+                      className="nav-link"
+                      style={{
+                        color: this.props.style ? this.props.style : "black",
+                      }}
+                      to="/dich-vu-visa"
+                    >
+                      DỊCH VỤ VISA
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="nav-bar-offcanvat">
+                    <NavLink
+                      className="nav-link"
+                      style={{
+                        color: this.props.style ? this.props.style : "black",
+                      }}
+                      to="/cam-nang-du-lich"
+                    >
+                      CẨM NANG DU LỊCH
+                    </NavLink>
+                  </NavItem>
+                  <Search />
+                </Nav>
+              </Offcanvas.Body>
+            </Offcanvas>
             <NavbarBrand className="mr-auto" href="/">
               <img
+                id="NavbarBrand"
                 src="/asscets/img/logo_sticky1.png"
                 height="50px"
                 // width="200px"
@@ -84,9 +188,6 @@ class Header extends Component {
                         THÔNG TIN LIÊN HỆ
                       </NavLink>
                     </NavDropdown.Item>
-                    {/* <NavDropdown.Item href="#action/3.3">
-                    Something
-                  </NavDropdown.Item> */}
                   </NavDropdown>
                 </NavItem>
                 <NavItem>

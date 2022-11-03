@@ -9,6 +9,7 @@ import classes from "./TravelHandbook.module.css";
 
 // mock
 import stories from "../../mock/travelhandBook.mock";
+import { Container } from "reactstrap";
 
 function TravelHandbook() {
   return (

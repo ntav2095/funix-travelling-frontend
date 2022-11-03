@@ -23,7 +23,7 @@ class Tour extends Component {
   render() {
     return (
       <Container id="background_img">
-        <Row lg="3" md="1" className="row-box-shadow-2 ">
+        <Row lg="3" md="2" xs="1" className="row-box-shadow-2">
           {tours.map((tour) => (
             <Col key={tour._id} className="bg  pt-4  container_tour ">
               <Card
@@ -31,7 +31,7 @@ class Tour extends Component {
                   width: "100%",
                 }}
               >
-                <Link to="/danh-sach-tour/1">
+                <Link to={"/danh-sach-tour/1"}>
                   <img
                     className={styles.img}
                     alt="Sample"
@@ -39,7 +39,7 @@ class Tour extends Component {
                   />
                 </Link>
                 <CardBody>
-                  <Link to="/danh-sach-tour/1">
+                  <Link to={"/danh-sach-tour/1"}>
                     <CardTitle tag="h5"> {tour.title} </CardTitle>
                   </Link>
                   <CardSubtitle className="mb-2 text-muted" tag="h6">
