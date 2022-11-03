@@ -1,19 +1,20 @@
 //
 
 import Layout from "../../layout/Default";
-
+import { Link } from "react-router-dom";
 import { phoneNumber, visaBanner, worldMap } from "../../assets/images";
 import Slider from "react-slick";
 import styles from "./Visa.module.css";
-import { reasons, steps, visaProducts } from "./mock";
+import { reasons, steps, visaProducts, searchResults } from "./mock";
 import settings from "./responsiveCarousel";
 
 import SignupConsultModal from "./SignupConsultModal";
 import { useState } from "react";
+import SearchResults from "./SearchResults";
+import { useEffect } from "react";
 
 function VisaService() {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -38,26 +39,7 @@ function VisaService() {
                 <div className={styles.input}>
                   <input type="text" placeholder="Nhập tên nước bạn muốn đến" />
 
-                  {/* <div className={styles.searcModal}>
-                    <p className={styles.title}>{earth} Dịch vụ visa</p>
-                    <ul>
-                      {searchResults.map((item) => (
-                        <li key={item.id}>
-                          <Link to={`/dich-vu-vi-sa/${item.id}`}>
-                            <div className={styles.imageWrapper}>
-                              <div
-                                style={{
-                                  backgroundImage: `url(${item.image})`,
-                                }}
-                                className={styles.image}
-                              ></div>
-                            </div>
-                            <span>{item.name}</span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div> */}
+                  <SearchResults />
                 </div>
                 <button>Tìm kiếm</button>
               </form>
@@ -76,7 +58,7 @@ function VisaService() {
             <div className={styles.chooseVisa}>
               <Slider {...settings}>
                 {visaProducts.map((item, index) => (
-                  <div key={index}>
+                  <Link key={index} to="/dich-vu-visa/1">
                     <div className={styles.visaProduct}>
                       <div className={styles.inner}>
                         <div
@@ -88,7 +70,7 @@ function VisaService() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </Slider>
             </div>
