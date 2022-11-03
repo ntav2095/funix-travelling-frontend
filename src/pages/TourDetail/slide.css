@@ -156,7 +156,7 @@
 .lp-modal-image > .modalslide {
   display: none;
   position: fixed;
-  z-index: 5;
+  z-index: 1056;
   padding-top: 100px;
   left: 0;
   top: 0;
