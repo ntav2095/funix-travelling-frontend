@@ -39,3 +39,8 @@
     padding-top: 15px;
   } */
 /* } */
+@media only screen and (max-width: 750px) {
+  button.navbar-toggler {
+    transform: translateX(-12em);
+  }
+}
