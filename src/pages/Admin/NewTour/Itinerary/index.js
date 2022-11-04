@@ -25,8 +25,14 @@ function Initerary() {
   const quill = useRef();
 
   const quillHandler = () => {
+    
     const x = quill.current.root.innerHTML;
-    console.log(x);
+    const  delta = quill.current.getContents();
+    const  image = new Image();
+    image.src = delta.ops[0].insert.image;
+    console.log(image)
+    document.getElementById('editor').appendChild(image)
+    console.log(delta);
   };
 
   useEffect(() => {

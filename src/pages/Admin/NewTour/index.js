@@ -61,6 +61,7 @@ function NewTour() {
   const [images, setImages] = useState([]);
   const [sendRequest, isLoading, data, error] = useAxios();
   const selectImagesHandler = (e) => {
+    
     setImages(Array.from(e.target.files));
   };
 
