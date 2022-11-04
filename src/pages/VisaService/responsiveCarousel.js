@@ -5,6 +5,7 @@ export default {
   slidesToShow: 4,
   slidesToScroll: 4,
   initialSlide: 0,
+  arrows: false,
   responsive: [
     {
       breakpoint: 1024,
