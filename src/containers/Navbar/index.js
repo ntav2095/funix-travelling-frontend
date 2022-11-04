@@ -142,7 +142,7 @@ class Header extends Component {
               <img
                 id="NavbarBrand"
                 src="/asscets/img/logo_sticky1.png"
-                height="50px"
+                height="30vw"
                 // width="200px"
                 alt="logo"
               />

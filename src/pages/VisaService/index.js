@@ -23,8 +23,8 @@ function VisaService() {
       <SignupConsultModal handleClose={handleClose} show={show} />
 
       <Layout>
-        <div className={styles.banner}>
-          <img src={visaBanner} alt="Visa banner" />
+        <div id={styles.banner}>
+          <img src={visaBanner} alt="Visa banner" className={styles.banner} />
         </div>
 
         <div className={styles.container}>

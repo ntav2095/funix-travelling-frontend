@@ -14,10 +14,10 @@
 }
 
 button.navbar-toggler {
-  transform: translateX(5em);
+  transform: translateX(6em);
 }
 a.mr-auto.navbar-brand {
-  transform: translateX(-2em);
+  transform: translateX(-3em);
 }
 .navbar > .container,
 .navbar > .container-fluid,

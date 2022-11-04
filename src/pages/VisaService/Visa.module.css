@@ -1,4 +1,4 @@
-.banner {
+img.banner {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,6 +154,12 @@
   .whyChooseUs ul li {
     margin-bottom: 32px;
     width: 100%;
+  }
+  img.banner {
+    width: 100vw;
+    height: 350px;
+    object-fit: cover;
+    object-position: 72% 0px;
   }
 }
 

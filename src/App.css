@@ -124,7 +124,13 @@ div#Body-content {
   background-color: rgb(20 2 2 / 16%);
   background-image: url("/src/assets/images/sec_inbound_tour_bg.jpg");
 }
-
+@media only screen and (max-width: 850px) {
+  div#Body-content {
+    padding: 2em 2em;
+    background-color: rgb(20 2 2 / 16%);
+    background-image: url("/src/assets/images/sec_inbound_tour_bg.jpg");
+  }
+}
 h1#Body-content_tour {
   text-align: center;
 }
@@ -193,9 +199,9 @@ h1#Body-content_tour {
 div#row-159726792 {
   padding: 8em;
 }
-.footer.pt-5.pb-3 {
+/* .footer.pt-5.pb-3 {
   padding: 8em;
-}
+} */
 .dropdown-menu.show {
   background: none;
   border: none;
