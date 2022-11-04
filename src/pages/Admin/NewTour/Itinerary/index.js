@@ -1,5 +1,5 @@
 // main
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Quill from "quill";
 
 // css
@@ -22,27 +22,72 @@ var toolbarOptions = [
 ];
 
 function Initerary() {
+  const [files, setFiles] = useState([]);
+
   const quill = useRef();
+  const modules = {
+    toolbar: {
+      container: [
+        [{ header: [1, 2, false] }],
+        ["bold", "italic", "underline", "strike", "blockquote"],
+        [
+          { list: "ordered" },
+          { list: "bullet" },
+          { indent: "-1" },
+          { indent: "+1" },
+        ],
+        ["link", "image"],
+        ["clean"],
+      ],
+
+      handlers: {
+        image: async function () {
+          const editor = this.quill;
+          const input = document.createElement("input");
+          input.setAttribute("type", "file");
+          input.setAttribute("accept", "image/*");
+          input.click();
+
+          input.addEventListener("change", (e) => {
+            const url = URL.createObjectURL(e.target.files[0]);
+            const range = editor.getSelection(true);
+            console.log(url.slice(5));
+            console.log(url);
+            const Image = Quill.import("formats/image");
+            Image.sanitize = (url) => url;
+            // editorRef.current.editor.insertEmbed(cursorPosition, "image", url)
+
+            editor.insertEmbed(range.index, "image", url);
+            editor.setSelection(range.index + 1);
+            setFiles((prev) => [...prev, url]);
+          });
+        },
+      },
+    },
+  };
 
   const quillHandler = () => {
     const x = quill.current.root.innerHTML;
-    console.log(x);
+    var delta = quill.current.getContents();
+    console.log(delta);
+    console.log(files);
   };
 
   useEffect(() => {
     quill.current = new Quill("#editor", {
-      modules: {
-        toolbar: toolbarOptions,
-      },
+      modules: modules,
       theme: "snow",
     });
   }, []);
+
   return (
     <div className="admin__initerary">
       <button type="button" onClick={quillHandler}>
         xxxxxxxxx
       </button>
+
       <div id="editor"></div>
+      <img src="" alt="" id="hehe" />
     </div>
   );
 }

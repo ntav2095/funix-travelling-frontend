@@ -49,6 +49,14 @@ function useAxios() {
     }
   }, [error, data]);
 
+  useEffect(() => {
+    return () => {
+      if (abortController.current) {
+        abortController.current.abort();
+      }
+    };
+  }, []);
+
   return [sendRequest, isLoading, data, error];
 }
 
