@@ -1,7 +1,7 @@
 // main
 import { Route, Routes } from "react-router-dom";
 
-// pages
+// client pages
 import ToursList from "./pages/ToursList";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
@@ -12,6 +12,10 @@ import TravelHandbookDetail from "./pages/TravelHandbookDetail";
 import TourDetail from "./pages/TourDetail";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+
+// admin pages
+import Dashboard from "./pages/Admin/Dashboard";
+import NewTour from "./pages/Admin/NewTour";
 
 function App() {
   return (
@@ -30,6 +34,9 @@ function App() {
         />
         <Route path="/danh-sach-tour/:a" element={<TourDetail />} />
         <Route path="/*" element={<NotFound />} />
+
+        <Route path="/admin" element={<Dashboard />} />
+        <Route path="/admin/new-tour" element={<NewTour />} />
       </Routes>
     </>
   );
