@@ -55,7 +55,6 @@ function Initerary() {
             console.log(url);
             const Image = Quill.import("formats/image");
             Image.sanitize = (url) => url;
-            // editorRef.current.editor.insertEmbed(cursorPosition, "image", url)
 
             editor.insertEmbed(range.index, "image", url);
             editor.setSelection(range.index + 1);
