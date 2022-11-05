@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import store from "./store";
+import { setUser } from "./store/user.slice";
 
 // css bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,6 +19,11 @@ import "./assets/css/variables.css";
 
 // css
 import "./App.css";
+
+const user = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user"))
+  : null;
+store.dispatch(setUser(user));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

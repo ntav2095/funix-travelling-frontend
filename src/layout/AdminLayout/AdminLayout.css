@@ -26,6 +26,13 @@
   padding: 16px;
 }
 
+.adminLayout__sidebar button {
+  border: none;
+  background: transparent;
+  color: red;
+  padding: 0;
+}
+
 .adminLayout__content {
   background: white;
   box-shadow: var(--box-shadow);
