@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // main
 import { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -193,3 +194,14 @@ function NewTour() {
 }
 
 export default NewTour;
+=======
+
+
+function EditTour() {
+    
+
+    
+}
+
+export default EditTour
+>>>>>>> cd8302a3d75c4a67a94d6567c64f10a31cff2387

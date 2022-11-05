@@ -27,6 +27,7 @@ function AdminLayout({ children }) {
             <li>
               <Link to="/admin/new-tour">New Tour</Link>
             </li>
+
             {user && (
               <li>
                 <button onClick={logoutHandler}>Log out</button>
@@ -38,6 +39,10 @@ function AdminLayout({ children }) {
                 <Link to="/admin/login">Login</Link>
               </li>
             )}
+
+            <li>
+              <Link to="/admin/edit-tour">Edit Tour</Link>
+            </li>
           </ul>
         </div>
 
