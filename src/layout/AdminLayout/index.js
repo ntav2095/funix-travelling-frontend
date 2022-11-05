@@ -17,6 +17,9 @@ function AdminLayout({ children }) {
             <li>
               <Link to="/admin/new-tour">New Tour</Link>
             </li>
+            <li>
+              <Link to="/admin/edit-tour">New Tour</Link>
+            </li>
           </ul>
         </div>
 

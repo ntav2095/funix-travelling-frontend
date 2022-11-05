@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound";
 // admin pages
 import Dashboard from "./pages/Admin/Dashboard";
 import NewTour from "./pages/Admin/NewTour";
+import EditTour from "./pages/Admin/EditTour";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
 
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/new-tour" element={<NewTour />} />
+        <Route path="/admin/edit-tour" element={<EditTour />} />
       </Routes>
     </>
   );
