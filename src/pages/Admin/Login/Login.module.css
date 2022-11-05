@@ -1,0 +1,42 @@
+.login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login form {
+  width: 100%;
+  max-width: 350px;
+  box-shadow: var(--box-shadow);
+  background: white;
+  padding: 16px;
+}
+
+.login label {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.login input {
+  width: 100%;
+  padding: 0 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  height: 35px;
+}
+
+.login label span {
+  color: red;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.login button {
+  padding: 4px 16px;
+  border: none;
+  color: white;
+  background: #000;
+}
