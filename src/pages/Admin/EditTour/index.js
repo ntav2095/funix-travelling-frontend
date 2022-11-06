@@ -20,6 +20,7 @@ import { useEffect } from "react";
 const initialValues = {
   name: "", // required
   journey: "", // required
+  description: "",
   departureDates: "", // require
   duration: "", // required
   lowestPrice: 0, // required
@@ -65,6 +66,7 @@ const validator = (values) => {
 function EditTour() {
   const [images, setImages] = useState([]);
   const [fetch, isFetching, tour, fetchingError] = useAxios();
+  const [removedImages, setRemovedImages] = useState([]);
   const [edit, isEditing, editingResult, editingError] = useAxios();
   const { tourId } = useParams();
 
@@ -72,11 +74,20 @@ function EditTour() {
     setImages(Array.from(e.target.files));
   };
 
+  const changeRemoveImageHandler = (url) => {
+    if (removedImages.includes(url)) {
+      setRemovedImages((prev) => prev.filter((item) => item !== url));
+    } else {
+      setRemovedImages((prev) => [...prev, url]);
+    }
+  };
+
   const initialValues = !tour
     ? null
     : {
         name: tour.item.name, // required
         journey: tour.item.journey, // required
+        description: tour.item.description, // required
         departureDates: tour.item.time.departureDates.join("\n"), // require
         duration: tour.item.time.duration, // required
         lowestPrice: tour.item.price.from, // required
@@ -95,12 +106,14 @@ function EditTour() {
     formData.append("tourId", tourId);
     formData.append("name", values.name);
     formData.append("journey", values.journey);
+    formData.append("description", values.description);
     formData.append("lowestPrice", values.lowestPrice);
     arrayFormData(
       formData,
       "departureDates",
       values.departureDates.split("\n")
     );
+    arrayFormData(formData, "removedImages", removedImages);
     arrayFormData(formData, "priceIncludes", values.priceIncludes.split("\n"));
     arrayFormData(formData, "priceExcludes", values.priceExcludes.split("\n"));
     arrayFormData(
@@ -122,6 +135,8 @@ function EditTour() {
     fetch(tourApi.getSingleTour(tourId));
   }, []);
 
+  console.log(tour, "xxxx");
+
   return (
     <AdminLayout>
       <div className="newTour">
@@ -138,21 +153,27 @@ function EditTour() {
                 <Form className="newTour__form">
                   <label>
                     <p className="newTour__label">Tên tour</p>
-                    <Field type="textarea" name="name" />
+                    <Field component="textarea" name="name" />
                     <ErrorMessage name="name" component="p" />
                   </label>
 
                   <label>
                     <p className="newTour__label">Lộ trình</p>
-                    <Field type="textarea" name="journey" />
+                    <Field component="textarea" name="journey" />
                     <ErrorMessage name="journey" component="p" />
+                  </label>
+
+                  <label>
+                    <p className="newTour__label">Mô tả</p>
+                    <Field component="textarea" name="description" />
+                    <ErrorMessage name="description" component="p" />
                   </label>
 
                   <label>
                     <p className="newTour__label">
                       Ngày khởi hành (dd/mm/yyyy) (enter xuống dòng)
                     </p>
-                    <Field type="textarea" name="departureDates" />
+                    <Field component="textarea" name="departureDates" />
                     <ErrorMessage name="departureDates" component="p" />
                   </label>
 
@@ -201,7 +222,7 @@ function EditTour() {
                   </label>
 
                   <label>
-                    <p className="newTour__label">Hình ảnh mới</p>
+                    <p className="newTour__label">Thêm hình ảnh mới</p>
                     <input
                       type="file"
                       multiple
@@ -209,6 +230,18 @@ function EditTour() {
                     />
                     <ErrorMessage name="images" component="p" />
                   </label>
+
+                  {/* handle remove images  */}
+                  {tour.item.images.map((item) => (
+                    <div key={item}>
+                      <input
+                        onChange={() => changeRemoveImageHandler(item)}
+                        checked={removedImages.includes(item)}
+                        type="checkbox"
+                      />
+                      <img src={item} />
+                    </div>
+                  ))}
 
                   <button type="submit">Submit</button>
                 </Form>

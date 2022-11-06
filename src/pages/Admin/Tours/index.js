@@ -47,13 +47,26 @@ function Tours() {
                   <td>{item.name}</td>
                   <td>{item.journey}</td>
                   <td>
-                    <div>
-                      <Link to={`/admin/edit-tour/${item._id}`}>Edit</Link>
-                      <button>Remove</button>
-                      <Link to={`/admin/add-itinerary/${item._id}`}>
+                    <div className={styles.actionBtns}>
+                      <Link
+                        to={`/admin/edit-tour/${item._id}`}
+                        className={styles.editBtn}
+                      >
+                        Edit
+                      </Link>
+                      <button className={styles.removeTourBtn}>Remove</button>
+                      <Link
+                        className={styles.addItineraryBtn}
+                        to={`/admin/add-itinerary/${item._id}`}
+                      >
                         Add itinerary
                       </Link>
-                      <button>Edit itinerary</button>
+                      <Link
+                        className={styles.editItineraryBtn}
+                        to={`/admin/edit-itinerary/${item._id}`}
+                      >
+                        Edit itinerary
+                      </Link>
                     </div>
                   </td>
                 </tr>

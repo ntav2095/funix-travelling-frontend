@@ -1,7 +1,6 @@
 // main
 import { useState, useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useEffect } from "react";
 
 // components
 import AdminLayout from "../../../layout/AdminLayout";
@@ -19,6 +18,7 @@ import "./NewTour.css";
 const initialValues = {
   name: "", // required
   journey: "", // required
+  description: "",
   departureDates: "", // require
   duration: "", // required
   lowestPrice: 0, // required
@@ -74,11 +74,13 @@ function NewTour() {
     formData.append("name", values.name);
     formData.append("journey", values.journey);
     formData.append("lowestPrice", values.lowestPrice);
+    formData.append("description", values.description);
     arrayFormData(
       formData,
       "departureDates",
       values.departureDates.split("\n")
     );
+
     arrayFormData(formData, "priceIncludes", values.priceIncludes.split("\n"));
     arrayFormData(formData, "priceExcludes", values.priceExcludes.split("\n"));
     arrayFormData(
@@ -96,14 +98,6 @@ function NewTour() {
     sendRequest(tourApi.add(formData));
   };
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
-
   return (
     <AdminLayout>
       <div className="newTour">
@@ -119,27 +113,49 @@ function NewTour() {
               <Form className="newTour__form">
                 <label>
                   <p className="newTour__label">Tên tour</p>
-                  <Field type="textarea" name="name" />
+                  <Field
+                    component="textarea"
+                    name="name"
+                    placeholder="Tour Giáng Sinh Châu Âu Pháp - Thụy Sỹ - Ý - Vatican 2022"
+                  />
                   <ErrorMessage name="name" component="p" />
                 </label>
 
                 <label>
                   <p className="newTour__label">Lộ trình</p>
-                  <Field type="textarea" name="journey" />
+                  <Field
+                    component="textarea"
+                    name="journey"
+                    placeholder="Hà Nội - Paris - Strasbourg - Colmar"
+                  />
                   <ErrorMessage name="journey" component="p" />
                 </label>
 
                 <label>
+                  <p className="newTour__label">Mô tả</p>
+                  <Field
+                    component="textarea"
+                    name="description"
+                    placeholder="Một hành trình khám phá thưởng ngoạn Giáng Sinh ở châu Âu..."
+                  />
+                  <ErrorMessage name="description" component="p" />
+                </label>
+
+                <label>
                   <p className="newTour__label">
-                    Ngày khởi hành (dd/mm/yyyy) (enter xuống dòng)
+                    Ngày khởi hành (mm/dd/yyyy) (enter xuống dòng)
                   </p>
-                  <Field type="textarea" name="departureDates" />
+                  <Field component="textarea" name="departureDates" />
                   <ErrorMessage name="departureDates" component="p" />
                 </label>
 
                 <label>
                   <p className="newTour__label">Thời gian</p>
-                  <Field type="text" name="duration" />
+                  <Field
+                    type="text"
+                    name="duration"
+                    placeholder="11 ngày 10 đêm"
+                  />
                   <ErrorMessage name="duration" component="p" />
                 </label>
 

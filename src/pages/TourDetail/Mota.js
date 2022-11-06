@@ -1,7 +1,6 @@
 import React from "react";
 import { useRef, useEffect } from "react";
 import { Tab } from "semantic-ui-react";
-import quillGetHTML from "../../services/helpers/quillGetHTML";
 import QuillReader from "./QuillReader";
 
 const Mota = ({ tour }) => {
@@ -11,7 +10,9 @@ const Mota = ({ tour }) => {
       menuItem: "Mô tả",
       render: () => (
         <Tab.Pane attached={false}>
-          <div className="lich_trinh_title other_news_title">//</div>
+          <div className="lich_trinh_title other_news_title">
+            <p>{tour.description}</p>
+          </div>
         </Tab.Pane>
       ),
     },
@@ -78,6 +79,12 @@ const Mota = ({ tour }) => {
             <h2 className="yikes-custom-woo-tab-title yikes-custom-woo-tab-title-gia-bao-gom">
               Giá bao gồm
             </h2>
+
+            <ul>
+              {tour.price.includes.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
           </div>
         </Tab.Pane>
       ),

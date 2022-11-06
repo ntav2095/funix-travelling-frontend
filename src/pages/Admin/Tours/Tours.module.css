@@ -14,3 +14,52 @@
   outline: none;
   margin: 0 8px;
 }
+
+.actionBtns {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.actionBtns > * {
+  margin: 0 8px;
+  padding: 6px 8px;
+  color: white;
+  transition: 0.2s;
+}
+
+.actionBtns > *:hover {
+  color: white;
+}
+
+.editBtn {
+  background: green;
+}
+
+.editBtn:hover {
+  background: rgb(11, 177, 11);
+}
+
+.removeTourBtn {
+  background: rgb(200, 33, 0);
+}
+
+.removeTourBtn:hover {
+  background: rgb(212, 53, 22);
+}
+
+.addItineraryBtn {
+  background: rgb(7, 145, 199);
+}
+
+.addItineraryBtn:hover {
+  background: rgb(30, 160, 220);
+}
+
+.editItineraryBtn {
+  background: rgb(211, 76, 8);
+}
+
+.editItineraryBtn:hover {
+  background: rgb(228, 93, 25);
+}
