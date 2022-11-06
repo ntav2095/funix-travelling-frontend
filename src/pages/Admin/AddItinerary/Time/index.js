@@ -7,8 +7,6 @@ function Time({ id, type, isSubmit, onSubmit }) {
   const timeRef = useRef();
 
   useEffect(() => {
-    console.log(type);
-    console.log(isSubmit);
     if (isSubmit > 0) {
       onSubmit(type, id, {
         session: sessionRef.current.value,

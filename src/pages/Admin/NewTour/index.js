@@ -93,8 +93,6 @@ function NewTour() {
       formData.append("images", item);
     });
 
-    // console.log(values.priceIncludes.split("\n"));
-
     sendRequest(tourApi.add(formData));
   };
 

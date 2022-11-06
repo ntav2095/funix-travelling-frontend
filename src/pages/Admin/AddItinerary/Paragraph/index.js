@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 
 import useEditor from "../../../../hooks/useEditor";
+import "./Paragraph.css";
 
 function Paragraph({ onChange, type, id, isSubmit, onSubmit }) {
   const editorRef = useRef();
@@ -12,7 +13,7 @@ function Paragraph({ onChange, type, id, isSubmit, onSubmit }) {
     }
   }, [isSubmit, files, id, quill, type, onSubmit]);
 
-  return <div ref={editorRef}></div>;
+  return <div className="addItinerary-editor" ref={editorRef}></div>;
 }
 
 export default Paragraph;

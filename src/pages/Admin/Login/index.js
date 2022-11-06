@@ -39,7 +39,6 @@ function Login() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
-  console.log(userApi.login());
   const submitHandler = (values) => {
     //
     sendRequest(userApi.login(values.username, values.password));

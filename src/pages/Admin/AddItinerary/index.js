@@ -73,7 +73,6 @@ function AddItinerary() {
     }
 
     if (type === "title" || type === "time") {
-      console.log(content);
       setPlan((prev) =>
         prev.map((item) =>
           item.id === id ? { ...item, content: content } : item
@@ -94,7 +93,6 @@ function AddItinerary() {
 
       let textPlan = JSON.stringify(plan);
       imgUrls = imgUrls.filter((item) => textPlan.includes(item.url));
-      console.log(imgUrls);
 
       // get urls from server
       const promises = imgUrls.map((item) => {

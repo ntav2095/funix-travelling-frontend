@@ -36,7 +36,7 @@ function App() {
           path="/cam-nang-du-lich/:id"
           element={<TravelHandbookDetail />}
         />
-        <Route path="/danh-sach-tour/:a" element={<TourDetail />} />
+        <Route path="/danh-sach-tour/:tourId" element={<TourDetail />} />
         <Route path="/*" element={<NotFound />} />
 
         <Route path="/admin" element={<Dashboard />} />
