@@ -1,18 +1,21 @@
-<<<<<<< HEAD
 // main
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useParams } from "react-router-dom";
 
 // components
 import AdminLayout from "../../../layout/AdminLayout";
-import Initerary from "./Itinerary";
 
 // apis
 import useAxios from "../../../hooks/useAxios";
-import { tourApi } from "../../../services/adminApis";
+import { tourApi } from "../../../services/apis";
+
+// helpers
+import arrayFormData from "../../../services/helpers/arrayFormData";
 
 // css
-import "./EditTour.css";
+import "./NewTour.css";
+import { useEffect } from "react";
 
 const initialValues = {
   name: "", // required
@@ -54,49 +57,70 @@ const validator = (values) => {
     errors.departureDates = "Trường này là bắt buộc";
   }
 
+  return {};
+
   return errors;
 };
 
-function NewTour() {
+function EditTour() {
   const [images, setImages] = useState([]);
-  const [sendRequest, isLoading, data, error] = useAxios();
+  const [fetch, isFetching, tour, fetchingError] = useAxios();
+  const [edit, isEditing, editingResult, editingError] = useAxios();
+  const { tourId } = useParams();
+
   const selectImagesHandler = (e) => {
     setImages(Array.from(e.target.files));
   };
 
+  const initialValues = !tour
+    ? null
+    : {
+        name: tour.item.name, // required
+        journey: tour.item.journey, // required
+        departureDates: tour.item.time.departureDates.join("\n"), // require
+        duration: tour.item.time.duration, // required
+        lowestPrice: tour.item.price.from, // required
+        priceIncludes: tour.item.price.includes.join("\n"),
+        priceExcludes: tour.item.price.includes.join("\n"),
+        images: tour.item.images,
+        highlights: tour.item.highlights.join("\n"),
+        cancellationPolicy: tour.item.cancellationPolicy.join("\n"),
+      };
+
   const submitHandler = (values, { setSubmitting }) => {
-    console.log(values.highlights);
-    const x = values.highlights;
-    console.log(x.split("\n"));
-    console.log(images);
+    console.log(values.cancellationPolicy);
 
     const formData = new FormData();
+    console.log(tourId);
+    formData.append("tourId", tourId);
     formData.append("name", values.name);
     formData.append("journey", values.journey);
     formData.append("lowestPrice", values.lowestPrice);
-    formData.append("departureDates", values.departureDates.split("\n"));
-    formData.append("priceIncludes", values.priceIncludes.split("\n"));
-    formData.append("priceExcludes", values.priceExcludes.split("\n"));
-    formData.append(
+    arrayFormData(
+      formData,
+      "departureDates",
+      values.departureDates.split("\n")
+    );
+    arrayFormData(formData, "priceIncludes", values.priceIncludes.split("\n"));
+    arrayFormData(formData, "priceExcludes", values.priceExcludes.split("\n"));
+    arrayFormData(
+      formData,
       "cancellationPolicy",
       values.cancellationPolicy.split("\n")
     );
-    formData.append("highlights", values.highlights.split("\n"));
+    arrayFormData(formData, "highlights", values.highlights.split("\n"));
+
     formData.append("duration", values.duration);
     images.forEach((item) => {
       formData.append("images", item);
     });
 
-    sendRequest(tourApi.addTour(formData));
+    edit(tourApi.edit(formData));
   };
 
   useEffect(() => {
-    console.log(data);
-  }, [data]);
-
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
+    fetch(tourApi.getSingleTour(tourId));
+  }, []);
 
   return (
     <AdminLayout>
@@ -104,104 +128,97 @@ function NewTour() {
         <h1>New tour</h1>
 
         <div className="main">
-          <Formik
-            initialValues={initialValues}
-            validate={() => ({})}
-            onSubmit={submitHandler}
-          >
-            {({ isSubmitting }) => (
-              <Form className="newTour__form">
-                <label>
-                  <p className="newTour__label">Tên tour</p>
-                  <Field type="textarea" name="name" />
-                  <ErrorMessage name="name" component="p" />
-                </label>
+          {tour && (
+            <Formik
+              initialValues={initialValues}
+              validate={validator}
+              onSubmit={submitHandler}
+            >
+              {({ isSubmitting }) => (
+                <Form className="newTour__form">
+                  <label>
+                    <p className="newTour__label">Tên tour</p>
+                    <Field type="textarea" name="name" />
+                    <ErrorMessage name="name" component="p" />
+                  </label>
 
-                <label>
-                  <p className="newTour__label">Lộ trình</p>
-                  <Field type="textarea" name="journey" />
-                  <ErrorMessage name="journey" component="p" />
-                </label>
+                  <label>
+                    <p className="newTour__label">Lộ trình</p>
+                    <Field type="textarea" name="journey" />
+                    <ErrorMessage name="journey" component="p" />
+                  </label>
 
-                <label>
-                  <p className="newTour__label">
-                    Ngày khởi hành (dd/mm/yyyy) (enter xuống dòng)
-                  </p>
-                  <Field type="textarea" name="departureDates" />
-                  <ErrorMessage name="departureDates" component="p" />
-                </label>
+                  <label>
+                    <p className="newTour__label">
+                      Ngày khởi hành (dd/mm/yyyy) (enter xuống dòng)
+                    </p>
+                    <Field type="textarea" name="departureDates" />
+                    <ErrorMessage name="departureDates" component="p" />
+                  </label>
 
-                <label>
-                  <p className="newTour__label">Thời gian</p>
-                  <Field type="text" name="duration" />
-                  <ErrorMessage name="duration" component="p" />
-                </label>
+                  <label>
+                    <p className="newTour__label">Thời gian</p>
+                    <Field type="text" name="duration" />
+                    <ErrorMessage name="duration" component="p" />
+                  </label>
 
-                <label>
-                  <p className="newTour__label">Giá từ</p>
-                  <Field type="number" name="lowestPrice" />
-                  <ErrorMessage name="lowestPrice" component="p" />
-                </label>
+                  <label>
+                    <p className="newTour__label">Giá từ</p>
+                    <Field type="number" name="lowestPrice" />
+                    <ErrorMessage name="lowestPrice" component="p" />
+                  </label>
 
-                <label>
-                  <p className="newTour__label">
-                    Giá bao gồm (enter xuống dòng)
-                  </p>
-                  <Field component="textarea" name="priceIncludes" />
-                  <ErrorMessage name="priceIncludes" component="p" />
-                </label>
+                  <label>
+                    <p className="newTour__label">
+                      Giá bao gồm (enter xuống dòng)
+                    </p>
+                    <Field component="textarea" name="priceIncludes" />
+                    <ErrorMessage name="priceIncludes" component="p" />
+                  </label>
 
-                <label>
-                  <p className="newTour__label">
-                    Giá không bao gồm (enter xuống dòng)
-                  </p>
-                  <Field component="textarea" name="priceExcludes" />
-                  <ErrorMessage name="priceExcludes" component="p" />
-                </label>
+                  <label>
+                    <p className="newTour__label">
+                      Giá không bao gồm (enter xuống dòng)
+                    </p>
+                    <Field component="textarea" name="priceExcludes" />
+                    <ErrorMessage name="priceExcludes" component="p" />
+                  </label>
 
-                <label>
-                  <p className="newTour__label">
-                    Điểm nổi bật (enter xuống dòng)
-                  </p>
-                  <Field component="textarea" name="highlights" />
-                  <ErrorMessage name="highlights" component="p" />
-                </label>
+                  <label>
+                    <p className="newTour__label">
+                      Điểm nổi bật (enter xuống dòng)
+                    </p>
+                    <Field component="textarea" name="highlights" />
+                    <ErrorMessage name="highlights" component="p" />
+                  </label>
 
-                <label>
-                  <p className="newTour__label">
-                    Điều kiện hoàn hủy đổi (enter xuống dòng)
-                  </p>
-                  <Field component="textarea" name="cancellationPolicy" />
-                  <ErrorMessage name="cancellationPolicy" component="p" />
-                </label>
+                  <label>
+                    <p className="newTour__label">
+                      Điều kiện hoàn hủy đổi (enter xuống dòng)
+                    </p>
+                    <Field component="textarea" name="cancellationPolicy" />
+                    <ErrorMessage name="cancellationPolicy" component="p" />
+                  </label>
 
-                <label>
-                  <p className="newTour__label">Hình ảnh</p>
-                  <input type="file" multiple onChange={selectImagesHandler} />
-                  <ErrorMessage name="images" component="p" />
-                </label>
+                  <label>
+                    <p className="newTour__label">Hình ảnh mới</p>
+                    <input
+                      type="file"
+                      multiple
+                      onChange={selectImagesHandler}
+                    />
+                    <ErrorMessage name="images" component="p" />
+                  </label>
 
-                <Initerary />
-
-                <button type="submit">Submit</button>
-              </Form>
-            )}
-          </Formik>
+                  <button type="submit">Submit</button>
+                </Form>
+              )}
+            </Formik>
+          )}
         </div>
       </div>
     </AdminLayout>
   );
 }
 
-export default NewTour;
-=======
-
-
-function EditTour() {
-    
-
-    
-}
-
-export default EditTour
->>>>>>> cd8302a3d75c4a67a94d6567c64f10a31cff2387
+export default EditTour;

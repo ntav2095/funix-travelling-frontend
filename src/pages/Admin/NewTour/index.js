@@ -1,18 +1,20 @@
 // main
-import { useState,useRef } from "react";
+import { useState, useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import axios from "axios";
+import { useEffect } from "react";
+
 // components
 import AdminLayout from "../../../layout/AdminLayout";
-import Initerary from "./Itinerary";
 
 // apis
 import useAxios from "../../../hooks/useAxios";
-import { tourApi } from "../../../services/adminApis";
+import { tourApi } from "../../../services/apis";
+
+// helpers
+import arrayFormData from "../../../services/helpers/arrayFormData";
 
 // css
 import "./NewTour.css";
-import { useEffect } from "react";
 
 const initialValues = {
   name: "", // required
@@ -26,8 +28,6 @@ const initialValues = {
   highlights: "",
   cancellationPolicy: "",
 };
-
-
 
 const validator = (values) => {
   const errors = {};
@@ -56,126 +56,47 @@ const validator = (values) => {
     errors.departureDates = "Trường này là bắt buộc";
   }
 
+  return {};
+
   return errors;
 };
 
 function NewTour() {
   const [images, setImages] = useState([]);
   const [sendRequest, isLoading, data, error] = useAxios();
-  const [quillContent,setquillContent]=useState({})
-  const [fileImage,setfileImage]=useState()
+
   const selectImagesHandler = (e) => {
     setImages(Array.from(e.target.files));
   };
-  const fileImageHandle = (e)=>{
-    console.log('fileImage',e)
-    setfileImage(e)
-  }
-  const submitHandler =  (values, { setSubmitting }) => {
-    // lấy dữ liệu image 
-    const imageContent=[]
-    
-    for(const key in quillContent){
-      // console.log(quillContent[key])
-     quillContent[key].map((item=>item.content.map(item2=>item2.insert.image?imageContent.push(item2.insert.image):item2)))
-    }
-    // console.log('fileImage',imageContent.toString())
-    // biến chứa dữ liệu file ảnh gồm url và file
-    const imageAfterFilter=fileImage.filter(item=>{
-      console.log(item.url)
-      return imageContent.includes(item.url)
-    })
-    //gửi dữ liệu file ảnh phần lộ trình về back-end 
 
-    
- 
-
-    // const x = values.highlights;
-
+  const submitHandler = (values, { setSubmitting }) => {
     const formData = new FormData();
     formData.append("name", values.name);
     formData.append("journey", values.journey);
     formData.append("lowestPrice", values.lowestPrice);
-    formData.append("departureDates", values.departureDates.split("\n"));
-    formData.append("priceIncludes", values.priceIncludes.split("\n"));
-    formData.append("priceExcludes", values.priceExcludes.split("\n"));
-    formData.append(
+    arrayFormData(
+      formData,
+      "departureDates",
+      values.departureDates.split("\n")
+    );
+    arrayFormData(formData, "priceIncludes", values.priceIncludes.split("\n"));
+    arrayFormData(formData, "priceExcludes", values.priceExcludes.split("\n"));
+    arrayFormData(
+      formData,
       "cancellationPolicy",
       values.cancellationPolicy.split("\n")
     );
-    formData.append("highlights", values.highlights.split("\n"));
+    arrayFormData(formData, "highlights", values.highlights.split("\n"));
+
     formData.append("duration", values.duration);
     images.forEach((item) => {
       formData.append("images", item);
     });
-    formData.append('itinerary',quillContent)
 
-    sendRequest(tourApi.addTour(formData));
+    // console.log(values.priceIncludes.split("\n"));
+
+    sendRequest(tourApi.add(formData));
   };
-
-
-
-  const content=(x)=>{
-     if(x.dateSession==='Cả ngày'){
-    //   setquillContent([...quillContent,{...quillContent[Number(x.dayNumber)-1],
-    //     'title':`Ngày ${x.dayNumber}: ${x.title}`,
-    //     'content':[{
-    //     content:x.content
-    // }]}])
-
-        setquillContent({...quillContent,[`Ngày ${x.dayNumber}`]:[{
-              content:x.content
-        }]})
-
-     } else{
-    if(x.dateSession==='Buổi sáng'){
-    //   setquillContent([...quillContent,{...quillContent[Number(x.dayNumber)-1],
-    //     'title':`Ngày ${x.dayNumber}: ${x.title}`,
-    //     'content':[{
-    //     dateSession:x.dateSession,
-    //     duration:x.duration,
-    //     content:x.content
-    // }]}])
-
-        setquillContent({...quillContent,[`Ngày ${x.dayNumber}`]:[{
-          dateSession:x.dateSession,
-            duration:x.duration,
-            content:x.content
-        }]})
-
-    }else{
-      // console.log(quillContent,Number(x.dayNumber))
-    //   setquillContent([...quillContent,{...quillContent[Number(x.dayNumber)-1],
-    //     'title':`Ngày ${x.dayNumber}: ${x.title}`,
-    //     'content':[
-    //     ...quillContent[Number(x.dayNumber)-1].content,
-    //     {dateSession:x.dateSession,
-    //     duration:x.duration,
-    //     content:x.content
-    // }]}])
-
-   
-    // setquillContent([...quillContent,{...quillContent[Number(x.dayNumber)-1],
-  //     'title':`Ngày ${x.dayNumber}: ${x.title}`,
-  //     'content':[
-  //     ...quillContent[Number(x.dayNumber)-1].content,
-  //     {dateSession:x.dateSession,
-  //     duration:x.duration,
-  //     content:x.content
-  // }]
-// }])
-
-        setquillContent({
-          ...quillContent,
-            [`Ngày ${x.dayNumber}`]:[...quillContent[`Ngày ${x.dayNumber}`],{
-              dateSession:x.dateSession,
-              duration:x.duration,
-              content:x.content
-        }]})
-
-}}}
-
-  
 
   useEffect(() => {
     console.log(data);
@@ -193,7 +114,7 @@ function NewTour() {
         <div className="main">
           <Formik
             initialValues={initialValues}
-            validate={() => ({})}
+            validate={validator}
             onSubmit={submitHandler}
           >
             {({ isSubmitting }) => (
@@ -267,16 +188,8 @@ function NewTour() {
                   <input type="file" multiple onChange={selectImagesHandler} />
                   <ErrorMessage name="images" component="p" />
                 </label>
-               
-                
-                  <Initerary file={fileImageHandle} quillContent={content}/>
-
-                <div id='preview'>
-
-                </div>
 
                 <button type="submit">Submit</button>
-                
               </Form>
             )}
           </Formik>

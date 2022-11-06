@@ -23,26 +23,26 @@ function AdminLayout({ children }) {
           <ul>
             <li>
               <Link to="/admin">Dashboard</Link>
+            </li>{" "}
+            <li>
+              <Link to="/admin/tours">Tours</Link>
             </li>
             <li>
               <Link to="/admin/new-tour">New Tour</Link>
             </li>
-
+            <li>
+              <Link to="/admin/add-itinerary">Add Itinerary</Link>
+            </li>
             {user && (
               <li>
                 <button onClick={logoutHandler}>Log out</button>
               </li>
             )}
-
             {!user && (
               <li>
                 <Link to="/admin/login">Login</Link>
               </li>
             )}
-
-            <li>
-              <Link to="/admin/edit-tour">Edit Tour</Link>
-            </li>
           </ul>
         </div>
 

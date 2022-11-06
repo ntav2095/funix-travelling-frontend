@@ -1,0 +1,19 @@
+.addDayForm {
+  display: flex;
+  align-items: center;
+}
+
+.addDayForm input {
+  flex: 1;
+  outline: none;
+  border: 1px solid #ccc;
+  padding: 6px 8px;
+}
+
+.addDayForm button {
+  padding: 6px 16px;
+  border: none;
+  background: #000;
+  color: white;
+  margin-left: 8px;
+}

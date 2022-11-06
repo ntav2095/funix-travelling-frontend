@@ -18,6 +18,5 @@ const tours = [
   createTour(),
   createTour(),
 ];
-console.log(tours);
 
 export default tours;

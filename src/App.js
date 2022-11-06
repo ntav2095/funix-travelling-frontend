@@ -17,10 +17,9 @@ import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Admin/Dashboard";
 import NewTour from "./pages/Admin/NewTour";
 import EditTour from "./pages/Admin/EditTour";
-<<<<<<< HEAD
 import Login from "./pages/Admin/Login";
-=======
->>>>>>> cd8302a3d75c4a67a94d6567c64f10a31cff2387
+import Tours from "./pages/Admin/Tours";
+import AddItinerary from "./pages/Admin/AddItinerary";
 
 function App() {
   return (
@@ -42,11 +41,10 @@ function App() {
 
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/new-tour" element={<NewTour />} />
-        <Route path="/admin/edit-tour" element={<EditTour />} />
-<<<<<<< HEAD
+        <Route path="/admin/edit-tour/:tourId" element={<EditTour />} />
         <Route path="/admin/login" element={<Login />} />
-=======
->>>>>>> cd8302a3d75c4a67a94d6567c64f10a31cff2387
+        <Route path="/admin/tours" element={<Tours />} />
+        <Route path="/admin/add-itinerary" element={<AddItinerary />} />
       </Routes>
     </>
   );
