@@ -44,7 +44,7 @@ function App() {
         <Route path="/admin/edit-tour/:tourId" element={<EditTour />} />
         <Route path="/admin/login" element={<Login />} />
         <Route path="/admin/tours" element={<Tours />} />
-        <Route path="/admin/add-itinerary" element={<AddItinerary />} />
+        <Route path="/admin/add-itinerary/:tourId" element={<AddItinerary />} />
       </Routes>
     </>
   );

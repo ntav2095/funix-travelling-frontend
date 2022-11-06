@@ -25,4 +25,17 @@ export const tourApi = {
     url: `/tour/${tourId}`,
     method: "GET",
   }),
+  addItinerary: (data) => ({
+    url: "/tour/itinerary",
+    method: "POST",
+    data: data,
+  }),
+};
+
+export const fileApi = {
+  uploadImages: (formData) => ({
+    url: "/file",
+    method: "POST",
+    data: formData,
+  }),
 };

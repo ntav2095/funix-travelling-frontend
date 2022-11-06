@@ -50,7 +50,9 @@ function Tours() {
                     <div>
                       <Link to={`/admin/edit-tour/${item._id}`}>Edit</Link>
                       <button>Remove</button>
-                      <button>Add itinerary</button>
+                      <Link to={`/admin/add-itinerary/${item._id}`}>
+                        Add itinerary
+                      </Link>
                       <button>Edit itinerary</button>
                     </div>
                   </td>

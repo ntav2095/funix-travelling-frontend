@@ -17,3 +17,38 @@
   color: white;
   margin-left: 8px;
 }
+
+.addBtns button {
+  padding: 6px 8px;
+  border: none;
+  margin: 6px 8px;
+  transition: 0.2s;
+}
+
+.addBtns button:first-child {
+  margin-left: 0;
+  background: orange;
+  color: white;
+}
+
+.addBtns button:last-child {
+  background: green;
+  color: white;
+}
+
+.addBtns button:nth-child(2) {
+  background: purple;
+  color: white;
+}
+
+.addBtns button:first-child:hover {
+  background: rgb(241, 166, 27);
+}
+
+.addBtns button:last-child:hover {
+  background: rgb(15, 168, 15);
+}
+
+.addBtns button:nth-child(2):hover {
+  background: rgb(159, 10, 159);
+}

@@ -1,6 +1,8 @@
 // main
 import { useState, useRef, useCallback, useEffect } from "react";
 import { v4 as uuid } from "uuid";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 // components
 import AdminLayout from "../../../layout/AdminLayout";
@@ -9,6 +11,8 @@ import Time from "./Time";
 import Paragraph from "./Paragraph";
 
 // apis
+import useAxios from "../../../hooks/useAxios";
+import { tourApi } from "../../../services/apis";
 
 // helpers
 import quillGetHTML from "../../../services/helpers/quillGetHTML";
@@ -23,6 +27,8 @@ function AddItinerary() {
   const [plan, setPlan] = useState([]);
   const [images, setImages] = useState([]);
   const [isSubmit, setIsSubmit] = useState(0);
+  const [sendRequest, isLoading, data, error] = useAxios();
+  const { tourId } = useParams();
 
   const addContentHandler = (type) => {
     //
@@ -76,33 +82,54 @@ function AddItinerary() {
     }
   }, []);
 
-  const test = () => {
-    let imgUrls = [];
-    images.forEach((item) => {
-      imgUrls = [...imgUrls, ...item.files.map((x) => x.url)];
-    });
-    let textPlan = JSON.stringify(plan);
-    imgUrls.forEach((item) => {
-      console.log(item);
-      textPlan = textPlan.replace(item, myUrl);
-    });
+  const test = async () => {
+    try {
+      let imgUrls = [];
+      images.forEach((item) => {
+        imgUrls = [
+          ...imgUrls,
+          ...item.files.map((x) => ({ url: x.url, file: x.file })),
+        ];
+      });
 
-    const newPlan = JSON.parse(textPlan);
-    let html = "";
-    newPlan.forEach((item) => {
-      if (item.type === "time") {
-        html += `<div><h2>${item.content.session}</h2><h2>${item.content.time}</h2></div>`;
-      }
+      let textPlan = JSON.stringify(plan);
+      imgUrls = imgUrls.filter((item) => textPlan.includes(item.url));
+      console.log(imgUrls);
 
-      if (item.type === "title") {
-        html += `<h1>${item.content}</h1>`;
-      }
+      // get urls from server
+      const promises = imgUrls.map((item) => {
+        const formData = new FormData();
+        formData.append("image", item.file);
+        return axios("http://localhost:5000/api/file/single", {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          data: formData,
+          method: "POST",
+        });
+      });
 
-      if (item.type === "para") {
-        html += `<h1>${quillGetHTML(item.content)}</h1>`;
-      }
-    });
-    document.getElementById("hehe").innerHTML = html;
+      const serverUrls = await Promise.all(promises);
+
+      let urls = serverUrls.map((item, index) => ({
+        newUrl: item.data,
+        oldUrl: imgUrls[index].url,
+      }));
+
+      urls.forEach((item) => {
+        textPlan = textPlan.replace(item.oldUrl, item.newUrl);
+      });
+
+      sendRequest(
+        tourApi.addItinerary({
+          tourId: tourId,
+          itinerary: JSON.parse(textPlan),
+        })
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -113,7 +140,6 @@ function AddItinerary() {
             return (
               <Title
                 key={item.id}
-                // onChange={changeHandler}
                 id={item.id}
                 type={item.type}
                 isSubmit={isSubmit}
@@ -126,7 +152,6 @@ function AddItinerary() {
             return (
               <Time
                 key={item.id}
-                // onChange={changeHandler}
                 id={item.id}
                 type={item.type}
                 isSubmit={isSubmit}
@@ -139,7 +164,6 @@ function AddItinerary() {
             return (
               <Paragraph
                 key={item.id}
-                // onChange={changeHandler}
                 id={item.id}
                 type={item.type}
                 isSubmit={isSubmit}
@@ -151,17 +175,18 @@ function AddItinerary() {
           return null;
         })}
 
-        <button onClick={() => addContentHandler("title")}>Add title</button>
-        <button onClick={() => addContentHandler("time")}>Add time</button>
-        <button onClick={() => addContentHandler("para")}>Add paragraph</button>
+        <div className={styles.addBtns}>
+          <button onClick={() => addContentHandler("title")}>Add title</button>
+          <button onClick={() => addContentHandler("time")}>Add time</button>
+          <button onClick={() => addContentHandler("para")}>
+            Add paragraph
+          </button>
+        </div>
 
         <div className="submitBtn">
-          <button onClick={() => setIsSubmit((prev) => prev + 1)}>
-            Submit
-          </button>
+          <button onClick={() => setIsSubmit((prev) => prev + 1)}>Done</button>
 
-          <button onClick={() => console.log(plan, images)}>xxx</button>
-          <button onClick={test}>test</button>
+          <button onClick={test}>Submit</button>
         </div>
 
         <div id="hehe"></div>
