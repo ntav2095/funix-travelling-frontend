@@ -31,6 +31,7 @@
   padding: 10px;
   margin: 16px 0px;
   font-size: 26px;
+  border: none;
 }
 .with100 {
   width: 100%;
@@ -48,6 +49,11 @@ p.gia-chuan {
   padding: 5px;
   font-size: 24px;
 }
+
+.gia-chuan span {
+  color: white;
+}
+
 input.with100.mt-2 {
   text-transform: uppercase;
   font-size: 0.97em;
@@ -76,12 +82,14 @@ input.with100.mt-2 {
   border-radius: 2px;
 }
 
-
 /* index.js */
-.tour-detail{
+.tour-detail {
   padding: 2em 8em;
   background: rgb(255, 255, 255);
 }
 
-
-/* -------------------------------------- */
+/* ---------------- vũ css ---------------------- */
+.callbackBtn {
+  background: #f98b04;
+  color: white;
+}
