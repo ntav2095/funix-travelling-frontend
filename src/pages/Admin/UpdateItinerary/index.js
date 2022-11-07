@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 // components
 import AdminLayout from "../../../layout/AdminLayout";
@@ -18,12 +18,13 @@ import { tourApi } from "../../../services/apis";
 // css
 import styles from "./AddItinerary.module.css";
 
-function AddItinerary() {
+function UpdateItinerary() {
   const [plan, setPlan] = useState([]);
   const [images, setImages] = useState([]);
-  const [sendRequest, isLoading, data, error] = useAxios();
+  const [sendRequest, isLoading, updated, updatingError] = useAxios();
   const [fetchTour, fetchingTour, fetchedTour, fetchingError] = useAxios();
   const { tourId } = useParams();
+  const navigate = useNavigate();
 
   // handle thêm title/thời gian/đoạn văn
   const addContentHandler = (type) => {
@@ -48,20 +49,18 @@ function AddItinerary() {
     if (type === "para") {
       const newId = uuid();
       setPlan((prev) => [...prev, { id: newId, type: "para", content: {} }]);
-      // setImages((prev) => [...prev, { id: newId, files: [] }]);
     }
   };
 
   // handle lưu data vào plan mỗi khi người dùng nhập dữ liệu
   const changeHandler = (type, id, content) => {
-    console.log(type, content);
     if (type === "para") {
       setPlan((prev) =>
         prev.map((item) =>
           item.id === id ? { ...item, content: content.delta } : item
         )
       );
-      console.log("set image");
+
       setImages((prev) => {
         if (images.find((item) => item.id === id)) {
           return prev.map((item) =>
@@ -81,10 +80,6 @@ function AddItinerary() {
       );
     }
   };
-
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
 
   // submit handler
   const submitHandler = async () => {
@@ -145,6 +140,19 @@ function AddItinerary() {
     ? `Cập nhật lộ trình tour: ${fetchedTour.item.name}`
     : "Cập nhật lộ trình tour";
 
+  useEffect(() => {
+    if (updated) {
+      alert("Cập nhật lộ trình tour thành công");
+      navigate("/admin/tours");
+    }
+  }, [updated]);
+
+  useEffect(() => {
+    if (updatingError) {
+      alert("Cập nhật lộ trình tour thất bại: ", updatingError.message.vi);
+      navigate("/admin/tours");
+    }
+  }, [updatingError]);
   return (
     <>
       <SpinnerModal show={isLoading || fetchingTour} />
@@ -209,4 +217,4 @@ function AddItinerary() {
   );
 }
 
-export default AddItinerary;
+export default UpdateItinerary;

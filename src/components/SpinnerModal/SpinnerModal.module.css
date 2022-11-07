@@ -1,7 +1,7 @@
 .modalContent {
-  background: transparent;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: transparent !important;
+  border: none !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }

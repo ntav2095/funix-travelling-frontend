@@ -35,7 +35,7 @@ class Tour extends Component {
     const fetchTours = async () => {
       try {
         const response = await axios({
-          url: "http://localhost:5000/api/tour",
+          url: "https://funixxx.herokuapp.com/api/tour",
           method: "GET",
           withCredentials: true,
         });

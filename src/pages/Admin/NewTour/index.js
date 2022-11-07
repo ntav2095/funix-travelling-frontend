@@ -117,7 +117,7 @@ function NewTour() {
 
   useEffect(() => {
     if (error) {
-      alert("Có lỗi xảy ra: ", error.mesage);
+      alert("Có lỗi xảy ra: ", error.message.vi);
     }
   }, [error]);
 
