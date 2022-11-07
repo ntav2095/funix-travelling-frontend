@@ -14,39 +14,16 @@ import { tourApi } from "../../../services/apis";
 
 // helpers
 import arrayFormData from "../../../services/helpers/arrayFormData";
+import formatDate from "../../../services/helpers/formatDate";
+
+// assets
+import { exclamation as exclamationSVG } from "../../../assets/svgs";
+
+// services
+import { tourValidator } from "../../../services/validators";
 
 // css
 import "./NewTour.css";
-
-const validator = (values) => {
-  const errors = {};
-
-  if (!values.name) {
-    errors.name = "Trường này là bắt buộc";
-  }
-
-  if (!values.journey) {
-    errors.journey = "Trường này là bắt buộc";
-  }
-
-  if (Number(values.lowestPrice) <= 0) {
-    errors.lowestPrice = "Giá phải lớn hơn 0";
-  }
-
-  if (isNaN(Number(values.lowestPrice))) {
-    errors.lowestPrice = "Trường này phải là số";
-  }
-
-  if (!values.duration) {
-    errors.duration = "Trường này là bắt buộc";
-  }
-
-  if (!values.departureDates) {
-    errors.departureDates = "Trường này là bắt buộc";
-  }
-
-  return errors;
-};
 
 function EditTour() {
   const [images, setImages] = useState([]);
@@ -74,7 +51,10 @@ function EditTour() {
         name: tour.item.name || "",
         journey: tour.item.journey || "",
         description: tour.item?.description || "",
-        departureDates: tour.item.time.departureDates.join("\n") || "",
+        departureDates:
+          tour.item.time.departureDates
+            .map((item) => formatDate(item))
+            .join("\n") || "",
         duration: tour.item.time.duration || "",
         lowestPrice: tour.item.price.from || "",
         priceIncludes: tour.item.price.includes.join("\n") || "",
@@ -83,6 +63,10 @@ function EditTour() {
         highlights: tour.item.highlights.join("\n") || "",
         cancellationPolicy: tour.item.cancellationPolicy.join("\n") || "",
       };
+
+  if (tour) {
+    console.log(tour.item.description);
+  }
 
   const submitHandler = (values) => {
     const formData = new FormData();
@@ -105,12 +89,10 @@ function EditTour() {
       values.cancellationPolicy.split("\n")
     );
     arrayFormData(formData, "highlights", values.highlights.split("\n"));
-
     formData.append("duration", values.duration);
-    images.forEach((item) => {
-      formData.append("images", item);
-    });
+    arrayFormData(formData, "images", images);
 
+    // send request
     edit(tourApi.edit(formData));
   };
 
@@ -140,25 +122,40 @@ function EditTour() {
             {tour && (
               <Formik
                 initialValues={initialValues}
-                validate={validator}
+                validate={tourValidator}
                 onSubmit={submitHandler}
               >
                 {() => (
                   <Form className="newTour__form">
                     <label>
-                      <p className="newTour__label">Tên tour</p>
+                      <p className="newTour__label">
+                        Tên tour{" "}
+                        <span title="Trường này là bắt buộc">
+                          {exclamationSVG}
+                        </span>
+                      </p>
                       <Field component="textarea" name="name" />
                       <ErrorMessage name="name" component="p" />
                     </label>
 
                     <label>
-                      <p className="newTour__label">Lộ trình</p>
+                      <p className="newTour__label">
+                        Lộ trình{" "}
+                        <span title="Trường này là bắt buộc">
+                          {exclamationSVG}
+                        </span>
+                      </p>
                       <Field component="textarea" name="journey" />
                       <ErrorMessage name="journey" component="p" />
                     </label>
 
                     <label>
-                      <p className="newTour__label">Mô tả</p>
+                      <p className="newTour__label">
+                        Mô tả{" "}
+                        <span title="Trường này là bắt buộc">
+                          {exclamationSVG}
+                        </span>
+                      </p>
                       <Field component="textarea" name="description" />
                       <ErrorMessage name="description" component="p" />
                     </label>
@@ -166,14 +163,22 @@ function EditTour() {
                     <label>
                       <p className="newTour__label">
                         Ngày khởi hành <span>(dd/mm/yyyy) </span>
-                        <span>(enter xuống dòng)</span>
+                        <span>(enter xuống dòng)</span>{" "}
+                        <span title="Trường này là bắt buộc">
+                          {exclamationSVG}
+                        </span>
                       </p>
                       <Field component="textarea" name="departureDates" />
                       <ErrorMessage name="departureDates" component="p" />
                     </label>
 
                     <label>
-                      <p className="newTour__label">Thời gian</p>
+                      <p className="newTour__label">
+                        Thời gian{" "}
+                        <span title="Trường này là bắt buộc">
+                          {exclamationSVG}
+                        </span>
+                      </p>
                       <Field type="text" name="duration" />
                       <ErrorMessage name="duration" component="p" />
                     </label>
@@ -202,7 +207,10 @@ function EditTour() {
 
                     <label>
                       <p className="newTour__label">
-                        Điểm nổi bật <span>(enter xuống dòng)</span>
+                        Điểm nổi bật <span>(enter xuống dòng)</span>{" "}
+                        <span title="Trường này là bắt buộc">
+                          {exclamationSVG}
+                        </span>
                       </p>
                       <Field component="textarea" name="highlights" />
                       <ErrorMessage name="highlights" component="p" />
@@ -210,7 +218,10 @@ function EditTour() {
 
                     <label>
                       <p className="newTour__label">
-                        Điều kiện hoàn hủy đổi <span>(enter xuống dòng)</span>
+                        Điều kiện hoàn hủy đổi <span>(enter xuống dòng)</span>{" "}
+                        <span title="Trường này là bắt buộc">
+                          {exclamationSVG}
+                        </span>
                       </p>
                       <Field component="textarea" name="cancellationPolicy" />
                       <ErrorMessage name="cancellationPolicy" component="p" />
@@ -236,7 +247,11 @@ function EditTour() {
                             checked={removedImages.includes(item)}
                             type="checkbox"
                           />
-                          <img src={item} />
+
+                          <div className="image">
+                            <img src={item} />
+                            <p className="removeText">remove</p>
+                          </div>
                         </div>
                       ))}
                     </div>
