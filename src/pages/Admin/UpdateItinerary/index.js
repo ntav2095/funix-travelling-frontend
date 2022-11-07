@@ -62,15 +62,7 @@ function UpdateItinerary() {
         )
       );
 
-      setImages((prev) => {
-        if (images.find((item) => item.id === id)) {
-          return prev.map((item) =>
-            item.id === id ? { ...item, files: content.files } : item
-          );
-        }
-
-        return [...prev, ...content.files];
-      });
+      setImages(content.files);
     }
 
     if (type === "title" || type === "time") {
