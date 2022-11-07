@@ -25,9 +25,9 @@ export const tourApi = {
     url: `/tour/${tourId}`,
     method: "GET",
   }),
-  addItinerary: (data) => ({
+  updateItinerary: (data) => ({
     url: "/tour/itinerary",
-    method: "POST",
+    method: "PUT",
     data: data,
   }),
 };

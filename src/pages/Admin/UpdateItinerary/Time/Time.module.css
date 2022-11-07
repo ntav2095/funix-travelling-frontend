@@ -1,16 +1,23 @@
 .session {
-  border-bottom: 2px solid rgb(159, 31, 8);
+  border-bottom: 3px solid rgb(159, 31, 8);
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
 }
 
 .session input {
-  max-width: 200px;
   border: none;
-  border-bottom: 1px solid #ccc;
   color: rgb(159, 31, 8);
   font-weight: 500;
+  padding: 6px 8px;
+  padding-bottom: 2px;
+  font-size: 15px;
+  outline: none;
+  width: 45%;
+}
+
+.session input:focus {
+  border: 1px solid rgb(159, 31, 8);
 }
 
 .session input::placeholder {

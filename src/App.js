@@ -22,7 +22,6 @@ import Tours from "./pages/Admin/Tours";
 import AddItinerary from "./pages/Admin/AddItinerary";
 import Posts from "./pages/Admin/Posts";
 import NewPosts from "./pages/Admin/Posts/newPosts";
-
 function App() {
   return (
     <>

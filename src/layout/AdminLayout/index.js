@@ -1,9 +1,29 @@
+// main
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { removeUser } from "../../store/user.slice";
-import "./AdminLayout.css";
 
-function AdminLayout({ children }) {
+// css
+import styles from "./AdminLayout.module.css";
+
+const userSVG = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="w-6 h-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+    />
+  </svg>
+);
+
+function AdminLayout({ children, title }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
@@ -14,24 +34,55 @@ function AdminLayout({ children }) {
   };
   return (
     <>
-      <header className="adminLayout__header">
-        <h1>Admin page {user && <span>({user.username})</span>}</h1>
+      <header className={styles.header}>
+        <div className={styles.inner}>
+          <h1>Admin page</h1>
+
+          {user && (
+            <div>
+              <p>
+                {userSVG} <span>{user.username}</span>
+              </p>
+
+              <button onClick={logoutHandler}>Log out</button>
+            </div>
+          )}
+        </div>
       </header>
 
-      <main className="adminLayout__main">
-        <div className="adminLayout__sidebar">
-          <ul>
+      <main className={styles.main}>
+        <div className={styles.sidebar}>
+          <ul className={styles.nav}>
             <li>
-              <Link to="/admin">Dashboard</Link>
-            </li>{" "}
-            <li>
-              <Link to="/admin/tours">Tours</Link>
+              <NavLink
+                end
+                className={({ isActive }) =>
+                  isActive ? styles.active : undefined
+                }
+                to="/admin"
+              >
+                Dashboard
+              </NavLink>
             </li>
             <li>
-              <Link to="/admin/new-tour">New Tour</Link>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? styles.active : undefined
+                }
+                to="/admin/tours"
+              >
+                Tours
+              </NavLink>
             </li>
             <li>
-              <Link to="/admin/add-itinerary">Add Itinerary</Link>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? styles.active : undefined
+                }
+                to="/admin/new-tour"
+              >
+                New Tour
+              </NavLink>
             </li>
             <li>
               <Link to="/admin/posts">Posts</Link>
@@ -44,15 +95,26 @@ function AdminLayout({ children }) {
                 <button onClick={logoutHandler}>Log out</button>
               </li>
             )}
+
             {!user && (
               <li>
-                <Link to="/admin/login">Login</Link>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? styles.active : undefined
+                  }
+                  to="/admin/login"
+                >
+                  Login
+                </NavLink>
               </li>
             )}
           </ul>
         </div>
 
-        <div className="adminLayout__content">{children}</div>
+        <div className={styles.content}>
+          <h2 className={styles.title}>{title}</h2>
+          {children}
+        </div>
       </main>
     </>
   );

@@ -1,16 +1,90 @@
-.tours table {
+.tours {
+  overflow: auto;
   width: 100%;
+}
+
+.table {
+  min-width: 100%;
   border-collapse: collapse;
 }
 
 .tours table td,
 .tours table tr {
   border: 1px solid #ccc;
+}
+
+.table thead div {
+  padding: 6px;
+  font-weight: 600;
+}
+
+.table tbody div {
+  padding: 6px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+}
+
+.table tbody .actionBtns {
+  max-width: 1000px !important;
+}
+
+/* ============ buttons ==========  */
+.actionBtns {
+  display: flex;
+  align-items: center;
   padding: 2px;
 }
 
-.tours table button {
+.table button,
+.table a {
   border: none;
   outline: none;
-  margin: 0 8px;
+  margin-right: 8px;
+  min-width: 80px;
+  text-align: center;
+  border-radius: 3.8px;
+}
+
+.actionBtns > * {
+  padding: 6px 8px;
+  color: white;
+  transition: 0.2s;
+}
+
+.actionBtns > *:hover {
+  color: white;
+}
+
+.editBtn {
+  background: green;
+}
+
+.editBtn:hover {
+  background: rgb(11, 177, 11);
+}
+
+.removeTourBtn {
+  background: rgb(200, 33, 0);
+}
+
+.removeTourBtn:hover {
+  background: rgb(223, 70, 40);
+}
+
+.addItineraryBtn {
+  background: rgb(7, 145, 199);
+}
+
+.addItineraryBtn:hover {
+  background: rgb(30, 160, 220);
+}
+
+.editItineraryBtn {
+  background: rgb(211, 76, 8);
+}
+
+.editItineraryBtn:hover {
+  background: rgb(228, 93, 25);
 }
