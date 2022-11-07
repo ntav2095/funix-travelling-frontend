@@ -18,37 +18,63 @@
   margin-left: 8px;
 }
 
+/* =============== add buttons ============= */
+.addBtns {
+  margin-top: 16px;
+}
+
 .addBtns button {
   padding: 6px 8px;
   border: none;
   margin: 6px 8px;
   transition: 0.2s;
+  border-radius: 3.8px;
 }
 
 .addBtns button:first-child {
   margin-left: 0;
-  background: orange;
+  background: #4f5dd3;
   color: white;
 }
 
 .addBtns button:last-child {
-  background: green;
+  background: rgb(125, 125, 125);
   color: white;
 }
 
 .addBtns button:nth-child(2) {
-  background: purple;
+  background: rgb(159, 31, 8);
   color: white;
 }
 
 .addBtns button:first-child:hover {
-  background: rgb(241, 166, 27);
+  background: #6c79eb;
 }
 
 .addBtns button:last-child:hover {
-  background: rgb(15, 168, 15);
+  background: rgb(152, 152, 152);
 }
 
 .addBtns button:nth-child(2):hover {
-  background: rgb(159, 10, 159);
+  background: rgb(187, 46, 21);
+}
+
+/* =============== submit button ============= */
+.submitBtn {
+  border-top: 1px solid #ccc;
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+.submitBtn button {
+  border-radius: 3.8px;
+  background: rgb(10, 158, 74);
+  padding: 6px 16px;
+  color: white;
+  border: rgb(8, 141, 65);
+  transition: 0.2s;
+}
+
+.submitBtn button:hover {
+  background: rgb(22, 181, 91);
 }

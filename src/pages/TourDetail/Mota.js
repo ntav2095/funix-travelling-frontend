@@ -3,6 +3,25 @@ import { useRef, useEffect } from "react";
 import { Tab } from "semantic-ui-react";
 import QuillReader from "./QuillReader";
 
+import styles from "./Itinerary.module.css";
+
+const clockSVG = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.7}
+    stroke="currentColor"
+    className="w-6 h-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+);
+
 const Mota = ({ tour }) => {
   const itineraryRef = useRef();
   const panes = [
@@ -22,27 +41,56 @@ const Mota = ({ tour }) => {
         <Tab.Pane attached={false}>
           <div
             ref={itineraryRef}
-            className="woocommerce-Tabs-panel woocommerce-Tabs-panel--lich-trinh panel entry-content "
+            className={
+              styles.itinerary +
+              " woocommerce-Tabs-panel woocommerce-Tabs-panel--lich-trinh panel entry-content"
+            }
             id="tab-lich-trinh"
             role="tabpanel"
             aria-labelledby="tab-title-lich-trinh"
           >
+            <h2 className={styles.mainTitle}>Lộ trình</h2>
             {tour.itinerary.map((item) => {
               if (item.type === "title") {
-                return <h2 key={item.id}>{item.content}</h2>;
+                return (
+                  <div className={styles.title}>
+                    <div className={styles.container}>
+                      <h3 key={item.id}>{item.content}</h3>
+                    </div>
+                  </div>
+                );
               }
 
               if (item.type === "time") {
                 return (
-                  <div key={item.id}>
-                    <span>{item.content.session}</span>
-                    <span>{item.content.time}</span>
+                  <div className={styles.container + " " + styles.bgContent}>
+                    <div key={item.id} className={styles.time}>
+                      <p>
+                        <span>{item.content.session}</span>
+                      </p>
+                      <p>
+                        {clockSVG}
+                        <span>{item.content.time}</span>
+                      </p>
+                    </div>
                   </div>
                 );
               }
 
               if (item.type === "para") {
-                return <QuillReader key={item.id} delta={item.content} />;
+                return (
+                  <div
+                    className={
+                      styles.container +
+                      " " +
+                      styles.bgContent +
+                      " " +
+                      styles.paragraph
+                    }
+                  >
+                    <QuillReader key={item.id} delta={item.content} />
+                  </div>
+                );
               }
             })}
           </div>

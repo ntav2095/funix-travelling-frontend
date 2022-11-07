@@ -10,6 +10,13 @@
 .newTour__label {
   display: block;
   margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.newTour__label span {
+  color: rgb(73, 73, 73);
+  font-weight: 400;
+  font-style: italic;
 }
 
 .newTour__form label p:last-child {

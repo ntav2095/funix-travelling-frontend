@@ -19,10 +19,10 @@ function Tours() {
     sendRequest(tourApi.get());
   }, []);
   return (
-    <AdminLayout>
+    <AdminLayout title="Danh sách tours">
       <div className={styles.tours}>
         {data && data.items.length > 0 && (
-          <table>
+          <table className={styles.table}>
             <thead>
               <tr>
                 <td>
@@ -30,9 +30,6 @@ function Tours() {
                 </td>
                 <td>
                   <div>Name</div>
-                </td>
-                <td>
-                  <div>Journey</div>
                 </td>
                 <td>
                   <div>Actions</div>
@@ -43,9 +40,12 @@ function Tours() {
             <tbody>
               {data.items.map((item) => (
                 <tr key={item._id}>
-                  <td>{item._id}</td>
-                  <td>{item.name}</td>
-                  <td>{item.journey}</td>
+                  <td>
+                    <div>{item._id}</div>
+                  </td>
+                  <td>
+                    <div>{item.name}</div>
+                  </td>
                   <td>
                     <div className={styles.actionBtns}>
                       <Link
@@ -56,16 +56,10 @@ function Tours() {
                       </Link>
                       <button className={styles.removeTourBtn}>Remove</button>
                       <Link
-                        className={styles.addItineraryBtn}
-                        to={`/admin/add-itinerary/${item._id}`}
-                      >
-                        Add itinerary
-                      </Link>
-                      <Link
                         className={styles.editItineraryBtn}
-                        to={`/admin/edit-itinerary/${item._id}`}
+                        to={`/admin/update-itinerary/${item._id}`}
                       >
-                        Edit itinerary
+                        Update itinerary
                       </Link>
                     </div>
                   </td>

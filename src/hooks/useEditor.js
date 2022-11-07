@@ -48,6 +48,7 @@ function useEditor(ref) {
     quill.current = new Quill(ref.current, {
       modules: modules,
       theme: "snow",
+      placeholder: "Thêm đoạn văn ở đây...",
     });
   }, []);
 

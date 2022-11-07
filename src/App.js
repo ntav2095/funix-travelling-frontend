@@ -19,7 +19,7 @@ import NewTour from "./pages/Admin/NewTour";
 import EditTour from "./pages/Admin/EditTour";
 import Login from "./pages/Admin/Login";
 import Tours from "./pages/Admin/Tours";
-import AddItinerary from "./pages/Admin/AddItinerary";
+import UpdateItinerary from "./pages/Admin/UpdateItinerary";
 
 function App() {
   return (
@@ -44,7 +44,10 @@ function App() {
         <Route path="/admin/edit-tour/:tourId" element={<EditTour />} />
         <Route path="/admin/login" element={<Login />} />
         <Route path="/admin/tours" element={<Tours />} />
-        <Route path="/admin/add-itinerary/:tourId" element={<AddItinerary />} />
+        <Route
+          path="/admin/update-itinerary/:tourId"
+          element={<UpdateItinerary />}
+        />
       </Routes>
     </>
   );

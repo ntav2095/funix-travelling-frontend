@@ -85,24 +85,21 @@ function EditTour() {
   const initialValues = !tour
     ? null
     : {
-        name: tour.item.name, // required
-        journey: tour.item.journey, // required
-        description: tour.item.description, // required
-        departureDates: tour.item.time.departureDates.join("\n"), // require
-        duration: tour.item.time.duration, // required
-        lowestPrice: tour.item.price.from, // required
-        priceIncludes: tour.item.price.includes.join("\n"),
-        priceExcludes: tour.item.price.includes.join("\n"),
+        name: tour.item.name || "",
+        journey: tour.item.journey || "",
+        description: tour.item?.description || "",
+        departureDates: tour.item.time.departureDates.join("\n") || "",
+        duration: tour.item.time.duration || "",
+        lowestPrice: tour.item.price.from || "",
+        priceIncludes: tour.item.price.includes.join("\n") || "",
+        priceExcludes: tour.item.price.includes.join("\n") || "",
         images: tour.item.images,
-        highlights: tour.item.highlights.join("\n"),
-        cancellationPolicy: tour.item.cancellationPolicy.join("\n"),
+        highlights: tour.item.highlights.join("\n") || "",
+        cancellationPolicy: tour.item.cancellationPolicy.join("\n") || "",
       };
 
-  const submitHandler = (values, { setSubmitting }) => {
-    console.log(values.cancellationPolicy);
-
+  const submitHandler = (values) => {
     const formData = new FormData();
-    console.log(tourId);
     formData.append("tourId", tourId);
     formData.append("name", values.name);
     formData.append("journey", values.journey);
@@ -138,10 +135,8 @@ function EditTour() {
   console.log(tour, "xxxx");
 
   return (
-    <AdminLayout>
+    <AdminLayout title="Cập nhật tour">
       <div className="newTour">
-        <h1>New tour</h1>
-
         <div className="main">
           {tour && (
             <Formik
@@ -171,7 +166,8 @@ function EditTour() {
 
                   <label>
                     <p className="newTour__label">
-                      Ngày khởi hành (dd/mm/yyyy) (enter xuống dòng)
+                      Ngày khởi hành <span>(dd/mm/yyyy) </span>
+                      <span>(enter xuống dòng)</span>
                     </p>
                     <Field component="textarea" name="departureDates" />
                     <ErrorMessage name="departureDates" component="p" />
@@ -191,7 +187,7 @@ function EditTour() {
 
                   <label>
                     <p className="newTour__label">
-                      Giá bao gồm (enter xuống dòng)
+                      Giá bao gồm <span>(enter xuống dòng)</span>
                     </p>
                     <Field component="textarea" name="priceIncludes" />
                     <ErrorMessage name="priceIncludes" component="p" />
@@ -199,7 +195,7 @@ function EditTour() {
 
                   <label>
                     <p className="newTour__label">
-                      Giá không bao gồm (enter xuống dòng)
+                      Giá không bao gồm <span>(enter xuống dòng)</span>
                     </p>
                     <Field component="textarea" name="priceExcludes" />
                     <ErrorMessage name="priceExcludes" component="p" />
@@ -207,7 +203,7 @@ function EditTour() {
 
                   <label>
                     <p className="newTour__label">
-                      Điểm nổi bật (enter xuống dòng)
+                      Điểm nổi bật <span>(enter xuống dòng)</span>
                     </p>
                     <Field component="textarea" name="highlights" />
                     <ErrorMessage name="highlights" component="p" />
@@ -215,7 +211,7 @@ function EditTour() {
 
                   <label>
                     <p className="newTour__label">
-                      Điều kiện hoàn hủy đổi (enter xuống dòng)
+                      Điều kiện hoàn hủy đổi <span>(enter xuống dòng)</span>
                     </p>
                     <Field component="textarea" name="cancellationPolicy" />
                     <ErrorMessage name="cancellationPolicy" component="p" />
@@ -232,16 +228,18 @@ function EditTour() {
                   </label>
 
                   {/* handle remove images  */}
-                  {tour.item.images.map((item) => (
-                    <div key={item}>
-                      <input
-                        onChange={() => changeRemoveImageHandler(item)}
-                        checked={removedImages.includes(item)}
-                        type="checkbox"
-                      />
-                      <img src={item} />
-                    </div>
-                  ))}
+                  <div className="editTour__imagesContainer">
+                    {tour.item.images.map((item) => (
+                      <div key={item}>
+                        <input
+                          onChange={() => changeRemoveImageHandler(item)}
+                          checked={removedImages.includes(item)}
+                          type="checkbox"
+                        />
+                        <img src={item} />
+                      </div>
+                    ))}
+                  </div>
 
                   <button type="submit">Submit</button>
                 </Form>
