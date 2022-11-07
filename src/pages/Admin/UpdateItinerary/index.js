@@ -62,7 +62,16 @@ function UpdateItinerary() {
         )
       );
 
-      setImages(content.files);
+      setImages((prev) => {
+        let newImages = [];
+        content.files.forEach((fileObj) => {
+          if (!prev.find((item) => item.url === fileObj.url)) {
+            newImages.push(fileObj);
+          }
+        });
+
+        return [...prev, ...newImages];
+      });
     }
 
     if (type === "title" || type === "time") {
@@ -85,7 +94,6 @@ function UpdateItinerary() {
 
       // loại các item hình không có trong plan (người dùng add vào rồi xóa chẳng hạn)
       let imgUrls = images.filter((item) => textPlan.includes(item.url));
-
       // tải ảnh lên server, lấy url ảnh tương ứng do server trả về
       const promises = imgUrls.map((item) => {
         const formData = new FormData();
@@ -152,6 +160,10 @@ function UpdateItinerary() {
       navigate("/admin/tours");
     }
   }, [updatingError]);
+
+  useEffect(() => {
+    console.log("images: ", images);
+  }, [images]);
   return (
     <>
       <SpinnerModal show={isLoading || fetchingTour || uploadingImgs} />

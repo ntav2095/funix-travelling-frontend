@@ -15,6 +15,7 @@ function Paragraph({ onChange, type, id, content }) {
   }, [files]);
 
   useEffect(() => {
+    console.log("change files: ", files);
     onChange(type, id, { delta: quill.current.getContents(), files: files });
   }, [files]);
 
