@@ -21,6 +21,7 @@ import styles from "./AddItinerary.module.css";
 function UpdateItinerary() {
   const [plan, setPlan] = useState([]);
   const [images, setImages] = useState([]);
+  const [uploadingImgs, setUploadingImgs] = useState(false);
   const [sendRequest, isLoading, updated, updatingError] = useAxios();
   const [fetchTour, fetchingTour, fetchedTour, fetchingError] = useAxios();
   const { tourId } = useParams();
@@ -84,6 +85,10 @@ function UpdateItinerary() {
   // submit handler
   const submitHandler = async () => {
     try {
+      if (uploadingImgs || isLoading) {
+        alert("Đang loading. Vui lòng đợi");
+        return;
+      }
       let textPlan = JSON.stringify(plan);
 
       // loại các item hình không có trong plan (người dùng add vào rồi xóa chẳng hạn)
@@ -93,7 +98,7 @@ function UpdateItinerary() {
       const promises = imgUrls.map((item) => {
         const formData = new FormData();
         formData.append("image", item.file);
-        return axios("http://localhost:5000/api/file/single", {
+        return axios("https://funixxx.herokuapp.com/api/file/single", {
           withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
@@ -102,6 +107,7 @@ function UpdateItinerary() {
           method: "POST",
         });
       });
+      setUploadingImgs(true);
       const serverUrls = await Promise.all(promises);
       let urls = serverUrls.map((item, index) => ({
         newUrl: item.data,
@@ -142,6 +148,7 @@ function UpdateItinerary() {
 
   useEffect(() => {
     if (updated) {
+      setUploadingImgs(false);
       alert("Cập nhật lộ trình tour thành công");
       navigate("/admin/tours");
     }
@@ -155,7 +162,7 @@ function UpdateItinerary() {
   }, [updatingError]);
   return (
     <>
-      <SpinnerModal show={isLoading || fetchingTour} />
+      <SpinnerModal show={isLoading || fetchingTour || uploadingImgs} />
       <AdminLayout title={title}>
         <div className={styles.container}>
           {plan.map((item) => {
