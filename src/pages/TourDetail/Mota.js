@@ -2,6 +2,7 @@ import React from "react";
 import { useRef, useEffect } from "react";
 import { Tab } from "semantic-ui-react";
 import QuillReader from "./QuillReader";
+import formatDate from "../../services/helpers/formatDate";
 
 import styles from "./Itinerary.module.css";
 
@@ -30,7 +31,55 @@ const Mota = ({ tour }) => {
       render: () => (
         <Tab.Pane attached={false}>
           <div className="lich_trinh_title other_news_title">
-            <p>{tour.description}</p>
+            <div className={styles.tourDesc}>
+              <p>Tên hành trình</p>
+              <div>
+                <p>{tour.name}</p>
+              </div>
+            </div>
+            <div className={styles.tourDesc}>
+              <p>Lộ trình</p>
+              <div>
+                <p>{tour.journey}</p>
+              </div>
+            </div>
+
+            <div className={styles.tourDesc}>
+              <p>Thời gian</p>
+              <div>
+                {" "}
+                <p>{tour.time.duration}</p>
+              </div>
+            </div>
+
+            <div className={styles.tourDesc}>
+              <p>Khởi hành</p>
+              <div>
+                <p>
+                  {tour.time.departureDates
+                    .map((item) => formatDate(item, "dd/MM/yyyy"))
+                    .join(", ")}
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.tourDesc}>
+              <p>Mô tả</p>
+              <div>
+                <p>{tour.description}</p>
+              </div>
+            </div>
+
+            <div className={styles.tourDesc}>
+              <p>Điểm nổi bật</p>
+              <div>
+                <ul>
+                  {tour.highlights.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </Tab.Pane>
       ),
