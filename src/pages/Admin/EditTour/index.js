@@ -15,6 +15,7 @@ import { tourApi } from "../../../services/apis";
 // helpers
 import arrayFormData from "../../../services/helpers/arrayFormData";
 import formatDate from "../../../services/helpers/formatDate";
+import { stringToDate } from "../../../services/helpers/dateHandler";
 
 // assets
 import { exclamation as exclamationSVG } from "../../../assets/svgs";
@@ -78,7 +79,7 @@ function EditTour() {
     arrayFormData(
       formData,
       "departureDates",
-      values.departureDates.split("\n")
+      values.departureDates.split("\n").map((item) => stringToDate(item)[1])
     );
     arrayFormData(formData, "removedImages", removedImages);
     arrayFormData(formData, "priceIncludes", values.priceIncludes.split("\n"));
@@ -113,10 +114,14 @@ function EditTour() {
     }
   }, [editingError]);
 
+  const requiredField = (
+    <span title="Trường này là bắt buộc">{exclamationSVG}</span>
+  );
+
   return (
     <>
       <SpinnerModal show={isFetching || isEditing} />
-      <AdminLayout title="Cập nhật tour">
+      <AdminLayout title={`Cập nhật tour: ${tour?.item.name || ""}`}>
         <div className="newTour">
           <div className="main">
             {tour && (
@@ -128,34 +133,19 @@ function EditTour() {
                 {() => (
                   <Form className="newTour__form">
                     <label>
-                      <p className="newTour__label">
-                        Tên tour{" "}
-                        <span title="Trường này là bắt buộc">
-                          {exclamationSVG}
-                        </span>
-                      </p>
+                      <p className="newTour__label">Tên tour {requiredField}</p>
                       <Field component="textarea" name="name" />
                       <ErrorMessage name="name" component="p" />
                     </label>
 
                     <label>
-                      <p className="newTour__label">
-                        Lộ trình{" "}
-                        <span title="Trường này là bắt buộc">
-                          {exclamationSVG}
-                        </span>
-                      </p>
+                      <p className="newTour__label">Lộ trình {requiredField}</p>
                       <Field component="textarea" name="journey" />
                       <ErrorMessage name="journey" component="p" />
                     </label>
 
                     <label>
-                      <p className="newTour__label">
-                        Mô tả{" "}
-                        <span title="Trường này là bắt buộc">
-                          {exclamationSVG}
-                        </span>
-                      </p>
+                      <p className="newTour__label">Mô tả {requiredField}</p>
                       <Field component="textarea" name="description" />
                       <ErrorMessage name="description" component="p" />
                     </label>
@@ -163,10 +153,7 @@ function EditTour() {
                     <label>
                       <p className="newTour__label">
                         Ngày khởi hành <span>(dd/mm/yyyy) </span>
-                        <span>(enter xuống dòng)</span>{" "}
-                        <span title="Trường này là bắt buộc">
-                          {exclamationSVG}
-                        </span>
+                        <span>(enter xuống dòng)</span> {requiredField}
                       </p>
                       <Field component="textarea" name="departureDates" />
                       <ErrorMessage name="departureDates" component="p" />
@@ -174,17 +161,14 @@ function EditTour() {
 
                     <label>
                       <p className="newTour__label">
-                        Thời gian{" "}
-                        <span title="Trường này là bắt buộc">
-                          {exclamationSVG}
-                        </span>
+                        Thời gian {requiredField}
                       </p>
                       <Field type="text" name="duration" />
                       <ErrorMessage name="duration" component="p" />
                     </label>
 
                     <label>
-                      <p className="newTour__label">Giá từ</p>
+                      <p className="newTour__label">Giá từ {requiredField}</p>
                       <Field type="number" name="lowestPrice" />
                       <ErrorMessage name="lowestPrice" component="p" />
                     </label>
@@ -208,9 +192,7 @@ function EditTour() {
                     <label>
                       <p className="newTour__label">
                         Điểm nổi bật <span>(enter xuống dòng)</span>{" "}
-                        <span title="Trường này là bắt buộc">
-                          {exclamationSVG}
-                        </span>
+                        {requiredField}
                       </p>
                       <Field component="textarea" name="highlights" />
                       <ErrorMessage name="highlights" component="p" />
@@ -219,9 +201,7 @@ function EditTour() {
                     <label>
                       <p className="newTour__label">
                         Điều kiện hoàn hủy đổi <span>(enter xuống dòng)</span>{" "}
-                        <span title="Trường này là bắt buộc">
-                          {exclamationSVG}
-                        </span>
+                        {requiredField}
                       </p>
                       <Field component="textarea" name="cancellationPolicy" />
                       <ErrorMessage name="cancellationPolicy" component="p" />

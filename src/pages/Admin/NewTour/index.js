@@ -13,6 +13,7 @@ import { tourApi } from "../../../services/apis";
 
 // helpers
 import arrayFormData from "../../../services/helpers/arrayFormData";
+import { stringToDate } from "../../../services/helpers/dateHandler";
 
 // services
 import { tourValidator } from "../../../services/validators";
@@ -55,7 +56,7 @@ function NewTour() {
     arrayFormData(
       formData,
       "departureDates",
-      values.departureDates.split("\n")
+      values.departureDates.split("\n").map((item) => stringToDate(item)[1])
     );
 
     arrayFormData(formData, "priceIncludes", values.priceIncludes.split("\n"));
@@ -88,6 +89,10 @@ function NewTour() {
     }
   }, [error]);
 
+  const requiredField = (
+    <span title="Trường này là bắt buộc">{exclamationSVG}</span>
+  );
+
   return (
     <>
       <SpinnerModal show={isLoading} />
@@ -102,64 +107,41 @@ function NewTour() {
               {() => (
                 <Form className="newTour__form">
                   <label>
-                    <p className="newTour__label">
-                      Tên tour{" "}
-                      <span title="Trường này là bắt buộc">
-                        {exclamationSVG}
-                      </span>
-                    </p>
+                    <p className="newTour__label">Tên tour {requiredField}</p>
                     <Field component="textarea" name="name" />
                     <ErrorMessage name="name" component="p" />
                   </label>
 
                   <label>
-                    <p className="newTour__label">
-                      Lộ trình{" "}
-                      <span title="Trường này là bắt buộc">
-                        {exclamationSVG}
-                      </span>
-                    </p>
+                    <p className="newTour__label">Lộ trình {requiredField}</p>
                     <Field component="textarea" name="journey" />
                     <ErrorMessage name="journey" component="p" />
                   </label>
 
                   <label>
-                    <p className="newTour__label">
-                      Mô tả{" "}
-                      <span title="Trường này là bắt buộc">
-                        {exclamationSVG}
-                      </span>
-                    </p>
+                    <p className="newTour__label">Mô tả {requiredField}</p>
                     <Field component="textarea" name="description" />
                     <ErrorMessage name="description" component="p" />
                   </label>
 
                   <label>
                     <p className="newTour__label">
-                      Ngày khởi hành (mm/dd/yyyy)
-                      <span>(enter xuống dòng)</span>{" "}
-                      <span title="Trường này là bắt buộc">
-                        {exclamationSVG}
-                      </span>
+                      Ngày khởi hành <span>(dd/mm/yyyy)</span>{" "}
+                      <span>(enter xuống dòng)</span> {requiredField}
                     </p>
                     <Field component="textarea" name="departureDates" />
                     <ErrorMessage name="departureDates" component="p" />
                   </label>
 
                   <label>
-                    <p className="newTour__label">
-                      Thời gian{" "}
-                      <span title="Trường này là bắt buộc">
-                        {exclamationSVG}
-                      </span>
-                    </p>
+                    <p className="newTour__label">Thời gian {requiredField}</p>
                     <Field type="text" name="duration" />
                     <ErrorMessage name="duration" component="p" />
                   </label>
 
                   <label>
                     <p className="newTour__label">
-                      Giá từ <span>(vnd)</span>
+                      Giá từ <span>(vnd)</span> {requiredField}
                     </p>
                     <Field type="number" name="lowestPrice" />
                     <ErrorMessage name="lowestPrice" component="p" />
@@ -195,9 +177,7 @@ function NewTour() {
                   <label>
                     <p className="newTour__label">
                       Điều kiện hoàn hủy đổi <span>(enter xuống dòng)</span>{" "}
-                      <span title="Trường này là bắt buộc">
-                        {exclamationSVG}
-                      </span>
+                      {requiredField}
                     </p>
                     <Field component="textarea" name="cancellationPolicy" />
                     <ErrorMessage name="cancellationPolicy" component="p" />

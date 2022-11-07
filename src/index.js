@@ -25,6 +25,9 @@ const user = localStorage.getItem("user")
   : null;
 store.dispatch(setUser(user));
 
+const x = new Date(2022, 10, 8);
+console.log(x);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>

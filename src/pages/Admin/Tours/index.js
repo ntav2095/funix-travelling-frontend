@@ -10,6 +10,9 @@ import SpinnerModal from "../../../components/SpinnerModal";
 import useAxios from "../../../hooks/useAxios";
 import { tourApi } from "../../../services/apis";
 
+// assets
+import * as svg from "../../../assets/svgs";
+
 // css
 import styles from "./Tours.module.css";
 
@@ -29,6 +32,9 @@ function Tours() {
               <thead>
                 <tr>
                   <td>
+                    <div>STT</div>
+                  </td>
+                  <td>
                     <div>ID</div>
                   </td>
                   <td>
@@ -41,8 +47,11 @@ function Tours() {
               </thead>
 
               <tbody>
-                {data.items.map((item) => (
+                {data.items.map((item, index) => (
                   <tr key={item._id}>
+                    <td>
+                      <div>{index + 1}</div>
+                    </td>
                     <td>
                       <div>{item._id}</div>
                     </td>
@@ -70,6 +79,14 @@ function Tours() {
                 ))}
               </tbody>
             </table>
+          )}
+
+          {data && data.items.length === 0 && <h2>Hiện không có tour nào</h2>}
+
+          {error && (
+            <h2 className={styles.errorMessage}>
+              {svg.exclamation} {error.message.vi}
+            </h2>
           )}
         </div>
       </AdminLayout>
