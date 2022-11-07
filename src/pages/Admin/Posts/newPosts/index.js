@@ -3,10 +3,11 @@ import { Button } from "react-bootstrap"
 import useAxios from "../../../../hooks/useAxios"
 import useEditor from "../../../../hooks/useEditor"
 import AdminLayout from "../../../../layout/AdminLayout"
-import Paragraph from "../../AddItinerary/Paragraph"
+
 import { v4 as uuid } from "uuid";
 
 import style from './newPost.module.css'
+import Paragraph from "../../UpdateItinerary/Paragraph"
 
 
 function NewPosts(){

@@ -6,9 +6,9 @@ import { useParams } from "react-router-dom";
 
 // components
 import AdminLayout from "../../../layout/AdminLayout";
-import Title from "./Title";
-import Time from "./Time";
-import Paragraph from "./Paragraph";
+import Title from "../UpdateItinerary/Title/index";
+import Time from "../UpdateItinerary/Time/index";
+import Paragraph from "../UpdateItinerary/Paragraph/index";
 
 // apis
 import useAxios from "../../../hooks/useAxios";
@@ -18,7 +18,7 @@ import { tourApi } from "../../../services/apis";
 import quillGetHTML from "../../../services/helpers/quillGetHTML";
 
 // css
-import styles from "./AddItinerary.module.css";
+import styles from "../UpdateItinerary/AddItinerary.module.css";
 
 const myUrl =
   "https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg";
