@@ -1,5 +1,15 @@
+.footer {
+  padding: 0 !important;
+}
+
 .container {
   width: 100%;
   max-width: 1700px;
   margin: 0 auto;
+  padding: 16px;
+  padding-top: 30px;
+}
+
+.footer iframe {
+  max-width: calc(100% - 16px);
 }
