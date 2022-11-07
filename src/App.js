@@ -1,6 +1,9 @@
 // main
 import { Route, Routes } from "react-router-dom";
 
+// components
+import RequireAuth from "./components/RequireAuth";
+
 // client pages
 import ToursList from "./pages/ToursList";
 import Contact from "./pages/Contact";
@@ -39,15 +42,18 @@ function App() {
         <Route path="/danh-sach-tour/:tourId" element={<TourDetail />} />
         <Route path="/*" element={<NotFound />} />
 
-        <Route path="/admin" element={<Dashboard />} />
-        <Route path="/admin/new-tour" element={<NewTour />} />
-        <Route path="/admin/edit-tour/:tourId" element={<EditTour />} />
         <Route path="/admin/login" element={<Login />} />
-        <Route path="/admin/tours" element={<Tours />} />
-        <Route
-          path="/admin/update-itinerary/:tourId"
-          element={<UpdateItinerary />}
-        />
+
+        <Route element={<RequireAuth />}>
+          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin/new-tour" element={<NewTour />} />
+          <Route path="/admin/edit-tour/:tourId" element={<EditTour />} />
+          <Route path="/admin/tours" element={<Tours />} />
+          <Route
+            path="/admin/update-itinerary/:tourId"
+            element={<UpdateItinerary />}
+          />
+        </Route>
       </Routes>
     </>
   );

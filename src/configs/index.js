@@ -7,4 +7,6 @@ if (process.env.NODE_ENV === "production") {
   config = productionConfig;
 }
 
-export default config;
+export default productionConfig;
+
+// export default config;
