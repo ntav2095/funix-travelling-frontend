@@ -1,0 +1,9 @@
+.newposts{
+    padding:10px
+}
+.newposts-editor{
+    border-radius: 5px;
+}
+.newposts > label{
+    display:block
+}

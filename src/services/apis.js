@@ -39,3 +39,24 @@ export const fileApi = {
     data: formData,
   }),
 };
+
+export const postsApi = {
+  add: (formData) => ({
+    url: "/tour",
+    method: "POST",
+    data: formData,
+  }),
+  get: () => ({
+    url: `/article`,
+    method: "GET",
+  }),
+  edit: (formData) => ({
+    url: "/article",
+    method: "PUT",
+    data: formData,
+  }),
+  delete: (articleId) => ({
+    url: `/article/${articleId}`,
+    method: "DELETE",
+  }),
+};

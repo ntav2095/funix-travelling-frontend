@@ -33,6 +33,12 @@ function AdminLayout({ children }) {
             <li>
               <Link to="/admin/add-itinerary">Add Itinerary</Link>
             </li>
+            <li>
+              <Link to="/admin/posts">Posts</Link>
+            </li>
+            <li>
+              <Link to="/admin/new-posts">New Posts</Link>
+            </li>
             {user && (
               <li>
                 <button onClick={logoutHandler}>Log out</button>

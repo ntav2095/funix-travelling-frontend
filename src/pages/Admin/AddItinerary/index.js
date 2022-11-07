@@ -29,7 +29,7 @@ function AddItinerary() {
   const [isSubmit, setIsSubmit] = useState(0);
   const [sendRequest, isLoading, data, error] = useAxios();
   const { tourId } = useParams();
-
+  console.log('plan',plan)
   const addContentHandler = (type) => {
     //
     if (type === "title") {

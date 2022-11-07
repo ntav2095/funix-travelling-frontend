@@ -20,6 +20,8 @@ import EditTour from "./pages/Admin/EditTour";
 import Login from "./pages/Admin/Login";
 import Tours from "./pages/Admin/Tours";
 import AddItinerary from "./pages/Admin/AddItinerary";
+import Posts from "./pages/Admin/Posts";
+import NewPosts from "./pages/Admin/Posts/newPosts";
 
 function App() {
   return (
@@ -45,6 +47,10 @@ function App() {
         <Route path="/admin/login" element={<Login />} />
         <Route path="/admin/tours" element={<Tours />} />
         <Route path="/admin/add-itinerary/:tourId" element={<AddItinerary />} />
+        <Route path="/admin/posts" element={<Posts />} />
+        <Route path="/admin/new-posts" element={<NewPosts />} />
+        {/* <Route path="/admin/edit-posts/:postId" element={<EditTour />} /> */}
+
       </Routes>
     </>
   );
