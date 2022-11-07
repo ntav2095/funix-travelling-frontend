@@ -3,8 +3,14 @@
     padding: 2em;
   }
 }
+
 @media only screen and (min-width: 1200px) {
   .footer.pt-5.pb-3 {
     padding: 8em;
   }
 }
+
+/* .footer iframe {
+  max-width: 100%;
+
+} */

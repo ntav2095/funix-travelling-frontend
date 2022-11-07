@@ -2,6 +2,15 @@ img.banner {
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+.banner img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 20px;
 }
 
 .container {
@@ -73,6 +82,17 @@ img.banner {
   cursor: pointer;
   white-space: nowrap;
   margin-left: 30px;
+}
+
+@media screen and (max-width: 450px) {
+  .searchVisa {
+    padding: 40px 8px;
+  }
+
+  .searchVisa form button {
+    padding: 0 8px;
+    margin-left: 8px;
+  }
 }
 
 /* lam visa nhanh */
@@ -204,6 +224,33 @@ img.banner {
 
   .callback .input {
     margin-bottom: 16px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .callback .inner {
+    padding: 8px 0px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .callback .inner .input {
+    flex-direction: column;
+    margin-bottom: 8px;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+  }
+
+  .callback .inner .input input {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 8px;
+  }
+
+  .callback .inner .input button {
+    width: 100%;
+    padding: 8px 16px;
   }
 }
 
