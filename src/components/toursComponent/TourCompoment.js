@@ -16,6 +16,9 @@ import { Link } from "react-router-dom";
 // apis
 import axios from "axios";
 
+// assets
+import { brokenImage } from "../../assets/images";
+
 import styles from "./TourCompoment.module.css";
 
 class Tour extends Component {
@@ -66,6 +69,9 @@ class Tour extends Component {
                       className={styles.img}
                       alt="Sample"
                       src={tour.images[0]}
+                      onError={(e) => {
+                        e.target.src = brokenImage;
+                      }}
                     />
                   </Link>
                   <CardBody className={styles.textBox}>
