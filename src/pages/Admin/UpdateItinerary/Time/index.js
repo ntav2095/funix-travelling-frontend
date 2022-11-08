@@ -1,14 +1,14 @@
 import styles from "./Time.module.css";
 
-function Time({ id, type, onChange, content }) {
+function Time({ id, onChange, content }) {
   const changeHandler = (e, name) => {
     if (name === "time") {
-      onChange(type, id, {
+      onChange(id, {
         session: content.session,
         time: e.target.value,
       });
     } else {
-      onChange(type, id, {
+      onChange(id, {
         session: e.target.value,
         time: content.time,
       });

@@ -12,6 +12,7 @@
   align-items: center;
   width: 100%;
   max-width: 1170px;
+  padding: 16px;
 }
 
 .header h1 {

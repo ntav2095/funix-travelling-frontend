@@ -1,23 +1,35 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useEffect } from "react";
+import Quill from "quill";
 
-import useEditor from "../../../../hooks/useEditor";
 import "./Paragraph.css";
 
-function Paragraph({ onChange, type, id, content }) {
+const toolbarContainer = [
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+  ["bold", "italic", "underline", "strike", "blockquote"],
+  [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+  ["link", "image"],
+  ["clean"],
+];
+
+const modules = {
+  toolbar: toolbarContainer,
+};
+
+function Paragraph({ onChange, id, content }) {
   const editorRef = useRef();
-  const [quill, files, clearQuill] = useEditor(editorRef);
+  const quill = useRef();
 
   useEffect(() => {
+    quill.current = new Quill(editorRef.current, {
+      modules: modules,
+      theme: "snow",
+      placeholder: "Thêm đoạn văn ở đây...",
+    });
     quill.current.setContents(content, "api");
     quill.current.on("text-change", () => {
-      onChange(type, id, { delta: quill.current.getContents(), files: files });
+      onChange(id, quill.current.getContents());
     });
-  }, [files]);
-
-  useEffect(() => {
-    console.log("change files: ", files);
-    onChange(type, id, { delta: quill.current.getContents(), files: files });
-  }, [files]);
+  }, []);
 
   return <div className="addItinerary-editor" ref={editorRef}></div>;
 }
