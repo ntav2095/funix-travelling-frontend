@@ -31,10 +31,11 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
-      const username = localStorage.getItem("username");
-      if (username) {
+      const user = localStorage.getItem("user");
+      if (user) {
         store.dispatch(setIsExpiredSession());
         localStorage.removeItem("username");
+        localStorage.removeItem("accessToken");
       }
     }
     return Promise.reject(error);

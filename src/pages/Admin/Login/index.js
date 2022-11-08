@@ -39,9 +39,6 @@ function Login() {
   const { user, isExpiredSession } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location);
-
-  console.log(isExpiredSession);
 
   const submitHandler = (values) => {
     sendRequest(userApi.login(values.username, values.password));
