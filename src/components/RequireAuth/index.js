@@ -1,14 +1,31 @@
 import { useSelector } from "react-redux";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 function RequireAuth() {
-  const { user } = useSelector((state) => state.user);
-
+  const { user, isExpiredSession } = useSelector((state) => state.user);
+  const location = useLocation();
+  console.log("From require auth: ", user, isExpiredSession);
   if (user) {
     return <Outlet />;
   }
 
-  return <Navigate to="/admin/login" />;
+  if (!user && isExpiredSession) {
+    return (
+      <Navigate
+        to="/admin/login"
+        state={{ isExpired: true, from: location.pathname }}
+      />
+    );
+  }
+
+  if (!user && !isExpiredSession) {
+    return (
+      <Navigate
+        to="/admin/login"
+        state={{ isExpired: false, from: location.pathname }}
+      />
+    );
+  }
 }
 
 export default RequireAuth;

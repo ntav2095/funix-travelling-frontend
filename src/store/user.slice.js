@@ -18,8 +18,12 @@ const userSlice = createSlice({
       state.user = null;
       state.isExpiredSession = false;
     },
+    setIsExpiredSession(state, action) {
+      state.isExpiredSession = true;
+      state.user = null;
+    },
   },
 });
 
-export const { setUser, removeUser } = userSlice.actions;
+export const { setUser, removeUser, setIsExpiredSession } = userSlice.actions;
 export default userSlice.reducer;

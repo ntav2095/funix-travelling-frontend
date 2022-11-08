@@ -1,7 +1,7 @@
 // main
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // components
@@ -36,11 +36,14 @@ const initialValues = {
 
 function Login() {
   const [sendRequest, isLoading, data, error] = useAxios();
+  const { user, isExpiredSession } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const location = useLocation();
+  console.log(location);
+
+  console.log(isExpiredSession);
 
   const submitHandler = (values) => {
-    //
     sendRequest(userApi.login(values.username, values.password));
   };
 
@@ -53,12 +56,22 @@ function Login() {
     }
   }, [data]);
 
-  if (user) {
+  if (user && !location.state.isExpired) {
     return <Navigate to="/admin" />;
+  }
+
+  if (user && location.state.isExpired) {
+    return <Navigate to={location.state.from} />;
   }
 
   return (
     <div className={styles.login}>
+      {location.state.isExpired && (
+        <div className={styles.expiredSession}>
+          <h1>Your session is expired. Please login!</h1>
+        </div>
+      )}
+
       <Formik
         initialValues={initialValues}
         validate={validator}
