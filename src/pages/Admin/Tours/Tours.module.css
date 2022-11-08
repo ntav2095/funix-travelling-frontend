@@ -46,6 +46,7 @@
   text-align: center;
   border-radius: 3.8px;
   display: block;
+  line-height: 1.6;
 }
 
 .actionBtns > * {
