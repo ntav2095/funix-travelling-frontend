@@ -54,33 +54,12 @@ function UpdateItinerary() {
   };
 
   // handle lưu data vào plan mỗi khi người dùng nhập dữ liệu
-  const changeHandler = (type, id, content) => {
-    if (type === "para") {
-      setPlan((prev) =>
-        prev.map((item) =>
-          item.id === id ? { ...item, content: content.delta } : item
-        )
-      );
-
-      setImages((prev) => {
-        let newImages = [];
-        content.files.forEach((fileObj) => {
-          if (!prev.find((item) => item.url === fileObj.url)) {
-            newImages.push(fileObj);
-          }
-        });
-
-        return [...prev, ...newImages];
-      });
-    }
-
-    if (type === "title" || type === "time") {
-      setPlan((prev) =>
-        prev.map((item) =>
-          item.id === id ? { ...item, content: content } : item
-        )
-      );
-    }
+  const changeHandler = (id, content) => {
+    setPlan((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, content: content } : item
+      )
+    );
   };
 
   // submit handler
@@ -90,37 +69,12 @@ function UpdateItinerary() {
         alert("Đang loading. Vui lòng đợi");
         return;
       }
-      let textPlan = JSON.stringify(plan);
 
-      // loại các item hình không có trong plan (người dùng add vào rồi xóa chẳng hạn)
-      let imgUrls = images.filter((item) => textPlan.includes(item.url));
-      // tải ảnh lên server, lấy url ảnh tương ứng do server trả về
-      const promises = imgUrls.map((item) => {
-        const formData = new FormData();
-        formData.append("image", item.file);
-        return axios("https://funixxx.herokuapp.com/api/file/single", {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          data: formData,
-          method: "POST",
-        });
-      });
-      setUploadingImgs(true);
-      const serverUrls = await Promise.all(promises);
-      let urls = serverUrls.map((item, index) => ({
-        newUrl: item.data,
-        oldUrl: imgUrls[index].url,
-      }));
-      urls.forEach((item) => {
-        textPlan = textPlan.replace(item.oldUrl, item.newUrl);
-      });
-
+      console.log(plan);
       sendRequest(
         tourApi.updateItinerary({
           tourId: tourId,
-          itinerary: JSON.parse(textPlan),
+          itinerary: plan,
         })
       );
     } catch (error) {
@@ -156,8 +110,12 @@ function UpdateItinerary() {
 
   useEffect(() => {
     if (updatingError) {
-      alert("Cập nhật lộ trình tour thất bại: ", updatingError.message.vi);
-      navigate("/admin/tours");
+      console.log(updatingError);
+      alert(
+        `Cập nhật lộ trình tour thất bại: ${
+          updatingError.message?.vi || "Unknown error"
+        }`
+      );
     }
   }, [updatingError]);
 
@@ -175,7 +133,6 @@ function UpdateItinerary() {
                 <Title
                   key={item.id}
                   id={item.id}
-                  type={item.type}
                   content={getContent(item.id)}
                   onChange={changeHandler}
                 />
@@ -187,7 +144,6 @@ function UpdateItinerary() {
                 <Time
                   key={item.id}
                   id={item.id}
-                  type={item.type}
                   content={getContent(item.id)}
                   onChange={changeHandler}
                 />
@@ -199,7 +155,6 @@ function UpdateItinerary() {
                 <Paragraph
                   key={item.id}
                   id={item.id}
-                  type={item.type}
                   content={getContent(item.id)}
                   onChange={changeHandler}
                 />

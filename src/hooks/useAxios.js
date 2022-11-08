@@ -37,7 +37,10 @@ function useAxios() {
       } else {
         setError({
           httpCode: null,
-          message: error.message,
+          message: {
+            en: error.message,
+            vi: error.message,
+          },
         });
       }
     }

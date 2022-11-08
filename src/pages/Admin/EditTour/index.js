@@ -122,7 +122,7 @@ function EditTour() {
 
   useEffect(() => {
     if (editingError) {
-      alert("Có lỗi xảy ra: ", editingError.message.en);
+      alert(`Có lỗi xảy ra: ${editingError.message.vi}`);
     }
   }, [editingError]);
 
