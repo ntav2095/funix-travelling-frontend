@@ -76,6 +76,7 @@ input.with100.mt-2 {
 .ui.secondary.menu {
   background: LEMONCHIFFON;
   border-radius: 2px;
+  display: block;
 }
 
 /* index.js */

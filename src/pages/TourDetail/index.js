@@ -20,10 +20,10 @@ function TourDetail() {
     <Layout>
       <Container>
         <Row className="tour-detail">
-          <Col lg="8" sm="12" style={{ width: "70%" }}>
+          <Col>
             <SlideImage input={imageArr} ratio={`3:2`} mode={`manual`} />
           </Col>
-          <Col lg="4" sm="12" style={{ width: "30%" }}>
+          <Col lg="4" sm="12">
             <Goituvan />
           </Col>
         </Row>
