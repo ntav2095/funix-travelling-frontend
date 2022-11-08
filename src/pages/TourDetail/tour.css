@@ -8,17 +8,20 @@
   border-radius: 5px;
   color: #fff;
   margin-bottom: 15px;
+  font-family: "Open Sans", sans-serif;
 }
 .form-tu-van h3 {
-  font-family: "Pacifico", cursive;
   text-align: center;
   color: white;
-  font-size: 30px;
+  font-size: 3vw;
 }
 .form-tu-van p {
   margin-bottom: 4px !important;
-  font-size: 20px;
+  font-size: 1.5vw;
   padding-bottom: 5px;
+}
+.form-tu-van p img {
+  max-width: -webkit-fill-available;
 }
 .a-dat-tour {
   display: block;
@@ -30,7 +33,7 @@
   text-transform: uppercase;
   padding: 10px;
   margin: 16px 0px;
-  font-size: 26px;
+  font-size: 2vw;
 }
 .with100 {
   width: 100%;
@@ -38,7 +41,7 @@
 .gia-form-tu-van p {
   border: 1px solid#fff;
   text-align: center;
-  font-size: 20px;
+  font-size: 2vw;
 }
 input.with100 {
   width: 100%;
@@ -50,12 +53,11 @@ p.gia-chuan {
 }
 input.with100.mt-2 {
   text-transform: uppercase;
-  font-size: 0.97em;
+  font-size: 2vw;
   letter-spacing: 0.03em;
   cursor: pointer;
   font-weight: bolder;
   text-align: center;
-
   border: 1px solid transparent;
   vertical-align: middle;
   border-radius: 0;
@@ -76,12 +78,17 @@ input.with100.mt-2 {
   border-radius: 2px;
 }
 
-
 /* index.js */
-.tour-detail{
-  padding: 2em 8em;
-  background: rgb(255, 255, 255);
+
+@media only screen and (max-width: 850px) {
+  .tour-detail {
+    padding: 2em 2em;
+  }
 }
-
-
 /* -------------------------------------- */
+@media only screen and (min-width: 851px) {
+  .tour-detail {
+    padding: 2em 6em;
+    background: rgb(255, 255, 255);
+  }
+}

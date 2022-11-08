@@ -45,11 +45,11 @@ function Visa() {
   };
   return (
     <Layout>
-      <div id="Body-content-1">
+      <div className="Body-content-3">
         <div className="banner-1">
           <img className="banner" src={visaBanner} alt="Visa banner" />
         </div>
-        <div id="Body-content-1">
+        <div id="Body-content-3">
           <Container>
             <Row>
               <Col>

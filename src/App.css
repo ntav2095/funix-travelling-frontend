@@ -131,10 +131,18 @@ div#Body-content {
 }
 @media only screen and (max-width: 850px) {
   div#Body-content {
-    padding: 2em 2em;
+    padding: 2em 1em;
     background-color: rgb(20 2 2 / 16%);
     background-image: url("/src/assets/images/sec_inbound_tour_bg.jpg");
   }
+  #Body-content-1 {
+    padding: 0;
+  }
+}
+#Body-content-1 {
+  max-width: 1170px;
+  margin: 0 auto;
+  width: 100%;
 }
 h1#Body-content_tour {
   text-align: center;

@@ -1,8 +1,9 @@
-@media only screen and (max-width: 670px) {
+@media only screen and (max-width: 600px) {
   .col-inner {
     padding: 0px;
     text-align: center;
     font-size: 15px;
+    padding: 2em 2em;
   }
   .carousel-caption {
     width: 70vw;
@@ -11,9 +12,9 @@
   div#Body-content {
     padding: 2em 2em !important;
   }
-  div#Body-content-1 {
+  /* div#Body-content-1 {
     padding: 2em 2em !important;
-  }
+  } */
   div#row-1621253027 {
     text-align: left;
     border: 1px solid rgb(245, 245, 245);
@@ -29,11 +30,14 @@
   }
 }
 
-@media only screen and (min-width: 671px) {
+@media only screen and (min-width: 601px) {
   button.navbar-toggler {
-    transform: translateX(-10em);
+    transform: translateX(-14em);
   }
   .col-inner {
     padding: 8em 2em;
   }
+  /* button.navbar-toggler {
+    transform: translateX(-16em);
+  } */
 }
