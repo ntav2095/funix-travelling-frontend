@@ -122,7 +122,12 @@ nav.navbar.navbar-expand-lg.navbar-dark {
 div#Body-content {
   padding: 2em 8em;
   background-color: rgb(20 2 2 / 16%);
-  background-image: url("/src/assets/images/sec_inbound_tour_bg.jpg");
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.356), transparent),
+    url("/src/assets/images/sec_inbound_tour_bg.jpg");
+  background-size: cover;
+  background-position: 50% center;
+  /* padding: 0px !important; */
 }
 @media only screen and (max-width: 850px) {
   div#Body-content {
@@ -133,6 +138,8 @@ div#Body-content {
 }
 h1#Body-content_tour {
   text-align: center;
+  font-weight: bolder;
+  color: #fff;
 }
 /*footer*/
 .footer {

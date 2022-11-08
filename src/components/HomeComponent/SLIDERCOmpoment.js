@@ -5,7 +5,7 @@ import "./silder.css";
 function Sliderheader() {
   return (
     <>
-      <div className="Navbar_header">
+      <div className="Navbar_header ">
         <Carousel>
           <Carousel.Item>
             <img

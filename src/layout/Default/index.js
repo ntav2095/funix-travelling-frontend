@@ -34,6 +34,7 @@ function DefaultLayout({ children, sidebarLeft, sidebarRight, primary }) {
     <>
       <Navbar />
       {children}
+
       <Footer />
     </>
   );

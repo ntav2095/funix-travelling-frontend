@@ -37,3 +37,7 @@ a.mr-auto.navbar-brand {
 button.navbar-toggler {
   background-color: #909fa170;
 }
+
+a#basic-nav-dropdown {
+  --bs-nav-link-hover-color: none;
+}

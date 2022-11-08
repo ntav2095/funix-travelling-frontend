@@ -10,6 +10,13 @@ import {
   Col,
   Row,
 } from "reactstrap";
+import {
+  phoneNumber,
+  visaBanner,
+  worldMap,
+  travelPic,
+  aboutCompany,
+} from "../../assets/images";
 import { Link } from "react-router-dom";
 import tours from "../../mock/tours.mock";
 
@@ -32,11 +39,7 @@ class Tour extends Component {
                 }}
               >
                 <Link to={"/danh-sach-tour/1"}>
-                  <img
-                    className={styles.img}
-                    alt="Sample"
-                    src="https://picsum.photos/300/200"
-                  />
+                  <img className={styles.img} alt="Sample" src={visaBanner} />
                 </Link>
                 <CardBody>
                   <Link to={"/danh-sach-tour/1"}>

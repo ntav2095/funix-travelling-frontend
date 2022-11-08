@@ -6,11 +6,13 @@ function ToursList() {
   return (
     <Layout>
       <div id="Body-content">
-        <Breadcrumb>
-          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item active>DANH SÁCH TOURS</Breadcrumb.Item>
-        </Breadcrumb>
-        <Tour />
+        <div id="Body-content-1">
+          <Breadcrumb>
+            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+            <Breadcrumb.Item active>DANH SÁCH TOURS</Breadcrumb.Item>
+          </Breadcrumb>
+          <Tour />
+        </div>
       </div>
     </Layout>
   );
