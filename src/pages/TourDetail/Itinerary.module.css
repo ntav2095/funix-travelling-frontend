@@ -87,11 +87,13 @@
 /* ========== mô tả tour ============= */
 .tourDesc {
   display: flex;
+  margin-bottom: 8px;
 }
 
 .tourDesc > p {
   font-weight: 600;
   width: 130px;
+  flex-shrink: 0;
 }
 
 .tourDesc ul {
