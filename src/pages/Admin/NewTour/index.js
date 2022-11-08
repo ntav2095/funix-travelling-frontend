@@ -1,5 +1,5 @@
 // main
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
@@ -12,7 +12,6 @@ import useAxios from "../../../hooks/useAxios";
 import { tourApi } from "../../../services/apis";
 
 // helpers
-import arrayFormData from "../../../services/helpers/arrayFormData";
 import { stringToDate } from "../../../services/helpers/dateHandler";
 
 // services
@@ -86,14 +85,14 @@ function NewTour() {
 
   useEffect(() => {
     if (data) {
-      alert("Tạo tour mới thành công");
+      alert("Tạo tour mới thành công. Bạn sẽ được chuyển đến tranng tours.");
       navigate("/admin/tours");
     }
   }, [data]);
 
   useEffect(() => {
     if (error) {
-      alert("Có lỗi xảy ra: ", error.message.vi);
+      alert(`Có lỗi xảy ra: ${error.message.vi}`);
     }
   }, [error]);
 
@@ -104,6 +103,7 @@ function NewTour() {
   return (
     <>
       <SpinnerModal show={isLoading} />
+
       <AdminLayout title="Tạo tour mới">
         <div className="newTour">
           <div className="main">

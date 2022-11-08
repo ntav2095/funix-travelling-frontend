@@ -4,7 +4,6 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 function RequireAuth() {
   const { user, isExpiredSession } = useSelector((state) => state.user);
   const location = useLocation();
-  console.log("From require auth: ", user, isExpiredSession);
   if (user) {
     return <Outlet />;
   }

@@ -1,7 +1,6 @@
 // main
 import { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
-import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 // components
@@ -20,7 +19,6 @@ import styles from "./AddItinerary.module.css";
 
 function UpdateItinerary() {
   const [plan, setPlan] = useState([]);
-  const [images, setImages] = useState([]);
   const [uploadingImgs, setUploadingImgs] = useState(false);
   const [sendRequest, isLoading, updated, updatingError] = useAxios();
   const [fetchTour, fetchingTour, fetchedTour, fetchingError] = useAxios();
@@ -63,23 +61,13 @@ function UpdateItinerary() {
   };
 
   // submit handler
-  const submitHandler = async () => {
-    try {
-      if (uploadingImgs || isLoading) {
-        alert("Đang loading. Vui lòng đợi");
-        return;
-      }
-
-      console.log(plan);
-      sendRequest(
-        tourApi.updateItinerary({
-          tourId: tourId,
-          itinerary: plan,
-        })
-      );
-    } catch (error) {
-      console.error(error);
-    }
+  const submitHandler = () => {
+    sendRequest(
+      tourApi.updateItinerary({
+        tourId: tourId,
+        itinerary: plan,
+      })
+    );
   };
 
   const getContent = (id) => {
@@ -103,14 +91,15 @@ function UpdateItinerary() {
   useEffect(() => {
     if (updated) {
       setUploadingImgs(false);
-      alert("Cập nhật lộ trình tour thành công");
+      alert(
+        "Cập nhật lộ trình tour thành công. Bạn sẽ được chuyển đến trang tours."
+      );
       navigate("/admin/tours");
     }
   }, [updated]);
 
   useEffect(() => {
     if (updatingError) {
-      console.log(updatingError);
       alert(
         `Cập nhật lộ trình tour thất bại: ${
           updatingError.message?.vi || "Unknown error"
@@ -119,12 +108,10 @@ function UpdateItinerary() {
     }
   }, [updatingError]);
 
-  useEffect(() => {
-    console.log("images: ", images);
-  }, [images]);
   return (
     <>
       <SpinnerModal show={isLoading || fetchingTour || uploadingImgs} />
+
       <AdminLayout title={title}>
         <div className={styles.container}>
           {plan.map((item) => {

@@ -5,6 +5,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // components
+import SpinnerModal from "../../../components/SpinnerModal";
 
 // apis
 import useAxios from "../../../hooks/useAxios";
@@ -36,7 +37,7 @@ const initialValues = {
 
 function Login() {
   const [sendRequest, isLoading, data, error] = useAxios();
-  const { user, isExpiredSession } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -62,35 +63,41 @@ function Login() {
   }
 
   return (
-    <div className={styles.login}>
-      {location.state.isExpired && (
-        <div className={styles.expiredSession}>
-          <h1>Your session is expired. Please login!</h1>
-        </div>
-      )}
+    <>
+      {isLoading && <SpinnerModal show={isLoading} />}
 
-      <Formik
-        initialValues={initialValues}
-        validate={validator}
-        onSubmit={submitHandler}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <label>
-              <Field type="text" name="username" placeholder="username" />
-              <ErrorMessage name="username" component="span" />
-            </label>
-            <label>
-              <Field type="password" name="password" placeholder="password" />
-              <ErrorMessage name="password" component="span" />
-            </label>
-
-            {error && <p className={styles.errorMessage}>{error.message}</p>}
-            <button type="submit">Login</button>
-          </Form>
+      {/* session expired notification  */}
+      <div className={styles.login}>
+        {location.state.isExpired && (
+          <div className={styles.expiredSession}>
+            <h1>Your session is expired. Please login!</h1>
+          </div>
         )}
-      </Formik>
-    </div>
+
+        {/* login form  */}
+        <Formik
+          initialValues={initialValues}
+          validate={validator}
+          onSubmit={submitHandler}
+        >
+          {() => (
+            <Form>
+              <label>
+                <Field type="text" name="username" placeholder="username" />
+                <ErrorMessage name="username" component="span" />
+              </label>
+              <label>
+                <Field type="password" name="password" placeholder="password" />
+                <ErrorMessage name="password" component="span" />
+              </label>
+
+              {error && <p className={styles.errorMessage}>{error.message}</p>}
+              <button type="submit">Login</button>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </>
   );
 }
 
