@@ -1,5 +1,11 @@
 import axios from "axios";
 import config from "../configs";
+import { setIsExpiredSession } from "../store/user.slice";
+
+let store;
+export const storeInjector = (injectedStore) => {
+  store = injectedStore;
+};
 
 const axiosInstance = axios.create({
   baseURL: config.baseURL,
@@ -15,6 +21,23 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   function (error) {
+    return Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response?.status === 401) {
+      const user = localStorage.getItem("user");
+      if (user) {
+        store.dispatch(setIsExpiredSession());
+        localStorage.removeItem("username");
+        localStorage.removeItem("accessToken");
+      }
+    }
     return Promise.reject(error);
   }
 );

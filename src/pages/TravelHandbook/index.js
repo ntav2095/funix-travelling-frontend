@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 // components
 import Layout from "../../layout/Default";
 
+// hooks
+import usePageTitle from "../../hooks/usePageTitle";
+
 // css
 import classes from "./TravelHandbook.module.css";
 
@@ -11,6 +14,7 @@ import classes from "./TravelHandbook.module.css";
 import stories from "../../mock/travelhandBook.mock";
 
 function TravelHandbook() {
+  usePageTitle(`Cẩm nang du lịch || Go Travel`);
   return (
     <Layout>
       <div className={classes.travelHandbook}>

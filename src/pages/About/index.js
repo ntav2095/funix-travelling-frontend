@@ -1,8 +1,11 @@
 import { aboutCompany } from "../../assets/images";
 import Layout from "../../layout/Default";
+import usePageTitle from "../../hooks/usePageTitle";
 import styles from "./About.module.css";
 
 function About() {
+  usePageTitle("Tổng quan công ty || Go Travel");
+
   return (
     <Layout sidebarLeft>
       <div className={styles.about}>

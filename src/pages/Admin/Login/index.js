@@ -1,10 +1,11 @@
 // main
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // components
+import SpinnerModal from "../../../components/SpinnerModal";
 
 // apis
 import useAxios from "../../../hooks/useAxios";
@@ -36,11 +37,11 @@ const initialValues = {
 
 function Login() {
   const [sendRequest, isLoading, data, error] = useAxios();
-  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const location = useLocation();
 
   const submitHandler = (values) => {
-    //
     sendRequest(userApi.login(values.username, values.password));
   };
 
@@ -53,34 +54,50 @@ function Login() {
     }
   }, [data]);
 
-  if (user) {
+  if (user && !location.state.isExpired) {
     return <Navigate to="/admin" />;
   }
 
-  return (
-    <div className={styles.login}>
-      <Formik
-        initialValues={initialValues}
-        validate={validator}
-        onSubmit={submitHandler}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <label>
-              <Field type="text" name="username" placeholder="username" />
-              <ErrorMessage name="username" component="span" />
-            </label>
-            <label>
-              <Field type="password" name="password" placeholder="password" />
-              <ErrorMessage name="password" component="span" />
-            </label>
+  if (user && location.state.isExpired) {
+    return <Navigate to={location.state.from} />;
+  }
 
-            {error && <p className={styles.errorMessage}>{error.message}</p>}
-            <button type="submit">Login</button>
-          </Form>
+  return (
+    <>
+      {isLoading && <SpinnerModal show={isLoading} />}
+
+      {/* session expired notification  */}
+      <div className={styles.login}>
+        {location.state.isExpired && (
+          <div className={styles.expiredSession}>
+            <h1>Your session is expired. Please login!</h1>
+          </div>
         )}
-      </Formik>
-    </div>
+
+        {/* login form  */}
+        <Formik
+          initialValues={initialValues}
+          validate={validator}
+          onSubmit={submitHandler}
+        >
+          {() => (
+            <Form>
+              <label>
+                <Field type="text" name="username" placeholder="username" />
+                <ErrorMessage name="username" component="span" />
+              </label>
+              <label>
+                <Field type="password" name="password" placeholder="password" />
+                <ErrorMessage name="password" component="span" />
+              </label>
+
+              {error && <p className={styles.errorMessage}>{error.message}</p>}
+              <button type="submit">Login</button>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </>
   );
 }
 

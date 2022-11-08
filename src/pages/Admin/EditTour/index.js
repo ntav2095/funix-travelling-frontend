@@ -1,5 +1,5 @@
 // main
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -13,7 +13,6 @@ import useAxios from "../../../hooks/useAxios";
 import { tourApi } from "../../../services/apis";
 
 // helpers
-import arrayFormData from "../../../services/helpers/arrayFormData";
 import formatDate from "../../../services/helpers/formatDate";
 import { stringToDate } from "../../../services/helpers/dateHandler";
 
@@ -65,10 +64,6 @@ function EditTour() {
         cancellationPolicy: tour.item.cancellationPolicy.join("\n") || "",
       };
 
-  if (tour) {
-    console.log(tour.item.description);
-  }
-
   const submitHandler = (values) => {
     const formData = new FormData();
     formData.append("tourId", tourId);
@@ -105,7 +100,6 @@ function EditTour() {
 
     formData.append("removedImages", JSON.stringify(removedImages));
 
-    // send request
     edit(tourApi.edit(formData));
   };
 
@@ -115,7 +109,7 @@ function EditTour() {
 
   useEffect(() => {
     if (editingResult) {
-      alert("Cập nhật tour thành công. Bạn sẽ được chuyển đến trang tour");
+      alert("Cập nhật tour thành công. Bạn sẽ được chuyển đến trang tour.");
       navigate("/admin/tours");
     }
   }, [editingResult]);
@@ -133,6 +127,7 @@ function EditTour() {
   return (
     <>
       <SpinnerModal show={isFetching || isEditing} />
+
       <AdminLayout title={`Cập nhật tour: ${tour?.item.name || ""}`}>
         <div className="newTour">
           <div className="main">

@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .login form {
@@ -23,7 +24,8 @@
   padding: 0 8px;
   border: 1px solid #ccc;
   outline: none;
-  height: 35px;
+  height: 38px;
+  border-radius: 3.8px;
 }
 
 .login label span {
@@ -35,8 +37,36 @@
 }
 
 .login button {
-  padding: 4px 16px;
+  padding: 8px 16px;
   border: none;
   color: white;
-  background: #000;
+  font-weight: 700;
+  width: 100%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 3.8px;
+  font-size: 15px;
+  background: #4f5dd3;
+  transition: 0.2s;
+}
+
+.login button:hover {
+  background: #616edd;
+}
+
+.login .expiredSession {
+  background: #ffdcdc;
+  border: 2px solid #ed9595;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.login .expiredSession h1 {
+  font-size: 17px;
+  color: #c35353;
 }

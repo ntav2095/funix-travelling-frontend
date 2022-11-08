@@ -10,6 +10,7 @@ import { Row } from "react-bootstrap";
 
 import { useParams } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
+import usePageTitle from "../../hooks/usePageTitle";
 import { tourApi } from "../../services/apis";
 import { useEffect } from "react";
 
@@ -19,6 +20,8 @@ import styles from "./TourDetail.module.css";
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const { tourId } = useParams();
+  const tourName = data ? data.item.name : "Tour du lịch";
+  usePageTitle(`${tourName} || Go Travel`);
 
   const tour = data ? data.item : null;
 
