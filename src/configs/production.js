@@ -1,8 +1,5 @@
 const config = {
-  baseURL: {
-    client: "",
-    admin: "http://localhost:5000/api/admin/tour",
-  },
+  baseURL: "https://funixxx.herokuapp.com/api",
 };
 
 export default config;

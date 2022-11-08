@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 
 import store from "./store";
 import { setUser } from "./store/user.slice";
+import { storeInjector } from "./services/axios";
 
 // css bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,6 +20,8 @@ import "./assets/css/variables.css";
 
 // css
 import "./App.css";
+
+storeInjector(store);
 
 const user = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user"))

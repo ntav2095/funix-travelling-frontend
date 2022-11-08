@@ -1,8 +1,8 @@
 import styles from "./Title.module.css";
 
-function Title({ content, onChange, type, id }) {
+function Title({ content, onChange, id }) {
   const changeHandler = (e) => {
-    onChange(type, id, e.target.value);
+    onChange(id, e.target.value);
   };
 
   return (

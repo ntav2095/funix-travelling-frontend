@@ -1,5 +1,9 @@
 import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
+
+// vũ css
+import styles from "./SliderHeader.module.css";
+
 function Sliderheader() {
   return (
     <>
@@ -35,8 +39,11 @@ function Sliderheader() {
           </Carousel.Item>
         </Carousel>
       </div>
-      <div id="Body-content" className="section-content relative">
-        <div className="row" id="row-159726792">
+      <div
+        id="Body-content"
+        className={styles.welcome + " section-content relative"}
+      >
+        <div className={"row " + styles.row} id="row-159726792">
           <div id="col-255806587" className="col medium-7 small-12 large-7">
             <div className="col-inner">
               <h2>Hãy chọn Travel Go</h2>
@@ -57,10 +64,10 @@ function Sliderheader() {
                 >
                   <div className="col-inner">
                     <p>
-                      <i className="fa fa-fighter-jet"></i>Chuyến bay đẳng cấp
+                      <i className="fa fa-fighter-jet"></i> Chuyến bay đẳng cấp
                     </p>
                     <p>
-                      <i className="fa fa-university"></i>Khách sạn tiện nghi
+                      <i className="fa fa-university"></i> Khách sạn tiện nghi
                     </p>
                   </div>
                 </div>
@@ -71,10 +78,10 @@ function Sliderheader() {
                 >
                   <div className="col-inner">
                     <p>
-                      <i className="fa fa-ship"></i>Hành trình hấp dẫn
+                      <i className="fa fa-ship"></i> Hành trình hấp dẫn
                     </p>
                     <p>
-                      <i className="fa fa-check"></i>Chất lượng đỉnh cao
+                      <i className="fa fa-check"></i> Chất lượng đỉnh cao
                     </p>
                   </div>
                 </div>
@@ -85,10 +92,10 @@ function Sliderheader() {
                 >
                   <div className="col-inner">
                     <p>
-                      <i className="fa fa-history"></i>Quản lý chặt chẽ
+                      <i className="fa fa-history"></i> Quản lý chặt chẽ
                     </p>
                     <p>
-                      <i className="fa fa-globe"></i>Hơn 100 tours quốc tế
+                      <i className="fa fa-globe"></i> Hơn 100 tours quốc tế
                     </p>
                   </div>
                 </div>
@@ -98,26 +105,18 @@ function Sliderheader() {
 
           <div id="col-2080754359" className="col medium-5 small-12 large-5">
             <div className="col-inner">
-              <div
-                className="img has-hover x md-x lg-x y md-y lg-y"
-                id="image_1250726040"
-                style={{ width: "30%" }}
-              >
-                <div className="img-inner dark">
-                  <img
-                    width="590"
-                    height="477"
-                    src="asscets/img/about.png"
-                    data-src="https://dulich4.dichvuweb.biz/wp-content/uploads/2018/12/about.png"
-                    className="lazy-load attachment-large size-large"
-                    alt=""
-                    loading="lazy"
-                    srcSet=""
-                    data-srcset="https://dulich4.dichvuweb.biz/wp-content/uploads/2018/12/about.png 590w, https://dulich4.dichvuweb.biz/wp-content/uploads/2018/12/about-510x412.png 510w, https://dulich4.dichvuweb.biz/wp-content/uploads/2018/12/about-495x400.png 495w"
-                    sizes="(max-width: 590px) 100vw, 590px"
-                  />
-                </div>
-              </div>
+              <img
+                width="590"
+                height="477"
+                src="asscets/img/about.png"
+                data-src="https://dulich4.dichvuweb.biz/wp-content/uploads/2018/12/about.png"
+                className="lazy-load attachment-large size-large"
+                alt=""
+                loading="lazy"
+                srcSet=""
+                data-srcset="https://dulich4.dichvuweb.biz/wp-content/uploads/2018/12/about.png 590w, https://dulich4.dichvuweb.biz/wp-content/uploads/2018/12/about-510x412.png 510w, https://dulich4.dichvuweb.biz/wp-content/uploads/2018/12/about-495x400.png 495w"
+                sizes="(max-width: 590px) 100vw, 590px"
+              />
             </div>
           </div>
         </div>

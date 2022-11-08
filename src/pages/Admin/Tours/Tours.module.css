@@ -14,12 +14,12 @@
 }
 
 .table thead div {
-  padding: 6px;
+  padding: 2px 6px;
   font-weight: 600;
 }
 
 .table tbody div {
-  padding: 6px;
+  padding: 3px 6px;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 200px;
@@ -87,4 +87,19 @@
 
 .editItineraryBtn:hover {
   background: rgb(228, 93, 25);
+}
+
+h2.errorMessage {
+  color: #d22626;
+  display: flex;
+  font-size: 18px;
+}
+h2.errorMessage svg {
+  width: 18px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+}
+
+.noTours {
+  font-size: 18px;
 }

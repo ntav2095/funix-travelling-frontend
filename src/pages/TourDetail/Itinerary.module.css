@@ -17,6 +17,7 @@
 
 .itinerary .title {
   background: #4f5dd3;
+  margin-top: 16px;
 }
 
 .itinerary h3 {
@@ -81,4 +82,19 @@
 .itinerary .paragraph {
   padding-top: 16px;
   padding-bottom: 16px;
+}
+
+/* ========== mô tả tour ============= */
+.tourDesc {
+  display: flex;
+}
+
+.tourDesc > p {
+  font-weight: 600;
+  width: 130px;
+}
+
+.tourDesc ul {
+  padding: 0;
+  list-style-position: inside;
 }

@@ -30,6 +30,11 @@ export const tourApi = {
     method: "PUT",
     data: data,
   }),
+  delete: (tourId) => ({
+    url: `/tour`,
+    method: "DELETE",
+    data: { tourId },
+  }),
 };
 
 export const fileApi = {

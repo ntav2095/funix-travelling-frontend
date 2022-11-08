@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.top {
+  display: flex;
+}
+
+.carousel {
+  flex: 3;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+.contactTable {
+  flex: 1;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+.contactTableInner {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 850px) {
+  .top {
+    flex-direction: column;
+  }
+  /* .carousel,
+  .contactTable {
+    width: 100%;
+  } */
+}
