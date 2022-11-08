@@ -1,10 +1,12 @@
 import Sliderheader from "../../components/HomeComponent/SLIDERCOmpoment";
 import Tour from "../../components/toursComponent/TourCompoment";
 import Layout from "../../layout/Default";
+import usePageTitle from "../../hooks/usePageTitle";
 
 // vũ css
 import styles from "./Home.module.css";
 function Home() {
+  usePageTitle("Trang chủ || Go Travel");
   return (
     <Layout>
       <Sliderheader />

@@ -5,6 +5,7 @@ import "./visa.css";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import Xemchitiet1 from "./xemchitiet1";
+import usePageTitle from "../../hooks/usePageTitle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Collapse,
@@ -43,6 +44,9 @@ function Visa() {
       setchon3("HỦY");
     } else setchon3("CHỌN");
   };
+
+  usePageTitle(`Visa --- đang cập nhật || Go Travel`);
+
   return (
     <Layout>
       <div className="banner-1">

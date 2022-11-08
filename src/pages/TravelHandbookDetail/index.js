@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 // components
 import Layout from "../../layout/Default";
 
+// hooks
+import usePageTitle from "../../hooks/usePageTitle";
+
 // css
 import classes from "./TravelHandbookDetail.module.css";
 
@@ -11,6 +14,8 @@ import classes from "./TravelHandbookDetail.module.css";
 import { story, relatedStories } from "./mock";
 
 function TravelHandbookDetail() {
+  usePageTitle(`Cẩm nang --- đang cập nhật || Go Travel`);
+
   return (
     <Layout sidebarRight primary>
       <div className={classes.story}>
