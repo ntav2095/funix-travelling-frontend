@@ -45,6 +45,7 @@
   min-width: 80px;
   text-align: center;
   border-radius: 3.8px;
+  display: block;
 }
 
 .actionBtns > * {

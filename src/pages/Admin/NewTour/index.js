@@ -115,9 +115,7 @@ function NewTour() {
               {() => (
                 <Form className="newTour__form">
                   <label>
-                    <p className="newTour__label">
-                      Tên toureee {requiredField}
-                    </p>
+                    <p className="newTour__label">Tên tour {requiredField}</p>
                     <Field component="textarea" name="name" />
                     <ErrorMessage name="name" component="p" />
                   </label>
