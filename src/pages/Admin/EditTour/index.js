@@ -74,24 +74,36 @@ function EditTour() {
     formData.append("tourId", tourId);
     formData.append("name", values.name);
     formData.append("journey", values.journey);
-    formData.append("description", values.description);
     formData.append("lowestPrice", values.lowestPrice);
-    arrayFormData(
-      formData,
+    formData.append("description", values.description);
+    formData.append(
       "departureDates",
-      values.departureDates.split("\n").map((item) => stringToDate(item)[1])
+      JSON.stringify(
+        values.departureDates.split("\n").map((item) => stringToDate(item)[1])
+      )
     );
-    arrayFormData(formData, "removedImages", removedImages);
-    arrayFormData(formData, "priceIncludes", values.priceIncludes.split("\n"));
-    arrayFormData(formData, "priceExcludes", values.priceExcludes.split("\n"));
-    arrayFormData(
-      formData,
+    formData.append(
+      "priceIncludes",
+      JSON.stringify(values.priceIncludes.split("\n"))
+    );
+    formData.append(
+      "priceExcludes",
+      JSON.stringify(values.priceExcludes.split("\n"))
+    );
+    formData.append(
       "cancellationPolicy",
-      values.cancellationPolicy.split("\n")
+      JSON.stringify(values.cancellationPolicy.split("\n"))
     );
-    arrayFormData(formData, "highlights", values.highlights.split("\n"));
+    formData.append(
+      "highlights",
+      JSON.stringify(values.highlights.split("\n"))
+    );
     formData.append("duration", values.duration);
-    arrayFormData(formData, "images", images);
+    images.forEach((item) => {
+      formData.append("images", item);
+    });
+
+    formData.append("removedImages", JSON.stringify(removedImages));
 
     // send request
     edit(tourApi.edit(formData));

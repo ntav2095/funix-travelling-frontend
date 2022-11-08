@@ -53,21 +53,29 @@ function NewTour() {
     formData.append("journey", values.journey);
     formData.append("lowestPrice", values.lowestPrice);
     formData.append("description", values.description);
-    arrayFormData(
-      formData,
+    formData.append(
       "departureDates",
-      values.departureDates.split("\n").map((item) => stringToDate(item)[1])
+      JSON.stringify(
+        values.departureDates.split("\n").map((item) => stringToDate(item)[1])
+      )
     );
 
-    arrayFormData(formData, "priceIncludes", values.priceIncludes.split("\n"));
-    arrayFormData(formData, "priceExcludes", values.priceExcludes.split("\n"));
-    arrayFormData(
-      formData,
+    formData.append(
+      "priceIncludes",
+      JSON.stringify(values.priceIncludes.split("\n"))
+    );
+    formData.append(
+      "priceExcludes",
+      JSON.stringify(values.priceExcludes.split("\n"))
+    );
+    formData.append(
       "cancellationPolicy",
-      values.cancellationPolicy.split("\n")
+      JSON.stringify(values.cancellationPolicy.split("\n"))
     );
-    arrayFormData(formData, "highlights", values.highlights.split("\n"));
-
+    formData.append(
+      "highlights",
+      JSON.stringify(values.highlights.split("\n"))
+    );
     formData.append("duration", values.duration);
     images.forEach((item) => {
       formData.append("images", item);
@@ -107,7 +115,9 @@ function NewTour() {
               {() => (
                 <Form className="newTour__form">
                   <label>
-                    <p className="newTour__label">Tên tour {requiredField}</p>
+                    <p className="newTour__label">
+                      Tên toureee {requiredField}
+                    </p>
                     <Field component="textarea" name="name" />
                     <ErrorMessage name="name" component="p" />
                   </label>

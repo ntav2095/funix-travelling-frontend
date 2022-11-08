@@ -27,7 +27,7 @@ function useAxios() {
       if (error.response) {
         setError({
           httpCode: error.response.status,
-          message: error.response.data.message.en,
+          message: error.response.data.message,
         });
       } else if (!window.navigator.onLine) {
         setError({

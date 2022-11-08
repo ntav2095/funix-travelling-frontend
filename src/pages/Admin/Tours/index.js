@@ -18,13 +18,33 @@ import styles from "./Tours.module.css";
 
 function Tours() {
   const [sendRequest, isLoading, data, error] = useAxios();
+  const [sendDelete, isDeleting, deleteResult, deleteError] = useAxios();
+
+  const deleteHandler = (tourId) => {
+    if (window.confirm("Bạn có chắc là muốn xóa không?")) {
+      sendDelete(tourApi.delete(tourId));
+    }
+  };
 
   useEffect(() => {
     sendRequest(tourApi.get());
   }, []);
+
+  useEffect(() => {
+    if (deleteError) {
+      alert(`Có lỗi xảy ra: ${deleteError.message.vi}`);
+    }
+  }, [deleteError]);
+
+  useEffect(() => {
+    if (deleteResult) {
+      alert(`Xóa thành công`);
+      sendRequest(tourApi.get());
+    }
+  }, [deleteResult]);
   return (
     <>
-      <SpinnerModal show={isLoading} />
+      <SpinnerModal show={isLoading || isDeleting} />
       <AdminLayout title="Danh sách tours">
         <div className={styles.tours}>
           {data && data.items.length > 0 && (
@@ -66,7 +86,12 @@ function Tours() {
                         >
                           Edit
                         </Link>
-                        <button className={styles.removeTourBtn}>Remove</button>
+                        <button
+                          className={styles.removeTourBtn}
+                          onClick={() => deleteHandler(item._id)}
+                        >
+                          Remove
+                        </button>
                         <Link
                           className={styles.editItineraryBtn}
                           to={`/admin/update-itinerary/${item._id}`}
