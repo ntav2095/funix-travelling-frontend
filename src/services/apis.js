@@ -42,12 +42,16 @@ export const fileApi = {
 
 export const postsApi = {
   add: (formData) => ({
-    url: "/tour",
+    url: "/article",
     method: "POST",
     data: formData,
   }),
   get: () => ({
     url: `/article`,
+    method: "GET",
+  }),
+  getSingleArticle: (articleId) => ({
+    url: `/tour/${articleId}`,
     method: "GET",
   }),
   edit: (formData) => ({

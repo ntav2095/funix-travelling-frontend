@@ -22,6 +22,7 @@ import Tours from "./pages/Admin/Tours";
 import AddItinerary from "./pages/Admin/AddItinerary";
 import Posts from "./pages/Admin/Posts";
 import NewPosts from "./pages/Admin/Posts/newPosts";
+import EditPosts from "./pages/Admin/Posts/editPosts";
 function App() {
   return (
     <>
@@ -48,7 +49,7 @@ function App() {
         <Route path="/admin/add-itinerary/:tourId" element={<AddItinerary />} />
         <Route path="/admin/posts" element={<Posts />} />
         <Route path="/admin/new-posts" element={<NewPosts />} />
-        {/* <Route path="/admin/edit-posts/:postId" element={<EditTour />} /> */}
+        <Route path="/admin/edit-posts/:postId" element={<EditPosts />} />
 
       </Routes>
     </>

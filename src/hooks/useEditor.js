@@ -27,7 +27,7 @@ function useEditor(ref) {
 
           input.addEventListener("change", (e) => {
             const url = URL.createObjectURL(e.target.files[0]);
-            setFiles((prev) => [...prev, { url, file: e.target.files[0] }]);
+            setFiles((prev) => [...prev, { url, file: e.target.files[0]}]);
             const range = editor.getSelection(true);
             const Image = Quill.import("formats/image");
             Image.sanitize = (url) => url;
