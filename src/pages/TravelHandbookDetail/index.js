@@ -50,8 +50,6 @@ function TravelHandbookDetail() {
   useEffect(() => {
     if (data) {
       let posts = data.items.filter((item) => item._id === id);
-      console.log("dữ liệu");
-      console.log(posts, data);
       setState(posts[0]);
     }
   }, [data]);

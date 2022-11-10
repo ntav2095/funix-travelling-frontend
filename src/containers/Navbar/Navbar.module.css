@@ -17,3 +17,7 @@
 .logo {
   width: 150px;
 }
+
+.navbar a {
+  font-weight: 500;
+}
