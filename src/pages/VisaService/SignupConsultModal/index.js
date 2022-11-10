@@ -29,10 +29,7 @@ function SignupConsultModal({ handleClose, show }) {
   };
 
   const submitHandler = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);
+    console.log(222);
   };
 
   return (
@@ -43,23 +40,23 @@ function SignupConsultModal({ handleClose, show }) {
       backdrop="static"
       keyboard={false}
     >
-      <Modal.Header closeButton>
-        <Modal.Title>
-          <p className={styles.header}>
-            Vui lòng cung cấp một số thông tin cần thiết hoặc gọi{" "}
-            <span>094 518 5959/090 176 2929</span> để được tư vấn VISA nhanh
-            nhất
-          </p>
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Formik
-          initialValues={initialValues}
-          validate={validator}
-          onSubmit={submitHandler}
-        >
-          {({ isSubmitting }) => (
-            <Form>
+      <Formik
+        initialValues={initialValues}
+        validate={validator}
+        onSubmit={submitHandler}
+      >
+        {() => (
+          <Form>
+            <Modal.Header closeButton>
+              <Modal.Title>
+                <p className={styles.header}>
+                  Vui lòng cung cấp một số thông tin cần thiết hoặc gọi{" "}
+                  <span>094 518 5959/090 176 2929</span> để được tư vấn VISA
+                  nhanh nhất
+                </p>
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
               <div className={styles.form}>
                 <label>
                   <p className={styles.label}>Họ Và tên</p>
@@ -77,13 +74,15 @@ function SignupConsultModal({ handleClose, show }) {
                   <ErrorMessage name="phoneNumber" component="p" />
                 </label>
               </div>
-            </Form>
-          )}
-        </Formik>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="warning">ĐĂNG KÝ</Button>
-      </Modal.Footer>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button type="submit" variant="warning">
+                ĐĂNG KÝ
+              </Button>
+            </Modal.Footer>
+          </Form>
+        )}
+      </Formik>
     </Modal>
   );
 }
