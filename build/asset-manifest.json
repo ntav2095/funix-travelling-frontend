@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.4ab489ce.css",
-    "main.js": "/static/js/main.c89c0132.js",
+    "main.css": "/static/css/main.7279a03b.css",
+    "main.js": "/static/js/main.6d9a0da2.js",
     "static/media/visa-banner.jpg": "/static/media/visa-banner.8af1539aee382c98b56a.jpg",
     "static/media/world-map.jpg": "/static/media/world-map.deaa286f6918e6be8410.jpg",
     "static/media/sec_inbound_tour_bg.jpg": "/static/media/sec_inbound_tour_bg.6c91ae35f28c5c425ae9.jpg",
@@ -12,11 +12,11 @@
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/index.html",
-    "main.4ab489ce.css.map": "/static/css/main.4ab489ce.css.map",
-    "main.c89c0132.js.map": "/static/js/main.c89c0132.js.map"
+    "main.7279a03b.css.map": "/static/css/main.7279a03b.css.map",
+    "main.6d9a0da2.js.map": "/static/js/main.6d9a0da2.js.map"
   },
   "entrypoints": [
-    "static/css/main.4ab489ce.css",
-    "static/js/main.c89c0132.js"
+    "static/css/main.7279a03b.css",
+    "static/js/main.6d9a0da2.js"
   ]
 }
