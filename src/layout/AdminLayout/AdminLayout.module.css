@@ -103,10 +103,27 @@
   padding: 16px;
 }
 
-.title {
+.contentHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid #ccc;
   margin-bottom: 16px;
   padding-bottom: 8px;
+}
+
+.contentHeader .navigateBtn {
+  background: var(--main-color);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 3.8px;
+  transition: 0.2s;
+}
+.contentHeader .navigateBtn:hover {
+  background: var(--main-color-hover);
+}
+
+.title {
   font-size: 20px;
   font-weight: 700;
 }

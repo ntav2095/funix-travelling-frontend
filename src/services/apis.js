@@ -44,3 +44,29 @@ export const fileApi = {
     data: formData,
   }),
 };
+
+export const visaApi = {
+  addVisa: (data) => ({
+    method: "POST",
+    url: "/visa",
+    data,
+  }),
+  editVisa: (data) => ({
+    method: "PUT",
+    url: "/visa",
+    data,
+  }),
+  getVisas: () => ({
+    method: "GET",
+    url: "/visa",
+  }),
+  getSingleVisa: (visaId) => ({
+    method: "GET",
+    url: `/visa/${visaId}`,
+  }),
+  deleteVisa: (visaId) => ({
+    method: "DELETE",
+    url: "/visa",
+    data: { visaId },
+  }),
+};

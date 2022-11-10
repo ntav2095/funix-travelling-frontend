@@ -1,0 +1,40 @@
+.actionBtns {
+  display: flex;
+  align-items: center;
+}
+
+.editBtn,
+.removeBtn {
+  display: inline-block;
+  height: 34px;
+  border-radius: 3.8px;
+  margin-right: 8px;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: 0.2s;
+}
+
+.editBtn {
+  background: orange;
+}
+
+.editBtn:hover {
+  color: white;
+  background: rgb(255, 178, 36);
+}
+
+.removeBtn {
+  background: rgb(241, 14, 14);
+}
+
+.removeBtn:hover {
+  color: white;
+  background: red;
+}
+
+.noProducts {
+  font-size: 20px;
+}

@@ -45,7 +45,11 @@ function Tours() {
   return (
     <>
       <SpinnerModal show={isLoading || isDeleting} />
-      <AdminLayout title="Danh sách tours">
+      <AdminLayout
+        title="Danh sách tours"
+        path="/admin/new-tour"
+        text="New Tour"
+      >
         <div className={styles.tours}>
           {data && data.items.length > 0 && (
             <table className={styles.table}>

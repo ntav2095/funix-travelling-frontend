@@ -23,7 +23,7 @@ const userSVG = (
   </svg>
 );
 
-function AdminLayout({ children, title }) {
+function AdminLayout({ children, title, path, text }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
@@ -32,6 +32,9 @@ function AdminLayout({ children, title }) {
     localStorage.removeItem("accessToken");
     dispatch(removeUser());
   };
+
+  const navLinkClasses = ({ isActive }) =>
+    isActive ? styles.active : undefined;
   return (
     <>
       <header className={styles.header}>
@@ -54,45 +57,25 @@ function AdminLayout({ children, title }) {
         <div className={styles.sidebar}>
           <ul className={styles.nav}>
             <li>
-              <NavLink
-                end
-                className={({ isActive }) =>
-                  isActive ? styles.active : undefined
-                }
-                to="/admin"
-              >
+              <NavLink end className={navLinkClasses} to="/admin">
                 Dashboard
               </NavLink>
             </li>
             <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? styles.active : undefined
-                }
-                to="/admin/tours"
-              >
+              <NavLink className={navLinkClasses} to="/admin/tours">
                 Tours
               </NavLink>
             </li>
+
             <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? styles.active : undefined
-                }
-                to="/admin/new-tour"
-              >
-                New Tour
+              <NavLink className={navLinkClasses} to="/admin/visa-products">
+                Visa Products
               </NavLink>
             </li>
 
             {!user && (
               <li>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? styles.active : undefined
-                  }
-                  to="/admin/login"
-                >
+                <NavLink className={navLinkClasses} to="/admin/login">
                   Login
                 </NavLink>
               </li>
@@ -101,7 +84,14 @@ function AdminLayout({ children, title }) {
         </div>
 
         <div className={styles.content}>
-          <h2 className={styles.title}>{title}</h2>
+          <div className={styles.contentHeader}>
+            <h2 className={styles.title}>{title}</h2>
+            {path && text && (
+              <Link className={styles.navigateBtn} to={path}>
+                {text}
+              </Link>
+            )}
+          </div>
           {children}
         </div>
       </main>

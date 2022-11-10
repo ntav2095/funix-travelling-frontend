@@ -4,6 +4,7 @@ import Quill from "quill";
 import "./Paragraph.css";
 
 const toolbarContainer = [
+  [{ color: [] }, { background: [] }],
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
   ["bold", "italic", "underline", "strike", "blockquote"],
   [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
