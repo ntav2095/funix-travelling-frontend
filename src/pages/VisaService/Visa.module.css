@@ -1,0 +1,378 @@
+img.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+.banner img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 20px;
+}
+
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0px 15px;
+}
+
+.searchAndSignupForConsultation {
+  background-position: center;
+  background-size: cover;
+}
+
+.searchVisa {
+  padding: 40px 30px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transform: translateY(-40px);
+  background: white;
+  max-width: calc(100vw - 32px);
+  margin: 0 auto;
+}
+
+.searchVisa p {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.searchVisa form {
+  display: flex;
+}
+
+.searchVisa form .input {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+}
+
+.searchVisa form input {
+  padding: 20px 12px;
+  background: #efefef;
+  border: none;
+  outline: none;
+  flex: 1;
+  margin-top: 20px;
+}
+
+/* css tạm để hiển thị searchModal khi focus input  */
+.searchVisa form input ~ div {
+  display: none;
+}
+
+.searchVisa form input:focus ~ div {
+  display: block;
+}
+
+.searchVisa form button {
+  margin-top: 20px;
+  border: none;
+  background: #f98b04;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  padding: 0 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-left: 30px;
+}
+
+@media screen and (max-width: 450px) {
+  .searchVisa {
+    padding: 40px 8px;
+  }
+
+  .searchVisa form button {
+    padding: 0 8px;
+    margin-left: 8px;
+  }
+}
+
+/* lam visa nhanh */
+.quickVisa {
+  padding: 50px 0;
+}
+
+.quickVisa h2 {
+  padding-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.chooseVisa {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+.visaProduct .inner {
+  margin: 8px;
+  cursor: pointer;
+}
+
+.visaProduct .image {
+  height: 0;
+  padding-top: 56%;
+  background-position: center;
+  background-size: cover;
+}
+
+.visaProduct .textBox {
+  background: #f98b04;
+  padding: 8px;
+  color: white;
+}
+
+.visaProduct .textBox .name {
+  white-space: nowrap;
+  width: 100%;
+  max-width: 500px;
+  margin-right: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* why choose us  */
+.whyChooseUs {
+  margin-top: 50px;
+}
+
+.whyChooseUs svg {
+  width: 60px;
+  color: #2d9ad9;
+}
+
+.whyChooseUs ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.whyChooseUs ul li {
+  width: 30%;
+  display: flex;
+  margin-bottom: 24px;
+}
+
+@media screen and (max-width: 850px) {
+  .whyChooseUs ul li {
+    margin-bottom: 32px;
+    width: calc(50% - 15px);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .whyChooseUs ul li {
+    margin-bottom: 32px;
+    width: 100%;
+  }
+  img.banner {
+    width: 100vw;
+    height: 350px;
+    object-fit: cover;
+    object-position: 72% 0px;
+  }
+}
+
+.whyChooseUs .content {
+  padding-left: 8px;
+}
+
+.whyChooseUs .name {
+  font-size: 17px;
+  font-weight: 600;
+  padding-bottom: 8px;
+  margin: 0;
+}
+
+/* yeu cau goi lai  */
+.callback {
+  background: #2d9ad9;
+  padding: 15px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.callback .inner {
+  padding: 16px 24px;
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.callback .input {
+  height: 35px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+@media screen and (max-width: 850px) {
+  .callback .inner {
+    padding: 8px 24px;
+    flex-direction: column;
+  }
+
+  .callback .input {
+    margin-bottom: 16px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .callback .inner {
+    padding: 8px 0px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .callback .inner .input {
+    flex-direction: column;
+    margin-bottom: 8px;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+  }
+
+  .callback .inner .input input {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 8px;
+  }
+
+  .callback .inner .input button {
+    width: 100%;
+    padding: 8px 16px;
+  }
+}
+
+.callback .input input {
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 8px;
+  margin-right: 8px;
+  width: 100%;
+  width: 220px;
+}
+
+.callback .input button {
+  background: #f98b04;
+  color: white;
+  padding: 0 16px;
+  border: none;
+  height: 100%;
+  white-space: nowrap;
+}
+
+/* dang ky tu van  */
+.signupForConsultation {
+  height: 300px;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.signupForConsultation h2 {
+  font-weight: 8 00;
+  text-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.signupForConsultation button {
+  color: white;
+  background: #f98b04;
+  border: 1px solid #f98b04;
+  padding: 8px 16px;
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-top: 16px;
+  transition: 0.2s;
+}
+
+.signupForConsultation button:hover {
+  box-shadow: inset 0 0 0 100px rgb(0 0 0 / 20%);
+}
+
+/* steps  */
+.steps {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.steps h2 {
+  padding-bottom: 32px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.steps ul {
+  flex-wrap: wrap;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  gap: 30px;
+}
+
+.steps ul li {
+  border: 3px dashed #62b0de;
+  border-radius: 16px;
+  padding: 15px;
+  position: relative;
+  padding-top: 32px;
+  text-align: center;
+  width: calc(25% - 30px);
+}
+
+@media screen and (max-width: 850px) {
+  .steps ul li {
+    width: calc(50% - 15px);
+  }
+  img.banner {
+    width: 100vw;
+    height: 350px;
+    object-fit: cover;
+    object-position: 72% 0px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .steps ul li {
+    width: 100%;
+  }
+}
+
+.steps .num {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  background: #2d9ad9;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+}
+
+.steps .name {
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.steps .desc {
+  font-size: 15px;
+}

@@ -1,0 +1,22 @@
+@media only screen and (max-width: 850px) {
+  .footer.pt-5.pb-3 {
+    padding: 2em;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .footer.pt-5.pb-3 {
+    padding: 8em;
+  }
+}
+
+/* .footer iframe {
+  max-width: 100%;
+
+} */
+.Footer_container__bp5hP {
+  max-width: 1700px;
+  width: 100%;
+  margin: 0px auto;
+  padding: 30px 16px 16px;
+}
