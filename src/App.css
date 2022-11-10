@@ -97,13 +97,12 @@ nav.navbar.navbar-expand-lg.navbar-dark {
 /* chi tiết tour*/
 #chitiet {
   text-align: center;
-  padding-left: 30px !important;
   display: block;
   text-transform: uppercase;
   line-height: 20px !important;
   color: #fff;
   background-color: #ff5a00;
-  padding: 9px 17px;
+  padding: 9px 0px;
   width: 100%;
 }
 #chitiet-gia-tien {
@@ -121,28 +120,7 @@ nav.navbar.navbar-expand-lg.navbar-dark {
 }
 div#Body-content {
   padding: 2em 8em;
-  background-color: rgb(20 2 2 / 16%);
-
-  background-image: linear-gradient(rgba(0, 0, 0, 0.356), transparent),
-    url("/src/assets/images/sec_inbound_tour_bg.jpg");
-  background-size: cover;
-  background-position: 50% center;
-  /* padding: 0px !important; */
-}
-@media only screen and (max-width: 850px) {
-  div#Body-content {
-    padding: 2em 1em;
-    background-color: rgb(20 2 2 / 16%);
-    background-image: url("/src/assets/images/sec_inbound_tour_bg.jpg");
-  }
-  #Body-content-1 {
-    padding: 0;
-  }
-}
-#Body-content-1 {
-  max-width: 1170px;
-  margin: 0 auto;
-  width: 100%;
+  background-color: rgba(238, 238, 238, 0.16);
 }
 h1#Body-content_tour {
   text-align: center;

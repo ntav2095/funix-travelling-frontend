@@ -1,9 +1,12 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Layout from "../../layout/Default";
 import companyInfo from "../../services/constants/companyInfo.constant";
+import usePageTitle from "../../hooks/usePageTitle";
 import styles from "./Contact.module.css";
 
 function Contact() {
+  usePageTitle("Liên hệ || Go Travel");
+
   const initialValues = {
     email: "",
     phone: "",

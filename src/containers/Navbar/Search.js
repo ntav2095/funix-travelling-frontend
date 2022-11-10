@@ -20,7 +20,6 @@ const initialState = {
 };
 
 function exampleReducer(state, action) {
-  console.log("action", action);
   switch (action.type) {
     case "CLEAN_QUERY":
       return initialState;
@@ -52,7 +51,6 @@ function SearchComponent() {
       }
 
       const re = new RegExp(_.escapeRegExp(data.value), "i");
-      console.log(re);
 
       dispatch({
         type: "FINISH_SEARCH",

@@ -33,7 +33,8 @@
   text-transform: uppercase;
   padding: 10px;
   margin: 16px 0px;
-  font-size: 2vw;
+  font-size: 26px;
+  border: none;
 }
 .with100 {
   width: 100%;
@@ -51,6 +52,11 @@ p.gia-chuan {
   padding: 5px;
   font-size: 24px;
 }
+
+.gia-chuan span {
+  color: white;
+}
+
 input.with100.mt-2 {
   text-transform: uppercase;
   font-size: 2vw;
@@ -80,16 +86,13 @@ input.with100.mt-2 {
 }
 
 /* index.js */
-
-@media only screen and (max-width: 850px) {
-  .tour-detail {
-    padding: 2em 2em;
-  }
+.tour-detail {
+  padding: 2em 8em;
+  background: rgb(255, 255, 255);
 }
-/* -------------------------------------- */
-@media only screen and (min-width: 851px) {
-  .tour-detail {
-    padding: 2em 6em;
-    background: rgb(255, 255, 255);
-  }
+
+/* ---------------- vũ css ---------------------- */
+.callbackBtn {
+  background: #f98b04;
+  color: white;
 }

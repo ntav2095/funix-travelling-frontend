@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 // components
 import Layout from "../../layout/Default";
 
+// hooks
+import usePageTitle from "../../hooks/usePageTitle";
+
 // css
 import classes from "./TravelHandbook.module.css";
 
@@ -13,6 +16,7 @@ import { Container } from "reactstrap";
 import { Row } from "react-bootstrap";
 
 function TravelHandbook() {
+  usePageTitle(`Cẩm nang du lịch || Go Travel`);
   return (
     <Layout>
       <div id="Body-content-1">

@@ -1,0 +1,33 @@
+.newTour {
+  margin-bottom: 50px;
+}
+
+.newTour__form label {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.newTour__label {
+  display: block;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.newTour__label span {
+  color: rgb(73, 73, 73);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.newTour__form label p:last-child {
+  font-size: 13px;
+  color: red;
+}
+
+.newTour__form label input,
+.newTour__form label textarea {
+  width: 100%;
+  outline: none;
+  border: 1px solid rgb(132, 132, 132);
+  padding: 2px 6px;
+}

@@ -13,7 +13,7 @@ export default class SlideImage extends React.Component {
      * Cái nào không active thì ẩn đi.
      */
     this.state = {
-      slideIndex: 0
+      slideIndex: 0,
     };
 
     const ratioWHArray = this.props.ratio.split(":");
@@ -46,21 +46,21 @@ export default class SlideImage extends React.Component {
   // Quay về ảnh phía trước, tức index giảm 1 => step = -1
   backward() {
     this.setState({
-      slideIndex: this.getNewSlideIndex(-1)
+      slideIndex: this.getNewSlideIndex(-1),
     });
   }
 
   // Tiến tới ảnh phía sau, tức index tăng 1 => step = 1
   forward() {
     this.setState({
-      slideIndex: this.getNewSlideIndex(1)
+      slideIndex: this.getNewSlideIndex(1),
     });
   }
 
   // Xác định slideIndex nào sẽ được active
   setSlideIndex(index) {
     this.setState({
-      slideIndex: index
+      slideIndex: index,
     });
   }
 
@@ -72,13 +72,12 @@ export default class SlideImage extends React.Component {
 
   runAutomatic() {
     this.setState({
-      slideIndex: this.getNewSlideIndex(1)
+      slideIndex: this.getNewSlideIndex(1),
     });
   }
 
   componentDidMount() {
     this.rootElm = ReactDOM.findDOMNode(this);
-    console.log(this.rootElm);
     this.modalElm = this.rootElm.querySelectorAll(".modalslide");
     this.containerElm = this.rootElm.querySelector(".containe");
 
@@ -92,22 +91,18 @@ export default class SlideImage extends React.Component {
   }
 
   showModal(index) {
-    console.log("show", this.modalElm[index]);
     this.modalElm[index].style.display = "block";
   }
 
   hideModal(index) {
-    console.log("hide", this.modalElm[index]);
     this.modalElm[index].style.display = "none";
   }
 
   render() {
     return (
-    
       <div className="lp-slideshow">
         <div className="containe">
           {this.props.input.map((image, index) => {
-            console.log(image, index);
             return (
               <div
                 key={index}
@@ -120,12 +115,20 @@ export default class SlideImage extends React.Component {
                 </div>
                 <img
                   className="imageslide"
-                  src={image.src}
-                  alt={image.caption}
-                  onClick={() =>{console.log('ảnh',this.state.slideIndex) ;this.showModal(this.state.slideIndex)}}
+                  // src={image.src}
+                  // alt={image.caption}
+                  src={image}
+                  alt="hehe"
+                  onClick={() => {
+                    this.showModal(this.state.slideIndex);
+                  }}
                 />
                 <div className="lp-modal-image">
-                  <div id={`${index}`} className="modalslide" onClick={() => this.hideModal(this.state.slideIndex)}>
+                  <div
+                    id={`${index}`}
+                    className="modalslide"
+                    onClick={() => this.hideModal(this.state.slideIndex)}
+                  >
                     <span
                       className="close"
                       onClick={() => this.hideModal(this.state.slideIndex)}
@@ -134,8 +137,10 @@ export default class SlideImage extends React.Component {
                     </span>
                     <img
                       className="modal-conten"
-                      src={image.src}
-                      alt={image.caption + " modal"}
+                      // src={image.src}
+                      // alt={image.caption + " modal"}
+                      src={image}
+                      alt="hehe modal"
                     />
                     {/* <span className="prev" onClick={this.backward}>
                       ❮
@@ -169,15 +174,16 @@ export default class SlideImage extends React.Component {
               >
                 <img
                   className="image-small"
-                  src={image.src}
-                  alt={image.caption}
+                  // src={image.src}
+                  // alt={image.caption}
+                  src={image}
+                  alt="hehe"
                 />
               </Card>
             );
           })}
         </div>
       </div>
-      
     );
   }
 }

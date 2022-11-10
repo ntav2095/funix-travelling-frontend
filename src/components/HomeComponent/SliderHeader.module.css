@@ -1,0 +1,46 @@
+.welcome {
+  width: 100%;
+  /* max-width: 1170px; */
+  margin: 0 auto;
+  background-size: cover;
+  background-position: center;
+  padding: 8px !important;
+}
+
+.welcome p,
+.welcome h2 {
+  color: #555;
+}
+
+.welcome h2 {
+  font-size: 28px;
+  margin-bottom: 24px;
+  font-weight: 600;
+  padding-top: 16px;
+}
+
+.welcome p {
+  font-size: 15px;
+}
+
+.welcome .row {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1170px;
+  padding: 8px !important;
+}
+
+.welcome .row > * {
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.welcome .row img {
+  width: 100%;
+}
+
+@media only screen and (max-width: 850px) {
+  .welcome .row {
+    flex-direction: column !important;
+  }
+}

@@ -17,10 +17,12 @@ import {
   TwitterIcon,
 } from "react-share";
 
+import styles from "./Footer.module.css";
+
 export default function Footer() {
   return (
-    <div className="footer pt-5 pb-3">
-      <div className="Footer_container__bp5hP">
+    <div className={styles.footer + " footer pt-5 pb-3"}>
+      <div className={styles.container}>
         <Container>
           <Row className="gy-3 mb-3">
             <Col lg="3">

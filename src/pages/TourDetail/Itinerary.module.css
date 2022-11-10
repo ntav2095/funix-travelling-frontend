@@ -1,0 +1,102 @@
+.itinerary .container {
+  margin: 0 16px;
+  padding: 0 8px;
+}
+
+.itinerary .mainTitle {
+  color: rgb(159, 31, 8);
+  font-weight: 600;
+  font-size: 20px;
+  border-bottom: 3px solid rgb(159, 31, 8);
+  padding-bottom: 8px;
+}
+
+.bgContent {
+  background: #fff8f7;
+}
+
+.itinerary .title {
+  background: #4f5dd3;
+  margin-top: 16px;
+}
+
+.itinerary h3 {
+  color: white;
+  letter-spacing: 1px;
+  font-size: 17px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 8px 0;
+}
+
+.itinerary img {
+  width: 100%;
+  max-width: 480px;
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 6px;
+}
+
+.itinerary .time {
+  padding-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  border-bottom: 3px solid rgb(159, 31, 8);
+}
+
+.itinerary .time p {
+  display: flex;
+  align-items: center;
+}
+
+.itinerary .time p span {
+  white-space: nowrap;
+  color: rgb(159, 31, 8);
+  font-weight: 500;
+  align-items: center;
+}
+
+.itinerary .time p svg {
+  color: rgb(159, 31, 8);
+  width: 15px;
+  margin-right: 3px;
+  transform: translateY(1px);
+}
+
+.itinerary ul {
+  margin: 0;
+}
+
+.itinerary li {
+  word-break: break-all;
+}
+
+.itinerary p {
+  margin: 0;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+  white-space: normal;
+}
+
+.itinerary .paragraph {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+/* ========== mô tả tour ============= */
+.tourDesc {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.tourDesc > p {
+  font-weight: 600;
+  width: 130px;
+  flex-shrink: 0;
+}
+
+.tourDesc ul {
+  padding: 0;
+  list-style-position: inside;
+}

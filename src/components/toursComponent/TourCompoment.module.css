@@ -1,8 +1,116 @@
-/* .img {
-
-} */
-.img {
-  object-fit: cover;
-  height: 250px;
+.tours {
+  max-width: 1170px;
   width: 100%;
+  margin: 0 auto !important;
+  padding: 30px 8px;
+}
+
+.tours > * {
+  width: 33.3333% !important;
+  max-width: 500px !important;
+}
+
+.card {
+  height: 360px !important;
+  width: 100%;
+}
+
+.image {
+  height: 70%;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.image::after {
+  display: block;
+  content: "";
+  position: absolute;
+  transition: 0.3s;
+  width: 1px;
+  height: 1px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.image:hover::after {
+  background: rgba(255, 255, 255, 0.151);
+  width: 100%;
+  height: 100%;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.textBox {
+  text-overflow: ellipsis;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  white-space: nowrap !important;
+}
+
+.card h5 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 300px;
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.card h5:hover {
+  text-decoration: underline;
+}
+
+.card h6 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 300px;
+  display: block;
+  padding-left: 0 !important;
+}
+
+.card h6:not(:last-of-type) {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.tourBtn {
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.tourBtn:hover {
+  background: #ff7429 !important;
+}
+
+.tourBtn a {
+  background: none !important;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 850px) {
+  .tours > * {
+    width: 50% !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .tours {
+    justify-content: center;
+  }
+
+  .tours > * {
+    width: 100% !important;
+  }
 }

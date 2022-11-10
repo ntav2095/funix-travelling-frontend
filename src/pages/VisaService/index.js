@@ -7,7 +7,7 @@ import Slider from "react-slick";
 import styles from "./Visa.module.css";
 import { reasons, steps, visaProducts, searchResults } from "./mock";
 import settings from "./responsiveCarousel";
-
+import usePageTitle from "../../hooks/usePageTitle";
 import SignupConsultModal from "./SignupConsultModal";
 import { useState } from "react";
 import SearchResults from "./SearchResults";
@@ -17,6 +17,8 @@ function VisaService() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  usePageTitle(`Dịch vụ visa || Go Travel`);
 
   return (
     <>
