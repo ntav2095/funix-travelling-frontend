@@ -1,98 +1,86 @@
+
+// useEffect(()=>{
+//     sendRequestPostsID(postsApi.getSingleArticle(PostsID));
+// },[]) const {PostsID}=useParams()sendRequest(
+        // postsApi.edit(formdata)
+        // );
+
 import {  useEffect, useRef, useState } from "react"
 import { Button } from "react-bootstrap"
 import useAxios from "../../../../hooks/useAxios"
-import useEditor from "../../../../hooks/useEditor"
 import AdminLayout from "../../../../layout/AdminLayout"
-
-import { v4 as uuid } from "uuid";
-
 import style from './editposts.module.css'
 import { postsApi } from "../../../../services/apis"
 import { useNavigate, useParams } from "react-router-dom"
-import axios from "axios"
+import  Quill  from "quill"
 
+const toolbarContainer = [
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+    ["link", "image"],
+    ["clean"],
+];
 
-function EditPosts(){
-    const navigation=useNavigate()
+const modules = {
+    toolbar: toolbarContainer,
+};
+
+function NewPosts(){
+    const navigation= useNavigate()
+    const quill = useRef();
     const editorRef = useRef();
-    const title=useRef()
-    const id=uuid()
-    const {articleId}=useParams()
+    const {postsId}=useParams()
+    const [stateTitle,setStateTitle]=useState()
     const [sendRequest, isLoading, data, error]=useAxios()
-    const [sendRequestArticleId, Loading, dataArticle, err]=useAxios()
-    const [state,setState]=useState({}) 
-    const [images,setImages]=useState({}) 
-    const [quill, files, clearQuill] = useEditor(editorRef);
+    const [sendRequestPostsID, Loading, dataPostsID, errorPostsID]=useAxios()
+console.log('PostsID',postsId)
+console.log('dataPostsID',data)
+    const hanldleSubmit= async () => {
+       await sendRequest(
+            postsApi.edit({
+                postsId,
+                title:stateTitle,
+                content:JSON.stringify(quill.current.getContents())
+            })
+        );
+       
+        }
+
+        const changeTitle=(e)=>{
+           setStateTitle(e.target.value)
+        }
+    useEffect(()=>{
+        sendRequestPostsID(postsApi.getSingleArticle(postsId));
+    },[])
+
+    useEffect(()=>{
+        if(data){
+            alert(data.message.vi)
+            navigation('/admin/posts')
+        }
+    },[data])
+
+    useEffect(() => {
+        if(dataPostsID){ setStateTitle(dataPostsID.article.title)
+        quill.current.setContents({ops:dataPostsID.article.content}, "api");}
+    }, [dataPostsID])
     
 
-    console.log(dataArticle)
-    console.log(state,images)
-    const hanldleSubmit= async ()=>{
-        console.log('id',id)
-      try {
-        
-        let text = JSON.stringify(state);
-        let imgCurrent = images.files?images.files.filter((item) => text.includes(item.url)):[];
-        if(imgCurrent.length>0){
-        const promises = imgCurrent.map((item) => {
-          const formData = new FormData();
-          formData.append("image", item.file);
-          return axios("http://localhost:5000/api/file/single", {
-            withCredentials: true,
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-            data: formData,
-            method: "POST",
-          });
-        });
-        const serverUrls = await Promise.all(promises);
-        let urls = serverUrls.map((item, index) => ({
-          newUrl: item.data,
-          oldUrl: images.files[index].url,
-        }));
-        urls.forEach((item) => {
-          text = text.replace(item.oldUrl, item.newUrl);
-        });
-      }
-      
-      const formdata= new FormData()
-      formdata.append('title',title.current.value)
-      formdata.append('authorId',uuid())
-      formdata.append('content',JSON.parse(text))
-      sendRequest(
-        postsApi.edit(formdata)
-        );
-        
-          setTimeout(() => {
-            navigation('/admin/posts')
-          }, 1000);
-          
-        } catch (error) {
-          console.log(error)
-        }
-          
-        }
-    useEffect(()=>{
-        sendRequestArticleId(postsApi.getSingleArticle(articleId));
-    },[])
     useEffect(() => {
-        quill.current.on("text-change", () => {
-        setImages({...images,files:files})
-        setState({...state, delta: quill.current.getContents()});
+        quill.current = new Quill(editorRef.current, {
+        modules: modules,
+        theme: "snow",
+        placeholder: "Thêm đoạn văn ở đây...",
         });
-      }, [files]);
-  
-    useEffect(()=>{
-        quill.current.setContents('content', "api")
-        title.current.value='toan'
-    },[dataArticle])
+        }, []);
+
 return(
     <AdminLayout>
         <div className={style.newposts}>
-            <h1>Chỉnh sửa bài viết</h1>
+            <h1>Chỉnh sửa bài viết {dataPostsID?dataPostsID.article.title:''}</h1>
             <label>Tiêu đề bài viết</label>
-            <input type='text' placeholder="Title" ref={title} required></input>
+            <input type='text'  placeholder="Title" value={stateTitle} onChange={changeTitle} required></input>
             <label>Nội dung bài viết</label>
             <div className="addItinerary-editor" ref={editorRef}></div>
             <Button onClick={hanldleSubmit}>Submit</Button>
@@ -101,4 +89,4 @@ return(
 )
 }
 
-export default EditPosts
+export default NewPosts

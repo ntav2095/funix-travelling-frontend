@@ -10,7 +10,6 @@ function Posts() {
     const [sendRequest, isLoading, data, error]=useAxios()
     const navigation=useNavigate()
     const deletePost=(e,Id)=>{
-        e.preventDefault()
         sendRequest(postsApi.delete(Id))
         // navigation('/')
     }
@@ -22,14 +21,15 @@ function Posts() {
     return(
         <AdminLayout>
             <div className={classes.posts}>
-            {data && data.items.length > 0 && (
-                <table>
+                <h1>Danh sách các bài viết</h1>
+            {data && data.items&&data.items.length > 0 && (
+                <table className={classes.table} >
                     <thead>
                     <tr>
                         <td>
                         <div>STT</div>
                         </td>
-                        <td>
+                        <td style={{width:'70%'}}>
                         <div>Title</div>
                         </td>
                         <td>
@@ -44,8 +44,8 @@ function Posts() {
                         <td>{index+1}</td>
                         <td>{item.title}</td>
                         <td>
-                            <Link to={`/admin/edit-posts/${item._id}`}><Button>Edit</Button></Link>
-                            <Button onClick={(event)=>deletePost(event,item._id)}>Delete</Button>
+                            <Link to={`/admin/edit-posts/${item._id}`}><Button variant="warning">Edit</Button></Link>
+                            <Button variant="danger" onClick={(event)=>deletePost(event,item._id)}>Delete</Button>
                         </td>
                         </tr>
                     ))}

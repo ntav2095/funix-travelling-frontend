@@ -56,7 +56,7 @@ export const postsApi = {
     method: "GET",
   }),
   getSingleArticle: (articleId) => ({
-    url: `/tour/${articleId}`,
+    url: `/article/${articleId}`,
     method: "GET",
   }),
   edit: (formData) => ({

@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Layout from "../../layout/Default";
 import "./visa.css";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Xemchitiet1 from "./xemchitiet1";
 import usePageTitle from "../../hooks/usePageTitle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,7 +19,11 @@ import {
 import { visaBanner } from "../../assets/images";
 
 import Datvisa from "./datve";
+import axios from "axios";
+
+
 function Visa() {
+  const phone=useRef()
   const [isOpen1, setIsOpen1] = useState(false);
   const [Chon1, setchon1] = useState("CHỌN");
   const toggle1 = () => {
@@ -45,6 +49,17 @@ function Visa() {
     } else setchon3("CHỌN");
   };
 
+  const handleClick= async(e)=>{
+    if(phone.current.value){
+      const form =new FormData()
+      form.append('title','Gọi lại ngay')
+      form.append('phone',phone.current.value)
+      await axios.post('https://formspree.io/f/mgeqpdao',form)
+    .then(d=>d.json())
+    .then(data=>console.log(data))
+    .catch(err=>console.log(err))
+  }
+  }
   usePageTitle(`Visa --- đang cập nhật || Go Travel`);
 
   return (
@@ -157,6 +172,7 @@ function Visa() {
                         value=""
                         placeholder="Số điên thoại của bạn là"
                         className="with100"
+                        ref={phone}
                       />
                     </span>
                     <br />
@@ -164,6 +180,7 @@ function Visa() {
                       type="submit"
                       value="Yêu cầu gọi lại"
                       className="with100 mt-2"
+                      onClick={handleClick}
                     />
                   </p>
                 </div>

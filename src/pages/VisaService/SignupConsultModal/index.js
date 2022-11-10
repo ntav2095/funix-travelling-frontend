@@ -4,8 +4,11 @@ import Modal from "react-bootstrap/Modal";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import styles from "./SignupConsultModal.module.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function SignupConsultModal({ handleClose, show }) {
+  const navigation=useNavigate()
   const initialValues = {
     fullname: "",
     email: "",
@@ -28,11 +31,20 @@ function SignupConsultModal({ handleClose, show }) {
     return errors;
   };
 
-  const submitHandler = (values, { setSubmitting }) => {
+  const submitHandler = async (values, { setSubmitting }) => {
+    const form= new FormData()
+    form.append('title', 'Tư vấn visa')
+    form.append('fullName', values.fullname)
+    form.append('email',values.email )
+    form.append('phone',values.phoneNumber )
+    await axios.post('https://formspree.io/f/mgeqpdao',form)
+    .then(d=>d.json())
+    .then(data=>console.log(data))
+    .catch(err=>console.log(err))
     setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
+      navigation('/dich-vu-visa')
     }, 400);
+   
   };
 
   return (
@@ -43,6 +55,12 @@ function SignupConsultModal({ handleClose, show }) {
       backdrop="static"
       keyboard={false}
     >
+      <Formik
+          initialValues={initialValues}
+          validate={validator}
+          onSubmit={submitHandler}
+        >
+        {() => (<Form>
       <Modal.Header closeButton>
         <Modal.Title>
           <p className={styles.header}>
@@ -53,13 +71,6 @@ function SignupConsultModal({ handleClose, show }) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Formik
-          initialValues={initialValues}
-          validate={validator}
-          onSubmit={submitHandler}
-        >
-          {({ isSubmitting }) => (
-            <Form>
               <div className={styles.form}>
                 <label>
                   <p className={styles.label}>Họ Và tên</p>
@@ -77,13 +88,12 @@ function SignupConsultModal({ handleClose, show }) {
                   <ErrorMessage name="phoneNumber" component="p" />
                 </label>
               </div>
-            </Form>
-          )}
-        </Formik>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="warning">ĐĂNG KÝ</Button>
+        <Button type='submit' variant="warning">ĐĂNG KÝ</Button>
       </Modal.Footer>
+      </Form>)}
+      </Formik> 
     </Modal>
   );
 }

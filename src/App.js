@@ -26,6 +26,7 @@ import AddItinerary from "./pages/Admin/AddItinerary";
 import Posts from "./pages/Admin/Posts";
 import NewPosts from "./pages/Admin/Posts/newPosts";
 import EditPosts from "./pages/Admin/Posts/editPosts";
+import UpdateItinerary from "./pages/Admin/UpdateItinerary";
 function App() {
   return (
     <>
@@ -45,13 +46,6 @@ function App() {
         <Route path="/*" element={<NotFound />} />
 
         <Route path="/admin/login" element={<Login />} />
-
-        <Route path="/admin/tours" element={<Tours />} />
-        <Route path="/admin/add-itinerary/:tourId" element={<AddItinerary />} />
-        <Route path="/admin/posts" element={<Posts />} />
-        <Route path="/admin/new-posts" element={<NewPosts />} />
-        <Route path="/admin/edit-posts/:postId" element={<EditPosts />} />
-
         <Route element={<RequireAuth />}>
           <Route path="/admin" element={<Dashboard />} />
           <Route path="/admin/new-tour" element={<NewTour />} />
@@ -61,6 +55,9 @@ function App() {
             path="/admin/update-itinerary/:tourId"
             element={<UpdateItinerary />}
           />
+           <Route path="/admin/posts" element={<Posts />} />
+        <Route path="/admin/new-posts" element={<NewPosts />} />
+        <Route path="/admin/edit-posts/:postsId" element={<EditPosts />} />
         </Route>
 
       </Routes>

@@ -2,10 +2,11 @@
     padding:10px
 }
 .newposts *{
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 .newposts h1{
    font-weight: 700;
+   font-size: 2em;
 }
 .newposts-editor{
     border-radius: 5px;

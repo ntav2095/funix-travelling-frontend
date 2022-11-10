@@ -1,0 +1,41 @@
+.adminLayout__header {
+  height: 56px;
+  background: white;
+  box-shadow: var(--box-shadow);
+}
+
+.adminLayout__header h1 {
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+  line-height: 56px;
+}
+
+.adminLayout__main {
+  display: flex;
+  width: 100%;
+  max-width: 1170px;
+  margin: 8px auto;
+  gap: 8px;
+}
+
+.adminLayout__sidebar {
+  min-width: 300px;
+  background: white;
+  box-shadow: var(--box-shadow);
+  padding: 16px;
+}
+
+.adminLayout__sidebar button {
+  border: none;
+  background: transparent;
+  color: red;
+  padding: 0;
+}
+
+.adminLayout__content {
+  background: white;
+  box-shadow: var(--box-shadow);
+  flex: 1;
+  padding: 16px;
+}
