@@ -2,7 +2,6 @@ import _ from "lodash";
 import React from "react";
 import { Search, Grid } from "semantic-ui-react";
 import "./search.css";
-// import './styles.css'
 
 const styleLink = document.createElement("link");
 styleLink.rel = "stylesheet";
@@ -65,7 +64,7 @@ function SearchComponent() {
   }, []);
 
   return (
-    <Grid>
+    <Grid className="search">
       <Grid.Column width={6}>
         <Search
           loading={loading}

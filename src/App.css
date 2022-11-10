@@ -16,16 +16,10 @@
   z-index: 2;
 }
 
-.navbar {
-  height: 83px;
-  z-index: 999;
-}
 nav.navbar.navbar-expand-md.navbar-light.bg-light {
   display: contents;
 }
-a.dropdown-item {
-  color: #adb5bd !important;
-}
+
 .container {
   margin-left: 10%;
 }

@@ -80,7 +80,6 @@ function AdminLayout({ children, title, path, text }) {
                 <button onClick={logoutHandler}>Log out</button>
               </li>
             )}
-
             {!user && (
               <li>
                 <NavLink className={navLinkClasses} to="/admin/login">

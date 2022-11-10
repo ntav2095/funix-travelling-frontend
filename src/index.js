@@ -15,10 +15,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// css variables
+// general css
 import "./assets/css/variables.css";
+import "./assets/css/normalize.css";
+import "./assets/css/share.css";
 
-// css
 import "./App.css";
 
 storeInjector(store);

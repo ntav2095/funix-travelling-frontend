@@ -147,23 +147,6 @@ const Mota = ({ tour }) => {
       ),
     },
     {
-      menuItem: "Quy Định Tour",
-      render: () => (
-        <Tab.Pane attached={false}>
-          <div
-            className="woocommerce-Tabs-panel woocommerce-Tabs-panel--quy-dinh-tour panel entry-content "
-            id="tab-quy-dinh-tour"
-            role="tabpanel"
-            aria-labelledby="tab-title-quy-dinh-tour"
-          >
-            <h2 className="yikes-custom-woo-tab-title yikes-custom-woo-tab-title-quy-dinh-tour">
-              Quy định Tour
-            </h2>
-          </div>
-        </Tab.Pane>
-      ),
-    },
-    {
       menuItem: "Giá Bao Gồm",
       render: () => (
         <Tab.Pane attached={false}>

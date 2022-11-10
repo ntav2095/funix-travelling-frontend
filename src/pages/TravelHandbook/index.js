@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { postsApi } from "../../services/apis";
 import { getDate, getMonth, getYear } from "date-fns";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 // components
 import Layout from "../../layout/Default";
@@ -13,6 +14,7 @@ import useAxios from "../../hooks/useAxios";
 
 // css
 import classes from "./TravelHandbook.module.css";
+import SpinnerModal from "../../components/SpinnerModal";
 
 function TravelHandbook() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -26,7 +28,6 @@ function TravelHandbook() {
   }
 
   function contentDes(content) {
-    console.log(content);
     let description = { text: [], image: [] };
     content.map((item) => {
       let t =
@@ -48,37 +49,52 @@ function TravelHandbook() {
   usePageTitle(`Cẩm nang du lịch || Go Travel`);
 
   return (
-    <Layout>
-      <div className={classes.travelHandbook}>
-        {data
-          ? data.items.map((item) => (
-              <Link
-                className={classes.story}
-                key={item._id}
-                to={`/cam-nang-du-lich/${item._id}`}
-              >
-                <div className={classes.inner}>
-                  <div className={classes.image}>
-                    <img
-                      src={contentDes(item.content).image[0]}
-                      alt={item.title}
-                    />
-                  </div>
-                  <div className={classes.boxText}>
-                    <h2 className={classes.title}>{item.title}</h2>
-                    <p className={classes.date}>
-                      {date(item.updatedAt || item.createdAt)}
-                    </p>
-                    <p className={classes.desc}>
-                      {contentDes(item.content).text[0]}
-                    </p>
-                  </div>
+    <>
+      <SpinnerModal show={isLoading} />
+      <Layout>
+        <div className="myContainer">
+          <Breadcrumb>
+            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+            <Breadcrumb.Item active>CẨM NANG DU LỊCH</Breadcrumb.Item>
+          </Breadcrumb>
+
+          <div className="row">
+            {data &&
+              data.items.length > 0 &&
+              data.items.map((item) => (
+                <div key={item._id} className="col-12 col-md-6 col-lg-4">
+                  <Link
+                    className={classes.story}
+                    key={item._id}
+                    to={`/cam-nang-du-lich/${item._id}`}
+                  >
+                    <div className={classes.inner}>
+                      <div
+                        className={classes.image}
+                        style={{
+                          backgroundImage: `url(${
+                            contentDes(item.content).image[0]
+                          })`,
+                        }}
+                      ></div>
+                      <div className={classes.boxText}>
+                        <h2 className={classes.title}>{item.title}</h2>
+                        <p className={classes.date}>
+                          {date(item.updatedAt || item.createdAt)}
+                        </p>
+                        <p className={classes.desc}>
+                          {contentDes(item.content).text[0].slice(0, 100)}
+                          ...
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
-              </Link>
-            ))
-          : null}
-      </div>
-    </Layout>
+              ))}
+          </div>
+        </div>
+      </Layout>
+    </>
   );
 }
 

@@ -16,6 +16,7 @@ import { useEffect } from "react";
 
 // vũ css
 import styles from "./TourDetail.module.css";
+import SpinnerModal from "../../components/SpinnerModal";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -24,34 +25,37 @@ function TourDetail() {
   usePageTitle(`${tourName} || Go Travel`);
 
   const tour = data ? data.item : null;
-  console.log(tour)
+  console.log(tour);
 
   useEffect(() => {
     sendRequest(tourApi.getSingleTour(tourId));
   }, []);
 
-  if (data) {
-    console.log(tour.images);
-  }
-
   return (
-    <Layout>
-      <div className={styles.container}>
-        <div className="tour-detail------tam_thoi_bo">
-          {tour && (
-            <div className={styles.top}>
-              <div className={styles.carousel}>
-                <SlideImage input={tour.images} ratio={`3:2`} mode={`manual`} />
+    <>
+      <SpinnerModal show={isLoading} />
+      <Layout>
+        <div className={styles.container}>
+          <div className="tour-detail------tam_thoi_bo">
+            {tour && (
+              <div className={styles.top}>
+                <div className={styles.carousel}>
+                  <SlideImage
+                    input={tour.images}
+                    ratio={`3:2`}
+                    mode={`manual`}
+                  />
+                </div>
+                <div className={styles.contactTable}>
+                  <Goituvan tour={tour} />
+                </div>
               </div>
-              <div className={styles.contactTable}>
-                <Goituvan tour={tour} />
-              </div>
-            </div>
-          )}
-          {tour && <Mota tour={tour} />}
+            )}
+            {tour && <Mota tour={tour} />}
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 }
 

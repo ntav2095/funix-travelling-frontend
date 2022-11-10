@@ -1,0 +1,28 @@
+html {
+  font-family: "Roboto", sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p,
+span {
+  font-family: "Roboto", sans-serif !important;
+}
+
+input {
+  outline: none;
+  border: 1px solid #ccc;
+}
+
+button {
+  border: none;
+}
+
+ul {
+  list-style-type: none;
+}

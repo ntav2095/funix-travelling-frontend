@@ -1,0 +1,100 @@
+.card {
+  box-shadow: var(--box-shadow);
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card h5,
+.card h6 {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.image {
+  height: 0;
+  padding-top: 60%;
+  background: red;
+  display: block;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.image::after {
+  position: absolute;
+  content: "";
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(211 211 211 / 21%);
+  width: 0;
+  height: 0;
+  transition: 0.2s;
+}
+
+.image:hover::after {
+  width: 100%;
+  height: 100%;
+}
+
+.name {
+  color: #555;
+  font-weight: 600;
+  padding-bottom: 8px;
+}
+
+.name:hover {
+  text-decoration: underline;
+}
+
+.duration {
+  color: rgb(114, 114, 114);
+  font-weight: 400;
+  padding-bottom: 6px;
+}
+
+.journey {
+  font-weight: 500;
+  color: rgb(114, 114, 114);
+  padding-bottom: 12px;
+}
+
+.cardFooter {
+  display: flex;
+  height: 40px;
+  align-items: stretch;
+}
+
+.cardFooter > * {
+  margin: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: 0.2s;
+}
+
+.price {
+  color: red;
+  background: rgb(230, 241, 255);
+}
+
+.seeDetail {
+  background: #ff5a00;
+  color: white;
+}
+
+.seeDetail:hover {
+  color: white;
+  background: #ff600a;
+}
