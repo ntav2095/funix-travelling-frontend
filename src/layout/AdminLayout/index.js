@@ -75,11 +75,7 @@ function AdminLayout({ children, title, path, text }) {
             <li>
               <Link to="/admin/posts">Posts</Link>
             </li>
-            {user && (
-              <li>
-                <button onClick={logoutHandler}>Log out</button>
-              </li>
-            )}
+
             {!user && (
               <li>
                 <NavLink className={navLinkClasses} to="/admin/login">

@@ -3,6 +3,7 @@ import Layout from "../../layout/Default";
 import companyInfo from "../../services/constants/companyInfo.constant";
 import usePageTitle from "../../hooks/usePageTitle";
 import styles from "./Contact.module.css";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 function Contact() {
   usePageTitle("Liên hệ || Go Travel");
