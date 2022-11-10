@@ -11,7 +11,6 @@ import usePageTitle from "../../hooks/usePageTitle";
 import classes from "./TravelHandbookDetail.module.css";
 
 // mock
-import { story, relatedStories } from "./mock";
 import { useEffect, useRef, useState } from "react";
 import { postsApi } from "../../services/apis";
 import useAxios from "../../hooks/useAxios";
@@ -23,7 +22,6 @@ function TravelHandbookDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const quill = useRef();
   const { id } = useParams();
-  console.log(state);
   function date(dateString) {
     const dateStringtoformater = new Date(dateString);
     const day = getDate(dateStringtoformater);
@@ -63,6 +61,7 @@ function TravelHandbookDetail() {
       quill.current.innerHTML = quillGetHTML({ ops: state.content });
     }
   }, [state]);
+
   usePageTitle(`Cẩm nang --- đang cập nhật || Go Travel`);
 
   return (
@@ -83,12 +82,15 @@ function TravelHandbookDetail() {
 
         <div className={classes.relatedStories}>
           <p className={classes.relatedStoriesTitle}>Bài viết liên quan</p>
-          <ul>
+          <ul className="row">
             {data
               ? data.items.map((item) => (
-                  <li key={item.id} className={classes.relatedStory}>
-                    <Link to={`/cam-nang-du-lich/${item._id}`}>
-                      <div className={classes.relatedStory}>
+                  <li key={item.id} className="col-12 col-md-6 col-lg-4">
+                    <Link
+                      className={classes.relatedStory}
+                      to={`/cam-nang-du-lich/${item._id}`}
+                    >
+                      <div>
                         <div
                           className={classes.image}
                           style={{
