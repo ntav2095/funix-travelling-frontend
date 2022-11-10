@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { postsApi } from "../../services/apis";
 import { getDate, getMonth, getYear } from "date-fns";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
+import { Row, Col } from "react-bootstrap";
 
 // components
 import Layout from "../../layout/Default";
@@ -49,34 +51,47 @@ function TravelHandbook() {
 
   return (
     <Layout>
-      <div className={classes.travelHandbook}>
-        {data
-          ? data.items.map((item) => (
-              <Link
-                className={classes.story}
-                key={item._id}
-                to={`/cam-nang-du-lich/${item._id}`}
-              >
-                <div className={classes.inner}>
-                  <div className={classes.image}>
-                    <img
-                      src={contentDes(item.content).image[0]}
-                      alt={item.title}
-                    />
-                  </div>
-                  <div className={classes.boxText}>
-                    <h2 className={classes.title}>{item.title}</h2>
-                    <p className={classes.date}>
-                      {date(item.updatedAt || item.createdAt)}
-                    </p>
-                    <p className={classes.desc}>
-                      {contentDes(item.content).text[0]}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            ))
-          : null}
+      <div className="myContainer">
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+          <Breadcrumb.Item active>CẨM NANG DU LỊCH</Breadcrumb.Item>
+        </Breadcrumb>
+
+        <div className={classes.travelHandbook}>
+          <Row lg="3" md="2" sm="1">
+            {data
+              ? data.items.map((item) => (
+                  <Col key={item._id} className="mb-4">
+                    <Link
+                      className={classes.story}
+                      key={item._id}
+                      to={`/cam-nang-du-lich/${item._id}`}
+                    >
+                      <div className={classes.inner}>
+                        <div
+                          className={classes.image}
+                          style={{
+                            backgroundImage: `url(${
+                              contentDes(item.content).image[0]
+                            })`,
+                          }}
+                        ></div>
+                        <div className={classes.boxText}>
+                          <h2 className={classes.title}>{item.title}</h2>
+                          <p className={classes.date}>
+                            {date(item.updatedAt || item.createdAt)}
+                          </p>
+                          <p className={classes.desc}>
+                            {contentDes(item.content).text[0].slice(0, 100)}...
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  </Col>
+                ))
+              : null}
+          </Row>
+        </div>
       </div>
     </Layout>
   );
