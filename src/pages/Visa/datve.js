@@ -6,15 +6,20 @@ import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 
 import "./visa.css";
+import axios from "axios";
 
 function Datvisa(args) {
-  const date=useRef()
+ 
   let [SLkhach, setSLkhach] = useState(1);
-
+  const [date,setDate]=useState()
   //   const plus = (a) => setSLkhach(a + 1);
   //   const minus = (a) => {
   //     setSLkhach(a - 1);
   //   };
+
+  const handleChangeInput=(e)=>{
+    setDate(e.target.value)
+  }
 
   const formatter = new Intl.NumberFormat("en-US", {
     // style: "currency",
@@ -22,9 +27,22 @@ function Datvisa(args) {
     minimumFractionDigits: 0,
   });
 
-  const handleClick=(e)=>{
+  const handleClick=async (e)=>{
     e.preventDefault()
     console.log(date.current)
+    await axios.post('https://sheetdb.io/api/v1/4zwi51ze52sbh', {
+      "data":{
+        'ngaydangki':new Date,
+        'ngaynhapcanh':date,
+        'soluongkhach':SLkhach,
+        'tongtien':6032000*SLkhach,
+      
+      }
+    })
+    .then(e=>e.json())
+    .then(data=>data)
+    .catch(err=>console.log(err))
+
   }
 
 
@@ -44,7 +62,7 @@ function Datvisa(args) {
                       name="date"
                       placeholder="date placeholder"
                       type="date"
-                      ref={date}
+                      onChange={handleChangeInput}
                     />
                     <div className="box-count-date"></div>
                   </Col>
