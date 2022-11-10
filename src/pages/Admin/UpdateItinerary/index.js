@@ -111,7 +111,6 @@ function UpdateItinerary() {
   return (
     <>
       <SpinnerModal show={isLoading || fetchingTour || uploadingImgs} />
-
       <AdminLayout title={title}>
         <div className={styles.container}>
           {plan.map((item) => {

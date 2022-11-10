@@ -24,6 +24,7 @@ function TourDetail() {
   usePageTitle(`${tourName} || Go Travel`);
 
   const tour = data ? data.item : null;
+  console.log(tour)
 
   useEffect(() => {
     sendRequest(tourApi.getSingleTour(tourId));

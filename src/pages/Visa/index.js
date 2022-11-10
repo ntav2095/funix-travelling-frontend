@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Layout from "../../layout/Default";
 import "./visa.css";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Xemchitiet1 from "./xemchitiet1";
 import usePageTitle from "../../hooks/usePageTitle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,7 +19,11 @@ import {
 import { visaBanner } from "../../assets/images";
 
 import Datvisa from "./datve";
+import axios from "axios";
+
+
 function Visa() {
+  const phone=useRef()
   const [isOpen1, setIsOpen1] = useState(false);
   const [Chon1, setchon1] = useState("CHỌN");
   const toggle1 = () => {
@@ -45,6 +49,17 @@ function Visa() {
     } else setchon3("CHỌN");
   };
 
+  const handleClick= async(e)=>{
+    if(phone.current.value){
+      const form =new FormData()
+      form.append('title','Gọi lại ngay')
+      form.append('phone',phone.current.value)
+      await axios.post('https://formspree.io/f/mgeqpdao',form)
+    .then(d=>d.json())
+    .then(data=>console.log(data))
+    .catch(err=>console.log(err))
+  }
+  }
   usePageTitle(`Visa --- đang cập nhật || Go Travel`);
 
   return (
@@ -163,11 +178,81 @@ function Visa() {
                       </span>
                       <br />
                       <input
+<<<<<<< HEAD
                         type="submit"
                         value="Yêu cầu gọi lại"
                         className="with100 mt-2"
                       />
                     </p>
+=======
+                        type="tel"
+                        name="dien-thoai"
+                        value=""
+                        placeholder="Số điên thoại của bạn là"
+                        className="with100"
+                        ref={phone}
+                      />
+                    </span>
+                    <br />
+                    <input
+                      type="submit"
+                      value="Yêu cầu gọi lại"
+                      className="with100 mt-2"
+                      onClick={handleClick}
+                    />
+                  </p>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+      <div id="Body-content-2">
+        <Container className="Body-content-2">
+          <div className="dich-vu">
+            <h2>Chọn gói dịch vụ</h2>
+            <ul className="chi-tiet-dich-vu">
+              <li>
+                <div className="box-top">
+                  <Row style={{ width: "100%" }}>
+                    <Col lg="4" id="box-info">
+                      <div className="box-info">
+                        <h3 className="title-name">
+                          Visa Ý (Trẻ em dưới 6 tuổi)
+                        </h3>
+                      </div>
+                    </Col>
+
+                    <Col lg="4" class="info-price">
+                      <div class="box-action">
+                        <div class="price-old"></div>
+                        <div class="price-current">6,032,000 VNĐ</div>
+                      </div>
+                    </Col>
+                    <Col>
+                      <div class="box-action">
+                        <button
+                          onClick={toggle1}
+                          // onClick={chon}
+                          style={{
+                            marginBottom: "1rem",
+                            backgroundColor:
+                              Chon1 == "HỦY" ? "rgb(244,244,244)" : "",
+                            color: Chon1 == "HỦY" ? "black" : "",
+                          }}
+                          class="btn-open-book-visa type-2"
+                        >
+                          {Chon1}
+                        </button>
+                      </div>
+                    </Col>
+                  </Row>
+                  <div
+                    onclick="toggle_tab_info_price('.box-bottom.type-2')"
+                    class="box-readmore"
+                  >
+                    <Xemchitiet1 />
+>>>>>>> admin-page
                   </div>
                 </div>
               </Col>

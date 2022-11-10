@@ -132,3 +132,9 @@ span {
   color: #777;
   margin: 0;
 }
+
+.quillContent img{
+  width: 70%;
+  margin: auto;
+  display:block
+}

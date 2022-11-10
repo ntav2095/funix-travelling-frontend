@@ -45,6 +45,30 @@ export const fileApi = {
   }),
 };
 
+export const postsApi = {
+  add: (formData) => ({
+    url: "/article",
+    method: "POST",
+    data: formData,
+  }),
+  get: () => ({
+    url: `/article`,
+    method: "GET",
+  }),
+  getSingleArticle: (articleId) => ({
+    url: `/article/${articleId}`,
+    method: "GET",
+  }),
+  edit: (formData) => ({
+    url: "/article",
+    method: "PUT",
+    data: formData,
+  }),
+  delete: (articleId) => ({
+    url: `/article/${articleId}`,
+    method: "DELETE",
+  }),
+};
 export const visaApi = {
   addVisa: (data) => ({
     method: "POST",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Collapse, Button, CardBody, Card, Input } from "reactstrap";
 import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
@@ -8,6 +8,7 @@ import Tab from "react-bootstrap/Tab";
 import "./visa.css";
 
 function Datvisa(args) {
+  const date=useRef()
   let [SLkhach, setSLkhach] = useState(1);
 
   //   const plus = (a) => setSLkhach(a + 1);
@@ -20,6 +21,12 @@ function Datvisa(args) {
     currency: "VND",
     minimumFractionDigits: 0,
   });
+
+  const handleClick=(e)=>{
+    e.preventDefault()
+    console.log(date.current)
+  }
+
 
   return (
     <Card>
@@ -37,6 +44,7 @@ function Datvisa(args) {
                       name="date"
                       placeholder="date placeholder"
                       type="date"
+                      ref={date}
                     />
                     <div className="box-count-date"></div>
                   </Col>
@@ -79,7 +87,7 @@ function Datvisa(args) {
                     </div>
                   </Col>
                   <Col id="box-btn-submit">
-                    <button>Đặt Ngay</button>
+                    <button onClick={handleClick}>Đặt Ngay</button>
                   </Col>
                 </Row>
               </Col>
