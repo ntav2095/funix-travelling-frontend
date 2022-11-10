@@ -8,7 +8,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function SignupConsultModal({ handleClose, show }) {
-  const navigation=useNavigate()
+  const navigation = useNavigate();
   const initialValues = {
     fullname: "",
     email: "",
@@ -31,25 +31,20 @@ function SignupConsultModal({ handleClose, show }) {
     return errors;
   };
 
-<<<<<<< HEAD
-  const submitHandler = (values, { setSubmitting }) => {
-    console.log(222);
-=======
-  const submitHandler = async (values, { setSubmitting }) => {
-    const form= new FormData()
-    form.append('title', 'Tư vấn visa')
-    form.append('fullName', values.fullname)
-    form.append('email',values.email )
-    form.append('phone',values.phoneNumber )
-    await axios.post('https://formspree.io/f/mgeqpdao',form)
-    .then(d=>d.json())
-    .then(data=>console.log(data))
-    .catch(err=>console.log(err))
+  const submitHandler = async (values) => {
+    const form = new FormData();
+    form.append("title", "Tư vấn visa");
+    form.append("fullName", values.fullname);
+    form.append("email", values.email);
+    form.append("phone", values.phoneNumber);
+    await axios
+      .post("https://formspree.io/f/mgeqpdao", form)
+      .then((d) => d.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
     setTimeout(() => {
-      navigation('/dich-vu-visa')
+      navigation("/dich-vu-visa");
     }, 400);
-   
->>>>>>> admin-page
   };
 
   return (
@@ -61,7 +56,6 @@ function SignupConsultModal({ handleClose, show }) {
       keyboard={false}
     >
       <Formik
-<<<<<<< HEAD
         initialValues={initialValues}
         validate={validator}
         onSubmit={submitHandler}
@@ -78,23 +72,6 @@ function SignupConsultModal({ handleClose, show }) {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-=======
-          initialValues={initialValues}
-          validate={validator}
-          onSubmit={submitHandler}
-        >
-        {() => (<Form>
-      <Modal.Header closeButton>
-        <Modal.Title>
-          <p className={styles.header}>
-            Vui lòng cung cấp một số thông tin cần thiết hoặc gọi{" "}
-            <span>094 518 5959/090 176 2929</span> để được tư vấn VISA nhanh
-            nhất
-          </p>
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
->>>>>>> admin-page
               <div className={styles.form}>
                 <label>
                   <p className={styles.label}>Họ Và tên</p>
@@ -112,7 +89,6 @@ function SignupConsultModal({ handleClose, show }) {
                   <ErrorMessage name="phoneNumber" component="p" />
                 </label>
               </div>
-<<<<<<< HEAD
             </Modal.Body>
             <Modal.Footer>
               <Button type="submit" variant="warning">
@@ -122,14 +98,6 @@ function SignupConsultModal({ handleClose, show }) {
           </Form>
         )}
       </Formik>
-=======
-      </Modal.Body>
-      <Modal.Footer>
-        <Button type='submit' variant="warning">ĐĂNG KÝ</Button>
-      </Modal.Footer>
-      </Form>)}
-      </Formik> 
->>>>>>> admin-page
     </Modal>
   );
 }
