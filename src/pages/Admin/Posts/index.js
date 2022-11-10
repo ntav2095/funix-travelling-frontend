@@ -19,9 +19,13 @@ function Posts() {
     }, [])
     console.log('data',data)
     return(
-        <AdminLayout>
+        <AdminLayout
+            title='Danh sách các bài viết'
+            path='/admin/new-posts'
+            text='New Posts'
+        >
             <div className={classes.posts}>
-                <h1>Danh sách các bài viết</h1>
+                
             {data && data.items&&data.items.length > 0 && (
                 <table className={classes.table} >
                     <thead>
@@ -52,7 +56,6 @@ function Posts() {
                     </tbody>
                 </table>
                 )}
-                <Link to={`/admin/new-posts`}><Button>New Posts</Button></Link>
             </div>
         </AdminLayout>
     )

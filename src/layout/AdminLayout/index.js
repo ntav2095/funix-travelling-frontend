@@ -75,9 +75,6 @@ function AdminLayout({ children, title, path, text }) {
             <li>
               <Link to="/admin/posts">Posts</Link>
             </li>
-            <li>
-              <Link to="/admin/new-posts">New Posts</Link>
-            </li>
             {user && (
               <li>
                 <button onClick={logoutHandler}>Log out</button>
