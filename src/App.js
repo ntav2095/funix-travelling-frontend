@@ -22,8 +22,11 @@ import NotFound from "./pages/NotFound";
 import NewTour from "./pages/Admin/NewTour";
 import EditTour from "./pages/Admin/EditTour";
 import Tours from "./pages/Admin/Tours";
+import AddItinerary from "./pages/Admin/AddItinerary";
+import Posts from "./pages/Admin/Posts";
+import NewPosts from "./pages/Admin/Posts/newPosts";
+import EditPosts from "./pages/Admin/Posts/editPosts";
 import UpdateItinerary from "./pages/Admin/UpdateItinerary";
-
 // visa
 import EditVisa from "./pages/Admin/EditVisa";
 import AddVisa from "./pages/Admin/AddVisa";
@@ -52,7 +55,6 @@ function App() {
         <Route path="/*" element={<NotFound />} />
 
         <Route path="/admin/login" element={<Login />} />
-
         <Route element={<RequireAuth />}>
           <Route path="/admin" element={<Dashboard />} />
 
@@ -72,6 +74,9 @@ function App() {
             path="/admin/edit-visa-product/:visaId"
             element={<EditVisa />}
           />
+          <Route path="/admin/posts" element={<Posts />} />
+          <Route path="/admin/new-posts" element={<NewPosts />} />
+          <Route path="/admin/edit-posts/:postsId" element={<EditPosts />} />
         </Route>
       </Routes>
     </>

@@ -1,0 +1,23 @@
+.session {
+  border-bottom: 2px solid rgb(159, 31, 8);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.session input {
+  max-width: 200px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  color: rgb(159, 31, 8);
+  font-weight: 500;
+}
+
+.session input::placeholder {
+  font-weight: 400;
+  color: #ccc;
+}
+
+.session input:last-child {
+  text-align: right;
+}
