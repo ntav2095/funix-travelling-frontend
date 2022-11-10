@@ -1,9 +1,19 @@
 .container {
+  background: var(--main-color);
+  background: white;
+  box-shadow: var(--box-shadow);
+}
+
+.navbar {
   width: 100%;
   max-width: 1170px;
   margin: 0 auto;
+  height: 80px;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
 }
 
-.container a {
-  white-space: nowrap;
+.logo {
+  width: 150px;
 }
