@@ -56,7 +56,7 @@ function TravelHandbook() {
 
   return (
     <>
-      <SpinnerModal show={isLoading} />
+      {/* <SpinnerModal show={isLoading} /> */}
       <Layout breadcrumb={breadcrumb}>
         <div className="myContainer">
           <div className="row">
