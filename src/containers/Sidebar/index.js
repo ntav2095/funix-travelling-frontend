@@ -1,4 +1,3 @@
-import { hotTours } from "../../mock/sidebar.mock";
 import ContactTable from "../ContactTable";
 import ProductItem from "../../components/ProductItem";
 import Placeholder from "../../components/placeholders/Placeholder";
@@ -51,6 +50,7 @@ function Sidebar({ primary }) {
                   image={tour.images[0]}
                   text={tour.name.slice(0, 40) + "..."}
                   curPrice={tour.price.from}
+                  oldPrice={tour.price.old}
                 />
               </li>
             ))}

@@ -57,6 +57,7 @@ function EditTour() {
             .join("\n") || "",
         duration: tour.item.time.duration || "",
         lowestPrice: tour.item.price.from || "",
+        oldPrice: tour.item.price.old || "",
         priceIncludes: tour.item.price.includes.join("\n") || "",
         priceExcludes: tour.item.price.includes.join("\n") || "",
         images: tour.item.images,
@@ -70,6 +71,7 @@ function EditTour() {
     formData.append("name", values.name);
     formData.append("journey", values.journey);
     formData.append("lowestPrice", values.lowestPrice);
+    formData.append("oldPrice", values.oldPrice);
     formData.append("description", values.description);
     formData.append(
       "departureDates",
@@ -175,9 +177,17 @@ function EditTour() {
                     </label>
 
                     <label>
-                      <p className="newTour__label">Giá từ {requiredField}</p>
+                      <p className="newTour__label">
+                        Giá từ (giá áp dụng) {requiredField}
+                      </p>
                       <Field type="number" name="lowestPrice" />
                       <ErrorMessage name="lowestPrice" component="p" />
+                    </label>
+
+                    <label>
+                      <p className="newTour__label">Giá gốc/giá cũ</p>
+                      <Field type="number" name="oldPrice" />
+                      <ErrorMessage name="oldPrice" component="p" />
                     </label>
 
                     <label>
