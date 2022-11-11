@@ -35,16 +35,6 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light {
 .carousel-control-prev {
   opacity: 0;
 }
-.carousel-caption {
-  bottom: 35% !important;
-  right: 0;
-  left: 13% !important;
-  font-family: "roboto";
-  /* font-weight: 500; */
-}
-.carousel-caption.h3 {
-  font-size: 2em !important ;
-}
 
 #slider_h3 {
   /* display: flex; */
