@@ -52,7 +52,7 @@ function TourDetail() {
           </div>
         </div>
 
-        {tour && <TourInfo tour={tour} isLoading={isLoading} />}
+        <TourInfo tour={tour} isLoading={isLoading} />
       </div>
     </Layout>
   );

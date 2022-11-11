@@ -57,8 +57,8 @@ function AdminLayout({ children, title, path, text }) {
         <div className={styles.sidebar}>
           <ul className={styles.nav}>
             <li>
-              <NavLink end className={navLinkClasses} to="/admin">
-                Dashboard
+              <NavLink end className={navLinkClasses} to="/">
+                Client page
               </NavLink>
             </li>
             <li>

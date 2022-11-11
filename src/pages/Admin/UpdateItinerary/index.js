@@ -14,12 +14,14 @@ import SpinnerModal from "../../../components/SpinnerModal";
 import useAxios from "../../../hooks/useAxios";
 import { tourApi } from "../../../services/apis";
 
+// assets
+import { xMark as closeSVG } from "../../../assets/svgs";
+
 // css
 import styles from "./AddItinerary.module.css";
 
 function UpdateItinerary() {
   const [plan, setPlan] = useState([]);
-  const [uploadingImgs, setUploadingImgs] = useState(false);
   const [sendRequest, isLoading, updated, updatingError] = useAxios();
   const [fetchTour, fetchingTour, fetchedTour, fetchingError] = useAxios();
   const { tourId } = useParams();
@@ -60,6 +62,12 @@ function UpdateItinerary() {
     );
   };
 
+  const removePortionHandler = (id) => {
+    if (window.confirm("Are you sure?")) {
+      setPlan((prev) => prev.filter((item) => item.id !== id));
+    }
+  };
+
   // submit handler
   const submitHandler = () => {
     sendRequest(
@@ -90,7 +98,6 @@ function UpdateItinerary() {
 
   useEffect(() => {
     if (updated) {
-      setUploadingImgs(false);
       alert(
         "Cập nhật lộ trình tour thành công. Bạn sẽ được chuyển đến trang tours."
       );
@@ -110,40 +117,64 @@ function UpdateItinerary() {
 
   return (
     <>
-      <SpinnerModal show={isLoading || fetchingTour || uploadingImgs} />
+      <SpinnerModal show={isLoading || fetchingTour} />
       <AdminLayout title={title}>
         <div className={styles.container}>
           {plan.map((item) => {
             if (item.type === "title") {
               return (
-                <Title
-                  key={item.id}
-                  id={item.id}
-                  content={getContent(item.id)}
-                  onChange={changeHandler}
-                />
+                <div className={styles.portion}>
+                  <Title
+                    key={item.id}
+                    id={item.id}
+                    content={getContent(item.id)}
+                    onChange={changeHandler}
+                  />
+                  <button
+                    className={styles.removeBtn}
+                    onClick={() => removePortionHandler(item.id)}
+                  >
+                    {closeSVG}
+                  </button>
+                </div>
               );
             }
 
             if (item.type === "time") {
               return (
-                <Time
-                  key={item.id}
-                  id={item.id}
-                  content={getContent(item.id)}
-                  onChange={changeHandler}
-                />
+                <div className={styles.portion}>
+                  <Time
+                    key={item.id}
+                    id={item.id}
+                    content={getContent(item.id)}
+                    onChange={changeHandler}
+                  />
+                  <button
+                    className={styles.removeBtn}
+                    onClick={() => removePortionHandler(item.id)}
+                  >
+                    {closeSVG}
+                  </button>
+                </div>
               );
             }
 
             if (item.type === "para") {
               return (
-                <Paragraph
-                  key={item.id}
-                  id={item.id}
-                  content={getContent(item.id)}
-                  onChange={changeHandler}
-                />
+                <div className={styles.portion}>
+                  <Paragraph
+                    key={item.id}
+                    id={item.id}
+                    content={getContent(item.id)}
+                    onChange={changeHandler}
+                  />
+                  <button
+                    className={styles.removeBtn}
+                    onClick={() => removePortionHandler(item.id)}
+                  >
+                    {closeSVG}
+                  </button>
+                </div>
               );
             }
 

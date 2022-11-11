@@ -16,12 +16,15 @@ import { postsApi } from "../../services/apis";
 import useAxios from "../../hooks/useAxios";
 import quillGetHTML from "../../services/helpers/quillGetHTML";
 import { getDate, getMonth, getYear } from "date-fns";
+import ArticlePlaceholder from "../../components/placeholders/ArticlePlaceholder";
+import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
 
 function TravelHandbookDetail() {
   const [state, setState] = useState();
   const [sendRequest, isLoading, data, error] = useAxios();
   const quill = useRef();
   const { id } = useParams();
+
   function date(dateString) {
     const dateStringtoformater = new Date(dateString);
     const day = getDate(dateStringtoformater);
@@ -29,6 +32,7 @@ function TravelHandbookDetail() {
     const year = getYear(dateStringtoformater);
     return `${day}-${month}-${year}`;
   }
+
   function contentDes(content) {
     let description = { text: [], image: [] };
     content.map((item) => {
@@ -47,6 +51,7 @@ function TravelHandbookDetail() {
   useEffect(() => {
     sendRequest(postsApi.get());
   }, []);
+
   useEffect(() => {
     if (data) {
       let posts = data.items.filter((item) => item._id === id);
@@ -74,7 +79,7 @@ function TravelHandbookDetail() {
 
   return (
     <Layout sidebarRight primary breadcrumb={breadcrumb}>
-      <div className={classes.x}>
+      <div>
         {state ? (
           <div className={classes.storyHeader}>
             <h1>{state.title}</h1>
@@ -84,16 +89,19 @@ function TravelHandbookDetail() {
             </p>
           </div>
         ) : null}
+
         <div className={classes.storyContent}>
           <div className={classes.quillContent} ref={quill}></div>
         </div>
+
+        {isLoading && <ArticlePlaceholder />}
 
         <div className={classes.relatedStories}>
           <p className={classes.relatedStoriesTitle}>Bài viết liên quan</p>
           <ul className="row">
             {data
               ? data.items.map((item) => (
-                  <li key={item.id} className="col-12 col-md-6 col-lg-4">
+                  <li key={item._id} className="col-12 col-sm-6 col-lg-4">
                     <Link
                       className={classes.relatedStory}
                       to={`/cam-nang-du-lich/${item._id}`}
@@ -119,6 +127,13 @@ function TravelHandbookDetail() {
                   </li>
                 ))
               : null}
+
+            {isLoading &&
+              new Array(3).fill(1).map((item, index) => (
+                <li key={item._id} className="col-12 col-sm-6 col-lg-4">
+                  <CardPlaceholder />
+                </li>
+              ))}
           </ul>
         </div>
       </div>

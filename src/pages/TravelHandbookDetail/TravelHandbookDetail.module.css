@@ -105,6 +105,10 @@ span {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
   font-weight: 600;
+  max-width: 250px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .relatedStory .date {

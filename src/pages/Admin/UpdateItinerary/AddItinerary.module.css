@@ -1,3 +1,7 @@
+.container {
+  padding-right: 40px;
+}
+
 .addDayForm {
   display: flex;
   align-items: center;
@@ -77,4 +81,32 @@
 
 .submitBtn button:hover {
   background: rgb(22, 181, 91);
+}
+
+/* ======== remove btn =============  */
+.portion {
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.removeBtn {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #44444461;
+  color: white;
+  transition: 0.2s;
+}
+
+.removeBtn:hover {
+  background: rgba(191, 27, 27, 0.732);
+}
+
+.removeBtn svg {
+  width: 15px;
 }
