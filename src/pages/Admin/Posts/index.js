@@ -8,14 +8,13 @@ import { useEffect } from 'react'
 
 function Posts() {
     const [sendRequest, isLoading, data, error]=useAxios()
-    const navigation=useNavigate()
-    const deletePost=(e,Id)=>{
-        sendRequest(postsApi.delete(Id))
-        // navigation('/')
+    const deletePost= async (e,Id)=>{
+        await sendRequest(postsApi.delete(Id))
+        await sendRequest(postsApi.get())
     }
 
     useEffect(() => {
-    sendRequest(postsApi.get())
+    
     }, [])
     console.log('data',data)
     return(
