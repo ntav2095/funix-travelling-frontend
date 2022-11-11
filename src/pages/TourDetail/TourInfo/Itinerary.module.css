@@ -3,6 +3,10 @@
   padding: 0 8px;
 }
 
+.itinerary p {
+  font-size: 15px;
+}
+
 .itinerary .mainTitle {
   color: rgb(159, 31, 8);
   font-weight: 600;
@@ -34,7 +38,9 @@
   max-width: 480px;
   display: block;
   margin: 0 auto;
-  padding-bottom: 6px;
+  margin-bottom: 8px;
+  margin-top: 6px;
+  box-shadow: var(--box-shadow);
 }
 
 .itinerary .time {
@@ -66,10 +72,12 @@
 
 .itinerary ul {
   margin: 0;
+  list-style: disc inside;
 }
 
 .itinerary li {
   word-break: break-all;
+  margin-bottom: 8px;
 }
 
 .itinerary p {
@@ -84,7 +92,6 @@
   padding-bottom: 16px;
 }
 
-/* ========== mô tả tour ============= */
 .tourDesc {
   display: flex;
   margin-bottom: 8px;
@@ -92,11 +99,13 @@
 
 .tourDesc > p {
   font-weight: 600;
-  width: 130px;
+  width: 110px;
   flex-shrink: 0;
+  font-size: 15px;
 }
 
 .tourDesc ul {
   padding: 0;
+  list-style-type: disc;
   list-style-position: inside;
 }

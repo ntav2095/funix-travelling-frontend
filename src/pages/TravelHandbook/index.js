@@ -6,6 +6,7 @@ import { getDate, getMonth, getYear } from "date-fns";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 // components
+import SpinnerModal from "../../components/SpinnerModal";
 import Layout from "../../layout/Default";
 
 // hooks
@@ -14,7 +15,12 @@ import useAxios from "../../hooks/useAxios";
 
 // css
 import classes from "./TravelHandbook.module.css";
-import SpinnerModal from "../../components/SpinnerModal";
+import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
+
+const breadcrumb = [
+  { href: "/", active: false, text: "trang chủ" },
+  { href: "/cam-nang-du-lich", active: true, text: "cẩm nang du lịch" },
+];
 
 function TravelHandbook() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -51,15 +57,11 @@ function TravelHandbook() {
   return (
     <>
       <SpinnerModal show={isLoading} />
-      <Layout>
+      <Layout breadcrumb={breadcrumb}>
         <div className="myContainer">
-          <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item active>CẨM NANG DU LỊCH</Breadcrumb.Item>
-          </Breadcrumb>
-
           <div className="row">
-            {data &&
+            {!isLoading &&
+              data &&
               data.items.length > 0 &&
               data.items.map((item) => (
                 <div key={item._id} className="col-12 col-md-6 col-lg-4">
@@ -89,6 +91,13 @@ function TravelHandbook() {
                       </div>
                     </div>
                   </Link>
+                </div>
+              ))}
+
+            {isLoading &&
+              new Array(2).fill(1).map((item, index) => (
+                <div key={item._id} className="col-12 col-md-6 col-lg-4">
+                  <CardPlaceholder />
                 </div>
               ))}
           </div>

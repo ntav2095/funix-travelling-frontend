@@ -1,36 +1,39 @@
 import Carousel from "react-bootstrap/Carousel";
+import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-
-// vũ css
+import { placeholder } from "../../../assets/images";
+//  css
 import styles from "./HomeSlider.module.css";
+import "./overrideCarousel.css";
 
-function Sliderheader() {
+function Sliderheader({ tours, isLoading }) {
   return (
     <Carousel className={styles.carousel}>
-      <Carousel.Item className={styles.carouselItem}>
-        <img
-          src="/asscets/img/slider-templates-kyco-1-1400x788.jpg"
-          alt="Second slide"
-        />
-        <div className="caption">
-          <Carousel.Caption interval={1000}>
-            <h3>GỀNH ĐÁ PHÚ YÊN</h3>
-            <p>DẤU CHÂN THIÊN ĐƯỜNG - ĐỊA ĐIỂM KHÁM PHÁ THÚ VỊ</p>
-            <Button variant="primary">Xem thêm</Button>{" "}
-          </Carousel.Caption>
-        </div>
-      </Carousel.Item>
-      <Carousel.Item className={styles.carouselItem}>
-        <img
-          src="/asscets/img/slider-templates-ghenh-da-2-1400x788.jpg"
-          alt="Third slide"
-        />
-        <Carousel.Caption>
-          <h3>GỀNH ĐÁ PHÚ YÊN</h3>
-          <p>DẤU CHÂN THIÊN ĐƯỜNG - ĐỊA ĐIỂM KHÁM PHÁ THÚ VỊ</p>
-          <Button variant="primary">Xem thêm</Button>{" "}
-        </Carousel.Caption>
-      </Carousel.Item>
+      {tours &&
+        !isLoading &&
+        tours.map((tour) => (
+          <Carousel.Item key={tour._id} className={styles.carouselItem}>
+            <div className={styles.image}>
+              <img src={tour.images[0]} alt="Second slide" />
+            </div>
+            <div className={styles.caption}>
+              <Carousel.Caption interval={1000}>
+                <h3>{tour.name}</h3>
+                <Button variant="primary" size="lg">
+                  <Link to={`/danh-sach-tour/${tour._id}`}>Xem thêm</Link>
+                </Button>
+              </Carousel.Caption>
+            </div>
+          </Carousel.Item>
+        ))}
+
+      {isLoading && (
+        <Carousel.Item className={styles.carouselItem}>
+          <div className={styles.image}>
+            <img src={placeholder} alt="Second slide" />
+          </div>
+        </Carousel.Item>
+      )}
     </Carousel>
   );
 }

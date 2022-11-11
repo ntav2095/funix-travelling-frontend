@@ -1,6 +1,7 @@
-import quillGetHTML from "../../../services/helpers/quillGetHTML";
 import { useEffect, useRef } from "react";
+import quillGetHTML from "../../../../services/helpers/quillGetHTML";
 import "./QuillReader.css";
+
 function QuillReader({ delta }) {
   const containerRef = useRef();
 

@@ -3,7 +3,12 @@ import Layout from "../../layout/Default";
 import companyInfo from "../../services/constants/companyInfo.constant";
 import usePageTitle from "../../hooks/usePageTitle";
 import styles from "./Contact.module.css";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
+
+const breadcrumb = [
+  { href: "/", active: false, text: "trang chủ" },
+  { href: "/lien-he", active: true, text: "giới thiệu" },
+  { href: "/lien-he", active: true, text: "thông tin liên hệ" },
+];
 
 function Contact() {
   usePageTitle("Liên hệ || Go Travel");
@@ -44,7 +49,7 @@ function Contact() {
     }, 400);
   };
   return (
-    <Layout sidebarLeft>
+    <Layout sidebarLeft breadcrumb={breadcrumb}>
       <div className={styles.contact}>
         <div className={styles.companyInfo}>
           <h2>{companyInfo.title1}</h2>

@@ -1,30 +1,15 @@
 import React from "react";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { Tab } from "semantic-ui-react";
 import QuillReader from "./QuillReader";
-import formatDate from "../../services/helpers/formatDate";
+import formatDate from "../../../services/helpers/formatDate";
+import { clock as clockSVG } from "../../../assets/svgs";
 
 import styles from "./Itinerary.module.css";
 
-const clockSVG = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.7}
-    stroke="currentColor"
-    className="w-6 h-6"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-    />
-  </svg>
-);
-
 const Mota = ({ tour }) => {
   const itineraryRef = useRef();
+  console.log(tour.highlights);
   const panes = [
     {
       menuItem: "Mô tả",
@@ -47,7 +32,6 @@ const Mota = ({ tour }) => {
             <div className={styles.tourDesc}>
               <p>Thời gian</p>
               <div>
-                {" "}
                 <p>{tour.time.duration}</p>
               </div>
             </div>
@@ -90,11 +74,7 @@ const Mota = ({ tour }) => {
         <Tab.Pane attached={false}>
           <div
             ref={itineraryRef}
-            className={
-              styles.itinerary +
-              " woocommerce-Tabs-panel woocommerce-Tabs-panel--lich-trinh panel entry-content"
-            }
-            id="tab-lich-trinh"
+            className={styles.itinerary}
             role="tabpanel"
             aria-labelledby="tab-title-lich-trinh"
           >
@@ -151,8 +131,7 @@ const Mota = ({ tour }) => {
       render: () => (
         <Tab.Pane attached={false}>
           <div
-            className="woocommerce-Tabs-panel woocommerce-Tabs-panel--gia-bao-gom panel entry-content "
-            id="tab-gia-bao-gom"
+            className={styles.highlights}
             role="tabpanel"
             aria-labelledby="tab-title-gia-bao-gom"
           >

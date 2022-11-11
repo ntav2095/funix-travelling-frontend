@@ -4,17 +4,21 @@ import { Row, Col } from "react-bootstrap";
 
 // components
 import Layout from "../../layout/Default";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import usePageTitle from "../../hooks/usePageTitle";
 import TourCard from "../../containers/TourCard";
-import SpinnerModal from "../../components/SpinnerModal";
+import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
 
 // apis
 import useAxios from "../../hooks/useAxios";
 import { tourApi } from "../../services/apis";
 
-// vũ css
+// css
 import styles from "./TourList.module.css";
+
+const breadcrumb = [
+  { href: "/", active: false, text: "trang chủ" },
+  { href: "/danh-sach-tour", active: true, text: "danh sách toursssssss" },
+];
 
 function ToursList() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -26,31 +30,29 @@ function ToursList() {
   usePageTitle(`Danh sách tours || Go Travel`);
 
   return (
-    <>
-      <SpinnerModal show={isLoading} />
-      <Layout>
-        <div className="myContainer">
-          <div className={styles.breadcrumbContainer}>
-            <Breadcrumb>
-              <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-              <Breadcrumb.Item active>DANH SÁCH TOURS</Breadcrumb.Item>
-            </Breadcrumb>
-          </div>
+    <Layout breadcrumb={breadcrumb}>
+      <div className="myContainer">
+        <div className={styles.container}>
+          <Row lg="3" md="2" sm="1">
+            {!isLoading &&
+              data &&
+              data.items.length > 0 &&
+              data.items.map((tour) => (
+                <Col key={tour._id} className="mb-4">
+                  <TourCard tour={tour} />
+                </Col>
+              ))}
 
-          <div className={styles.container}>
-            {data && data.items.length > 0 && (
-              <Row lg="3" md="2" sm="1">
-                {data.items.map((tour) => (
-                  <Col key={tour._id} className="mb-4">
-                    <TourCard tour={tour} />
-                  </Col>
-                ))}
-              </Row>
-            )}
-          </div>
+            {isLoading &&
+              new Array(10).fill(1).map((item, index) => (
+                <Col key={index} className="mb-4">
+                  <CardPlaceholder key={index} />
+                </Col>
+              ))}
+          </Row>
         </div>
-      </Layout>
-    </>
+      </div>
+    </Layout>
   );
 }
 
