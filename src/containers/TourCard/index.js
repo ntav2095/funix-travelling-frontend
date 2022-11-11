@@ -17,15 +17,14 @@ import { brokenImage } from "../../assets/images";
 import styles from "./TourCard.module.css";
 
 function TourCard({ tour }) {
-  const errorImgHandler = (e) => {
-    e.target.src = brokenImage;
-  };
   return (
     <Card className={styles.card}>
       <Link
         className={styles.image}
         to={`/danh-sach-tour/${tour._id}`}
-        style={{ backgroundImage: `url(${tour.images[0]})` }}
+        style={{
+          backgroundImage: `url(${tour.images[0]}), url(${brokenImage})`,
+        }}
       ></Link>
 
       <CardBody className={styles.textBox}>

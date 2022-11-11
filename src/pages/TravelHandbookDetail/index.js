@@ -50,8 +50,6 @@ function TravelHandbookDetail() {
   useEffect(() => {
     if (data) {
       let posts = data.items.filter((item) => item._id === id);
-      console.log("dữ liệu");
-      console.log(posts, data);
       setState(posts[0]);
     }
   }, [data]);
@@ -64,8 +62,18 @@ function TravelHandbookDetail() {
 
   usePageTitle(`Cẩm nang --- đang cập nhật || Go Travel`);
 
+  const breadcrumb = [
+    { href: "/", active: false, text: "trang chủ" },
+    { href: "/cam-nang-du-lich", active: false, text: "cẩm nang du lịch" },
+    {
+      href: `/danh-sach-tour/${id}`,
+      active: true,
+      text: state?.title || "bài viết",
+    },
+  ];
+
   return (
-    <Layout sidebarRight primary>
+    <Layout sidebarRight primary breadcrumb={breadcrumb}>
       <div className={classes.x}>
         {state ? (
           <div className={classes.storyHeader}>

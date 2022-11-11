@@ -3,11 +3,17 @@ import Layout from "../../layout/Default";
 import usePageTitle from "../../hooks/usePageTitle";
 import styles from "./About.module.css";
 
+const breadcrumb = [
+  { href: "/", active: false, text: "trang chủ" },
+  { href: "/ve-cong-ty", active: true, text: "giới thiệu" },
+  { href: "/ve-cong-ty", active: true, text: "tổng quan công ty" },
+];
+
 function About() {
   usePageTitle("Tổng quan công ty || Go Travel");
 
   return (
-    <Layout sidebarLeft>
+    <Layout sidebarLeft breadcrumb={breadcrumb}>
       <div className={styles.about}>
         <div className={styles.image}>
           <img src={aboutCompany} alt="About our company" />

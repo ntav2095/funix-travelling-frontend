@@ -16,3 +16,15 @@ div.dropdown-menu.show {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.navbar-nav .nav-link.active {
+  border-bottom: 2px solid rgb(40, 155, 255);
+}
+
+.dropdown-item:active {
+  background-color: rgb(216, 245, 245) !important;
+}
+
+.nav-item:last-of-type {
+  padding-right: 8px;
+}

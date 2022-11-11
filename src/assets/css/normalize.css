@@ -12,6 +12,7 @@ a,
 p,
 span {
   font-family: "Roboto", sans-serif !important;
+  font-size: inherit;
 }
 
 input {
@@ -25,4 +26,8 @@ button {
 
 ul {
   list-style-type: none;
+}
+
+a:active {
+  color: inherit;
 }
