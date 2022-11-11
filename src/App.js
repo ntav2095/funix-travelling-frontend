@@ -22,7 +22,6 @@ import NotFound from "./pages/NotFound";
 import NewTour from "./pages/Admin/NewTour";
 import EditTour from "./pages/Admin/EditTour";
 import Tours from "./pages/Admin/Tours";
-import AddItinerary from "./pages/Admin/AddItinerary";
 import Posts from "./pages/Admin/Posts";
 import NewPosts from "./pages/Admin/Posts/newPosts";
 import EditPosts from "./pages/Admin/Posts/editPosts";
@@ -35,7 +34,6 @@ import Visas from "./pages/Admin/Visas";
 // others
 import Dashboard from "./pages/Admin/Dashboard";
 import Login from "./pages/Admin/Login";
-import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
