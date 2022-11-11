@@ -33,12 +33,7 @@ function TourCarousel({ tour, isLoading }) {
               className={styles.carouselItem}
               onClick={() => setIsShowModal(true)}
             >
-              <img
-                className="d-block w-100"
-                src={img}
-                alt={tour.name}
-                onError={handlerBrokenImg}
-              />
+              <img src={img} alt={tour.name} onError={handlerBrokenImg} />
             </Carousel.Item>
           ))}
 

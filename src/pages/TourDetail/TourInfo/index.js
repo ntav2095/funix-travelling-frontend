@@ -5,17 +5,17 @@ import QuillReader from "./QuillReader";
 import formatDate from "../../../services/helpers/formatDate";
 import { clock as clockSVG } from "../../../assets/svgs";
 
-import styles from "./Itinerary.module.css";
+import styles from "./TourInfo.module.css";
 
-const Mota = ({ tour }) => {
+const TourInfo = ({ tour }) => {
   const itineraryRef = useRef();
-  console.log(tour.highlights);
+
   const panes = [
     {
-      menuItem: "Mô tả",
+      menuItem: "Tổng Quan",
       render: () => (
         <Tab.Pane attached={false}>
-          <div className="lich_trinh_title other_news_title">
+          <div>
             <div className={styles.tourDesc}>
               <p>Tên hành trình</p>
               <div>
@@ -58,9 +58,11 @@ const Mota = ({ tour }) => {
               <p>Điểm nổi bật</p>
               <div>
                 <ul>
-                  {tour.highlights.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
+                  {tour.highlights
+                    .filter((item) => Boolean(item.trim()))
+                    .map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
                 </ul>
               </div>
             </div>
@@ -69,7 +71,7 @@ const Mota = ({ tour }) => {
       ),
     },
     {
-      menuItem: "Lịch Trình",
+      menuItem: "Lộ Trình",
       render: () => (
         <Tab.Pane attached={false}>
           <div
@@ -82,9 +84,9 @@ const Mota = ({ tour }) => {
             {tour.itinerary.map((item) => {
               if (item.type === "title") {
                 return (
-                  <div className={styles.title}>
+                  <div className={styles.title} key={item.id}>
                     <div className={styles.container}>
-                      <h3 key={item.id}>{item.content}</h3>
+                      <h3>{item.content}</h3>
                     </div>
                   </div>
                 );
@@ -92,8 +94,11 @@ const Mota = ({ tour }) => {
 
               if (item.type === "time") {
                 return (
-                  <div className={styles.container + " " + styles.bgContent}>
-                    <div key={item.id} className={styles.time}>
+                  <div
+                    className={styles.container + " " + styles.bgContent}
+                    key={item.id}
+                  >
+                    <div className={styles.time}>
                       <p>
                         <span>{item.content.session}</span>
                       </p>
@@ -116,8 +121,9 @@ const Mota = ({ tour }) => {
                       " " +
                       styles.paragraph
                     }
+                    key={item.id}
                   >
-                    <QuillReader key={item.id} delta={item.content} />
+                    <QuillReader delta={item.content} />
                   </div>
                 );
               }
@@ -135,9 +141,7 @@ const Mota = ({ tour }) => {
             role="tabpanel"
             aria-labelledby="tab-title-gia-bao-gom"
           >
-            <h2 className="yikes-custom-woo-tab-title yikes-custom-woo-tab-title-gia-bao-gom">
-              Giá bao gồm
-            </h2>
+            <h2>Giá bao gồm</h2>
 
             <ul>
               {tour.price.includes.map((item, index) => (
@@ -149,12 +153,22 @@ const Mota = ({ tour }) => {
       ),
     },
     {
-      menuItem: "Đánh giá",
-      render: () => <></>,
+      menuItem: "Đánh Giá",
+      render: () => <div></div>,
     },
   ];
 
-  return <Tab menu={{ secondary: true }} panes={panes} />;
+  return (
+    <div className={styles.tourInfo}>
+      <Tab
+        menu={{
+          color: "blue",
+          inverted: true,
+        }}
+        panes={panes}
+      />
+    </div>
+  );
 };
 
-export default Mota;
+export default TourInfo;
