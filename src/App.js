@@ -1,6 +1,7 @@
 // main
 import { Route, Routes } from "react-router-dom";
-import React from "react";
+import React, { Suspense } from "react";
+import Loading from "./components/loading";
 // components
 
 const RequireAuth=React.lazy(()=> import('./components/RequireAuth'))
@@ -44,7 +45,7 @@ const Login=React.lazy(()=> import("./pages/Admin/Login"))
 
 function App() {
   return (
-    <>
+    <><Suspense fallback={<Loading />}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/danh-sach-tour" element={<ToursList />} />
@@ -86,6 +87,7 @@ function App() {
           <Route path="/admin/edit-posts/:postsId" element={<EditPosts />} />
         </Route>
       </Routes>
+      </Suspense>
     </>
   );
 }
