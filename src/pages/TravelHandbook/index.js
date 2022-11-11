@@ -96,7 +96,7 @@ function TravelHandbook() {
 
             {isLoading &&
               new Array(2).fill(1).map((item, index) => (
-                <div key={item._id} className="col-12 col-md-6 col-lg-4">
+                <div key={index} className="col-12 col-md-6 col-lg-4">
                   <CardPlaceholder />
                 </div>
               ))}

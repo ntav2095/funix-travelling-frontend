@@ -12,9 +12,10 @@ export const tourApi = {
     method: "POST",
     data: formData,
   }),
-  get: () => ({
+  get: (params = {}) => ({
     url: `/tour`,
     method: "GET",
+    params: params,
   }),
   edit: (formData) => ({
     url: "/tour",
@@ -35,13 +36,9 @@ export const tourApi = {
     method: "DELETE",
     data: { tourId },
   }),
-};
-
-export const fileApi = {
-  uploadImages: (formData) => ({
-    url: "/file",
-    method: "POST",
-    data: formData,
+  getHotTours: () => ({
+    url: `/tour/hot-tours`,
+    method: "GET",
   }),
 };
 
@@ -51,9 +48,10 @@ export const postsApi = {
     method: "POST",
     data: formData,
   }),
-  get: () => ({
+  get: (params = {}) => ({
     url: `/article`,
     method: "GET",
+    params,
   }),
   getSingleArticle: (articleId) => ({
     url: `/article/${articleId}`,
@@ -68,7 +66,12 @@ export const postsApi = {
     url: `/article/${articleId}`,
     method: "DELETE",
   }),
+  getNewArticles: () => ({
+    url: `/article/new-articles`,
+    method: "GET",
+  }),
 };
+
 export const visaApi = {
   addVisa: (data) => ({
     method: "POST",

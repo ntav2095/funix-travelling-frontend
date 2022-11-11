@@ -35,6 +35,7 @@ import Visas from "./pages/Admin/Visas";
 // others
 import Dashboard from "./pages/Admin/Dashboard";
 import Login from "./pages/Admin/Login";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
