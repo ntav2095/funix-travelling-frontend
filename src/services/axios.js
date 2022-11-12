@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
       const user = localStorage.getItem("user");
       if (user) {
         store.dispatch(setIsExpiredSession());
-        localStorage.removeItem("username");
+        localStorage.removeItem("user");
         localStorage.removeItem("accessToken");
       }
     }

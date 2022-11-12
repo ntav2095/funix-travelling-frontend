@@ -15,7 +15,8 @@ span {
   font-size: inherit;
 }
 
-input {
+input,
+textarea {
   outline: none;
   border: 1px solid #ccc;
 }

@@ -153,10 +153,6 @@ const TourInfo = ({ tour, isLoading }) => {
             </Tab.Pane>
           ),
         },
-        {
-          menuItem: "Đánh Giá",
-          render: () => <div></div>,
-        },
       ]
     : [];
 
