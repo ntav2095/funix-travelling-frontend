@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { Tab } from "semantic-ui-react";
 import QuillReader from "./QuillReader";
@@ -7,7 +6,6 @@ import formatDate from "../../../services/helpers/formatDate";
 import { clock as clockSVG } from "../../../assets/svgs";
 
 import styles from "./TourInfo.module.css";
-import ReviewTour from "./ReviewTour";
 
 const TourInfo = ({ tour, isLoading }) => {
   const itineraryRef = useRef();
@@ -155,14 +153,6 @@ const TourInfo = ({ tour, isLoading }) => {
             </Tab.Pane>
           ),
         },
-        // {
-        //   menuItem: "Đánh Giá",
-        //   render: () => (
-        //     <Tab.Pane>
-        //       <ReviewTour tour={tour} />
-        //     </Tab.Pane>
-        //   ),
-        // },
       ]
     : [];
 
