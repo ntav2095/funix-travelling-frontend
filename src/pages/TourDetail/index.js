@@ -16,6 +16,8 @@ import usePageTitle from "../../hooks/usePageTitle";
 
 //  css
 import styles from "./TourDetail.module.css";
+import FacebookComment from "../../containers/facebookComment";
+import ReviewTour from "./TourInfo/ReviewTour";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -53,6 +55,14 @@ function TourDetail() {
         </div>
 
         <TourInfo tour={tour} isLoading={isLoading} />
+        {tour && (
+          <FacebookComment
+            width="100%"
+            href={`https://travelling-website-funix-v1.web.app/danh-sach-tour/${tourId}`}
+          />
+        )}
+
+        {tour && <ReviewTour tour={tour} />}
       </div>
     </Layout>
   );

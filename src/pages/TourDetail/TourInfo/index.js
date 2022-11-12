@@ -155,14 +155,14 @@ const TourInfo = ({ tour, isLoading }) => {
             </Tab.Pane>
           ),
         },
-        {
-          menuItem: "Đánh Giá",
-          render: () => (
-            <Tab.Pane>
-              <ReviewTour tour={tour} />
-            </Tab.Pane>
-          ),
-        },
+        // {
+        //   menuItem: "Đánh Giá",
+        //   render: () => (
+        //     <Tab.Pane>
+        //       <ReviewTour tour={tour} />
+        //     </Tab.Pane>
+        //   ),
+        // },
       ]
     : [];
 
