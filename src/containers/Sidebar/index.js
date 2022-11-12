@@ -1,4 +1,3 @@
-import { hotTours } from "../../mock/sidebar.mock";
 import ContactTable from "../ContactTable";
 import ProductItem from "../../components/ProductItem";
 import Placeholder from "../../components/placeholders/Placeholder";
