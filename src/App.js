@@ -1,7 +1,8 @@
 // main
 import { Route, Routes } from "react-router-dom";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import Loading from "./components/loading";
+import { LiveChat } from "./containers/Livechat";
 // components
 
 const RequireAuth=React.lazy(()=> import('./components/RequireAuth'))
@@ -44,6 +45,10 @@ const Login=React.lazy(()=> import("./pages/Admin/Login"))
 
 
 function App() {
+
+  useEffect(()=>{
+    LiveChat()
+  },[])
   return (
     <><Suspense fallback={<Loading />}>
       <Routes>
