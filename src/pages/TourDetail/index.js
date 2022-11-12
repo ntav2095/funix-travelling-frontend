@@ -17,7 +17,7 @@ import usePageTitle from "../../hooks/usePageTitle";
 //  css
 import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
-import ReviewTour from "./TourInfo/ReviewTour";
+import ReviewTour from "./ReviewTour";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();

@@ -1,4 +1,4 @@
-import { starSolid, starOutline } from "../../../../../assets/svgs";
+import { starSolid, starOutline } from "../../../../assets/svgs";
 
 // css
 import styles from "./Stars.module.css";

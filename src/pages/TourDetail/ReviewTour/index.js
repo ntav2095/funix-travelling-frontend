@@ -16,7 +16,7 @@ import {
   starOutline,
   starSolid,
   thumbUpOutline,
-} from "../../../../assets/svgs";
+} from "../../../assets/svgs";
 
 // css
 import styles from "./ReviewTour.module.css";

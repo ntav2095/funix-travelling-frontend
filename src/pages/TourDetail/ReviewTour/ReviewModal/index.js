@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Stars from "../Stars";
 
 // assets
-import { camera as cameraSVG } from "../../../../../assets/svgs";
+import { camera as cameraSVG } from "../../../../assets/svgs";
 
 // css
 import styles from "./ReviewModal.module.css";
