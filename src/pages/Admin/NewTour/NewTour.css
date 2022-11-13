@@ -24,6 +24,12 @@
   color: red;
 }
 
+.newTour__label svg {
+  width: 15px;
+  color: rgb(239 127 127);
+  cursor: help;
+}
+
 .newTour__form label input,
 .newTour__form label textarea {
   width: 100%;

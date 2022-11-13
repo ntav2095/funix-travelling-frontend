@@ -138,7 +138,7 @@ const TourInfo = ({ tour, isLoading }) => {
           render: () => (
             <Tab.Pane attached={false}>
               <div
-                className={styles.highlights}
+                className={styles.price}
                 role="tabpanel"
                 aria-labelledby="tab-title-gia-bao-gom"
               >
@@ -146,6 +146,14 @@ const TourInfo = ({ tour, isLoading }) => {
 
                 <ul>
                   {tour.price.includes.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+
+                <h2>Giá không bao gồm</h2>
+
+                <ul>
+                  {tour.price.excludes.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
                 </ul>

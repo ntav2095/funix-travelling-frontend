@@ -27,7 +27,6 @@ const NotFound = React.lazy(() => import("./pages/NotFound"));
 const NewTour = React.lazy(() => import("./pages/Admin/NewTour"));
 const EditTour = React.lazy(() => import("./pages/Admin/EditTour"));
 const Tours = React.lazy(() => import("./pages/Admin/Tours"));
-const AddItinerary = React.lazy(() => import("./pages/Admin/AddItinerary"));
 const Posts = React.lazy(() => import("./pages/Admin/Posts"));
 const NewPosts = React.lazy(() => import("./pages/Admin/Posts/newPosts"));
 const EditPosts = React.lazy(() => import("./pages/Admin/Posts/editPosts"));
@@ -45,10 +44,9 @@ const Dashboard = React.lazy(() => import("./pages/Admin/Dashboard"));
 const Login = React.lazy(() => import("./pages/Admin/Login"));
 
 function App() {
-
-  useEffect(()=>{
-    LiveChat()
-  },[])
+  useEffect(() => {
+    LiveChat();
+  }, []);
   return (
     <>
       <Suspense fallback={<Loading />}>
