@@ -9,48 +9,61 @@ import {
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
 import styles from "./Navbar.module.css";
 import "./overrideNavbar.css";
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.toggleNav = this.toggleNav.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-
-    this.handleShow = this.handleShow.bind(this);
-
-    this.state = {
+function Header(){
+   
+    const [state,setState]= useState({
       isNavOpen: false,
       search: "",
       show: false,
-    };
-  }
-  handleClose() {
-    this.setState({
-      show: !this.state.show,
+    })
+  
+  function handleClose() {
+    setState({
+      show: !state.show,
     });
   }
-  handleShow() {
-    this.setState({
-      show: !this.state.show,
+  function handleShow() {
+    setState({
+      show: !state.show,
     });
   }
-  toggleNav() {
-    this.setState({
-      isNavOpen: !this.state.isNavOpen,
+  function toggleNav() {
+    setState({
+      isNavOpen: !state.isNavOpen,
     });
   }
-  render() {
+useEffect(() => {
+  window.addEventListener('scroll',()=>{
+    console.log(document.documentElement.scrollTop)
+    const container=document.getElementById('container-navbar')
+    if(document.documentElement.scrollTop>250){
+      console.log('add')
+      container.classList.add(styles.fixed)
+    }else if(document.documentElement.scrollTop<=10){
+      console.log('remove')
+      container.classList.remove(styles.fixed)
+      
+    }
+  })
+  
+}, [])
+
+
+
     return (
-      <div className={styles.container}>
-        <Navbar expand="lg" className={styles.navbar}>
+      <>
+      <div style={{width:'100%',height:'80px',background: 'white'}}></div>
+      <div id="container-navbar" className={styles.container}>
+        <Navbar id="navbar" expand="lg" className={styles.navbar}>
           <div className="container">
-            <NavbarToggler onClick={this.handleShow} />
-            <Offcanvas show={this.state.show} onHide={this.handleClose}>
+            <NavbarToggler onClick={handleShow} />
+            <Offcanvas show={state.show} onHide={handleClose}>
               <Offcanvas.Header closeButton></Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav navbar>
@@ -106,7 +119,7 @@ class Header extends Component {
               />
             </NavbarBrand>
 
-            <Collapse isOpen={this.state.isNavOpen} navbar>
+            <Collapse isOpen={state.isNavOpen} navbar>
               <Nav navbar>
                 <NavItem>
                   <NavLink className="nav-link" to="/" end>
@@ -148,7 +161,8 @@ class Header extends Component {
           </div>
         </Navbar>
       </div>
+      </>
     );
   }
-}
+
 export default Header;
