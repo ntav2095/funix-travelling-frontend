@@ -3,7 +3,10 @@ import Footer from "../../containers/Footer";
 import Navbar from "../../containers/Navbar";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import styles from "./Layout.module.css";
+
+import i18next from "../../services/languages/i18n";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function DefaultLayout({
   children,
@@ -12,6 +15,8 @@ function DefaultLayout({
   primary,
   breadcrumb,
 }) {
+  const { i18n, t } = useTranslation();
+
   if (sidebarLeft || sidebarRight) {
     let classes = styles.container;
     if (sidebarLeft) {
@@ -76,6 +81,40 @@ function DefaultLayout({
       )}
       {children}
 
+      <div className="myContainer">
+        <div className={styles.languageBar}>
+          <button
+            className={
+              styles.vi +
+              " " +
+              (i18n.language === "vi" ? styles.active : undefined)
+            }
+            onClick={() =>
+              i18n
+                .changeLanguage("vi")
+                .then()
+                .catch((err) => console.error(err))
+            }
+          >
+            Việt Nam
+          </button>
+          <button
+            className={
+              styles.en +
+              " " +
+              (i18n.language === "en" ? styles.active : undefined)
+            }
+            onClick={() =>
+              i18n
+                .changeLanguage("en")
+                .then(() => console.log(2))
+                .catch((err) => console.error(err))
+            }
+          >
+            English
+          </button>
+        </div>
+      </div>
       <Footer />
     </>
   );

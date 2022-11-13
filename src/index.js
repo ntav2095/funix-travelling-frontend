@@ -8,6 +8,9 @@ import store from "./store";
 import { setUser } from "./store/user.slice";
 import { storeInjector } from "./services/axios";
 
+import i18n from "./services/languages/i18n";
+import { i18nInjector } from "./hooks/useAxios";
+
 // css bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -22,7 +25,9 @@ import "./assets/css/share.css";
 
 import "./App.css";
 
+// injecting
 storeInjector(store);
+i18nInjector(i18n);
 
 const user = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user"))

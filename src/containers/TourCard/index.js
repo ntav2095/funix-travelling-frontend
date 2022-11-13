@@ -1,13 +1,5 @@
 // main
-import {
-  Card,
-  CardTitle,
-  CardBody,
-  CardSubtitle,
-  Container,
-  Col,
-  Row,
-} from "reactstrap";
+import { Card, CardTitle, CardBody, CardSubtitle } from "reactstrap";
 import { Link } from "react-router-dom";
 
 // assets

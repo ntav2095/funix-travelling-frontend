@@ -109,7 +109,7 @@ function UpdateItinerary() {
     if (updatingError) {
       alert(
         `Cập nhật lộ trình tour thất bại: ${
-          updatingError.message?.vi || "Unknown error"
+          updatingError.message || "Unknown error"
         }`
       );
     }

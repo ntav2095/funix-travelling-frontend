@@ -32,7 +32,7 @@ function Tours() {
 
   useEffect(() => {
     if (deleteError) {
-      alert(`Có lỗi xảy ra: ${deleteError.message.vi}`);
+      alert(`Có lỗi xảy ra: ${deleteError.message}`);
     }
   }, [deleteError]);
 

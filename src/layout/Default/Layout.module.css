@@ -64,3 +64,35 @@
     flex-basis: 100%;
   }
 }
+
+/* =============== language bar ================= */
+.languageBar {
+  padding: 8px;
+}
+
+.vi {
+  padding: 8px 16px;
+  border: 1px solid #000;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.en {
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border: 1px solid #000;
+  margin-left: 16px;
+}
+
+.vi.active {
+  background: red;
+  border: 1px solid red;
+  color: yellow;
+}
+
+.en.active {
+  background: blue;
+  border: 1px solid blue;
+  color: white;
+}
