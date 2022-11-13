@@ -23,7 +23,7 @@ import { exclamation as exclamationSVG } from "../../../assets/svgs";
 import { tourValidator } from "../../../services/validators";
 
 // css
-import "./NewTour.css";
+import "./EditTour.css";
 
 function EditTour() {
   const [images, setImages] = useState([]);
