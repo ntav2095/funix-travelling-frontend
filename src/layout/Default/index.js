@@ -112,6 +112,9 @@ function DefaultLayout({
           >
             English
           </button>
+          <h1 style={{ color: "Red" }}>
+            Toàn làm feature languages branch này nha
+          </h1>
         </div>
       </div>
       <Footer />
