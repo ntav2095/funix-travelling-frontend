@@ -4,7 +4,6 @@ import Navbar from "../../containers/Navbar";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import styles from "./Layout.module.css";
 
-import i18next from "../../services/languages/i18n";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -15,7 +14,7 @@ function DefaultLayout({
   primary,
   breadcrumb,
 }) {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
 
   if (sidebarLeft || sidebarRight) {
     let classes = styles.container;
@@ -87,11 +86,11 @@ function DefaultLayout({
             className={
               styles.vi +
               " " +
-              (i18n.language === "vi" ? styles.active : undefined)
+              (i18n.language === "vie" ? styles.active : undefined)
             }
             onClick={() =>
               i18n
-                .changeLanguage("vi")
+                .changeLanguage("vie")
                 .then()
                 .catch((err) => console.error(err))
             }
@@ -102,11 +101,11 @@ function DefaultLayout({
             className={
               styles.en +
               " " +
-              (i18n.language === "en" ? styles.active : undefined)
+              (i18n.language === "eng" ? styles.active : undefined)
             }
             onClick={() =>
               i18n
-                .changeLanguage("en")
+                .changeLanguage("eng")
                 .then(() => console.log(2))
                 .catch((err) => console.error(err))
             }
