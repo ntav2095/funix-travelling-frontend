@@ -1,4 +1,4 @@
-import { isValidDate, stringToDate } from "./helpers/dateHandler";
+import { stringToDate } from "./helpers/dateHandler";
 
 export const tourValidator = (values) => {
   const errors = {};
@@ -29,8 +29,12 @@ export const tourValidator = (values) => {
       });
   }
 
-  if (!values.duration) {
-    errors.duration = "Trường này là bắt buộc";
+  if (!values.days) {
+    errors.days = "Trường này là bắt buộc";
+  }
+
+  if (!values.nights) {
+    errors.nights = "Trường này là bắt buộc";
   }
 
   if (!values.highlights) {
@@ -42,10 +46,10 @@ export const tourValidator = (values) => {
   }
 
   if (
-    (!isNaN(Number(values.lowestPrice)) && values.lowestPrice <= 0) ||
-    isNaN(Number(values.lowestPrice))
+    (!isNaN(Number(values.currentPrice)) && values.currentPrice <= 0) ||
+    isNaN(Number(values.currentPrice))
   ) {
-    errors.lowestPrice = "Trường này phải là số lớn hơn 0";
+    errors.currentPrice = "Trường này phải là số lớn hơn 0";
   }
 
   return errors;

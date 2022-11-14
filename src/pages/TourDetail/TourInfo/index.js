@@ -33,7 +33,9 @@ const TourInfo = ({ tour, isLoading }) => {
                 <div className={styles.tourDesc}>
                   <p>Thời gian</p>
                   <div>
-                    <p>{tour.time.duration}</p>
+                    <p>
+                      {tour.duration.days} ngày {tour.duration.nights} đêm
+                    </p>
                   </div>
                 </div>
 
@@ -41,7 +43,7 @@ const TourInfo = ({ tour, isLoading }) => {
                   <p>Khởi hành</p>
                   <div>
                     <p>
-                      {tour.time.departureDates
+                      {tour.departureDates
                         .map((item) => formatDate(item, "dd/MM/yyyy"))
                         .join(", ")}
                     </p>
@@ -145,7 +147,15 @@ const TourInfo = ({ tour, isLoading }) => {
                 <h2>Giá bao gồm</h2>
 
                 <ul>
-                  {tour.price.includes.map((item, index) => (
+                  {tour.priceIncludes.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+
+                <h2>Giá không bao gồm</h2>
+
+                <ul>
+                  {tour.priceExcludes.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
                 </ul>

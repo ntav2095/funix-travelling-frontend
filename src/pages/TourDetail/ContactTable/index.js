@@ -9,7 +9,7 @@ function ContactTable({ tour, isLoading }) {
   const [modalShow, setModalShow] = React.useState(false);
 
   const departureDates = tour
-    ? tour.time.departureDates
+    ? tour.departureDates
         .map((item) => format(new Date(item), "dd/MM/yyyy"))
         .join(", ")
     : "";
@@ -29,7 +29,9 @@ function ContactTable({ tour, isLoading }) {
               </div>
               <div>
                 <p>Thời gian:</p>
-                <p>{tour.time.duration}</p>
+                <p>
+                  {tour.duration.days} ngày {tour.duration.nights} đêm
+                </p>
               </div>
               <div>
                 <p>Lịch trình:</p>
@@ -37,7 +39,7 @@ function ContactTable({ tour, isLoading }) {
               </div>
             </div>
 
-            <p className={styles.price}>{tour.price.from} đồng</p>
+            <p className={styles.price}>{tour.currentPrice} đồng</p>
 
             <button
               className={styles.orderBtn}

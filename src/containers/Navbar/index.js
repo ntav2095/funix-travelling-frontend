@@ -1,4 +1,4 @@
-import Search from "./Search";
+// main
 import {
   Navbar,
   NavbarBrand,
@@ -11,7 +11,15 @@ import { NavLink } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import React, { Component } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { useTranslation } from "react-i18next";
 
+// components
+import Search from "./Search";
+
+// lang
+import i18next from "../../services/languages/i18n";
+
+// css
 import styles from "./Navbar.module.css";
 import "./overrideNavbar.css";
 
@@ -20,7 +28,6 @@ class Header extends Component {
     super(props);
     this.toggleNav = this.toggleNav.bind(this);
     this.handleClose = this.handleClose.bind(this);
-
     this.handleShow = this.handleShow.bind(this);
 
     this.state = {
@@ -44,6 +51,8 @@ class Header extends Component {
       isNavOpen: !this.state.isNavOpen,
     });
   }
+
+  // {i18next.t("Welcome to React")}
   render() {
     return (
       <div className={styles.container}>
@@ -55,9 +64,7 @@ class Header extends Component {
               <Offcanvas.Body>
                 <Nav navbar>
                   <NavItem className="nav-bar-offcanvat">
-                    <NavLink className="nav-link" to="/">
-                      TRANG CHỦ
-                    </NavLink>
+                    <NavLink className="nav-link" to="/"></NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
@@ -110,36 +117,39 @@ class Header extends Component {
               <Nav navbar>
                 <NavItem>
                   <NavLink className="nav-link" to="/" end>
-                    TRANG CHỦ
+                    {i18next.t("header.home")}
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavDropdown title="GIỚI THIỆU" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">
+                  <NavDropdown
+                    title={i18next.t("header.intro")}
+                    id="basic-nav-dropdown"
+                  >
+                    <NavDropdown.Item>
                       <NavLink className="nav-link" to="/ve-cong-ty">
-                        TỔNG QUAN CÔNG TY
+                        {i18next.t("header.about")}
                       </NavLink>
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">
+                    <NavDropdown.Item to="/lien-he">
                       <NavLink className="nav-link" to="/lien-he">
-                        THÔNG TIN LIÊN HỆ
+                        {i18next.t("header.contact")}
                       </NavLink>
                     </NavDropdown.Item>
                   </NavDropdown>
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/danh-sach-tour">
-                    DANH SÁCH TOURS
+                    {i18next.t("header.viTours")}
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/dich-vu-visa">
-                    DỊCH VỤ VISA
+                    {i18next.t("header.visaService")}
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/cam-nang-du-lich">
-                    CẨM NANG DU LỊCH
+                    {i18next.t("header.travelHandbook")}
                   </NavLink>
                 </NavItem>
                 <Search />

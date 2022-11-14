@@ -1,5 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import axios from "../services/axios";
+import { useTranslation } from "react-i18next";
+
+// inject i18n
+let i18n;
+export const i18nInjector = (injectedObj) => {
+  i18n = injectedObj;
+};
 
 function useAxios() {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,20 +34,29 @@ function useAxios() {
       if (error.response) {
         setError({
           httpCode: error.response.status,
-          message: error.response.data.message,
+          message: error.response.data.message[i18n.language],
         });
+      } else if (error.request) {
+        if (!window.navigator.onLine) {
+          setError({
+            httpCode: null,
+            message: i18n.t("errorMessage.offline"),
+          });
+        } else {
+          setError({
+            httpCode: null,
+            message: i18n.t("errorMessage.networkError"),
+          });
+        }
       } else if (!window.navigator.onLine) {
         setError({
           httpCode: null,
-          message: "You are offline. Please check your internet connection.",
+          message: i18n.t("errorMessage.offline"),
         });
       } else {
         setError({
           httpCode: null,
-          message: {
-            en: error.message,
-            vi: error.message,
-          },
+          message: error.message,
         });
       }
     }

@@ -22,10 +22,12 @@ export const tourApi = {
     method: "PUT",
     data: formData,
   }),
-  getSingleTour: (tourId) => ({
+  getSingleTour: (tourId, language = null) => ({
     url: `/tour/${tourId}`,
-    method: "GET",
+    method: "POST",
+    data: { language },
   }),
+
   updateItinerary: (data) => ({
     url: "/tour/itinerary",
     method: "PUT",

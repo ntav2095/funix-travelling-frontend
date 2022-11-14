@@ -1,13 +1,5 @@
 // main
-import {
-  Card,
-  CardTitle,
-  CardBody,
-  CardSubtitle,
-  Container,
-  Col,
-  Row,
-} from "reactstrap";
+import { Card, CardTitle, CardBody, CardSubtitle } from "reactstrap";
 import { Link } from "react-router-dom";
 
 // assets
@@ -17,6 +9,7 @@ import { brokenImage } from "../../assets/images";
 import styles from "./TourCard.module.css";
 
 function TourCard({ tour }) {
+  console.log(tour);
   return (
     <Card className={styles.card}>
       <Link
@@ -34,7 +27,7 @@ function TourCard({ tour }) {
           </CardTitle>
         </Link>
         <CardSubtitle tag="h6" className={styles.duration}>
-          {tour.time.duration}
+          {tour.duration.days} ngày {tour.duration.nights} đêm
         </CardSubtitle>
         <CardSubtitle tag="h6" className={styles.journey} title={tour.journey}>
           {tour.journey}
@@ -42,7 +35,7 @@ function TourCard({ tour }) {
 
         <div className={styles.cardFooter}>
           <p className={styles.price}>
-            {tour.price.from.toLocaleString()} ĐỒNG
+            {tour.currentPrice.toLocaleString()} ĐỒNG
           </p>
           <Link className={styles.seeDetail} to={`/danh-sach-tour/${tour._id}`}>
             XEM CHI TIẾT

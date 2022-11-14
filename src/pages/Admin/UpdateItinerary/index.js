@@ -1,7 +1,7 @@
 // main
 import { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 // components
 import AdminLayout from "../../../layout/AdminLayout";
@@ -22,6 +22,7 @@ import styles from "./AddItinerary.module.css";
 
 function UpdateItinerary() {
   const [plan, setPlan] = useState([]);
+  const [language, setLanguage] = useState("vie");
   const [sendRequest, isLoading, updated, updatingError] = useAxios();
   const [fetchTour, fetchingTour, fetchedTour, fetchingError] = useAxios();
   const { tourId } = useParams();
@@ -74,6 +75,7 @@ function UpdateItinerary() {
       tourApi.updateItinerary({
         tourId: tourId,
         itinerary: plan,
+        language,
       })
     );
   };
@@ -83,11 +85,12 @@ function UpdateItinerary() {
   };
 
   useEffect(() => {
-    fetchTour(tourApi.getSingleTour(tourId));
-  }, []);
+    fetchTour(tourApi.getSingleTour(tourId, language));
+  }, [language]);
 
   useEffect(() => {
     if (fetchedTour) {
+      console.log("itinerary: ", fetchedTour.item.itinerary);
       setPlan(fetchedTour.item.itinerary);
     }
   }, [fetchedTour]);
@@ -109,7 +112,7 @@ function UpdateItinerary() {
     if (updatingError) {
       alert(
         `Cập nhật lộ trình tour thất bại: ${
-          updatingError.message?.vi || "Unknown error"
+          updatingError.message || "Unknown error"
         }`
       );
     }
@@ -120,66 +123,102 @@ function UpdateItinerary() {
       <SpinnerModal show={isLoading || fetchingTour} />
       <AdminLayout title={title}>
         <div className={styles.container}>
-          {plan.map((item) => {
-            if (item.type === "title") {
-              return (
-                <div className={styles.portion}>
-                  <Title
-                    key={item.id}
-                    id={item.id}
-                    content={getContent(item.id)}
-                    onChange={changeHandler}
-                  />
-                  <button
-                    className={styles.removeBtn}
-                    onClick={() => removePortionHandler(item.id)}
-                  >
-                    {closeSVG}
-                  </button>
-                </div>
-              );
-            }
+          {fetchedTour &&
+            fetchedTour.item.itinerary.length === 0 &&
+            plan.length === 0 &&
+            fetchedTour.completedItinerary && (
+              <div>
+                <h2>
+                  Lộ trình ngôn ngữ {language} này đang trống. Bạn có muốn ráp
+                  lộ trình kia vào khuôn?
+                </h2>
+                <button onClick={() => setPlan(fetchedTour.completedItinerary)}>
+                  Có
+                </button>
+              </div>
+            )}
 
-            if (item.type === "time") {
-              return (
-                <div className={styles.portion}>
-                  <Time
-                    key={item.id}
-                    id={item.id}
-                    content={getContent(item.id)}
-                    onChange={changeHandler}
-                  />
-                  <button
-                    className={styles.removeBtn}
-                    onClick={() => removePortionHandler(item.id)}
-                  >
-                    {closeSVG}
-                  </button>
-                </div>
-              );
-            }
+          {fetchedTour && !fetchedTour.item.name && (
+            <div>
+              <h2>
+                Bạn chưa có phiên bản tiếng {language} của tour này. Bạn cần
+                thêm bản {language} trước rồi hằng vào cập nhật lộ trình
+              </h2>
+              <Link to={`/admin/edit-tour/${tourId}`}>
+                Cập nhật bản tiếng {language}
+              </Link>
+            </div>
+          )}
+          <label>
+            <p>Ngôn ngữ</p>
+            <select
+              name="language"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="vie">Việt Nam</option>
+              <option value="eng">English</option>
+            </select>
+          </label>
 
-            if (item.type === "para") {
-              return (
-                <div className={styles.portion}>
-                  <Paragraph
-                    key={item.id}
-                    id={item.id}
-                    content={getContent(item.id)}
-                    onChange={changeHandler}
-                  />
-                  <button
-                    className={styles.removeBtn}
-                    onClick={() => removePortionHandler(item.id)}
-                  >
-                    {closeSVG}
-                  </button>
-                </div>
-              );
-            }
+          {!fetchingTour && (
+            <div>
+              {plan.map((item) => {
+                if (item.type === "title") {
+                  return (
+                    <div key={item.id} className={styles.portion}>
+                      <Title
+                        id={item.id}
+                        content={getContent(item.id)}
+                        onChange={changeHandler}
+                      />
+                      <button
+                        className={styles.removeBtn}
+                        onClick={() => removePortionHandler(item.id)}
+                      >
+                        {closeSVG}
+                      </button>
+                    </div>
+                  );
+                }
 
-            return null;
-          })}
+                if (item.type === "time") {
+                  return (
+                    <div key={item.id} className={styles.portion}>
+                      <Time
+                        id={item.id}
+                        content={getContent(item.id)}
+                        onChange={changeHandler}
+                      />
+                      <button
+                        className={styles.removeBtn}
+                        onClick={() => removePortionHandler(item.id)}
+                      >
+                        {closeSVG}
+                      </button>
+                    </div>
+                  );
+                } else {
+                  console.log(".......", item.content);
+                  return (
+                    <div key={language + item.id} className={styles.portion}>
+                      <Paragraph
+                        id={item.id}
+                        content={item.content}
+                        onChange={changeHandler}
+                      />
+                      <button
+                        className={styles.removeBtn}
+                        onClick={() => removePortionHandler(item.id)}
+                      >
+                        {closeSVG}
+                      </button>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          )}
 
           <div className={styles.addBtns}>
             <button onClick={() => addContentHandler("title")}>

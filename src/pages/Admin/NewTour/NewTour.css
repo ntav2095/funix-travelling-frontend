@@ -19,6 +19,12 @@
   font-style: italic;
 }
 
+.newTour__label svg {
+  width: 15px;
+  color: rgb(239 127 127);
+  cursor: help;
+}
+
 .newTour__form label p:last-child {
   font-size: 13px;
   color: red;
@@ -36,4 +42,19 @@
   outline: none;
   border: 1px solid rgb(132, 132, 132);
   padding: 2px 6px;
+}
+
+/* =========== button ===============  */
+.newTour button {
+  padding: 8px 16px;
+  color: white;
+  background: #4f5dd3;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 16px;
+}
+
+.newTour button:hover {
+  background: #626ed8;
 }
