@@ -23,7 +23,7 @@
   object-fit: cover;
   object-position: center;
 }
-
+/* 
 .image::after {
   position: absolute;
   top: 0;
@@ -34,7 +34,7 @@
   content: "";
   display: block;
   z-index: 1;
-}
+} */
 
 .carousel h3 {
   text-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
@@ -43,7 +43,4 @@
   font-size: 17px;
 }
 
-.carousel a,
-.carousel a:hover {
-  color: white;
-}
+

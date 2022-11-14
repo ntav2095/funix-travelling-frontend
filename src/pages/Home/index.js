@@ -15,6 +15,9 @@ import { tourApi } from "../../services/apis";
 
 // css
 import styles from "./Home.module.css";
+import EuropeTours from "./tourChauAu";
+import CountryTours from "./tourTrongnuoc";
+import CamNang from "./camNangDuLich";
 
 function Home() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -36,6 +39,18 @@ function Home() {
 
       <div className="myContainer">
         <TrendingTours tours={data?.items} isLoading={isLoading} />
+      </div>
+      
+      <div className="myContainer">
+        <EuropeTours tours={data?.items} isLoading={isLoading} />
+      </div>
+      
+      <div className="myContainer">
+        <CountryTours tours={data?.items} isLoading={isLoading} />
+      </div>
+      
+      <div className="myContainer">
+        <CamNang tours={data?.items} isLoading={isLoading} />
       </div>
     </Layout>
   );

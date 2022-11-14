@@ -1,7 +1,10 @@
 .container {
   background: var(--main-color);
   background: white;
-  box-shadow: var(--box-shadow);
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
 }
 
 .navbar {
@@ -15,10 +18,48 @@
 }
 
 .logo {
-  width: 150px;
+  width: 180px;
+  transition: 0.4s;
 }
 
 .navbar a {
   font-weight: 500;
   /* text-transform: uppercase; */
+}
+.fixed{
+  position: fixed !important;
+  left: 0;
+  top: 0;
+  right: 0;
+  text-align: center;
+  height: 70px;
+  z-index: 999;
+  animation: scroll 0.5s;
+  box-shadow: var(--box-shadow);
+}
+@keyframes scroll {
+  from{top:-50px}
+  to{top:0px}
+}
+.fixed .logo{
+width: 130px;
+transition: 0.4s;
+}
+.btn{
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 26px;
+  z-index: 99;
+  font-size: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  opacity: 0.4;
+}
+.btn:hover{
+  background-color: rgb(248, 244, 244);
+  opacity: 1;
 }

@@ -13,10 +13,6 @@ function Posts() {
         await sendRequest(postsApi.get())
     }
 
-    useEffect(() => {
-    
-    }, [])
-    console.log('data',data)
     return(
         <AdminLayout
             title='Danh sách các bài viết'

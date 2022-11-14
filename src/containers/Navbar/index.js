@@ -9,7 +9,7 @@ import {
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useTranslation } from "react-i18next";
 
@@ -22,44 +22,70 @@ import i18next from "../../services/languages/i18n";
 // css
 import styles from "./Navbar.module.css";
 import "./overrideNavbar.css";
+import useLazyLoading, { loadingImg } from "../../hooks/uselazyLoading";
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.toggleNav = this.toggleNav.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.handleShow = this.handleShow.bind(this);
+function Header() {
+  const [lazy] = useLazyLoading(loadingImg);
+  const [state, setState] = useState({
+    isNavOpen: false,
+    search: "",
+    show: false,
+  });
 
-    this.state = {
-      isNavOpen: false,
-      search: "",
-      show: false,
-    };
-  }
-  handleClose() {
-    this.setState({
-      show: !this.state.show,
+  function handleClose() {
+    setState({
+      show: !state.show,
     });
   }
-  handleShow() {
-    this.setState({
-      show: !this.state.show,
+  function handleShow() {
+    setState({
+      show: !state.show,
     });
   }
-  toggleNav() {
-    this.setState({
-      isNavOpen: !this.state.isNavOpen,
+  function toggleNav() {
+    setState({
+      isNavOpen: !state.isNavOpen,
     });
   }
+  function topFunction() {
+    console.log("gọi hàm");
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      console.log(document.documentElement.scrollTop);
+      const container = document.getElementById("container-navbar");
+      if (document.documentElement.scrollTop > 250) {
+        console.log("add");
+        container.classList.add(styles.fixed);
+      } else if (document.documentElement.scrollTop <= 10) {
+        console.log("remove");
+        container.classList.remove(styles.fixed);
+      }
+      if (
+        document.body.scrollTop > 250 ||
+        document.documentElement.scrollTop > 250
+      ) {
+        document.getElementById("Btn").style.display = "block";
+      } else {
+        document.getElementById("Btn").style.display = "none";
+      }
+    });
+  }, []);
 
-  // {i18next.t("Welcome to React")}
-  render() {
-    return (
-      <div className={styles.container}>
-        <Navbar expand="lg" className={styles.navbar}>
+  useEffect(() => {
+    lazy();
+  });
+
+  return (
+    <>
+      <div style={{ width: "100%", height: "80px", background: "white" }}></div>
+      <div id="container-navbar" className={styles.container}>
+        <Navbar id="navbar" expand="lg" className={styles.navbar}>
           <div className="container">
-            <NavbarToggler onClick={this.handleShow} />
-            <Offcanvas show={this.state.show} onHide={this.handleClose}>
+            <NavbarToggler onClick={handleShow} />
+            <Offcanvas show={state.show} onHide={handleClose}>
               <Offcanvas.Header closeButton></Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav navbar>
@@ -81,7 +107,13 @@ class Header extends Component {
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/danh-sach-tour">
-                      DANH SÁCH TOURS
+                      DU LỊCH CHÂU ÂU
+                    </NavLink>
+                  </NavItem>
+
+                  <NavItem className="nav-bar-offcanvat">
+                    <NavLink className="nav-link" to="/danh-sach-tour">
+                      DU LỊCH TRONG NƯỚC
                     </NavLink>
                   </NavItem>
 
@@ -113,7 +145,7 @@ class Header extends Component {
               />
             </NavbarBrand>
 
-            <Collapse isOpen={this.state.isNavOpen} navbar>
+            <Collapse isOpen={state.isNavOpen} navbar>
               <Nav navbar>
                 <NavItem>
                   <NavLink className="nav-link" to="/" end>
@@ -138,8 +170,13 @@ class Header extends Component {
                   </NavDropdown>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/danh-sach-tour">
-                    {i18next.t("header.viTours")}
+                  <NavLink className="nav-link" to="/tour-chau-au">
+                    DU LỊCH CHÂU ÂU
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" to="/tour-trong-nuoc">
+                    DU LỊCH TRONG NƯỚC
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -157,8 +194,17 @@ class Header extends Component {
             </Collapse>
           </div>
         </Navbar>
+        <button
+          onClick={topFunction}
+          id="Btn"
+          className={styles.btn}
+          title="Go to top"
+        >
+          <i class="fas fa-arrow-circle-up" style={{ fontSize: "30px" }}></i>
+        </button>
       </div>
-    );
-  }
+    </>
+  );
 }
+
 export default Header;

@@ -73,12 +73,14 @@ function TravelHandbook() {
                     <div className={classes.inner}>
                       <div
                         className={classes.image}
-                        style={{
-                          backgroundImage: `url(${
-                            contentDes(item.content).image[0]
-                          })`,
-                        }}
-                      ></div>
+                        // style={{
+                        //   backgroundImage: `url(${
+                            
+                        //   })`,
+                        // }}
+                      >
+                        <img src='../../assets/images/placeholder.jpg' lazy={contentDes(item.content).image[0]}   />
+                      </div>
                       <div className={classes.boxText}>
                         <h2 className={classes.title}>{item.title}</h2>
                         <p className={classes.date}>

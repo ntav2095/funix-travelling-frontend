@@ -20,3 +20,70 @@
   margin: 0px auto;
   padding: 30px 16px 16px;
 }
+
+.footer {
+ background-image: url('../../assets/images/sec_video_tour_bg.jpg');
+  /* background-repeat: no-repeat;
+  background-position:center;
+  background-size: cover;
+  background-color: black;
+  opacity: 0.6; */ 
+  /* background-color: #3c2f75; */
+  color: #f1f1f1;
+}
+.footer-title {
+  font-size: 19px;
+  /* padding-bottom: 20px; */
+  color: #faab3b;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+.footer h3 {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: #fff;
+}
+.footer ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.footer svg {
+  margin-right: 5px;
+}
+.footer-hotline {
+  font-weight: bold;
+  color: #ffff15;
+  margin-bottom: 0px;
+}
+.footer-social-share {
+  display: flex;
+  gap: 6px;
+  margin-top: 7px;
+}
+.footer-social-share li {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+.footer-social-share svg {
+  margin: 0;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #f1f1f1;
+}
+.footer a:hover {
+  color: #fff;
+}
+.footer-menu li {
+  padding: 5px 0;
+}
+.footer-menu li + li {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}

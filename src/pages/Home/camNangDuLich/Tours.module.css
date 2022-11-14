@@ -1,8 +1,8 @@
 .title {
-  padding-bottom: 16px;
-  text-align: center;
-  font-size: 28px;
-}
+    padding-bottom: 16px;
+    text-align: center;
+    font-size: 28px;
+  }
 .title::after{
   content: "";
     display: table;
@@ -15,3 +15,4 @@
     background-position-y: bottom;
     padding-top: 0;
 }
+  

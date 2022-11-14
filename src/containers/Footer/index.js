@@ -21,7 +21,7 @@ import styles from "./Footer.module.css";
 export default function Footer() {
   return (
     <div className={styles.footer + " footer pt-5 pb-3"}>
-      <div className="myContainer">
+      <div className={styles.blur +"myContainer"}>
         <Row className="gy-3 mb-3">
           <Col lg="3">
             <p className="footer-title">THÔNG TIN LIÊN HỆ</p>
