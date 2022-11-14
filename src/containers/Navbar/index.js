@@ -14,9 +14,10 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 
 import styles from "./Navbar.module.css";
 import "./overrideNavbar.css";
+import useLazyLoading from '../../hooks/uselazyLoading'
 
 function Header(){
-   
+    const lazy=useLazyLoading()
     const [state,setState]= useState({
       isNavOpen: false,
       search: "",
@@ -38,6 +39,11 @@ function Header(){
       isNavOpen: !state.isNavOpen,
     });
   }
+  function topFunction() {
+    console.log('gọi hàm')
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
 useEffect(() => {
   window.addEventListener('scroll',()=>{
     console.log(document.documentElement.scrollTop)
@@ -48,13 +54,19 @@ useEffect(() => {
     }else if(document.documentElement.scrollTop<=10){
       console.log('remove')
       container.classList.remove(styles.fixed)
-      
     }
+    if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
+      document.getElementById("Btn").style.display = "block";
+  } else {
+      document.getElementById("Btn").style.display = "none";
+  }
   })
   
 }, [])
 
-
+useEffect(()=>{
+  console.log(document.querySelectorAll('[src]'))
+})
 
     return (
       <>
@@ -87,7 +99,13 @@ useEffect(() => {
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/danh-sach-tour">
-                      DANH SÁCH TOURS
+                      DU LỊCH CHÂU ÂU
+                    </NavLink>
+                  </NavItem>
+
+                  <NavItem className="nav-bar-offcanvat">
+                    <NavLink className="nav-link" to="/danh-sach-tour">
+                      DU LỊCH TRONG NƯỚC
                     </NavLink>
                   </NavItem>
 
@@ -141,8 +159,13 @@ useEffect(() => {
                   </NavDropdown>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/danh-sach-tour">
-                    DANH SÁCH TOURS
+                  <NavLink className="nav-link" to="/tour-chau-au">
+                    DU LỊCH CHÂU ÂU
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" to="/tour-trong-nuoc">
+                    DU LỊCH TRONG NƯỚC
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -160,6 +183,7 @@ useEffect(() => {
             </Collapse>
           </div>
         </Navbar>
+        <button onClick={topFunction} id='Btn' className={styles.btn} title="Go to top"><i class='fas fa-arrow-circle-up' style={{fontSize:'30px'}}></i></button>
       </div>
       </>
     );

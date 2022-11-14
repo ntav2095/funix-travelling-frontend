@@ -52,7 +52,8 @@ function App() {
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/danh-sach-tour" element={<ToursList />} />
+          <Route path="/tour-chau-au" element={<ToursList />} />
+          <Route path="/tour-trong-nuoc" element={<ToursList />} />
           <Route path="/lien-he" element={<Contact />} />
           <Route path="/ve-cong-ty" element={<About />} />
           <Route path="/dich-vu-visa/1" element={<Visa />} />
