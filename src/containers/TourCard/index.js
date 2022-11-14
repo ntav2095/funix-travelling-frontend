@@ -42,7 +42,7 @@ function TourCard({ tour }) {
 
         <div className={styles.cardFooter}>
           <p className={styles.price}>
-            {tour.price.from.toLocaleString()} ĐỒNG
+             {tour.price.from.toLocaleString()} ĐỒNG 
           </p>
           <Link className={styles.seeDetail} to={`/danh-sach-tour/${tour._id}`}>
             XEM CHI TIẾT

@@ -14,10 +14,10 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 
 import styles from "./Navbar.module.css";
 import "./overrideNavbar.css";
-import useLazyLoading from '../../hooks/uselazyLoading'
+import useLazyLoading, { loadingImg } from '../../hooks/uselazyLoading'
 
 function Header(){
-    const lazy=useLazyLoading()
+    const [lazy]=useLazyLoading(loadingImg)
     const [state,setState]= useState({
       isNavOpen: false,
       search: "",
@@ -65,7 +65,7 @@ useEffect(() => {
 }, [])
 
 useEffect(()=>{
-  console.log(document.querySelectorAll('[src]'))
+  lazy()
 })
 
     return (
