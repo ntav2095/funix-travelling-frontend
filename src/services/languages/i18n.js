@@ -10,7 +10,7 @@ const resources = {
         contact: "Liên hệ",
         viTours: "Tours trong nước",
         euTours: "Tours châu Âu",
-        visaService: "Dịch vụ visa",
+        visaService: "Visa",
         travelHandbook: "Cẩm nang du lịch",
         intro: "Giới thiệu",
       },

@@ -95,37 +95,37 @@ function Header() {
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/ve-cong-ty">
-                      TỔNG QUAN CÔNG TY
+                      Tổng quan công ty
                     </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/lien-he">
-                      THÔNG TIN LIÊN HỆ
+                      Liên hệ
                     </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/danh-sach-tour">
-                      DU LỊCH CHÂU ÂU
+                      Du lịch châu Âu
                     </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/danh-sach-tour">
-                      DU LỊCH TRONG NƯỚC
+                      Du lịch trong nước
                     </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/dich-vu-visa">
-                      DỊCH VỤ VISA
+                      Visa
                     </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/cam-nang-du-lich">
-                      CẨM NANG DU LỊCH
+                      Cẩm nang du lịch
                     </NavLink>
                   </NavItem>
 
@@ -171,12 +171,12 @@ function Header() {
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/tour-chau-au">
-                    DU LỊCH CHÂU ÂU
+                    Du lịch châu Âu
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/tour-trong-nuoc">
-                    DU LỊCH TRONG NƯỚC
+                    Du lịch trong nước
                   </NavLink>
                 </NavItem>
                 <NavItem>
