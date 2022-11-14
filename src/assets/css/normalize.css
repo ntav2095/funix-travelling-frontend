@@ -16,7 +16,8 @@ span {
 }
 
 input,
-textarea {
+textarea,
+select {
   outline: none;
   border: 1px solid #ccc;
 }

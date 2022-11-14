@@ -13,8 +13,6 @@ function useAxios() {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
   const abortController = useRef();
-  // const { i18n, t } = useTranslation();
-  console.log(i18n.language);
 
   const sendRequest = useCallback(async (config) => {
     try {

@@ -1,6 +1,7 @@
 import axios from "axios";
 import config from "../configs";
 import { setIsExpiredSession } from "../store/user.slice";
+import i18n from "./languages/i18n";
 
 let store;
 export const storeInjector = (injectedStore) => {
@@ -18,6 +19,8 @@ axiosInstance.interceptors.request.use(
     if (accessToken) {
       config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
+
+    config.params = { ...config.params, lang: i18n.language };
     return config;
   },
   function (error) {
