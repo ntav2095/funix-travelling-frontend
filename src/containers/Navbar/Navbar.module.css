@@ -63,3 +63,37 @@ transition: 0.4s;
   background-color: rgb(248, 244, 244);
   opacity: 1;
 }
+
+
+.admin{
+  background-color: white;
+  margin-left: 1rem;
+  padding: 8px;
+}
+
+/* =============== language bar ================= */
+.languageBar {
+  padding: 8px;
+}
+
+.vi {
+  padding: 8px 0px 8px 10px;
+  /* border: 1px solid #000; */
+  font-weight: 400;
+  letter-spacing: 1px;
+  display: none;
+  /* margin-left: 0rem; */
+  background-color: white;
+
+}
+
+.en {
+  font-weight: 400;
+  letter-spacing: 1px;
+  padding: 8px 0px 8px 10px;
+  /* border: 1px solid #000; */
+  /* margin-left: 16px; */
+  background-color: white;
+
+}
+

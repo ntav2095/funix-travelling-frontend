@@ -14,6 +14,7 @@ import { tourApi } from "../../services/apis";
 
 // css
 import styles from "./TourList.module.css";
+import Panavigation from "../../containers/panavigation";
 
 const breadcrumb = [
   { href: "/", active: false, text: "trang chủ" },
@@ -26,6 +27,11 @@ function ToursList() {
   useEffect(() => {
     sendRequest(tourApi.get());
   }, []);
+
+
+  function page(e){
+    console.log('page',e)
+  }
 
   usePageTitle(`Danh sách tours || Go Travel`);
 
@@ -50,6 +56,7 @@ function ToursList() {
                 </Col>
               ))}
           </Row>
+          <Panavigation totalPage={3} callback={page} />
         </div>
       </div>
     </Layout>

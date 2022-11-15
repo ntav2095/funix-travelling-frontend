@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import React, { Suspense, useEffect } from "react";
 import Loading from "./components/loading";
 import { LiveChat } from "./containers/Livechat";
+import Panavigation from "./containers/panavigation";
 // components
 
 const RequireAuth = React.lazy(() => import("./components/RequireAuth"));

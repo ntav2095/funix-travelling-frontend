@@ -1,0 +1,19 @@
+.container{
+    text-align: right;
+}
+.panavigation{
+    margin-right: 3rem;
+}
+.btn-pana{
+    border: 1px solid rgb(71, 70, 70);
+    display: inline;
+    width: 2rem;
+}
+.btn-pana:hover{
+    background-color: rgb(156, 148, 148);
+}
+.active-pana{
+    background-color: rgb(39, 39, 223);
+    font-weight: 600;
+    color: white;
+}

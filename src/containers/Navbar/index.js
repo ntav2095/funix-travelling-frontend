@@ -7,11 +7,12 @@ import {
   Collapse,
   NavItem,
 } from "reactstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import React, { Component, useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useTranslation } from "react-i18next";
+
 
 // components
 import Search from "./Search";
@@ -26,12 +27,13 @@ import useLazyLoading, { loadingImg } from "../../hooks/uselazyLoading";
 
 function Header() {
   const [lazy] = useLazyLoading(loadingImg);
+  const navigation=useNavigate()
   const [state, setState] = useState({
     isNavOpen: false,
     search: "",
     show: false,
   });
-
+  const { i18n } = useTranslation();
   function handleClose() {
     setState({
       show: !state.show,
@@ -77,6 +79,16 @@ function Header() {
   useEffect(() => {
     lazy();
   });
+
+  useEffect(()=>{
+    if(i18n.language==='vie'){
+      document.getElementById('btnvn').style.display='none'
+      document.getElementById('btnen').style.display='block'
+    }else{
+      document.getElementById('btnen').style.display='none'
+      document.getElementById('btnvn').style.display='block'
+    }
+  },[i18n.language])
 
   return (
     <>
@@ -189,7 +201,47 @@ function Header() {
                     {i18next.t("header.travelHandbook")}
                   </NavLink>
                 </NavItem>
-                <Search />
+                <NavItem>
+                  <Search />
+                </NavItem>
+                <NavItem>
+                  <button
+                  id="btnvn"
+                    className={
+                      styles.vi +
+                      " " +
+                      (i18n.language === "vie" ? styles.active : undefined)
+                    }
+                    onClick={() =>{
+                      i18n
+                        .changeLanguage("vie")
+                        .then()
+                        .catch((err) => console.error(err))
+                      
+                    }}
+                  >
+                    VN
+                  </button>
+                  <button
+                    id="btnen"
+                    className={
+                      styles.en +
+                      " " +
+                      (i18n.language === "eng" ? styles.active : undefined)
+                    }
+                    onClick={() =>{
+                      i18n
+                        .changeLanguage("eng")
+                        .then(() => console.log(2))
+                        .catch((err) => console.error(err))
+                    }}
+                  >
+                    EN
+                  </button>
+                </NavItem>
+                <NavItem>
+                  <button className={styles.admin} onClick={()=>{navigation('./admin')}}> <i class='fas fa-user-cog' style={{fontSize:'1.5rem'}}></i></button>
+                </NavItem>
               </Nav>
             </Collapse>
           </div>
@@ -208,3 +260,4 @@ function Header() {
 }
 
 export default Header;
+
