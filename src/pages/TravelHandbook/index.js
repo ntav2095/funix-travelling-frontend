@@ -56,8 +56,8 @@ function TravelHandbook() {
     return description;
   }
   useEffect(() => {
-    sendRequest(postsApi.get({lang:i18n.language,page:page}));
-  }, [page,i18n.language]);
+    sendRequest(postsApi.get({page:page}));
+  }, [page]);
 
   usePageTitle(`Cẩm nang du lịch || Go Travel`);
 

@@ -21,18 +21,21 @@ function Sidebar({ primary }) {
   }, []);
 
   const getArticleImage = (articleContent) => {
+    const content =articleContent.ops
     let imageSrc = "";
-    for (const item of articleContent) {
+    for (const item of content) {
       if (item.insert?.image) {
         imageSrc = item.insert.image;
         return imageSrc;
       }
     }
   };
-
+useEffect(()=>{
   if (articles && articles.length > 0) {
     getArticleImage(articles[0].content);
   }
+},[articles])
+  
 
   return (
     <div className={styles.sidebar}>

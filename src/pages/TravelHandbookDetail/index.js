@@ -18,13 +18,16 @@ import quillGetHTML from "../../services/helpers/quillGetHTML";
 import { getDate, getMonth, getYear } from "date-fns";
 import ArticlePlaceholder from "../../components/placeholders/ArticlePlaceholder";
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
+import i18n from "../../services/languages/i18n";
 
 function TravelHandbookDetail() {
   const [state, setState] = useState();
+  console.log(state)
+  console.log(i18n.language)
   const [sendRequest, isLoading, data, error] = useAxios();
   const quill = useRef();
   const { id } = useParams();
-
+  console.log(data)
   function date(dateString) {
     const dateStringtoformater = new Date(dateString);
     const day = getDate(dateStringtoformater);
@@ -53,11 +56,13 @@ function TravelHandbookDetail() {
   }, []);
 
   useEffect(() => {
-    if (data) {
-      let posts = data.items.filter((item) => item._id === id);
-      setState(posts[0]);
+    console.log(i18n.language)
+    if (data && i18n.language==='vie') {
+      setState(data.article);
+    }else if(data){
+      setState(data.article.translation[0]);
     }
-  }, [data]);
+  }, [data,i18n.language]);
 
   useEffect(() => {
     if (state) {
@@ -84,8 +89,8 @@ function TravelHandbookDetail() {
           <div className={classes.storyHeader}>
             <h1>{state.title}</h1>
             <p className={classes.date}>
-              Posted on <span>{date(state.updatedAt || state.createdAt)}</span>{" "}
-              by <Link to="/admin">admin</Link>
+              Posted on <span>{date(data.article.updatedAt || data.article.createdAt)}</span>{" "}
+              by <Link to="/admin">{state.author}</Link>
             </p>
           </div>
         ) : null}
@@ -96,7 +101,7 @@ function TravelHandbookDetail() {
 
         {isLoading && <ArticlePlaceholder />}
 
-        <div className={classes.relatedStories}>
+        {/* <div className={classes.relatedStories}>
           <p className={classes.relatedStoriesTitle}>Bài viết liên quan</p>
           <ul className="row">
             {data
@@ -135,7 +140,7 @@ function TravelHandbookDetail() {
                 </li>
               ))}
           </ul>
-        </div>
+        </div> */}
       </div>
     </Layout>
   );
