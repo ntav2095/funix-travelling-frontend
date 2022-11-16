@@ -49,7 +49,7 @@ function TravelHandbookDetail() {
   }
 
   useEffect(() => {
-    sendRequest(postsApi.get());
+    sendRequest(postsApi.getSingleArticle(id));
   }, []);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ function TravelHandbookDetail() {
 
   useEffect(() => {
     if (state) {
-      quill.current.innerHTML = quillGetHTML({ ops: state.content });
+      quill.current.innerHTML = quillGetHTML(state.content);
     }
   }, [state]);
 
@@ -111,7 +111,7 @@ function TravelHandbookDetail() {
                           className={classes.image}
                           style={{
                             backgroundImage: `url(${
-                              contentDes(item.content).image[0]
+                              contentDes(item.content.ops).image[0]
                             })`,
                           }}
                         ></div>

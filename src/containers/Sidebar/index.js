@@ -14,7 +14,7 @@ function Sidebar({ primary }) {
 
   const tours = toursData ? toursData.items : null;
   const articles = articlesData ? articlesData.items : null;
-
+  console.log('articles',articles)
   useEffect(() => {
     fetchTours(tourApi.get({ trending: true }));
     fetchArtilces(postsApi.get({ trending: true }));

@@ -1,5 +1,5 @@
 // main
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 
 // components
@@ -15,22 +15,24 @@ import { tourApi } from "../../services/apis";
 // css
 import styles from "./TourList.module.css";
 import Panavigation from "../../containers/panavigation";
+import i18n from "../../services/languages/i18n";
 
 const breadcrumb = [
   { href: "/", active: false, text: "trang chủ" },
-  { href: "/danh-sach-tour", active: true, text: "danh sách toursssssss" },
+  { href: "/danh-sach-tour", active: true, text: "danh sách tours" },
 ];
 
 function ToursList() {
   const [sendRequest, isLoading, data, error] = useAxios();
-
+  const [page,setPage]= useState(1)
   useEffect(() => {
-    sendRequest(tourApi.get());
-  }, []);
+    sendRequest(tourApi.get({page:page}));
+  }, [page]);
 
-
-  function page(e){
-    console.log('page',e)
+  console.log('data',data)
+  console.log('page',page)
+  function setpage(e){
+    setPage(e)
   }
 
   usePageTitle(`Danh sách tours || Go Travel`);
@@ -56,7 +58,7 @@ function ToursList() {
                 </Col>
               ))}
           </Row>
-          <Panavigation totalPage={3} callback={page} />
+          <Panavigation totalPage={3} callback={setpage} />
         </div>
       </div>
     </Layout>

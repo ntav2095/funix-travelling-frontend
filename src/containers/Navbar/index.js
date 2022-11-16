@@ -81,6 +81,7 @@ function Header() {
   });
 
   useEffect(()=>{
+    console.log('lag',i18n.language)
     if(i18n.language==='vie'){
       document.getElementById('btnvn').style.display='none'
       document.getElementById('btnen').style.display='block'
@@ -102,46 +103,86 @@ function Header() {
               <Offcanvas.Body>
                 <Nav navbar>
                   <NavItem className="nav-bar-offcanvat">
-                    <NavLink className="nav-link" to="/"></NavLink>
+                    <NavLink className="nav-link" to="/">
+                    {i18next.t("header.home")}
+                    </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/ve-cong-ty">
-                      Tổng quan công ty
+                    {i18next.t("header.about")}
                     </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/lien-he">
-                      Liên hệ
+                    {i18next.t("header.contact")}
                     </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/danh-sach-tour">
-                      Du lịch châu Âu
+                    {i18next.t("header.euTours")} 
                     </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/danh-sach-tour">
-                      Du lịch trong nước
+                    {i18next.t("header.viTours")} 
                     </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/dich-vu-visa">
-                      Visa
+                    {i18next.t("header.visaService")}
                     </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
                     <NavLink className="nav-link" to="/cam-nang-du-lich">
-                      Cẩm nang du lịch
+                    {i18next.t("header.travelHandbook")}
                     </NavLink>
                   </NavItem>
+                  <NavItem >
+                  <button
+                  id="btnvn"
+                    className={
+                      styles.vi +
+                      " " +
+                      (i18n.language === "vie" ? styles.active : undefined)
+                    }
+                    style={{display:"inline-block"}}
+                    onClick={() =>{
+                      i18n
+                        .changeLanguage("vie")
+                        .then()
+                        .catch((err) => console.error(err))
+                      
+                    }}
+                  >
+                    VN
+                  </button>
+                  <button
+                    id="btnen"
+                    className={
+                      styles.en +
+                      " " +
+                      (i18n.language === "eng" ? styles.active : undefined)
+                    }
+                    onClick={() =>{
+                      i18n
+                        .changeLanguage("eng")
+                        .then(() => console.log(2))
+                        .catch((err) => console.error(err))
+                    }}
+                  >
+                    EN
+                  </button>
+                
+                  <button className={styles.admin} onClick={()=>{navigation('./admin')}}> <i class='fas fa-user-cog' style={{fontSize:'1.5rem'}}></i></button>
+                </NavItem>
 
-                  <NavItem>
+                <NavItem>
                     <Search />
                   </NavItem>
                 </Nav>
@@ -183,12 +224,12 @@ function Header() {
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/tour-chau-au">
-                    Du lịch châu Âu
+                    {i18next.t("header.euTours")} 
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link" to="/tour-trong-nuoc">
-                    Du lịch trong nước
+                  {i18next.t("header.viTours")} 
                   </NavLink>
                 </NavItem>
                 <NavItem>

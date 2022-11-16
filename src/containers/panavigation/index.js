@@ -5,7 +5,7 @@ import './panavition.css'
 export default function Panavigation(props){
     const [state,setState]=useState(1)
 
-    // console.log(state)
+    console.log(state)
     const totalPage=props.totalPage
     function button1(){
        return state>=3?
@@ -13,7 +13,6 @@ export default function Panavigation(props){
         null
     }
     function button2(){
-        
         return  state>=3?
             setState((prev)=>prev-1):
                 state>1?
@@ -22,7 +21,6 @@ export default function Panavigation(props){
        
     }
     function button3(){
-        
       return  state==2
         ?setState((prev)=>prev+1):
             state==1?
@@ -31,7 +29,6 @@ export default function Panavigation(props){
         
     }
     function button4(){
-        
         return state>=3?
             setState((prev)=>prev+1):
                 state>1?
@@ -49,7 +46,7 @@ export default function Panavigation(props){
     }
 
     useEffect(() => {
-        if(state>1){
+        if(state>=1){
         props.callback(state)
         }
     },[state])
@@ -59,8 +56,10 @@ export default function Panavigation(props){
         const btnBefor=document.getElementById('btnBefor')
         if(state==1){
             btnAfter.style.display='none'
+            btnBefor.style.display='inline'
         }else if(state==totalPage){
             btnBefor.style.display='none'
+            btnAfter.style.display='inline'
         }else{
             btnAfter.style.display='inline'
             btnBefor.style.display='inline'

@@ -16,6 +16,8 @@ import useAxios from "../../hooks/useAxios";
 // css
 import classes from "./TravelHandbook.module.css";
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
+import i18n from "../../services/languages/i18n";
+import Panavigation from "../../containers/panavigation";
 
 const breadcrumb = [
   { href: "/", active: false, text: "trang chủ" },
@@ -24,6 +26,11 @@ const breadcrumb = [
 
 function TravelHandbook() {
   const [sendRequest, isLoading, data, error] = useAxios();
+  const [page,setPage]=useState(1)
+  console.log(data)
+  function setpage(e){
+    setPage(e)
+  }
 
   function date(dateString) {
     const dateStringtoformater = new Date(dateString);
@@ -49,8 +56,8 @@ function TravelHandbook() {
     return description;
   }
   useEffect(() => {
-    sendRequest(postsApi.get());
-  }, []);
+    sendRequest(postsApi.get({lang:i18n.language,page:page}));
+  }, [page,i18n.language]);
 
   usePageTitle(`Cẩm nang du lịch || Go Travel`);
 
@@ -79,7 +86,7 @@ function TravelHandbook() {
                         //   })`,
                         // }}
                       >
-                        <img src='../../assets/images/placeholder.jpg' lazy={contentDes(item.content).image[0]}   />
+                        <img src='../../assets/images/placeholder.jpg' lazy={contentDes(item.content.ops).image[0]}   />
                       </div>
                       <div className={classes.boxText}>
                         <h2 className={classes.title}>{item.title}</h2>
@@ -87,7 +94,7 @@ function TravelHandbook() {
                           {date(item.updatedAt || item.createdAt)}
                         </p>
                         <p className={classes.desc}>
-                          {contentDes(item.content).text[0].slice(0, 100)}
+                          {contentDes(item.content.ops).text[0].slice(0, 100)}
                           ...
                         </p>
                       </div>
@@ -103,6 +110,7 @@ function TravelHandbook() {
                 </div>
               ))}
           </div>
+            <Panavigation totalPage={3} callback={setpage} />
         </div>
       </Layout>
     </>
