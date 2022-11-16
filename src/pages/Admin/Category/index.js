@@ -88,7 +88,8 @@ function Category() {
                   </option>
                 ))}
             </select>
-            <button>Add</button>
+            <br />
+            <button className="mt-4">Add</button>
           </form>
         </div>
       </AdminLayout>

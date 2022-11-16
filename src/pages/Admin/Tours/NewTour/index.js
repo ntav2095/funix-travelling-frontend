@@ -1,46 +1,14 @@
-// main
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-// components
-import AdminLayout from "../../../../layout/AdminLayout";
-import SpinnerModal from "../../../../components/SpinnerModal";
-
-// apis
-import useAxios from "../../../../hooks/useAxios";
-import { adminApis } from "../../../../services/apis";
-
-// helpers
-import { stringToDate } from "../../../../services/helpers/dateHandler";
-
-// assets
-import { exclamation as exclamationSVG } from "../../../../assets/svgs";
-
-// css
-import TourForm from "../TourForm";
-
-const initialValues = {
-  language: "vie",
-  category: [],
-
-  name: "",
-  journey: "",
-  description: "",
-  highlights: "",
-
-  departureDates: "",
-  days: 0,
-  nights: 0,
-
-  currentPrice: 0,
-  oldPrice: 0,
-  priceIncludes: "",
-  priceExcludes: "",
-
-  cancellationPolicy: "",
-  slider: [],
-  thumb: null,
-};
+import {
+  useEffect,
+  useNavigate,
+  AdminLayout,
+  SpinnerModal,
+  useAxios,
+  adminApis,
+  stringToDate,
+  TourForm,
+  initialValues,
+} from "./import";
 
 function NewTour() {
   const [sendRequest, isLoading, data, error] = useAxios();
