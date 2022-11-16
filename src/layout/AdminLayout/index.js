@@ -66,7 +66,6 @@ function AdminLayout({ children, title, path, text }) {
                 Tours
               </NavLink>
             </li>
-
             <li>
               <NavLink className={navLinkClasses} to="/admin/visa-products">
                 Visa Products
@@ -74,8 +73,10 @@ function AdminLayout({ children, title, path, text }) {
             </li>
             <li>
               <Link to="/admin/posts">Posts</Link>
+            </li>{" "}
+            <li>
+              <Link to="/admin/category">Category</Link>
             </li>
-
             {!user && (
               <li>
                 <NavLink className={navLinkClasses} to="/admin/login">

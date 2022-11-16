@@ -1,0 +1,49 @@
+.container {
+  padding: 8px;
+}
+
+.container label {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.container label h6 {
+  margin-bottom: 3.8px;
+}
+
+.container label input {
+  display: block;
+  width: 100%;
+}
+
+.container img {
+  width: 50%;
+  display: block;
+  margin: 16px auto;
+}
+
+.previewImage {
+  margin-top: 32px;
+}
+
+.previewImage em {
+  font-weight: 400;
+  font-size: 14px;
+  color: rgb(74, 74, 74);
+}
+
+.currentThumb {
+  margin-top: 16px;
+}
+
+.currentThumb p {
+  margin-bottom: 3.8px;
+}
+
+.currentThumb img {
+  width: 200px;
+}
+
+.container button {
+  padding: 8px 16px;
+}

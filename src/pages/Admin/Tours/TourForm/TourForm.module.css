@@ -1,0 +1,85 @@
+.container {
+  padding-bottom: 30px;
+}
+
+.container svg {
+  width: 15px;
+  color: rgb(239 127 127);
+  cursor: help;
+}
+
+.container label {
+  display: block;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.container label h6 {
+  color: red;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.container .label {
+  margin-bottom: 3.8px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.container input,
+.container textarea {
+  width: 100%;
+  padding: 6px 8px;
+}
+
+.container button {
+  padding: 8px 16px;
+  background: var(--main-color);
+  color: white;
+  letter-spacing: 1px;
+}
+
+/* ====================== categories =============  */
+.cat {
+  margin: 24px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.cat label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.cat label input {
+  width: auto;
+  margin-left: 8px;
+}
+
+/* ====================== image preview =============  */
+.currentImages {
+  border-top: 1px solid #ccc;
+  padding-top: 16px;
+  margin-top: 32px;
+}
+
+.currentImages h6 {
+  padding-top: 16px;
+}
+
+.preview {
+  display: flex;
+  gap: 16px;
+  border-bottom: 1px solid #ccc;
+}
+
+.preview label {
+  display: block;
+  width: 150px;
+}
+
+.preview label img {
+  width: 100%;
+}

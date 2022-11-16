@@ -1,92 +1,102 @@
+import { useEffect, useRef, useState } from "react";
+import { Button } from "react-bootstrap";
+import useAxios from "../../../../hooks/useAxios";
+import AdminLayout from "../../../../layout/AdminLayout";
+import { adminApis } from "../../../../services/apis";
+import { useNavigate, useParams } from "react-router-dom";
+import Editor from "../../../../containers/Editor";
+import { Tab } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
+import ArticleForm from "../ArticleForm";
+import styles from "./editposts.module.css";
 
-// useEffect(()=>{
-//     sendRequestPostsID(postsApi.getSingleArticle(PostsID));
-// },[]) const {PostsID}=useParams()sendRequest(
-        // postsApi.edit(formdata)
-        // );
+function EditPost() {
+  const [goEdit, editing, isSuccess, editingError] = useAxios();
+  const [fetchArticle, fetching, fetchedData, fetchingError] = useAxios();
+  const [lang, setLang] = useState("vi");
+  const [article, setArticle] = useState(null);
 
-import {  useEffect, useRef, useState } from "react"
-import { Button } from "react-bootstrap"
-import useAxios from "../../../../hooks/useAxios"
-import AdminLayout from "../../../../layout/AdminLayout"
-import style from './editposts.module.css'
-import { postsApi } from "../../../../services/apis"
-import { useNavigate, useParams } from "react-router-dom"
-import  Quill  from "quill"
+  const [data, setData] = useState(null);
+  const { articleId } = useParams();
 
-const toolbarContainer = [
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
-    ["link", "image"],
-    ["clean"],
-];
+  const langs = fetchedData
+    ? fetchedData.metadata.categories
+        .find((item) => item.type === "language")
+        .items.map((item) => item.code)
+    : [];
 
-const modules = {
-    toolbar: toolbarContainer,
-};
+  const submitHandler = async (values) => {
+    const { title, author, origin, lead, thumb, content, language } = values;
+    const formData = new FormData();
+    formData.append("articleId", articleId);
+    formData.append("language", language);
+    formData.append("title", title);
+    formData.append("author", author);
+    formData.append("origin", origin);
+    formData.append("lead", lead);
+    formData.append("content", JSON.stringify(content));
+    if (typeof thumb !== "string") {
+      formData.append("image", thumb);
+    }
 
-function NewPosts(){
-    const navigation= useNavigate()
-    const quill = useRef();
-    const editorRef = useRef();
-    const {postsId}=useParams()
-    const [stateTitle,setStateTitle]=useState()
-    const [sendRequest, isLoading, data, error]=useAxios()
-    const [sendRequestPostsID, Loading, dataPostsID, errorPostsID]=useAxios()
-console.log('PostsID',postsId)
-console.log('dataPostsID',data)
-    const hanldleSubmit= async () => {
-       await sendRequest(
-            postsApi.edit({
-                postsId,
-                title:stateTitle,
-                content:JSON.stringify(quill.current.getContents())
-            })
-        );
-       
-        }
+    goEdit(adminApis.article.edit(formData));
+  };
 
-        const changeTitle=(e)=>{
-           setStateTitle(e.target.value)
-        }
-    useEffect(()=>{
-        sendRequestPostsID(postsApi.getSingleArticle(postsId));
-    },[])
+  useEffect(() => {
+    fetchArticle(adminApis.article.getSingle(articleId, lang));
+  }, [lang]);
 
-    useEffect(()=>{
-        if(data){
-            alert(data.message.vi)
-            navigation('/admin/posts')
-        }
-    },[data])
+  useEffect(() => {
+    if (fetchedData) {
+      setArticle(fetchedData.data);
+    }
+  }, [fetchedData]);
 
-    useEffect(() => {
-        if(dataPostsID){ setStateTitle(dataPostsID.article.title)
-        quill.current.setContents({ops:dataPostsID.article.content}, "api");}
-    }, [dataPostsID])
-    
+  useEffect(() => {
+    if (isSuccess) {
+      alert("Thanh cong");
+    }
+  }, [isSuccess]);
 
-    useEffect(() => {
-        quill.current = new Quill(editorRef.current, {
-        modules: modules,
-        theme: "snow",
-        placeholder: "Thêm đoạn văn ở đây...",
-        });
-        }, []);
+  const initialValues = article
+    ? {
+        title: article.title,
+        author: article.author,
+        origin: article.origin,
+        lead: article.lead,
+        thumb: article.thumb,
+        content: article.content,
+        language: lang,
+      }
+    : null;
 
-return(
+  return (
     <AdminLayout>
-        <div className={style.newposts}>
-            <h1>Chỉnh sửa bài viết {dataPostsID?dataPostsID.article.title:''}</h1>
-            <label>Tiêu đề bài viết</label>
-            <input type='text'  placeholder="Title" value={stateTitle} onChange={changeTitle} required></input>
-            <label>Nội dung bài viết</label>
-            <div className="addItinerary-editor" ref={editorRef}></div>
-            <Button onClick={hanldleSubmit}>Submit</Button>
-        </div>
+      <div className={styles.editPost}>
+        <h1>Article ID: {articleId}</h1>
+
+        <label className={styles.langSelect}>
+          <span>Ngôn ngữ</span>
+          <select value={lang} onChange={(e) => setLang(e.target.value)}>
+            {langs.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        {initialValues && !fetching && (
+          <div className={styles.container}>
+            <ArticleForm
+              initialValues={initialValues}
+              onSubmit={submitHandler}
+            />
+          </div>
+        )}
+      </div>
     </AdminLayout>
-)
+  );
 }
 
-export default NewPosts
+export default EditPost;

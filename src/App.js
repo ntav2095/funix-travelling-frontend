@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import React, { Suspense, useEffect } from "react";
 import Loading from "./components/loading";
 import { LiveChat } from "./containers/Livechat";
+import Category from "./pages/Admin/Category";
 // components
 
 const RequireAuth = React.lazy(() => import("./components/RequireAuth"));
@@ -24,14 +25,14 @@ const NotFound = React.lazy(() => import("./pages/NotFound"));
 // admin pages
 
 // tours
-const NewTour = React.lazy(() => import("./pages/Admin/NewTour"));
-const EditTour = React.lazy(() => import("./pages/Admin/EditTour"));
+const NewTour = React.lazy(() => import("./pages/Admin/Tours/NewTour"));
+const EditTour = React.lazy(() => import("./pages/Admin/Tours/EditTour"));
 const Tours = React.lazy(() => import("./pages/Admin/Tours"));
 const Posts = React.lazy(() => import("./pages/Admin/Posts"));
 const NewPosts = React.lazy(() => import("./pages/Admin/Posts/newPosts"));
 const EditPosts = React.lazy(() => import("./pages/Admin/Posts/editPosts"));
 const UpdateItinerary = React.lazy(() =>
-  import("./pages/Admin/UpdateItinerary")
+  import("./pages/Admin/Tours/UpdateItinerary")
 );
 
 // visa
@@ -69,6 +70,7 @@ function App() {
           <Route path="/admin/login" element={<Login />} />
           <Route element={<RequireAuth />}>
             <Route path="/admin" element={<Dashboard />} />
+            <Route path="/admin/category" element={<Category />} />
 
             {/* tour  */}
             <Route path="/admin/new-tour" element={<NewTour />} />
@@ -89,7 +91,10 @@ function App() {
             {/* posts */}
             <Route path="/admin/posts" element={<Posts />} />
             <Route path="/admin/new-posts" element={<NewPosts />} />
-            <Route path="/admin/edit-posts/:postsId" element={<EditPosts />} />
+            <Route
+              path="/admin/edit-posts/:articleId"
+              element={<EditPosts />}
+            />
           </Route>
         </Routes>
       </Suspense>

@@ -1,7 +1,6 @@
 // main
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Quill from "quill";
-import { v4 as uuid } from "uuid";
 
 const toolbarContainer = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -16,11 +15,16 @@ const modules = {
   toolbar: toolbarContainer,
 };
 
-function Editor({ placeholder, onChange, initialValue, onBlur, onFocus }) {
+function Editor({
+  placeholder,
+  onChange = function () {},
+  initialValue = { ops: [{ insert: "\n" }] },
+  onBlur = function () {},
+  onFocus = function () {},
+}) {
   const quill = useRef();
   const editorRef = useRef();
   const containerRef = useRef();
-
   useEffect(() => {
     if (quill.current) {
       return;
@@ -32,10 +36,7 @@ function Editor({ placeholder, onChange, initialValue, onBlur, onFocus }) {
       placeholder: placeholder || "Thêm đoạn văn ở đây...",
     });
 
-    if (initialValue) {
-      quill.current.setContents(initialValue, "api");
-    }
-
+    quill.current.setContents(initialValue, "api");
     quill.current.on("text-change", () => {
       onChange(quill.current.getContents());
     });

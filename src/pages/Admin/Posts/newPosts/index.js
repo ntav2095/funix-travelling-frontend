@@ -3,74 +3,60 @@ import { Button } from "react-bootstrap";
 import useAxios from "../../../../hooks/useAxios";
 import AdminLayout from "../../../../layout/AdminLayout";
 import style from "./newPost.module.css";
-import { postsApi } from "../../../../services/apis";
-import { useNavigate } from "react-router-dom";
-import Quill from "quill";
-
-const toolbarContainer = [
-  [{ header: [1, 2, 3, 4, 5, 6, false] }],
-  ["bold", "italic", "underline", "strike", "blockquote"],
-  [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
-  ["link", "image"],
-  ["clean"],
-];
-
-const modules = {
-  toolbar: toolbarContainer,
-};
+import { adminApis } from "../../../../services/apis";
+import Editor from "../../../../containers/Editor";
 
 function NewPosts() {
-  const [language, setLanguage] = useState("vie");
-  const navigation = useNavigate();
-  const quill = useRef();
-  const editorRef = useRef();
-  const title = useRef();
+  const [content, setContent] = useState(null);
   const [sendRequest, isLoading, data, error] = useAxios();
 
+  const titleRef = useRef();
+  const authorRef = useRef();
+  const originRef = useRef();
+  const leadRef = useRef();
+  const thumbRef = useRef();
+
   const hanldleSubmit = async () => {
-    await sendRequest(
-      postsApi.add({
-        title: title.current.value,
-        content: JSON.stringify(quill.current.getContents()),
-        language,
-      })
-    );
+    const formData = new FormData();
+    formData.append("title", titleRef.current.value);
+    formData.append("author", authorRef.current.value);
+    formData.append("origin", originRef.current.value);
+    formData.append("lead", leadRef.current.value);
+    formData.append("content", JSON.stringify(content));
+    formData.append("image", thumbRef.current.files[0]);
+    await sendRequest(adminApis.article.add(formData));
   };
 
   useEffect(() => {
     if (data) {
-      alert(data.message.vi);
-      navigation("/admin/posts");
+      alert("Thành công");
     }
   }, [data]);
 
   useEffect(() => {
-    quill.current = new Quill(editorRef.current, {
-      modules: modules,
-      theme: "snow",
-      placeholder: "Thêm đoạn văn ở đây...",
-    });
-  }, []);
+    if (error) {
+      alert("Thất bại");
+    }
+  }, [error]);
 
   return (
     <AdminLayout>
-      <div className={style.newposts}>
-        <h1>New Posts</h1>
-        <label>
-          <p>Ngôn ngữ</p>
-          <select
-            name="language"
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
-          >
-            <option value="vie">Tiếng Việt</option>
-            <option value="eng">English</option>
-          </select>
-        </label>
-        <label>Tiêu đề bài viết</label>
-        <input type="text" placeholder="Title" ref={title} required></input>
+      <div className={style.newpost}>
+        <h1>New Post</h1>
+        <p>Ngôn ngữ mặc định: Tiếng Việt</p>
+
+        <input type="text" placeholder="Tiêu đề" ref={titleRef} required />
+        <input type="text" placeholder="Tác giả" ref={authorRef} required />
+        <input type="text" placeholder="Nguồn" ref={originRef} />
+        <input type="text" placeholder="Mở đầu" ref={leadRef} />
+        <Editor
+          placeholder="Nội dung"
+          onChange={(delta) => setContent(delta)}
+        />
+
+        <input type="file" ref={thumbRef} />
+
         <label>Nội dung bài viết</label>
-        <div className="addItinerary-editor" ref={editorRef}></div>
         <Button onClick={hanldleSubmit}>Submit</Button>
       </div>
     </AdminLayout>

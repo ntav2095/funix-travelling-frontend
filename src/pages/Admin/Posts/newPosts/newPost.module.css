@@ -1,25 +1,8 @@
-.newposts{
-    padding:10px
+.newpost input {
+  margin-bottom: 8px;
+  display: block;
 }
-.newposts *{
-    font-size: 1rem;
-}
-.newposts h1{
-   font-weight: 700;
-   font-size: 2em;
-}
-.newposts-editor{
-    border-radius: 5px;
-}
-.newposts input{
-    width: 100%;
-}
-.newposts button{
-    margin-top: 1em;
-}
-.newposts > label{
-    display:block;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
 
+.newpost button {
+  margin-top: 8px;
 }

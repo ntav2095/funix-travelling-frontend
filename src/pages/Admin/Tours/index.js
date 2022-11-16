@@ -51,7 +51,7 @@ function Tours() {
         text="New Tour"
       >
         <div className={styles.tours}>
-          {data && data.items.length > 0 && (
+          {data && data.data.length > 0 && (
             <table className={styles.table}>
               <thead>
                 <tr>
@@ -71,7 +71,7 @@ function Tours() {
               </thead>
 
               <tbody>
-                {data.items.map((item, index) => (
+                {data.data.map((item, index) => (
                   <tr key={item._id}>
                     <td>
                       <div>{index + 1}</div>
@@ -110,7 +110,7 @@ function Tours() {
             </table>
           )}
 
-          {data && data.items.length === 0 && <h2>Hiện không có tour nào</h2>}
+          {data && data.data.length === 0 && <h2>Hiện không có tour nào</h2>}
 
           {error && (
             <h2 className={styles.errorMessage}>

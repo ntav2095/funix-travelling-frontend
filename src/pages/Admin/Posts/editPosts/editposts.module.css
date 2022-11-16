@@ -1,25 +1,16 @@
-.newposts{
-    padding:10px
+.editPost input {
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  display: block;
 }
-.newposts *{
-    font-size: 1rem;
-}
-.newposts h1{
-   font-weight: 700;
-   font-size: 2em;
-}
-.newposts-editor{
-    border-radius: 5px;
-}
-.newposts input{
-    width: 100%;
-}
-.newposts button{
-    margin-top: 1em;
-}
-.newposts > label{
-    display:block;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
 
+.editPost button {
+  background: var(--main-color);
+  color: white;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.editPost img {
+  display: block;
 }

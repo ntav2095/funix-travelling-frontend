@@ -99,3 +99,85 @@ export const visaApi = {
     data: { visaId },
   }),
 };
+
+export const categoryApi = {
+  get: () => ({
+    method: "GET",
+    url: "/admin/categories",
+  }),
+  add: (formData) => ({
+    method: "POST",
+    url: "/admin/categories",
+    formData,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  }),
+};
+
+export const adminApis = {
+  article: {
+    add: (formData) => ({
+      method: "POST",
+      url: "/admin/article",
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }),
+    getSingle: (articleId, cat_lang) => ({
+      method: "GET",
+      url: `/admin/article/${articleId}/?cat_lang=${cat_lang}`,
+    }),
+    edit: (formData) => ({
+      method: "PUT",
+      url: "/admin/article",
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }),
+  },
+
+  tour: {
+    add: (formData) => ({
+      method: "POST",
+      url: "/admin/tour",
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }),
+    getSingle: (tourId, cat_lang) => ({
+      method: "GET",
+      url: `/admin/tour/${tourId}/?cat_lang=${cat_lang}`,
+    }),
+    edit: (formData) => ({
+      method: "PUT",
+      url: "/admin/tour",
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }),
+  },
+
+  itinerary: {
+    update: (data) => ({
+      method: "PUT",
+      url: "/admin/tour/itinerary",
+      data,
+    }),
+  },
+  category: {
+    add: (data) => ({
+      method: "POST",
+      url: "/admin/categories",
+      data,
+    }),
+    get: () => ({
+      method: "GET",
+      url: "/admin/categories",
+    }),
+  },
+};
