@@ -30,7 +30,7 @@ function ContactTable({ tour, isLoading }) {
               <div>
                 <p>Thời gian:</p>
                 <p>
-                  {tour.duration.days} ngày {tour.duration.nights} đêm
+                  {tour.days} ngày {tour.nights} đêm
                 </p>
               </div>
               <div>

@@ -22,10 +22,9 @@ import ReviewTour from "./ReviewTour";
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const { tourId } = useParams();
-  const tourName = data ? data.item.name : "Tour du lịch";
-  usePageTitle(`${tourName} || Go Travel`);
+  const tour = data ? data.data : null;
 
-  const tour = data ? data.item : null;
+  usePageTitle(`${tour?.name} || Go Travel`);
 
   useEffect(() => {
     sendRequest(tourApi.getSingleTour(tourId));
@@ -37,7 +36,7 @@ function TourDetail() {
     {
       href: `/danh-sach-tour/${tourId}`,
       active: true,
-      text: data?.item?.name || "Chi tiết tour",
+      text: tour?.name || "Chi tiết tour",
     },
   ];
 
