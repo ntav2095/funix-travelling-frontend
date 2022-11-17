@@ -24,8 +24,8 @@ function Tour(props){
             settings: {
               slidesToShow: 3,
               slidesToScroll: 3,
-              infinite: true,
-              dots: true
+              infinite: false,
+              dots: false
             }
           },
           {
@@ -33,7 +33,7 @@ function Tour(props){
             settings: {
               slidesToShow: 2,
               slidesToScroll: 2,
-              initialSlide: 2
+              initialSlide: 0
             }
           }
         ]

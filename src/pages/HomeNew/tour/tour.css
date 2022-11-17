@@ -13,3 +13,9 @@
     padding: 8px 8px 0px 8px;
     display: block;
 }
+.slick-next {
+    right: -7px;
+}
+.slick-prev {
+    left: -7px;
+}
