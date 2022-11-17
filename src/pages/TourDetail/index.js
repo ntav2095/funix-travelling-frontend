@@ -20,19 +20,22 @@ import usePageTitle from "../../hooks/usePageTitle";
 //  css
 import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
+import { useTranslation } from "react-i18next";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const { tourId } = useParams();
+  const { i18n } = useTranslation();
 
   const tour = data ? data.data.item : null;
 
   const tourName = tour ? tour.name : "Tour du lịch";
   usePageTitle(`${tourName} || Go Travel`);
+  console.log("xxx", i18n.language);
 
   useEffect(() => {
     sendRequest(tourApi.getSingleTour(tourId));
-  }, []);
+  }, [i18n.language]);
 
   const breadcrumb = [
     { href: "/", active: false, text: "trang chủ" },

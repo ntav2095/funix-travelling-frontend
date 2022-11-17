@@ -15,6 +15,7 @@ import { tourApi } from "../../services/apis";
 // css
 import styles from "./TourList.module.css";
 import Panavigation from "../../containers/panavigation";
+import { useTranslation } from "react-i18next";
 
 const breadcrumb = [
   { href: "/", active: false, text: "trang chủ" },
@@ -24,10 +25,11 @@ const breadcrumb = [
 function ToursList() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const [page, setPage] = useState(1);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     sendRequest(tourApi.get({ page: page }));
-  }, [page]);
+  }, [page, i18n.language]);
 
   function setpage(e) {
     setPage(e);
