@@ -1,0 +1,21 @@
+.slick-next.slick-disabled:before, .slick-prev.slick-disabled:before {
+    display: none;
+}
+.slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: #b9b4b4;
+    -webkit-font-smoothing: antialiased;
+}
+.slick-initialized .slick-slide {
+    padding: 8px 8px 0px 8px;
+    display: block;
+}
+.slick-next {
+    right: -7px;
+}
+.slick-prev {
+    left: -7px;
+}

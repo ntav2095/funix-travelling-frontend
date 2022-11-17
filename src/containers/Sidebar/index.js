@@ -14,14 +14,13 @@ function Sidebar({ primary }) {
 
   const tours = toursData ? toursData.items : null;
   const articles = articlesData ? articlesData.items : null;
-  console.log('articles',articles)
   useEffect(() => {
     fetchTours(tourApi.get({ trending: true }));
     fetchArtilces(postsApi.get({ trending: true }));
   }, []);
 
   const getArticleImage = (articleContent) => {
-    const content =articleContent.ops
+    const content = articleContent.ops;
     let imageSrc = "";
     for (const item of content) {
       if (item.insert?.image) {
@@ -30,12 +29,11 @@ function Sidebar({ primary }) {
       }
     }
   };
-useEffect(()=>{
-  if (articles && articles.length > 0) {
-    getArticleImage(articles[0].content);
-  }
-},[articles])
-  
+  useEffect(() => {
+    if (articles && articles.length > 0) {
+      getArticleImage(articles[0].content);
+    }
+  }, [articles]);
 
   return (
     <div className={styles.sidebar}>

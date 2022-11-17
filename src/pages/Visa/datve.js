@@ -28,7 +28,6 @@ function Datvisa(args) {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log(date.current);
     await axios
       .post("https://sheetdb.io/api/v1/4zwi51ze52sbh", {
         data: {

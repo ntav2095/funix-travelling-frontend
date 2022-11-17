@@ -1,85 +1,105 @@
-.contactTable {
-  background: #2d9ad9;
-  color: white;
-  padding: 30px 16px;
+.container {
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 992px) {
+  .container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+}
+
+.container > * {
+  width: 300px;
+}
+
+.card {
+  box-shadow: var(--box-shadow);
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  padding-bottom: 24px;
+}
+
+.card .price {
+  font-size: 20px;
+}
+
+.card ul {
+  padding: 0;
+  padding-left: 16px;
+}
+
+.card ul li {
+  margin-bottom: 6px;
+}
+
+.card ul li span,
+.card ul li strong {
+  line-height: 1.2;
+  position: relative;
+}
+
+.card ul li span::before {
+  content: "•"; /* Insert content that looks like bullets */
+  position: absolute;
+  right: calc(100% + 3.6px);
+  top: 1px;
+  color: rgb(0, 0, 0); /* Or a color you prefer */
   font-size: 15px;
-  max-width: 460px;
-  margin: 0 auto;
 }
 
-.title {
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-.generalInfo {
-  padding: 16px 0;
-}
-
-.generalInfo > div {
-  display: flex;
-  justify-content: space-between;
-}
-
-.generalInfo > div p:first-child {
-  margin-right: 16px;
-  white-space: nowrap;
-  flex: 1;
-}
-
-.generalInfo > div p:last-child {
-  flex: 3;
-  display: flex;
-  justify-content: flex-end;
-  text-align: justify;
-}
-
-.price {
-  text-align: center;
-  padding: 8px 0px;
-  border: 2px solid white;
-  color: white;
-  text-transform: uppercase;
-}
-
-.orderBtn {
-  color: white;
-  height: 40px;
-  background: #e74c3c;
+.card button {
   width: 100%;
-  text-transform: uppercase;
-  font-weight: 500;
-  letter-spacing: 0.8px;
-}
-
-.contactSoon {
-  text-align: center;
-  padding-top: 16px;
-}
-
-.callbackBtn {
-  height: 40px;
-  text-align: center;
-  text-transform: uppercase;
-  background: #f98b04;
-  width: 100%;
-  color: white;
-  font-weight: 500;
-  letter-spacing: 0.8px;
-}
-
-.phoneImage {
-  display: block;
-  margin: 0 auto;
+  padding: 12px;
   margin-bottom: 8px;
+  color: #050505;
+  border-radius: 999px;
+  border: 1px solid #ccc;
+  background: white;
+  font-weight: 600;
 }
 
-.phoneInput {
-  height: 40px;
-  padding: 6px 8px;
-  width: 100%;
-  margin-bottom: 16px;
+.card button:first-of-type {
+  position: relative;
 }
+
+.card button:first-of-type svg {
+  position: absolute;
+  right: 15px;
+  width: 12px;
+  margin-top: 2px;
+}
+
+.card button:nth-of-type(2) {
+  background: #000;
+  color: white;
+}
+
+/* ========= contactInfo ==========  */
+.contactInfo {
+  padding: 16px;
+}
+
+.contactInfo ul {
+  padding: 0;
+  margin: 0;
+}
+
+.contactInfo li {
+  white-space: nowrap;
+}
+
+.contactInfo img {
+  width: 80%;
+}
+
+/* @media only screen and (max-width: 992px) {
+  .contactInfo {
+    flex-direction: column;
+  }
+} */
 
 .placeHolder {
   height: 550px;

@@ -2,50 +2,58 @@ import React, { useEffect } from "react";
 import styles from "./tour.module.css";
 import { brokenImage } from "../../../assets/images";
 import { useNavigate } from "react-router-dom";
-import { click } from "@testing-library/user-event/dist/click";
+import Slider from "react-slick";
+import "./tour.css";
 
 function Tour(props) {
   const { title, tour, naviga, isLoading } = props;
   const navigation = useNavigate();
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 0,
+        },
+      },
+    ],
+  };
   const handlerBrokenImg = (e) => {
     e.target.src = brokenImage;
   };
-
-  const click = (e) => {
-    const scroll = document.getElementById("scroll");
-    if (e) {
-      // document.documentElement.scrollLeft
-      scroll.scrollLeft = scroll.scrollLeft - 100;
-    } else {
-      scroll.scrollLeft = scroll.scrollLeft + 100;
-    }
-  };
-
-  useEffect(() => {
-    const scroll = document.getElementById("scroll");
-    scroll.addEventListener("scroll", () => {
-      console.log(scroll.scrollLeft);
-      scroll.scrollLeft = scroll.scrollLeft + 100;
-    });
-  }, []);
 
   return (
     <div className={styles.title}>
       <div>
         <h3>{title}</h3>
       </div>
-      <div className={styles.position}>
-        <div id="scroll" className={styles.container}>
-          <button
-            className={styles.button + " " + styles.after}
-            onClick={() => click(0)}
-          >
-            {"<"}
-          </button>
+      <div className={styles.container}>
+        <Slider {...settings}>
           {!isLoading &&
             tour &&
             tour.map((item, id) => (
-              <div key={id} className={styles.carouselItem} onClick={() => {}}>
+              <div
+                key={id}
+                className={styles.carouselItem}
+                onClick={() => navigation("/danh-sach-tour/" + item._id)}
+              >
                 <div className={styles.img}>
                   <img
                     src={item.thumb}
@@ -54,7 +62,7 @@ function Tour(props) {
                   />
                 </div>
                 <div className={styles.content}>
-                  <h6>item.name</h6>
+                  <h5>{item.name}</h5>
                   <ul>
                     <li>{item.journey}</li>
                     <li>{item.days + " ngày " + item.nights + " đêm"}</li>
@@ -63,19 +71,7 @@ function Tour(props) {
                 </div>
               </div>
             ))}
-
-          {isLoading && (
-            <div
-              className={styles.carouselItem + " " + styles.placeholder}
-            ></div>
-          )}
-          <button
-            className={styles.button + " " + styles.befor}
-            onClick={() => click(1)}
-          >
-            {">"}
-          </button>
-        </div>
+        </Slider>
       </div>
       <div className={styles.tourdetail} onClick={() => navigation(naviga)}>
         Xem tất cả

@@ -15,7 +15,6 @@ import { tourApi } from "../../services/apis";
 // css
 import styles from "./TourList.module.css";
 import Panavigation from "../../containers/panavigation";
-import i18n from "../../services/languages/i18n";
 
 const breadcrumb = [
   { href: "/", active: false, text: "trang chủ" },
@@ -57,6 +56,7 @@ function ToursList() {
                 </Col>
               ))}
           </Row>
+
           <Panavigation totalPage={3} callback={setpage} />
         </div>
       </div>

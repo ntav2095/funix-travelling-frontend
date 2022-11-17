@@ -49,7 +49,6 @@ function Header() {
     });
   }
   function topFunction() {
-    console.log("gọi hàm");
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
@@ -57,10 +56,8 @@ function Header() {
     window.addEventListener("scroll", () => {
       const container = document.getElementById("container-navbar");
       if (document.documentElement.scrollTop > 250) {
-        console.log("add");
         container.classList.add(styles.fixed);
       } else if (document.documentElement.scrollTop <= 10) {
-        console.log("remove");
         container.classList.remove(styles.fixed);
       }
       if (
@@ -119,13 +116,13 @@ function Header() {
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
-                    <NavLink className="nav-link" to="/danh-sach-tour">
+                    <NavLink className="nav-link" to="/tour-chau-au">
                       {i18next.t("header.euTours")}
                     </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
-                    <NavLink className="nav-link" to="/danh-sach-tour">
+                    <NavLink className="nav-link" to="/tour-trong-nuoc">
                       {i18next.t("header.viTours")}
                     </NavLink>
                   </NavItem>
@@ -189,10 +186,6 @@ function Header() {
                       ></i>
                     </button>
                   </NavItem>
-
-                  <NavItem>
-                    <Search />
-                  </NavItem>
                 </Nav>
               </Offcanvas.Body>
             </Offcanvas>
@@ -244,9 +237,6 @@ function Header() {
                   <NavLink className="nav-link" to="/cam-nang-du-lich">
                     {i18next.t("header.travelHandbook")}
                   </NavLink>
-                </NavItem>
-                <NavItem>
-                  <Search />
                 </NavItem>
                 <NavItem>
                   <button

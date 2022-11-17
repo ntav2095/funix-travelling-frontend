@@ -11,13 +11,15 @@ import TourCarousel from "./TourCarousel";
 import useAxios from "../../hooks/useAxios";
 import { tourApi } from "../../services/apis";
 
+// assets
+import { hearder as bannerImg } from "../../assets/images";
+
 // hooks
 import usePageTitle from "../../hooks/usePageTitle";
 
 //  css
 import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
-import i18n from "../../services/languages/i18n";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -38,15 +40,18 @@ function TourDetail() {
     {
       href: `/danh-sach-tour/${tourId}`,
       active: true,
-      text: data?.item?.name || "Chi tiết tour",
+      text: tour?.name || "Chi tiết tour",
     },
   ];
-
-  console.log(tour);
 
   return (
     <Layout breadcrumb={breadcrumb}>
       <div className="myContainer">
+        <img src={bannerImg} className="img-fluid w-100" alt="" />
+      </div>
+
+      <div className="myContainer">
+        <h1 className="text-uppercase my-4 ">{tour?.name}</h1>
         <div className={styles.top}>
           <div className={styles.carousel}>
             <TourCarousel tour={tour} isLoading={isLoading} />

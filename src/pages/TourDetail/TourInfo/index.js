@@ -64,7 +64,7 @@ const TourInfo = ({ tour, isLoading }) => {
                       {tour.highlights
                         .filter((item) => Boolean(item.trim()))
                         .map((item, index) => (
-                          <li key={index}>{item}</li>
+                          <li key={index}>- {item}</li>
                         ))}
                     </ul>
                   </div>
@@ -136,7 +136,7 @@ const TourInfo = ({ tour, isLoading }) => {
           ),
         },
         {
-          menuItem: "Giá Bao Gồm",
+          menuItem: "Bảng giá",
           render: () => (
             <Tab.Pane attached={false}>
               <div
@@ -146,25 +146,37 @@ const TourInfo = ({ tour, isLoading }) => {
               >
                 <h2>Giá bao gồm</h2>
 
-                <ul>
+                <ul className="ps-2">
                   {tour.priceIncludes.map((item, index) => (
-                    <li key={index}>{item}</li>
+                    <li key={index}>- {item}</li>
                   ))}
                 </ul>
 
                 <h2>Giá không bao gồm</h2>
 
-                <ul>
+                <ul className="ps-2">
                   {tour.priceExcludes.map((item, index) => (
-                    <li key={index}>{item}</li>
+                    <li key={index}>- {item}</li>
                   ))}
                 </ul>
+              </div>
+            </Tab.Pane>
+          ),
+        },
+        {
+          menuItem: "Điều khoản",
+          render: () => (
+            <Tab.Pane attached={false}>
+              <div
+                className={styles.price}
+                role="tabpanel"
+                aria-labelledby="tab-title-gia-bao-gom"
+              >
+                <h2>Điều kiện hoàn hủy</h2>
 
-                <h2>Giá không bao gồm</h2>
-
-                <ul>
-                  {tour.price.excludes.map((item, index) => (
-                    <li key={index}>{item}</li>
+                <ul className="ps-3">
+                  {tour.cancellationPolicy.map((item, index) => (
+                    <li key={index}>- {item}</li>
                   ))}
                 </ul>
               </div>
@@ -177,13 +189,7 @@ const TourInfo = ({ tour, isLoading }) => {
   return (
     <div className={styles.tourInfo}>
       {!isLoading && tour && (
-        <Tab
-          menu={{
-            color: "blue",
-            inverted: true,
-          }}
-          panes={panes}
-        />
+        <Tab menu={{ attached: true, tabular: true }} panes={panes} />
       )}
 
       {isLoading && (

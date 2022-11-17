@@ -1,17 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import Modal from "react-bootstrap/Modal";
 import { brokenImage } from "../../../assets/images";
 import { xMark as closeSVG } from "../../../assets/svgs";
+import Slider from "react-slick";
 
 import styles from "./TourCarousel.module.css";
+import "./override.css";
+import { useEffect } from "react";
+
+const settings = {
+  className: "center",
+  centerMode: true,
+  infinite: true,
+  centerPadding: "60px",
+  slidesToShow: 1,
+  speed: 500,
+};
 
 function TourCarousel({ tour, isLoading }) {
   const [index, setIndex] = useState(0);
   const [isShowModal, setIsShowModal] = useState(false);
+  const sliderRef = useRef();
 
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
+  const handleSelect = (selectedIndex) => {
+    if (selectedIndex === -1) {
+      setIndex(tour?.slider.length - 1);
+    } else if (selectedIndex === tour?.slider.length) {
+      setIndex(0);
+    } else {
+      setIndex(selectedIndex);
+    }
   };
 
   const handlerBrokenImg = (e) => {
@@ -24,44 +43,30 @@ function TourCarousel({ tour, isLoading }) {
 
   return (
     <>
-      <Carousel activeIndex={index} onSelect={handleSelect}>
-        {!isLoading &&
-          tour &&
-          tour.slider.map((img, id) => (
-            <Carousel.Item
-              key={id}
-              className={styles.carouselItem}
-              onClick={() => setIsShowModal(true)}
-            >
-              <img src={img} alt={tour.name} onError={handlerBrokenImg} />
-            </Carousel.Item>
-          ))}
-
-        {isLoading && (
-          <div className={styles.carouselItem + " " + styles.placeholder}></div>
-        )}
-      </Carousel>
-
-      <div className={styles.imageMenu}>
-        {!isLoading &&
-          tour &&
-          tour.slider.map((img, id) => (
-            <div key={id} className={styles.image} onClick={() => setIndex(id)}>
-              <img src={img} alt={tour.name} onError={handlerBrokenImg} />
-              {index !== id && <div className={styles.overlay} />}
-            </div>
-          ))}
-
-        {isLoading &&
-          new Array(4)
-            .fill(1)
-            .map((item, id) => (
+      <div className="tourCarousel__container">
+        <Slider
+          {...settings}
+          afterChange={(x) => {
+            setIndex(x);
+          }}
+        >
+          {!isLoading &&
+            tour &&
+            tour.slider.map((img, id) => (
               <div
                 key={id}
-                className={styles.image + " " + styles.placeholder}
-              />
+                className={styles.image}
+                onClick={() => setIsShowModal(true)}
+              >
+                <img src={img} alt={tour.name} onError={handlerBrokenImg} />
+              </div>
             ))}
+        </Slider>
       </div>
+
+      {isLoading && (
+        <div className={styles.carouselItem + " " + styles.placeholder}></div>
+      )}
 
       <Modal
         show={isShowModal}

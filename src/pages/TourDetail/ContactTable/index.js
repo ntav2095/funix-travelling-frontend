@@ -1,71 +1,95 @@
 import React from "react";
 import BookingModal from "../BookingModal";
 import { format } from "date-fns";
-
-// vũ css
+import { home3 as phonePng } from "../../../assets/images";
+import { arrowRight as arrowSvg } from "../../../assets/svgs";
 import styles from "./ContactTable.module.css";
 
 function ContactTable({ tour, isLoading }) {
   const [modalShow, setModalShow] = React.useState(false);
-  console.log(tour);
-  const departureDates = tour
-    ? tour.departureDates
-        .map((item) => format(new Date(item), "dd/MM/yyyy"))
-        .join(", ")
-    : "";
 
+  const pointOfDeparture = tour ? tour.journey.split("-")[0].trim() : "";
+  const destinations = tour
+    ? tour.journey
+        .split("-")
+        .map((item) => item.trim())
+        .filter((item) => item.toLowerCase() !== pointOfDeparture.toLowerCase())
+        .join(" - ")
+    : "";
   return (
     <>
       <BookingModal show={modalShow} onHide={() => setModalShow(false)} />
 
       {!isLoading && tour && (
-        <div className={styles.contactTable}>
-          <div>
-            <h3 className={styles.title}>Gọi để tư vấn</h3>
-            <div className={styles.generalInfo}>
-              <div>
-                <p>Ngày khởi hành:</p>
-                <p>{departureDates}</p>
-              </div>
-              <div>
-                <p>Thời gian:</p>
-                <p>
+        <div
+          className={
+            styles.container +
+            " d-flex d-lg-block align-items-start flex-column flex-sm-row "
+          }
+        >
+          <div className={styles.card + " mx-auto"}>
+            <ul className={styles.tourInfo}>
+              <li>
+                <span>Trọn gói: </span>
+                <strong className={styles.price}>
+                  {tour.currentPrice.toLocaleString()} đ
+                </strong>
+              </li>
+              <li>
+                <span>Điểm đến: </span>
+                <strong>{destinations}</strong>
+              </li>
+              <li>
+                <span>Thời gian: </span>
+                <strong>
                   {tour.days} ngày {tour.nights} đêm
-                </p>
-              </div>
-              <div>
-                <p>Lịch trình:</p>
-                <p>{tour.journey}</p>
-              </div>
-            </div>
-
-            <p className={styles.price}>{tour.currentPrice} đồng</p>
+                </strong>
+              </li>
+              <li>
+                <span>Điểm khởi hành: </span>
+                <strong>{pointOfDeparture}</strong>
+              </li>
+            </ul>
 
             <button
               className={styles.orderBtn}
               onClick={() => setModalShow(true)}
             >
-              Đặt Tour ngay
+              Ngày khởi hành
+              {arrowSvg}
             </button>
 
-            <p className={styles.contactSoon}>Liên hệ càng sớm - Giá càng rẻ</p>
-
-            <img src="/asscets/img/duanmoi.png" className={styles.phoneImage} />
-
-            <p>
-              Hoặc để lại số điện thoại, chúng tôi sẽ gọi lại cho bạn sau ít
-              phút!
-            </p>
-
-            <input
-              className={styles.phoneInput}
-              type="tel"
-              placeholder="Số điên thoại của bạn là"
-            />
-
-            <button type="submit" className={styles.callbackBtn}>
-              yêu cầu gọi lại
+            <button
+              className={styles.orderBtn}
+              onClick={() => setModalShow(true)}
+            >
+              Đặt tour
             </button>
+
+            <button
+              className={styles.orderBtn}
+              onClick={() => setModalShow(true)}
+            >
+              Liên hệ tư vấn
+            </button>
+          </div>
+
+          <div
+            className={
+              styles.contactInfo + " row  mt-4 mt-sm-0 mt-lg-4 mx-auto"
+            }
+          >
+            <div className="col-8 ">
+              <h4 className="mb-2">Thông tin liên hệ:</h4>
+              <ul>
+                <li>Hotline: 123456789</li>
+                <li>Zalo: 123456789</li>
+                <li>Email: abcxyz@gmail.com</li>
+              </ul>
+            </div>
+            <div className="col-4 d-flex align-items-center justify-content-center ">
+              <img src={phonePng} alt="phone" />
+            </div>
           </div>
         </div>
       )}

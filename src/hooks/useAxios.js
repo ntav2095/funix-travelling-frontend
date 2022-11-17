@@ -8,11 +8,11 @@ export const i18nInjector = (injectedObj) => {
   i18n = injectedObj;
 };
 
-const defaultDataHandler = (data) => {
+const defaultDataHadnler = (data) => {
   return data;
 };
 
-function useAxios(dataHandler = defaultDataHandler) {
+function useAxios(dataHandler = defaultDataHadnler) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);

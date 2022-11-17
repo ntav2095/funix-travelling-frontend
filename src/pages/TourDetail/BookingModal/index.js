@@ -6,7 +6,6 @@ import "./BookingModal.css";
 function BookingModal(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
     const tour = e.target[0].value;
     const maleFemale = e.target[1].checked
       ? "Mr"

@@ -9,7 +9,6 @@ function TourForm({ initialValues, onSubmit, cat }) {
   );
 
   const checkHandler = (setFieldValue, values, src) => {
-    console.log(values);
     if (values.removedImages.includes(src)) {
       setFieldValue(
         "removedImages",
