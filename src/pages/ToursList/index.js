@@ -15,7 +15,6 @@ import { tourApi } from "../../services/apis";
 // css
 import styles from "./TourList.module.css";
 import Panavigation from "../../containers/panavigation";
-import i18n from "../../services/languages/i18n";
 
 const breadcrumb = [
   { href: "/", active: false, text: "trang chủ" },
@@ -24,15 +23,14 @@ const breadcrumb = [
 
 function ToursList() {
   const [sendRequest, isLoading, data, error] = useAxios();
-  const [page,setPage]= useState(1)
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    sendRequest(tourApi.get({page:page}));
+    sendRequest(tourApi.get({ page: page }));
   }, [page]);
 
-  console.log('data',data)
-  console.log('page',page)
-  function setpage(e){
-    setPage(e)
+  function setpage(e) {
+    setPage(e);
   }
 
   usePageTitle(`Danh sách tours || Go Travel`);
@@ -44,8 +42,8 @@ function ToursList() {
           <Row lg="3" md="2" sm="1">
             {!isLoading &&
               data &&
-              data.items.length > 0 &&
-              data.items.map((tour) => (
+              data.data.length > 0 &&
+              data.data.map((tour) => (
                 <Col key={tour._id} className="mb-4">
                   <TourCard tour={tour} />
                 </Col>
@@ -58,6 +56,7 @@ function ToursList() {
                 </Col>
               ))}
           </Row>
+
           <Panavigation totalPage={3} callback={setpage} />
         </div>
       </div>

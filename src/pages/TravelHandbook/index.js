@@ -26,10 +26,9 @@ const breadcrumb = [
 
 function TravelHandbook() {
   const [sendRequest, isLoading, data, error] = useAxios();
-  const [page,setPage]=useState(1)
-  console.log(data)
-  function setpage(e){
-    setPage(e)
+  const [page, setPage] = useState(1);
+  function setpage(e) {
+    setPage(e);
   }
 
   function date(dateString) {
@@ -56,7 +55,7 @@ function TravelHandbook() {
     return description;
   }
   useEffect(() => {
-    sendRequest(postsApi.get({page:page}));
+    sendRequest(postsApi.get({ page: page }));
   }, [page]);
 
   usePageTitle(`Cẩm nang du lịch || Go Travel`);
@@ -82,11 +81,14 @@ function TravelHandbook() {
                         className={classes.image}
                         // style={{
                         //   backgroundImage: `url(${
-                            
+
                         //   })`,
                         // }}
                       >
-                        <img src='../../assets/images/placeholder.jpg' lazy={contentDes(item.content.ops).image[0]}   />
+                        <img
+                          src="../../assets/images/placeholder.jpg"
+                          lazy={contentDes(item.content.ops).image[0]}
+                        />
                       </div>
                       <div className={classes.boxText}>
                         <h2 className={classes.title}>{item.title}</h2>
@@ -110,7 +112,7 @@ function TravelHandbook() {
                 </div>
               ))}
           </div>
-            <Panavigation totalPage={3} callback={setpage} />
+          <Panavigation totalPage={3} callback={setpage} />
         </div>
       </Layout>
     </>

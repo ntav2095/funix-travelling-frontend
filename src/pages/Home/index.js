@@ -13,7 +13,7 @@ import SpinnerModal from "../../components/SpinnerModal";
 import useAxios from "../../hooks/useAxios";
 import { tourApi } from "../../services/apis";
 
-import datatour from '../../data/tour/tours'
+import datatour from "../../data/tour/tours";
 // css
 import styles from "./Home.module.css";
 import EuropeTours from "./tourChauAu";
@@ -25,11 +25,9 @@ function Home() {
   const [sendRequest, isLoading, data, error] = useAxios();
 
   useEffect(() => {
-    sendRequest(tourApi.get({lang:i18n.language}));
+    sendRequest(tourApi.get({ lang: i18n.language }));
   }, []);
-//  const data={items:datatour}
-//   const isLoading=false
-//   console.log(data)
+
   usePageTitle("Trang chủ || Go Travel");
   return (
     <Layout>
@@ -44,15 +42,15 @@ function Home() {
       <div className="myContainer">
         <TrendingTours tours={data?.items} isLoading={isLoading} />
       </div>
-      
+
       <div className="myContainer">
         <EuropeTours tours={data?.items} isLoading={isLoading} />
       </div>
-      
+
       <div className="myContainer">
         <CountryTours tours={data?.items} isLoading={isLoading} />
       </div>
-      
+
       <div className="myContainer">
         <CamNang tours={data?.items} isLoading={isLoading} />
       </div>

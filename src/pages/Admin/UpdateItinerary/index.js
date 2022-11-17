@@ -90,7 +90,6 @@ function UpdateItinerary() {
 
   useEffect(() => {
     if (fetchedTour) {
-      console.log("itinerary: ", fetchedTour.item.itinerary);
       setPlan(fetchedTour.item.itinerary);
     }
   }, [fetchedTour]);
@@ -199,7 +198,6 @@ function UpdateItinerary() {
                     </div>
                   );
                 } else {
-                  console.log(".......", item.content);
                   return (
                     <div key={language + item.id} className={styles.portion}>
                       <Paragraph

@@ -8,7 +8,11 @@ export const i18nInjector = (injectedObj) => {
   i18n = injectedObj;
 };
 
-function useAxios() {
+const defaultDataHadnler = (data) => {
+  return data;
+};
+
+function useAxios(dataHandler = defaultDataHadnler) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
@@ -28,7 +32,7 @@ function useAxios() {
         signal: abortController.current.signal,
       });
 
-      setData(response.data);
+      setData(dataHandler(response.data));
     } catch (error) {
       console.error(error);
       if (error.response) {

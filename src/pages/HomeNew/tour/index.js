@@ -9,7 +9,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "./tour.css";
 function Tour(props) {
   const { title, tour, naviga, isLoading } = props;
-  console.log(tour);
   const navigation = useNavigate();
   const settings = {
     dots: false,
@@ -24,8 +23,8 @@ function Tour(props) {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          infinite: true,
-          dots: true,
+          infinite: false,
+          dots: false,
         },
       },
       {
@@ -33,7 +32,7 @@ function Tour(props) {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2,
+          initialSlide: 0,
         },
       },
     ],

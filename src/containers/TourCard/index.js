@@ -9,14 +9,13 @@ import { brokenImage } from "../../assets/images";
 import styles from "./TourCard.module.css";
 
 function TourCard({ tour }) {
-  console.log(tour);
   return (
     <Card className={styles.card}>
       <Link
         className={styles.image}
         to={`/danh-sach-tour/${tour._id}`}
         style={{
-          backgroundImage: `url(${tour.images[0]}), url(${brokenImage})`,
+          backgroundImage: `url(${tour.thumb}), url(${brokenImage})`,
         }}
       ></Link>
 
@@ -27,7 +26,7 @@ function TourCard({ tour }) {
           </CardTitle>
         </Link>
         <CardSubtitle tag="h6" className={styles.duration}>
-          {/* {tour.duration.days} ngày {tour.duration.nights} đêm */}
+          {tour.days} ngày {tour.nights} đêm
         </CardSubtitle>
         <CardSubtitle tag="h6" className={styles.journey} title={tour.journey}>
           {tour.journey}
@@ -35,7 +34,7 @@ function TourCard({ tour }) {
 
         <div className={styles.cardFooter}>
           <p className={styles.price}>
-            {/* {tour.currentPrice.toLocaleString()} ĐỒNG */}
+            {tour.currentPrice.toLocaleString()} ĐỒNG
           </p>
           <Link className={styles.seeDetail} to={`/danh-sach-tour/${tour._id}`}>
             XEM CHI TIẾT

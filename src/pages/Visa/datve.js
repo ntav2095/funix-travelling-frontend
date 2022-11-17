@@ -9,17 +9,16 @@ import "./visa.css";
 import axios from "axios";
 
 function Datvisa(args) {
- 
   let [SLkhach, setSLkhach] = useState(1);
-  const [date,setDate]=useState()
+  const [date, setDate] = useState();
   //   const plus = (a) => setSLkhach(a + 1);
   //   const minus = (a) => {
   //     setSLkhach(a - 1);
   //   };
 
-  const handleChangeInput=(e)=>{
-    setDate(e.target.value)
-  }
+  const handleChangeInput = (e) => {
+    setDate(e.target.value);
+  };
 
   const formatter = new Intl.NumberFormat("en-US", {
     // style: "currency",
@@ -27,33 +26,31 @@ function Datvisa(args) {
     minimumFractionDigits: 0,
   });
 
-  const handleClick=async (e)=>{
-    e.preventDefault()
-    console.log(date.current)
-    await axios.post('https://sheetdb.io/api/v1/4zwi51ze52sbh', {
-      "data":{
-        'ngaydangki':new Date,
-        'ngaynhapcanh':date,
-        'soluongkhach':SLkhach,
-        'tongtien':6032000*SLkhach,
-      
-      }
-    })
-    .then(e=>e.json())
-    .then(data=>data)
-    .catch(err=>console.log(err))
-
-  }
-
+  const handleClick = async (e) => {
+    e.preventDefault();
+    console.log(date.current);
+    await axios
+      .post("https://sheetdb.io/api/v1/4zwi51ze52sbh", {
+        data: {
+          ngaydangki: new Date(),
+          ngaynhapcanh: date,
+          soluongkhach: SLkhach,
+          tongtien: 6032000 * SLkhach,
+        },
+      })
+      .then((e) => e.json())
+      .then((data) => data)
+      .catch((err) => console.log(err));
+  };
 
   return (
     <Card>
       <CardBody>
-        <div class="type-0 box-book">
-          <div class="divided"></div>
+        <div className="type-0 box-book">
+          <div className="divided"></div>
           <form method="" action="">
-            <Row class="box-content">
-              <Col class="box-form">
+            <Row className="box-content">
+              <Col className="box-form">
                 <Row>
                   <Col className="box-info-date">
                     <label>Chọn ngày nhập cảnh</label>

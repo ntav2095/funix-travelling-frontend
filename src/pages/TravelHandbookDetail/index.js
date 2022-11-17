@@ -23,13 +23,11 @@ import { useTranslation } from "react-i18next";
 
 function TravelHandbookDetail() {
   const [state, setState] = useState();
-  console.log(state)
- 
-  const {i18n} = useTranslation()
+
+  const { i18n } = useTranslation();
   const [sendRequest, isLoading, data, error] = useAxios();
   const quill = useRef();
   const { id } = useParams();
-  console.log(data)
   function date(dateString) {
     const dateStringtoformater = new Date(dateString);
     const day = getDate(dateStringtoformater);
@@ -58,14 +56,13 @@ function TravelHandbookDetail() {
   }, [i18n.language]);
 
   useEffect(() => {
-    console.log(i18n.language)
     if (data) {
       setState(data.article);
     }
     // }else if(data){
     //   setState(data.article.translation[0]);
     // }
-  }, [data,i18n.language]);
+  }, [data, i18n.language]);
 
   useEffect(() => {
     if (state) {
@@ -92,7 +89,10 @@ function TravelHandbookDetail() {
           <div className={classes.storyHeader}>
             <h1>{state.title}</h1>
             <p className={classes.date}>
-              Posted on <span>{date(data.article.updatedAt || data.article.createdAt)}</span>{" "}
+              Posted on{" "}
+              <span>
+                {date(data.article.updatedAt || data.article.createdAt)}
+              </span>{" "}
               by <Link to="/admin">{state.author}</Link>
             </p>
           </div>
