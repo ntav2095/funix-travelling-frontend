@@ -19,20 +19,17 @@ import Tour from "./tour";
       </div>
 
       <div className="myContainer">
+        <Tour tour={data?.data} title={'TOUR CHÂU ÂU'} naviga={'/tour-chau-au'} isloading={isLoading} />
+      </div>
+
+      <div className="myContainer">
         <Tour tour={data?.data} title={'TOUR TRONG NƯỚC'} naviga={'/tour-trong-nuoc'} isloading={isLoading} />
       </div>
-{/* 
+
       <div className="myContainer">
+        <Tour tour={data?.data} title={'TOUR CẨM NANG DU LỊCH'} naviga={'/cam-nang-du-lich'} isloading={isLoading} />
       </div>
-      
-      <div className="myContainer">
-      </div>
-      
-      <div className="myContainer">
-      </div>
-      
-      <div className="myContainer">
-      </div> */}
+
     </Layout>
  )
  }
