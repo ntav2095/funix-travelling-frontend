@@ -18,12 +18,14 @@ import quillGetHTML from "../../services/helpers/quillGetHTML";
 import { getDate, getMonth, getYear } from "date-fns";
 import ArticlePlaceholder from "../../components/placeholders/ArticlePlaceholder";
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
-import i18n from "../../services/languages/i18n";
+// import i18n from "../../services/languages/i18n";
+import { useTranslation } from "react-i18next";
 
 function TravelHandbookDetail() {
   const [state, setState] = useState();
   console.log(state)
-  console.log(i18n.language)
+ 
+  const {i18n} = useTranslation()
   const [sendRequest, isLoading, data, error] = useAxios();
   const quill = useRef();
   const { id } = useParams();
@@ -53,15 +55,16 @@ function TravelHandbookDetail() {
 
   useEffect(() => {
     sendRequest(postsApi.getSingleArticle(id));
-  }, []);
+  }, [i18n.language]);
 
   useEffect(() => {
     console.log(i18n.language)
-    if (data && i18n.language==='vie') {
+    if (data) {
       setState(data.article);
-    }else if(data){
-      setState(data.article.translation[0]);
     }
+    // }else if(data){
+    //   setState(data.article.translation[0]);
+    // }
   }, [data,i18n.language]);
 
   useEffect(() => {

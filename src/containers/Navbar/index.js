@@ -82,7 +82,7 @@ function Header() {
 
   useEffect(()=>{
     console.log('lag',i18n.language)
-    if(i18n.language==='vie'){
+    if(i18n.language==='vi'){
       document.getElementById('btnvn').style.display='none'
       document.getElementById('btnen').style.display='block'
     }else{
@@ -93,7 +93,7 @@ function Header() {
 
   return (
     <>
-      <div style={{ width: "100%", height: "80px", background: "white" }}></div>
+      {/* <div style={{ width: "100%", height: "80px", background: "white" }}></div> */}
       <div id="container-navbar" className={styles.container}>
         <Navbar id="navbar" expand="lg" className={styles.navbar}>
           <div className="container">
@@ -149,12 +149,12 @@ function Header() {
                     className={
                       styles.vi +
                       " " +
-                      (i18n.language === "vie" ? styles.active : undefined)
+                      (i18n.language === "vi" ? styles.active : undefined)
                     }
                     style={{display:"inline-block"}}
                     onClick={() =>{
                       i18n
-                        .changeLanguage("vie")
+                        .changeLanguage("vi")
                         .then()
                         .catch((err) => console.error(err))
                       
@@ -167,11 +167,11 @@ function Header() {
                     className={
                       styles.en +
                       " " +
-                      (i18n.language === "eng" ? styles.active : undefined)
+                      (i18n.language === "en" ? styles.active : undefined)
                     }
                     onClick={() =>{
                       i18n
-                        .changeLanguage("eng")
+                        .changeLanguage("en")
                         .then(() => console.log(2))
                         .catch((err) => console.error(err))
                     }}
@@ -190,12 +190,8 @@ function Header() {
             </Offcanvas>
 
             <NavbarBrand className="mr-auto" href="/">
-              <img
-                id="NavbarBrand"
-                src="/asscets/img/logo_sticky1.png"
-                alt="logo"
-                className={styles.logo}
-              />
+        
+              <h1 className={styles.logo}>TRAVEL LOGO</h1>
             </NavbarBrand>
 
             <Collapse isOpen={state.isNavOpen} navbar>
@@ -251,11 +247,11 @@ function Header() {
                     className={
                       styles.vi +
                       " " +
-                      (i18n.language === "vie" ? styles.active : undefined)
+                      (i18n.language === "vi" ? styles.active : undefined)
                     }
                     onClick={() =>{
                       i18n
-                        .changeLanguage("vie")
+                        .changeLanguage("vi")
                         .then()
                         .catch((err) => console.error(err))
                       
@@ -268,11 +264,11 @@ function Header() {
                     className={
                       styles.en +
                       " " +
-                      (i18n.language === "eng" ? styles.active : undefined)
+                      (i18n.language === "en" ? styles.active : undefined)
                     }
                     onClick={() =>{
                       i18n
-                        .changeLanguage("eng")
+                        .changeLanguage("en")
                         .then(() => console.log(2))
                         .catch((err) => console.error(err))
                     }}

@@ -2,7 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 const resources = {
-  vie: {
+  vi: {
     translation: {
       header: {
         home: "Trang chủ",
@@ -20,7 +20,7 @@ const resources = {
       },
     },
   },
-  eng: {
+  en: {
     translation: {
       header: {
         home: "Home",
@@ -47,8 +47,8 @@ i18n
     // (tip move them in a JSON file and import them,
     // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
     resources,
-    lng: "vie", // if you're using a language detector, do not define the lng option
-    fallbackLng: "eng",
+    lng: "vi", // if you're using a language detector, do not define the lng option
+    fallbackLng: "en",
 
     interpolation: {
       escapeValue: false, // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
