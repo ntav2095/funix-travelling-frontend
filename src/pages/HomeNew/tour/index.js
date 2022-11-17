@@ -4,13 +4,15 @@ import { brokenImage } from "../../../assets/images";
 import { useNavigate } from "react-router-dom";
 import { click } from "@testing-library/user-event/dist/click";
 import Slider from "react-slick";
-
-
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+import "./tour.css"
 function Tour(props){
     const {title,tour,naviga,isLoading}=props
+    console.log(tour)
     const navigation=useNavigate()
     const  settings = {
-        dots: true,
+        dots: false,
         infinite: false,
         speed: 500,
         slidesToShow: 4,
@@ -57,14 +59,14 @@ return(
             <div
                 key={id}
                 className={styles.carouselItem}
-                onClick={() => {}}
+                onClick={() => navigation('/danh-sach-tour/'+item._id)}
             >
                 <div className={styles.img}>
                     <img src={item.thumb} alt={tour.name} onError={handlerBrokenImg} />
                 </div>
                 <div className={styles.content}>
-                    <h6>item.name</h6>
-                    <ul>
+                    <h5>{item.name}</h5>
+                    <ul >
                         <li>{item.journey}</li>
                         <li>{item.days+ ' ngày ' + item.nights +' đêm'}</li>
                         <li>{'Trọn gói:' + item.currentPrice + 'đ'}</li>

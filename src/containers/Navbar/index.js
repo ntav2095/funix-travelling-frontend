@@ -121,13 +121,13 @@ function Header() {
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
-                    <NavLink className="nav-link" to="/danh-sach-tour">
+                    <NavLink className="nav-link" to="/tour-chau-au">
                     {i18next.t("header.euTours")} 
                     </NavLink>
                   </NavItem>
 
                   <NavItem className="nav-bar-offcanvat">
-                    <NavLink className="nav-link" to="/danh-sach-tour">
+                    <NavLink className="nav-link" to="/tour-trong-nuoc">
                     {i18next.t("header.viTours")} 
                     </NavLink>
                   </NavItem>
@@ -181,10 +181,6 @@ function Header() {
                 
                   <button className={styles.admin} onClick={()=>{navigation('./admin')}}> <i class='fas fa-user-cog' style={{fontSize:'1.5rem'}}></i></button>
                 </NavItem>
-
-                <NavItem>
-                    <Search />
-                  </NavItem>
                 </Nav>
               </Offcanvas.Body>
             </Offcanvas>
@@ -237,9 +233,6 @@ function Header() {
                   <NavLink className="nav-link" to="/cam-nang-du-lich">
                     {i18next.t("header.travelHandbook")}
                   </NavLink>
-                </NavItem>
-                <NavItem>
-                  <Search />
                 </NavItem>
                 <NavItem>
                   <button
