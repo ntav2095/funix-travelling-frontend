@@ -16,10 +16,17 @@
   width: 100%;
 }
 
+.errorMsg p {
+  font-size: 13px;
+  color: red;
+  margin-top: 2px;
+}
+
 .container img {
   width: 50%;
   display: block;
-  margin: 16px auto;
+  margin: 16px;
+  margin-left: 0;
 }
 
 .previewImage {
@@ -46,4 +53,6 @@
 
 .container button {
   padding: 8px 16px;
+  background: #050505;
+  color: white;
 }

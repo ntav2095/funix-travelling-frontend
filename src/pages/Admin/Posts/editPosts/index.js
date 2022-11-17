@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { Button } from "react-bootstrap";
 import useAxios from "../../../../hooks/useAxios";
 import AdminLayout from "../../../../layout/AdminLayout";
 import { adminApis } from "../../../../services/apis";
 import { useNavigate, useParams } from "react-router-dom";
-import Editor from "../../../../containers/Editor";
-import { Tab } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import ArticleForm from "../ArticleForm";
 import styles from "./editposts.module.css";
+import usePageTitle from "../../../../hooks/usePageTitle";
+import ErrorMessage from "../../../../components/ErrorMessage";
 
 function EditPost() {
   const [goEdit, editing, isSuccess, editingError] = useAxios();
@@ -16,14 +14,13 @@ function EditPost() {
   const [lang, setLang] = useState("vi");
   const [article, setArticle] = useState(null);
 
-  const [data, setData] = useState(null);
   const { articleId } = useParams();
 
   const langs = fetchedData
     ? fetchedData.metadata.categories
         .find((item) => item.type === "language")
         .items.map((item) => item.code)
-    : [];
+    : null;
 
   const submitHandler = async (values) => {
     const { title, author, origin, lead, thumb, content, language } = values;
@@ -70,21 +67,35 @@ function EditPost() {
       }
     : null;
 
-  return (
-    <AdminLayout>
-      <div className={styles.editPost}>
-        <h1>Article ID: {articleId}</h1>
+  usePageTitle("Sửa bài viết | Go Travel");
 
-        <label className={styles.langSelect}>
-          <span>Ngôn ngữ</span>
-          <select value={lang} onChange={(e) => setLang(e.target.value)}>
-            {langs.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </label>
+  return (
+    <AdminLayout title={`Cập nhật bài viết ID: ${articleId}`}>
+      <div className={styles.editPost}>
+        {langs && (
+          <label className="d-flex align-items-center mb-4">
+            <h6 className="mb-0 me-2">Ngôn ngữ</h6>
+            <select value={lang} onChange={(e) => setLang(e.target.value)}>
+              {langs.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
+
+        {!initialValues && fetchedData && (
+          <div>
+            <h2>Hiện chưa có version ngôn ngữ "{lang}" của bài viết này này</h2>
+            <button
+              className={styles.addLangBtn}
+              onClick={() => setArticle(fetchedData.metadata.original)}
+            >
+              Thêm version tiếng "{lang}"
+            </button>
+          </div>
+        )}
 
         {initialValues && !fetching && (
           <div className={styles.container}>
@@ -94,6 +105,8 @@ function EditPost() {
             />
           </div>
         )}
+
+        {fetchingError && <ErrorMessage msg={fetchingError.message} />}
       </div>
     </AdminLayout>
   );

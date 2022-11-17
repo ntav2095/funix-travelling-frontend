@@ -1,34 +1,34 @@
-// main
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import {
+  useEffect,
+  useState,
+  Link,
+  AdminLayout,
+  SpinnerModal,
+  ErrorMessage,
+  useAxios,
+  tourApi,
+  adminApis,
+  styles,
+  Pagination,
+  PAGE_SIZE,
+} from "./import";
 
-// components
-import AdminLayout from "../../../layout/AdminLayout";
-import SpinnerModal from "../../../components/SpinnerModal";
-
-// apis
-import useAxios from "../../../hooks/useAxios";
-import { tourApi } from "../../../services/apis";
-
-// assets
-import * as svg from "../../../assets/svgs";
-
-// css
-import styles from "./Tours.module.css";
+import "./override.css";
 
 function Tours() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const [sendDelete, isDeleting, deleteResult, deleteError] = useAxios();
+  const [page, setPage] = useState(1);
 
   const deleteHandler = (tourId) => {
     if (window.confirm("Bạn có chắc là muốn xóa không?")) {
-      sendDelete(tourApi.delete(tourId));
+      sendDelete(adminApis.tour.delete(tourId));
     }
   };
 
   useEffect(() => {
-    sendRequest(tourApi.get());
-  }, []);
+    sendRequest(tourApi.get({ page, page_size: PAGE_SIZE }));
+  }, [page]);
 
   useEffect(() => {
     if (deleteError) {
@@ -42,6 +42,9 @@ function Tours() {
       sendRequest(tourApi.get());
     }
   }, [deleteResult]);
+
+  let errMsg = error ? error.message : null;
+
   return (
     <>
       <SpinnerModal show={isLoading || isDeleting} />
@@ -52,71 +55,79 @@ function Tours() {
       >
         <div className={styles.tours}>
           {data && data.data.length > 0 && (
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <td>
-                    <div>STT</div>
-                  </td>
-                  <td>
-                    <div>ID</div>
-                  </td>
-                  <td>
-                    <div>Name</div>
-                  </td>
-                  <td>
-                    <div>Actions</div>
-                  </td>
-                </tr>
-              </thead>
-
-              <tbody>
-                {data.data.map((item, index) => (
-                  <tr key={item._id}>
+            <>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
                     <td>
-                      <div>{index + 1}</div>
+                      <div>STT</div>
                     </td>
                     <td>
-                      <div>{item._id}</div>
+                      <div>ID</div>
                     </td>
                     <td>
-                      <div>{item.name}</div>
+                      <div>Name</div>
                     </td>
                     <td>
-                      <div className={styles.actionBtns}>
-                        <Link
-                          to={`/admin/edit-tour/${item._id}`}
-                          className={styles.editBtn}
-                        >
-                          Edit
-                        </Link>
-                        <button
-                          className={styles.removeTourBtn}
-                          onClick={() => deleteHandler(item._id)}
-                        >
-                          Remove
-                        </button>
-                        <Link
-                          className={styles.editItineraryBtn}
-                          to={`/admin/update-itinerary/${item._id}`}
-                        >
-                          Update itinerary
-                        </Link>
-                      </div>
+                      <div>Actions</div>
                     </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody>
+                  {data.data.map((item, index) => (
+                    <tr key={item._id}>
+                      <td>
+                        <div>{(page - 1) * PAGE_SIZE + index + 1}</div>
+                      </td>
+                      <td>
+                        <div>{item._id}</div>
+                      </td>
+                      <td>
+                        <div>{item.name}</div>
+                      </td>
+                      <td>
+                        <div className={styles.actionBtns}>
+                          <Link
+                            to={`/admin/edit-tour/${item._id}`}
+                            className={styles.editBtn}
+                          >
+                            Sửa
+                          </Link>
+                          <button
+                            className={styles.removeTourBtn}
+                            onClick={() => deleteHandler(item._id)}
+                          >
+                            Xóa
+                          </button>
+                          <Link
+                            className={styles.editItineraryBtn}
+                            to={`/admin/update-itinerary/${item._id}`}
+                          >
+                            Thêm/cập nhật lộ trình
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <Pagination
+                className={styles.pagination + " toursPagination"}
+                current={page}
+                pageSize={PAGE_SIZE}
+                total={data.metadata.total_count}
+                onChange={(current, pageSize) => {
+                  setPage(current);
+                }}
+              />
+            </>
           )}
 
           {data && data.data.length === 0 && <h2>Hiện không có tour nào</h2>}
 
-          {error && (
-            <h2 className={styles.errorMessage}>
-              {svg.exclamation} {error.message.vi}
-            </h2>
-          )}
+          <ErrorMessage msg={errMsg} />
         </div>
       </AdminLayout>
     </>

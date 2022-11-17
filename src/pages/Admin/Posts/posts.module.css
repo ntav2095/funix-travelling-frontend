@@ -1,30 +1,33 @@
-.posts{
-    display:block;
-    padding:1em
+.posts {
+  display: block;
+  padding: 1em;
 }
-.posts button{
- margin: 0px 5px;
+.posts button {
+  margin: 0px 5px;
 }
-.table{
-    width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border-collapse: collapse;
-    white-space: nowrap;
-    overflow: hidden;
-    
+.table {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+  white-space: nowrap;
+  overflow: hidden;
 }
-.table td{
-    border: 1px solid #ddd;
-    width: 675px;
-    padding: 8px;
-    text-align: left;
-    text-overflow: ellipsis; 
+.table td {
+  border: 1px solid #ddd;
+  width: 675px;
+  padding: 8px;
+  text-align: left;
+  text-overflow: ellipsis;
 }
-.table tr:hover {background-color: coral;}
-.table tr:nth-child(even){background-color: #f2f2f2;}
-.table thead{
-    padding-top: 12px;
+.table tr:hover {
+  background-color: coral;
+}
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.table thead {
+  padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
   background-color: #2fda9b;
@@ -33,4 +36,15 @@
   font-weight: 600;
 }
 
+/* =================== pagination ====================  */
+.pagination {
+  display: flex;
+}
 
+.pagination a {
+  display: block;
+  border: 1px solid #050505;
+  padding: 6px 8px;
+  margin: 8px;
+  cursor: pointer;
+}

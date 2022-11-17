@@ -1,19 +1,15 @@
-// main
-import { useEffect } from "react";
+import {
+  useEffect,
+  AdminLayout,
+  SpinnerModal,
+  useAxios,
+  adminApis,
+  categoryApi,
+  useRef,
+  CatGroup,
+  styles,
+} from "./import";
 
-// components
-import AdminLayout from "../../../layout/AdminLayout";
-import SpinnerModal from "../../../components/SpinnerModal";
-
-// hooks
-import useAxios from "../../../hooks/useAxios";
-import { adminApis, categoryApi } from "../../../services/apis";
-// main
-import { useRef } from "react";
-
-// css
-import styles from "./Category.module.css";
-//
 function Category() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const [add, adding, result, addingError] = useAxios();
@@ -23,11 +19,19 @@ function Category() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    const type = typeRef.current.value;
+    const code = codeRef.current.value;
+    const parent = parentRef.current.value;
+    if (!type || !code) {
+      alert("Thiếu trường");
+      return;
+    }
+
     add(
       adminApis.category.add({
-        type: typeRef.current.value,
-        code: codeRef.current.value,
-        parent: parentRef.current.value,
+        type,
+        code,
+        parent,
       })
     );
   };
@@ -49,36 +53,19 @@ function Category() {
   }, [addingError]);
   return (
     <>
-      <SpinnerModal show={isLoading} />
+      <SpinnerModal show={isLoading || adding} />
       <AdminLayout title="Category">
         <div className={styles.container}>
           {error && <p>{error.message}</p>}
 
-          {data && (
-            <table>
-              <thead>
-                <tr>
-                  <th>type</th>
-                  <th>code</th>
-                  <th>parent</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {data.data.map((item) => (
-                  <tr key={item._id}>
-                    <td>{item.type}</td>
-                    <td>{item.code}</td>
-                    <td>{item.parent?.code}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          {data && <CatGroup type="continent" cat={data.data} />}
+          {data && <CatGroup type="language" cat={data.data} />}
+          {data && <CatGroup type="country" cat={data.data} />}
+          {data && <CatGroup type="city" cat={data.data} />}
 
           <form onSubmit={submitHandler} className={styles.textForm}>
-            <input ref={typeRef} type="text" placeholder="category type" />
-            <input ref={codeRef} type="text" placeholder="category code" />
+            <input ref={typeRef} type="text" placeholder="type" />
+            <input ref={codeRef} type="text" placeholder="code" />
             <select ref={parentRef}>
               <option value="">Không</option>
               {data &&

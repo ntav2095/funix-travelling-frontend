@@ -2,6 +2,12 @@
   padding-right: 40px;
 }
 
+.langSelect {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+}
+
 .addDayForm {
   display: flex;
   align-items: center;
@@ -104,7 +110,7 @@
 }
 
 .removeBtn:hover {
-  background: rgba(191, 27, 27, 0.732);
+  background: #050505;
 }
 
 .removeBtn svg {

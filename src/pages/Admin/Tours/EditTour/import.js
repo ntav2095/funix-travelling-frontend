@@ -1,10 +1,13 @@
 // main
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { format } from "date-fns";
 
 // components
 import AdminLayout from "../../../../layout/AdminLayout";
 import SpinnerModal from "../../../../components/SpinnerModal";
+import TourForm from "../TourForm";
+import ErrorMessage from "../../../../components/ErrorMessage";
 
 // apis
 import useAxios from "../../../../hooks/useAxios";
@@ -13,33 +16,16 @@ import { adminApis } from "../../../../services/apis";
 // helpers
 import { stringToDate } from "../../../../services/helpers/dateHandler";
 
-import TourForm from "../TourForm";
+// css
+import styles from "./EditTour.module.css";
 
-const initialValues = {
-  language: "vie",
-  category: [],
-
-  name: "",
-  journey: "",
-  description: "",
-  highlights: "",
-
-  departureDates: "",
-  days: 0,
-  nights: 0,
-
-  currentPrice: 0,
-  oldPrice: 0,
-  priceIncludes: "",
-  priceExcludes: "",
-
-  cancellationPolicy: "",
-  slider: [],
-  thumb: null,
-};
-
-const dataPacker = (values) => {
+const formPacker = (values, tourId) => {
   const formData = new FormData();
+
+  formData.append("language", values.language);
+  formData.append("category", JSON.stringify(values.category));
+  formData.append("tourId", tourId);
+  formData.append("removedImages", JSON.stringify(values.removedImages));
 
   formData.append("name", values.name);
   formData.append("journey", values.journey);
@@ -76,7 +62,6 @@ const dataPacker = (values) => {
   });
 
   formData.append("thumb", values.thumb);
-  formData.append("category", JSON.stringify(values.category));
 
   return formData;
 };
@@ -85,12 +70,15 @@ export {
   useState,
   useEffect,
   useNavigate,
+  useParams,
+  format,
   AdminLayout,
   SpinnerModal,
+  TourForm,
   useAxios,
   adminApis,
   stringToDate,
-  TourForm,
-  initialValues,
-  dataPacker,
+  ErrorMessage,
+  styles,
+  formPacker,
 };

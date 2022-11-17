@@ -4,13 +4,12 @@
   display: block;
 }
 
-.editPost button {
-  background: var(--main-color);
-  color: white;
-  margin-bottom: 16px;
+.editPost img {
   display: block;
 }
 
-.editPost img {
-  display: block;
+.addLangBtn {
+  padding: 8px 16px;
+  background: #050505;
+  color: white;
 }

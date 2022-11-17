@@ -1,22 +1,24 @@
 import { stringToDate } from "./helpers/dateHandler";
 
+const REQUIRED = "Trường này là bắt buộc";
+
 export const tourValidator = (values) => {
   const errors = {};
 
   if (!values.name) {
-    errors.name = "Trường này là bắt buộc";
+    errors.name = REQUIRED;
   }
 
   if (!values.journey) {
-    errors.journey = "Trường này là bắt buộc";
+    errors.journey = REQUIRED;
   }
 
   if (!values.description) {
-    errors.description = "Trường này là bắt buộc";
+    errors.description = REQUIRED;
   }
 
   if (!values.departureDates) {
-    errors.departureDates = "Trường này là bắt buộc";
+    errors.departureDates = REQUIRED;
   } else {
     values.departureDates
       .split("\n")
@@ -30,26 +32,47 @@ export const tourValidator = (values) => {
   }
 
   if (!values.days) {
-    errors.days = "Trường này là bắt buộc";
+    errors.days = REQUIRED;
+  }
+
+  if (values.days < 0) {
+    errors.days = "Phải lớn hơn 0";
+  }
+
+  if (values.nights <= 0) {
+    errors.nights = "Phải lớn hơn 0";
   }
 
   if (!values.nights) {
-    errors.nights = "Trường này là bắt buộc";
+    errors.nights = REQUIRED;
   }
 
   if (!values.highlights) {
-    errors.highlights = "Trường này là bắt buộc";
+    errors.highlights = REQUIRED;
   }
 
   if (!values.cancellationPolicy) {
-    errors.cancellationPolicy = "Trường này là bắt buộc";
+    errors.cancellationPolicy = REQUIRED;
   }
 
-  if (
-    (!isNaN(Number(values.currentPrice)) && values.currentPrice <= 0) ||
-    isNaN(Number(values.currentPrice))
-  ) {
-    errors.currentPrice = "Trường này phải là số lớn hơn 0";
+  if (!values.currentPrice) {
+    errors.currentPrice = REQUIRED;
+  }
+
+  if (values.currentPrice <= 0) {
+    errors.currentPrice = "Phải lớn hơn 0";
+  }
+
+  if (values.oldPrice <= 0) {
+    errors.oldPrice = "Phải lớn hơn 0";
+  }
+
+  if (!values.thumb) {
+    errors.thumb = REQUIRED;
+  }
+
+  if (values.slider.length === 0) {
+    errors.slider = REQUIRED;
   }
 
   return errors;

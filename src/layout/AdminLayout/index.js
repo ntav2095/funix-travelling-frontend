@@ -72,10 +72,14 @@ function AdminLayout({ children, title, path, text }) {
               </NavLink>
             </li>
             <li>
-              <Link to="/admin/posts">Posts</Link>
-            </li>{" "}
+              <NavLink className={navLinkClasses} to="/admin/posts">
+                Posts
+              </NavLink>
+            </li>
             <li>
-              <Link to="/admin/category">Category</Link>
+              <NavLink className={navLinkClasses} to="/admin/category">
+                Category
+              </NavLink>
             </li>
             {!user && (
               <li>

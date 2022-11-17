@@ -91,17 +91,20 @@
   background: rgb(228, 93, 25);
 }
 
-h2.errorMessage {
-  color: #d22626;
-  display: flex;
-  font-size: 18px;
-}
-h2.errorMessage svg {
-  width: 18px;
-  margin-right: 2px;
-  margin-bottom: 2px;
-}
-
 .noTours {
   font-size: 18px;
+}
+
+/* =================== pagination ====================  */
+.pagination {
+  display: flex;
+  padding: 0;
+}
+
+.pagination a {
+  display: block;
+  border: 1px solid #050505;
+  padding: 6px 8px;
+  margin: 8px;
+  cursor: pointer;
 }

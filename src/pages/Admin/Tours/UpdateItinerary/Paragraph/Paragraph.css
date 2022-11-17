@@ -3,5 +3,15 @@
   display: block;
   width: 100%;
   max-width: 480px;
-  margin: 0 auto;
+  margin: 8px auto;
+}
+
+.addItinerary-editor ul,
+.ql-snow .ql-editor ul {
+  margin: 8px 0;
+}
+
+.addItinerary-editor ul li,
+.ql-snow .ql-editor ul li {
+  margin-bottom: 16px;
 }

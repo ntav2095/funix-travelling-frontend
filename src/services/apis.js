@@ -137,6 +137,11 @@ export const adminApis = {
         "Content-Type": "multipart/form-data",
       },
     }),
+    delete: (articleId) => ({
+      method: "DELETE",
+      url: "/admin/article",
+      data: { articleId },
+    }),
   },
 
   tour: {
@@ -159,6 +164,11 @@ export const adminApis = {
       headers: {
         "Content-Type": "multipart/form-data",
       },
+    }),
+    delete: (tourId) => ({
+      method: "DELETE",
+      url: "/admin/tour",
+      data: { tourId },
     }),
   },
 

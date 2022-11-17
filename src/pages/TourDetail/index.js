@@ -18,13 +18,14 @@ import usePageTitle from "../../hooks/usePageTitle";
 import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
 import ReviewTour from "./ReviewTour";
+import i18n from "../../services/languages/i18n";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const { tourId } = useParams();
   const tourName = data ? data.item.name : "Tour du lịch";
   usePageTitle(`${tourName} || Go Travel`);
-
+  console.log(i18n.language);
   const tour = data ? data.item : null;
 
   useEffect(() => {

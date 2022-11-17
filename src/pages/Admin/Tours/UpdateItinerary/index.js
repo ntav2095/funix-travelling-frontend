@@ -105,19 +105,15 @@ function UpdateItinerary() {
     }
   }, [updatingError]);
 
-  const langs = fetchedData
-    ? fetchedData.metadata.categories
-        .find((item) => item.type === "language")
-        .items.map((item) => item.code)
-    : [];
+  const langs = fetchedData ? fetchedData.metadata.available_lang : [];
 
   return (
     <>
       <SpinnerModal show={fetching || updating} />
       <AdminLayout title="Cập nhật lộ trình tour">
         <div className={styles.container}>
-          <label className={styles.langSelect}>
-            <span>Ngôn ngữ</span>
+          <label className="d-flex align-items-center mb-4">
+            <h6 className="mb-0 me-2">Ngôn ngữ</h6>
             <select value={lang} onChange={(e) => setLang(e.target.value)}>
               {langs.map((item) => (
                 <option key={item} value={item}>
@@ -127,7 +123,7 @@ function UpdateItinerary() {
             </select>
           </label>
 
-          {lang !== "vi" && (
+          {lang !== "vi" && plan.length === 0 && (
             <div>
               <button
                 onClick={() => setPlan(fetchedData.metadata.original.itinerary)}
@@ -138,59 +134,60 @@ function UpdateItinerary() {
           )}
 
           <div>
-            {plan.map((item) => {
-              if (item.type === "title") {
-                return (
-                  <div key={item.id} className={styles.portion}>
-                    <Title
-                      id={item.id}
-                      content={getContent(item.id)}
-                      onChange={changeHandler}
-                    />
-                    <button
-                      className={styles.removeBtn}
-                      onClick={() => removePortionHandler(item.id)}
-                    >
-                      {closeSVG}
-                    </button>
-                  </div>
-                );
-              }
+            {!fetching &&
+              plan.map((item) => {
+                if (item.type === "title") {
+                  return (
+                    <div key={item.id} className={styles.portion + " mt-4"}>
+                      <Title
+                        id={item.id}
+                        content={getContent(item.id)}
+                        onChange={changeHandler}
+                      />
+                      <button
+                        className={styles.removeBtn}
+                        onClick={() => removePortionHandler(item.id)}
+                      >
+                        {closeSVG}
+                      </button>
+                    </div>
+                  );
+                }
 
-              if (item.type === "time") {
-                return (
-                  <div key={item.id} className={styles.portion}>
-                    <Time
-                      id={item.id}
-                      content={getContent(item.id)}
-                      onChange={changeHandler}
-                    />
-                    <button
-                      className={styles.removeBtn}
-                      onClick={() => removePortionHandler(item.id)}
-                    >
-                      {closeSVG}
-                    </button>
-                  </div>
-                );
-              } else {
-                return (
-                  <div key={item.id} className={styles.portion}>
-                    <Paragraph
-                      id={item.id}
-                      content={item.content}
-                      onChange={changeHandler}
-                    />
-                    <button
-                      className={styles.removeBtn}
-                      onClick={() => removePortionHandler(item.id)}
-                    >
-                      {closeSVG}
-                    </button>
-                  </div>
-                );
-              }
-            })}
+                if (item.type === "time") {
+                  return (
+                    <div key={item.id} className={styles.portion}>
+                      <Time
+                        id={item.id}
+                        content={getContent(item.id)}
+                        onChange={changeHandler}
+                      />
+                      <button
+                        className={styles.removeBtn}
+                        onClick={() => removePortionHandler(item.id)}
+                      >
+                        {closeSVG}
+                      </button>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div key={item.id} className={styles.portion}>
+                      <Paragraph
+                        id={item.id}
+                        content={item.content}
+                        onChange={changeHandler}
+                      />
+                      <button
+                        className={styles.removeBtn}
+                        onClick={() => removePortionHandler(item.id)}
+                      >
+                        {closeSVG}
+                      </button>
+                    </div>
+                  );
+                }
+              })}
           </div>
 
           <div className={styles.addBtns}>

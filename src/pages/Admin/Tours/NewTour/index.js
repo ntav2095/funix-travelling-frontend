@@ -8,6 +8,7 @@ import {
   stringToDate,
   TourForm,
   initialValues,
+  dataPacker,
 } from "./import";
 
 function NewTour() {
@@ -17,47 +18,7 @@ function NewTour() {
   const navigate = useNavigate();
 
   const submitHandler = (values) => {
-    const formData = new FormData();
-
-    formData.append("name", values.name);
-    formData.append("journey", values.journey);
-    formData.append("description", values.description);
-    formData.append(
-      "highlights",
-      JSON.stringify(values.highlights.split("\n"))
-    );
-
-    formData.append("currentPrice", values.currentPrice);
-    formData.append("oldPrice", values.oldPrice);
-    formData.append(
-      "priceIncludes",
-      JSON.stringify(values.priceIncludes.split("\n"))
-    );
-    formData.append(
-      "priceExcludes",
-      JSON.stringify(values.priceExcludes.split("\n"))
-    );
-
-    formData.append(
-      "departureDates",
-      JSON.stringify(
-        values.departureDates.split("\n").map((item) => stringToDate(item)[1])
-      )
-    );
-    formData.append("days", values.days);
-    formData.append("nights", values.nights);
-
-    formData.append(
-      "cancellationPolicy",
-      JSON.stringify(values.cancellationPolicy.split("\n"))
-    );
-
-    values.slider.forEach((item) => {
-      formData.append("slider", item);
-    });
-
-    formData.append("thumb", values.thumb);
-
+    const formData = dataPacker(values);
     sendRequest(adminApis.tour.add(formData));
   };
 
@@ -77,7 +38,6 @@ function NewTour() {
   useEffect(() => {
     fetchCat(adminApis.category.get());
   }, []);
-  console.log(cat);
   return (
     <>
       <SpinnerModal show={isLoading} />

@@ -32,29 +32,43 @@
   padding: 6px 8px;
 }
 
-.container button {
-  padding: 8px 16px;
-  background: var(--main-color);
-  color: white;
-  letter-spacing: 1px;
+.smallTextArea textarea {
+  height: 50px;
+}
+
+.mediumTextArea textarea {
+  height: 80px;
+}
+
+.bigTextArea textarea {
+  min-height: 150px;
 }
 
 /* ====================== categories =============  */
 .cat {
   margin: 24px 0;
   border: 1px solid #ccc;
-  border-radius: 8px;
   padding: 8px;
+}
+
+.catItems {
+  display: flex;
+  gap: 24px;
+  justify-content: flex-start;
 }
 
 .cat label {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
+  border: 1px solid #050505;
+  width: auto;
+  padding: 3.6px 8px;
+  cursor: pointer;
 }
 
 .cat label input {
   width: auto;
+  margin: 0;
   margin-left: 8px;
 }
 
@@ -82,4 +96,13 @@
 
 .preview label img {
   width: 100%;
+}
+
+/* ========== submit btn ==========  */
+.submitBtn {
+  padding: 8px 16px;
+  cursor: pointer;
+  color: white;
+  background: #050505;
+  margin-top: 24px;
 }
