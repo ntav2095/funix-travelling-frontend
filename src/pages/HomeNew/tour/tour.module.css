@@ -1,70 +1,74 @@
-.title h3{
-    font-size: 16px;
-    font-weight: 700;
-    
+/* .title h3 {
+  font-size: 16px;
+  font-weight: 700;
 }
-.position{
-    position: relative;
+.position {
+  position: relative;
 }
-.carouselItem{
-    margin: 8px;
-    width: 23%;
-    height: auto;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+.carouselItem {
+  margin: 8px;
+  width: 23%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 }
-.carouselItem> .img{
-    height: 50%;
-    width: 100%;
+.carouselItem > .img {
+  height: 50%;
+  width: 100%;
 }
-.carouselItem> .img > img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+.carouselItem > .img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
-.carouselItem> .content > h6{
-    font-weight: 700;
+.carouselItem > .content > h6 {
+  font-weight: 700;
 }
 
-.carouselItem> .content > ul >li{
-    white-space:nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.carouselItem > .content > ul > li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.tourdetail{
-    width: max-content;
-    border: 1px solid black;
-    border-radius: 8px;
+.tourdetail {
+  width: max-content;
+  border: 1px solid black;
+  border-radius: 8px;
 }
-.container{
-    max-width: inherit;
-    display: flex;
-    flex-direction: row;
-    overflow: auto;
-    overflow: -moz-scrollbars-none;
-    -ms-overflow-style: none;
-    
+.container {
+  max-width: inherit;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
 }
-/* .container::-webkit-scrollbar{
-  display: none; 
-} */
-.container > .button{
-    position: absolute;
-    top:50%;
-    background-color: white;
-    border-radius: 50%;
-    border: 0px;
-    font-weight: 600;
-    font-size: large;
+
+.container > .button {
+  position: absolute;
+  top: 50%;
+  background-color: white;
+  border-radius: 50%;
+  border: 0px;
+  font-weight: 600;
+  font-size: large;
 }
-.container > .after{
-    left: 0px;
+.container > .after {
+  left: 0px;
 }
-.container > .befor{
-    right: 0px;
+.container > .befor {
+  right: 0px;
 }
 .placeholder {
-    background: var(--skeleton-color);
-    height: 110px;
-  }
+  background: var(--skeleton-color);
+  height: 110px;
+} */
+
+.img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
