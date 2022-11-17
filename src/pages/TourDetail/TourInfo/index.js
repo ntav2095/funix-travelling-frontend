@@ -34,7 +34,7 @@ const TourInfo = ({ tour, isLoading }) => {
                   <p>Thời gian</p>
                   <div>
                     <p>
-                      {tour.duration.days} ngày {tour.duration.nights} đêm
+                      {tour.days} ngày {tour.nights} đêm
                     </p>
                   </div>
                 </div>

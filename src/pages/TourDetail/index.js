@@ -17,16 +17,16 @@ import usePageTitle from "../../hooks/usePageTitle";
 //  css
 import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
-import ReviewTour from "./ReviewTour";
 import i18n from "../../services/languages/i18n";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const { tourId } = useParams();
-  const tourName = data ? data.item.name : "Tour du lịch";
+
+  const tour = data ? data.data.item : null;
+
+  const tourName = tour ? tour.name : "Tour du lịch";
   usePageTitle(`${tourName} || Go Travel`);
-  console.log(i18n.language);
-  const tour = data ? data.item : null;
 
   useEffect(() => {
     sendRequest(tourApi.getSingleTour(tourId));
@@ -42,6 +42,8 @@ function TourDetail() {
     },
   ];
 
+  console.log(tour);
+
   return (
     <Layout breadcrumb={breadcrumb}>
       <div className="myContainer">
@@ -56,8 +58,6 @@ function TourDetail() {
         </div>
 
         <TourInfo tour={tour} isLoading={isLoading} />
-
-        {tour && <ReviewTour tour={tour} />}
 
         {tour && (
           <FacebookComment

@@ -9,12 +9,13 @@
 }
 
 .image {
-  height: 60%;
- 
-  /* background-position: center;
-  background-size: cover; */
+  height: 0;
+  padding-top: 60%;
+
+  background-position: center;
+  background-size: cover;
 }
-.image img{
+.image img {
   object-fit: cover;
   width: 100%;
 }

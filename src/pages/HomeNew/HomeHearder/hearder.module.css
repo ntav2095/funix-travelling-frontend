@@ -1,0 +1,30 @@
+.hearder{
+    width: 100%;
+}
+.hearder > .image >img{
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    object-position: center;
+}
+.hearder > .container{
+    width: 100%;
+    padding: 16px;
+}
+
+.about{
+    background-color: rgba(244,241,236,255);
+    border-radius: 8px;
+    padding:1em;
+    height: 100%;
+}
+.about > div{
+    display: inline-table;
+    text-align: center;
+    padding: 8px 0px 8px 8px;
+}
+.about > div>img{
+   width: 3rem;
+   height: 3rem ;
+   margin-bottom: 8px;
+}

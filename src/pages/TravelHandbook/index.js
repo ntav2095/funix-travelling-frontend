@@ -16,6 +16,8 @@ import useAxios from "../../hooks/useAxios";
 // css
 import classes from "./TravelHandbook.module.css";
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
+import Panavigation from "../../containers/panavigation";
+import { useTranslation } from "react-i18next";
 
 const breadcrumb = [
   { href: "/", active: false, text: "trang chủ" },
@@ -24,6 +26,12 @@ const breadcrumb = [
 
 function TravelHandbook() {
   const [sendRequest, isLoading, data, error] = useAxios();
+  const [page, setPage] = useState(1);
+
+  const { i18n } = useTranslation();
+  function setpage(e) {
+    setPage(e);
+  }
 
   function date(dateString) {
     const dateStringtoformater = new Date(dateString);
@@ -33,37 +41,22 @@ function TravelHandbook() {
     return `${day}-${month}-${year}`;
   }
 
-  function contentDes(content) {
-    let description = { text: [], image: [] };
-    content.map((item) => {
-      let t =
-        typeof item.insert === "string" && item.insert.length > 10
-          ? description.text.push(item.insert)
-          : null;
-      let e = item.insert.image
-        ? description.image.push(item.insert.image)
-        : null;
-      return item;
-    });
-
-    return description;
-  }
   useEffect(() => {
-    sendRequest(postsApi.get());
-  }, []);
+    sendRequest(postsApi.get({ page: page, lang: i18n.language }));
+  }, [page, i18n.language]);
 
   usePageTitle(`Cẩm nang du lịch || Go Travel`);
 
   return (
     <>
-      {/* <SpinnerModal show={isLoading} /> */}
+      <SpinnerModal show={isLoading} />
       <Layout breadcrumb={breadcrumb}>
         <div className="myContainer">
           <div className="row">
             {!isLoading &&
               data &&
-              data.items.length > 0 &&
-              data.items.map((item) => (
+              data.data.length > 0 &&
+              data.data.map((item) => (
                 <div key={item._id} className="col-12 col-md-6 col-lg-4">
                   <Link
                     className={classes.story}
@@ -73,21 +66,17 @@ function TravelHandbook() {
                     <div className={classes.inner}>
                       <div
                         className={classes.image}
-                        // style={{
-                        //   backgroundImage: `url(${
-                            
-                        //   })`,
-                        // }}
-                      >
-                        <img src='../../assets/images/placeholder.jpg' lazy={contentDes(item.content).image[0]}   />
-                      </div>
+                        style={{
+                          backgroundImage: `url(${item.thumb})`,
+                        }}
+                      ></div>
                       <div className={classes.boxText}>
                         <h2 className={classes.title}>{item.title}</h2>
                         <p className={classes.date}>
                           {date(item.updatedAt || item.createdAt)}
                         </p>
                         <p className={classes.desc}>
-                          {contentDes(item.content).text[0].slice(0, 100)}
+                          {item.lead}
                           ...
                         </p>
                       </div>
@@ -103,6 +92,7 @@ function TravelHandbook() {
                 </div>
               ))}
           </div>
+          <Panavigation totalPage={3} callback={setpage} />
         </div>
       </Layout>
     </>

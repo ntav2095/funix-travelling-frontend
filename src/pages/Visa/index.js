@@ -75,32 +75,32 @@ function Visa() {
                 <div className="col-lg-8 col-md-8">
                   <h1>Dịch Vụ Làm Visa Ý</h1>
                   <div className="visa-rating-comment">
-                    <div class="box-rating-comment type-visa">
+                    <div className="box-rating-comment type-visa">
                       <p>
-                        <span class="point">5/5</span>
-                        <span class="box-item-star">
-                          <span class="item-star">
-                            <i class="fas fa-star"></i>
+                        <span className="point">5/5</span>
+                        <span className="box-item-star">
+                          <span className="item-star">
+                            <i className="fas fa-star"></i>
                           </span>
-                          <span class="item-star">
-                            <i class="fas fa-star"></i>
+                          <span className="item-star">
+                            <i className="fas fa-star"></i>
                           </span>
-                          <span class="item-star">
-                            <i class="fas fa-star"></i>
+                          <span className="item-star">
+                            <i className="fas fa-star"></i>
                           </span>
-                          <span class="item-star">
-                            <i class="fas fa-star"></i>
+                          <span className="item-star">
+                            <i className="fas fa-star"></i>
                           </span>
-                          <span class="item-star">
-                            <i class="fas fa-star"></i>
+                          <span className="item-star">
+                            <i className="fas fa-star"></i>
                           </span>
                         </span>
-                        <span class="count">(1 đánh giá)</span>
+                        <span className="count">(1 đánh giá)</span>
                       </p>
                     </div>
                   </div>
 
-                  <div class="visa-info-feature">
+                  <div className="visa-info-feature">
                     <ul>
                       <li>
                         <i className="fa fa-calendar"></i> Nhập cảnh sớm nhất dự
@@ -109,10 +109,10 @@ function Visa() {
                       <li>
                         <i className="fa fa-calendar-plus"></i> Hỗ trợ 24/7
                       </li>
-                      <li class="refund">Hoàn hủy miễn phí</li>
+                      <li className="refund">Hoàn hủy miễn phí</li>
                     </ul>
                   </div>
-                  <div class="visa-content-feature">
+                  <div className="visa-content-feature">
                     <ul>
                       <li>
                         Tư vấn và đưa ra giải pháp hiệu quả nhất cho hồ sơ của
@@ -134,7 +134,7 @@ function Visa() {
                   </div>
                 </div>
 
-                <div class="clearfix"></div>
+                <div className="clearfix"></div>
               </div>
             </Col>
             <Col lg="4">
@@ -204,14 +204,14 @@ function Visa() {
                       </div>
                     </Col>
 
-                    <Col lg="4" class="info-price">
-                      <div class="box-action">
-                        <div class="price-old"></div>
-                        <div class="price-current">6,032,000 VNĐ</div>
+                    <Col lg="4" className="info-price">
+                      <div className="box-action">
+                        <div className="price-old"></div>
+                        <div className="price-current">6,032,000 VNĐ</div>
                       </div>
                     </Col>
                     <Col>
-                      <div class="box-action">
+                      <div className="box-action">
                         <button
                           onClick={toggle1}
                           // onClick={chon}
@@ -221,7 +221,7 @@ function Visa() {
                               Chon1 == "HỦY" ? "rgb(244,244,244)" : "",
                             color: Chon1 == "HỦY" ? "black" : "",
                           }}
-                          class="btn-open-book-visa type-2"
+                          className="btn-open-book-visa type-2"
                         >
                           {Chon1}
                         </button>
@@ -230,7 +230,7 @@ function Visa() {
                   </Row>
                   <div
                     onclick="toggle_tab_info_price('.box-bottom.type-2')"
-                    class="box-readmore"
+                    className="box-readmore"
                   >
                     <Xemchitiet1 />
                   </div>
@@ -250,14 +250,14 @@ function Visa() {
                       </div>
                     </Col>
 
-                    <Col lg="4" class="info-price">
-                      <div class="box-action">
-                        <div class="price-old"></div>
-                        <div class="price-current">6,032,000 VNĐ</div>
+                    <Col lg="4" className="info-price">
+                      <div className="box-action">
+                        <div className="price-old"></div>
+                        <div className="price-current">6,032,000 VNĐ</div>
                       </div>
                     </Col>
                     <Col>
-                      <div class="box-action">
+                      <div className="box-action">
                         <button
                           onClick={toggle2}
                           // onClick={chon}
@@ -267,7 +267,7 @@ function Visa() {
                               Chon2 === "HỦY" ? "rgb(244,244,244)" : "",
                             color: Chon2 === "HỦY" ? "black" : "",
                           }}
-                          class="btn-open-book-visa type-2"
+                          className="btn-open-book-visa type-2"
                         >
                           {Chon2}
                         </button>
@@ -276,7 +276,7 @@ function Visa() {
                   </Row>
                   <div
                     onclick="toggle_tab_info_price('.box-bottom.type-2')"
-                    class="box-readmore"
+                    className="box-readmore"
                   >
                     <Xemchitiet1 />
                   </div>
@@ -296,14 +296,14 @@ function Visa() {
                       </div>
                     </Col>
 
-                    <Col lg="4" class="info-price">
-                      <div class="box-action">
-                        <div class="price-old"></div>
-                        <div class="price-current">6,032,000 VNĐ</div>
+                    <Col lg="4" className="info-price">
+                      <div className="box-action">
+                        <div className="price-old"></div>
+                        <div className="price-current">6,032,000 VNĐ</div>
                       </div>
                     </Col>
                     <Col>
-                      <div class="box-action">
+                      <div className="box-action">
                         <button
                           onClick={toggle3}
                           // onClick={chon}
@@ -313,7 +313,7 @@ function Visa() {
                               Chon3 === "HỦY" ? "rgb(244,244,244)" : "",
                             color: Chon3 === "HỦY" ? "black" : "",
                           }}
-                          class="btn-open-book-visa type-2"
+                          className="btn-open-book-visa type-2"
                         >
                           {Chon3}
                         </button>
@@ -322,7 +322,7 @@ function Visa() {
                   </Row>
                   <div
                     onclick="toggle_tab_info_price('.box-bottom.type-2')"
-                    class="box-readmore"
+                    className="box-readmore"
                   >
                     <Xemchitiet1 />
                   </div>

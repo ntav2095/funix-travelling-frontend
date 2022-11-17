@@ -5,7 +5,6 @@ import Breadcrumb from "react-bootstrap/Breadcrumb";
 import styles from "./Layout.module.css";
 
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 function DefaultLayout({
   children,
@@ -14,7 +13,7 @@ function DefaultLayout({
   primary,
   breadcrumb,
 }) {
-  const { i18n } = useTranslation();
+
 
   if (sidebarLeft || sidebarRight) {
     let classes = styles.container;
@@ -79,44 +78,6 @@ function DefaultLayout({
         </div>
       )}
       {children}
-
-      <div className="myContainer">
-        <div className={styles.languageBar}>
-          <button
-            className={
-              styles.vi +
-              " " +
-              (i18n.language === "vie" ? styles.active : undefined)
-            }
-            onClick={() =>
-              i18n
-                .changeLanguage("vie")
-                .then()
-                .catch((err) => console.error(err))
-            }
-          >
-            Việt Nam
-          </button>
-          <button
-            className={
-              styles.en +
-              " " +
-              (i18n.language === "eng" ? styles.active : undefined)
-            }
-            onClick={() =>
-              i18n
-                .changeLanguage("eng")
-                .then(() => console.log(2))
-                .catch((err) => console.error(err))
-            }
-          >
-            English
-          </button>
-          <h1 style={{ color: "Red" }}>
-            Toàn làm feature languages branch này nha
-          </h1>
-        </div>
-      </div>
       <Footer />
     </>
   );

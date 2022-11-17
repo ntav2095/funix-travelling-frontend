@@ -27,7 +27,7 @@ function TourCarousel({ tour, isLoading }) {
       <Carousel activeIndex={index} onSelect={handleSelect}>
         {!isLoading &&
           tour &&
-          tour.images.map((img, id) => (
+          tour.slider.map((img, id) => (
             <Carousel.Item
               key={id}
               className={styles.carouselItem}
@@ -45,7 +45,7 @@ function TourCarousel({ tour, isLoading }) {
       <div className={styles.imageMenu}>
         {!isLoading &&
           tour &&
-          tour.images.map((img, id) => (
+          tour.slider.map((img, id) => (
             <div key={id} className={styles.image} onClick={() => setIndex(id)}>
               <img src={img} alt={tour.name} onError={handlerBrokenImg} />
               {index !== id && <div className={styles.overlay} />}
@@ -81,7 +81,7 @@ function TourCarousel({ tour, isLoading }) {
           <Carousel activeIndex={index} onSelect={handleSelect}>
             {!isLoading &&
               tour &&
-              tour.images.map((img, id) => (
+              tour.slider.map((img, id) => (
                 <Carousel.Item key={id} className={styles.carouselItemModal}>
                   <div className={styles.imageModal}>
                     <img src={img} alt={tour.name} onError={handlerBrokenImg} />

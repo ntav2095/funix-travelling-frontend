@@ -14,7 +14,7 @@ function Xemchitiet1(args) {
   return (
     <React.StrictMode>
       <p onClick={toggle1} style={{ marginBottom: "1rem" }} id="xem-chi-tiet">
-        Xem chi tiết <i class="fas fa-chevron-down"></i>
+        Xem chi tiết <i className="fas fa-chevron-down"></i>
       </p>
       <Collapse isOpen={isOpen1} {...args}>
         <Card>
@@ -44,7 +44,7 @@ function Xemchitiet1(args) {
                     <Tab.Pane eventKey="first">
                       <div
                         role="tabpanel"
-                        class="tab-pane active"
+                        className="tab-pane active"
                         id="details_services_4"
                       >
                         <p>
@@ -88,7 +88,7 @@ function Xemchitiet1(args) {
                     <Tab.Pane eventKey="second">
                       <div
                         role="tabpanel"
-                        class="tab-pane active"
+                        className="tab-pane active"
                         id="price_included_4"
                       >
                         <p>
@@ -126,7 +126,7 @@ function Xemchitiet1(args) {
                     <Tab.Pane eventKey="3">
                       <div
                         role="tabpanel"
-                        class="tab-pane active"
+                        className="tab-pane active"
                         id="info_rule_4"
                       >
                         <p>
@@ -159,7 +159,7 @@ function Xemchitiet1(args) {
                     <Tab.Pane eventKey="4">
                       <div
                         role="tabpanel"
-                        class="tab-pane active"
+                        className="tab-pane active"
                         id="info_policy_4"
                       >
                         <p>

@@ -13,19 +13,23 @@ import SpinnerModal from "../../components/SpinnerModal";
 import useAxios from "../../hooks/useAxios";
 import { tourApi } from "../../services/apis";
 
+import datatour from '../../data/tour/tours'
 // css
 import styles from "./Home.module.css";
 import EuropeTours from "./tourChauAu";
 import CountryTours from "./tourTrongnuoc";
 import CamNang from "./camNangDuLich";
+import i18n from "../../services/languages/i18n";
 
 function Home() {
   const [sendRequest, isLoading, data, error] = useAxios();
 
   useEffect(() => {
-    sendRequest(tourApi.get());
+    sendRequest(tourApi.get({lang:i18n.language}));
   }, []);
-
+//  const data={items:datatour}
+//   const isLoading=false
+//   console.log(data)
   usePageTitle("Trang chủ || Go Travel");
   return (
     <Layout>

@@ -24,7 +24,7 @@ function TrendingTours({ tours, isLoading }) {
           ))}
 
         {isLoading &&
-          new Array(10).fill(1).map((item, index) => (
+          new Array(6).fill(1).map((item, index) => (
             <Col key={index} className="mb-4">
               <CardPlaceholder />
             </Col>

@@ -1,6 +1,6 @@
 // main
 import { Link, useParams } from "react-router-dom";
-
+import { format } from "date-fns";
 // components
 import Layout from "../../layout/Default";
 
@@ -18,13 +18,16 @@ import quillGetHTML from "../../services/helpers/quillGetHTML";
 import { getDate, getMonth, getYear } from "date-fns";
 import ArticlePlaceholder from "../../components/placeholders/ArticlePlaceholder";
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
+// import i18n from "../../services/languages/i18n";
+import { useTranslation } from "react-i18next";
 
 function TravelHandbookDetail() {
   const [state, setState] = useState();
+
+  const { i18n } = useTranslation();
   const [sendRequest, isLoading, data, error] = useAxios();
   const quill = useRef();
   const { id } = useParams();
-
   function date(dateString) {
     const dateStringtoformater = new Date(dateString);
     const day = getDate(dateStringtoformater);
@@ -49,21 +52,20 @@ function TravelHandbookDetail() {
   }
 
   useEffect(() => {
-    sendRequest(postsApi.get());
-  }, []);
+    sendRequest(postsApi.getSingleArticle(id));
+  }, [i18n.language]);
 
   useEffect(() => {
     if (data) {
-      let posts = data.items.filter((item) => item._id === id);
-      setState(posts[0]);
+      setState(data.article);
     }
-  }, [data]);
+  }, [data, i18n.language]);
 
   useEffect(() => {
-    if (state) {
-      quill.current.innerHTML = quillGetHTML({ ops: state.content });
+    if (data) {
+      quill.current.innerHTML = quillGetHTML(data.data.item.content);
     }
-  }, [state]);
+  }, [data]);
 
   usePageTitle(`Cẩm nang --- đang cập nhật || Go Travel`);
 
@@ -77,15 +79,18 @@ function TravelHandbookDetail() {
     },
   ];
 
+  const article = data ? data.data.item : null;
+
   return (
     <Layout sidebarRight primary breadcrumb={breadcrumb}>
       <div>
-        {state ? (
+        {article ? (
           <div className={classes.storyHeader}>
-            <h1>{state.title}</h1>
+            <h1>{article.title}</h1>
             <p className={classes.date}>
-              Posted on <span>{date(state.updatedAt || state.createdAt)}</span>{" "}
-              by <Link to="/admin">admin</Link>
+              Posted on{" "}
+              <span>{format(new Date(article.createdAt), "dd/MM/yyyy")}</span>
+              by <Link to="/admin">{article.author}</Link>
             </p>
           </div>
         ) : null}
@@ -96,7 +101,7 @@ function TravelHandbookDetail() {
 
         {isLoading && <ArticlePlaceholder />}
 
-        <div className={classes.relatedStories}>
+        {/* <div className={classes.relatedStories}>
           <p className={classes.relatedStoriesTitle}>Bài viết liên quan</p>
           <ul className="row">
             {data
@@ -111,7 +116,7 @@ function TravelHandbookDetail() {
                           className={classes.image}
                           style={{
                             backgroundImage: `url(${
-                              contentDes(item.content).image[0]
+                              contentDes(item.content.ops).image[0]
                             })`,
                           }}
                         ></div>
@@ -135,7 +140,7 @@ function TravelHandbookDetail() {
                 </li>
               ))}
           </ul>
-        </div>
+        </div> */}
       </div>
     </Layout>
   );

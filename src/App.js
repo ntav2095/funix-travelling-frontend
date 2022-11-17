@@ -1,9 +1,11 @@
 // main
 import { Route, Routes } from "react-router-dom";
 import React, { Suspense, useEffect } from "react";
+// import HomeNew from "./pages/HomeNew";
 import Loading from "./components/loading";
 import { LiveChat } from "./containers/Livechat";
 import Category from "./pages/Admin/Category";
+import Panavigation from "./containers/panavigation";
 // components
 
 const RequireAuth = React.lazy(() => import("./components/RequireAuth"));
@@ -19,6 +21,7 @@ const TravelHandbook = React.lazy(() => import("./pages/TravelHandbook"));
 const TravelHandbookDetail = React.lazy(() =>
   import("./pages/TravelHandbookDetail")
 );
+const HomeNew = React.lazy(() => import("./pages/HomeNew"));
 const TourDetail = React.lazy(() => import("./pages/TourDetail"));
 const Home = React.lazy(() => import("./pages/Home"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
@@ -52,7 +55,7 @@ function App() {
     <>
       <Suspense fallback={<Loading />}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomeNew />} />
           <Route path="/tour-chau-au" element={<ToursList />} />
           <Route path="/tour-trong-nuoc" element={<ToursList />} />
           <Route path="/lien-he" element={<Contact />} />

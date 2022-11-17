@@ -7,7 +7,7 @@ import styles from "./ContactTable.module.css";
 
 function ContactTable({ tour, isLoading }) {
   const [modalShow, setModalShow] = React.useState(false);
-
+  console.log(tour);
   const departureDates = tour
     ? tour.departureDates
         .map((item) => format(new Date(item), "dd/MM/yyyy"))
@@ -30,7 +30,7 @@ function ContactTable({ tour, isLoading }) {
               <div>
                 <p>Thời gian:</p>
                 <p>
-                  {tour.duration.days} ngày {tour.duration.nights} đêm
+                  {tour.days} ngày {tour.nights} đêm
                 </p>
               </div>
               <div>
