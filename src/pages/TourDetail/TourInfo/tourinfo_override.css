@@ -1,0 +1,13 @@
+.tourInfo .nav-link {
+  color: #050505;
+  border: 1px solid rgb(234, 234, 234);
+}
+
+.tourInfo .nav-tabs .nav-link.active {
+  /* border: 1px solid #ccc; */
+  /* border-bottom: none; */
+}
+
+.tourInfo .nav.nav-tabs {
+  margin-bottom: 0 !important;
+}

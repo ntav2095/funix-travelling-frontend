@@ -43,26 +43,28 @@ function TourCarousel({ tour, isLoading }) {
 
   return (
     <>
-      <div className="tourCarousel__container">
-        <Slider
-          {...settings}
-          afterChange={(x) => {
-            setIndex(x);
-          }}
-        >
-          {!isLoading &&
-            tour &&
-            tour.slider.map((img, id) => (
-              <div
-                key={id}
-                className={styles.image}
-                onClick={() => setIsShowModal(true)}
-              >
-                <img src={img} alt={tour.name} onError={handlerBrokenImg} />
-              </div>
-            ))}
-        </Slider>
-      </div>
+      {tour && (
+        <div className="tourCarousel__container">
+          <Slider
+            {...settings}
+            afterChange={(x) => {
+              setIndex(x);
+            }}
+          >
+            {!isLoading &&
+              tour &&
+              tour.slider.map((img, id) => (
+                <div
+                  key={id}
+                  className={styles.image}
+                  onClick={() => setIsShowModal(true)}
+                >
+                  <img src={img} alt={tour.name} onError={handlerBrokenImg} />
+                </div>
+              ))}
+          </Slider>
+        </div>
+      )}
 
       {isLoading && (
         <div className={styles.carouselItem + " " + styles.placeholder}></div>

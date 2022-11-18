@@ -1,20 +1,9 @@
 import Sidebar from "../../containers/Sidebar";
 import Footer from "../../containers/Footer";
 import Navbar from "../../containers/Navbar";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import styles from "./Layout.module.css";
 
-import { Link } from "react-router-dom";
-
-function DefaultLayout({
-  children,
-  sidebarLeft,
-  sidebarRight,
-  primary,
-  breadcrumb,
-}) {
-
-
+function DefaultLayout({ children, sidebarLeft, sidebarRight, primary }) {
   if (sidebarLeft || sidebarRight) {
     let classes = styles.container;
     if (sidebarLeft) {
@@ -28,23 +17,6 @@ function DefaultLayout({
     return (
       <>
         <Navbar />
-        {breadcrumb && (
-          <div className={styles.breadcrumb}>
-            <Breadcrumb>
-              {breadcrumb.map((item, index) => (
-                <Breadcrumb.Item
-                  key={index}
-                  active={item.active}
-                  linkAs={Link}
-                  linkProps={{ to: item.href }}
-                >
-                  {item.text}
-                </Breadcrumb.Item>
-              ))}
-            </Breadcrumb>
-          </div>
-        )}
-
         <div className={classes}>
           <div className={styles.sidebar}>
             <Sidebar primary={primary} />
@@ -61,22 +33,7 @@ function DefaultLayout({
   return (
     <>
       <Navbar />
-      {breadcrumb && (
-        <div className={styles.breadcrumb}>
-          <Breadcrumb>
-            {breadcrumb.map((item, index) => (
-              <Breadcrumb.Item
-                key={index}
-                active={item.active}
-                linkAs={Link}
-                linkProps={{ to: item.href }}
-              >
-                {item.text}
-              </Breadcrumb.Item>
-            ))}
-          </Breadcrumb>
-        </div>
-      )}
+
       {children}
       <Footer />
     </>

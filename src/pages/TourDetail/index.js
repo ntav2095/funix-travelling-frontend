@@ -6,6 +6,7 @@ import ContactTable from "./ContactTable";
 import TourInfo from "./TourInfo";
 import Layout from "../../layout/Default";
 import TourCarousel from "./TourCarousel";
+import ErrorPage from "../../containers/ErrorPage";
 
 // apis
 import useAxios from "../../hooks/useAxios";
@@ -49,31 +50,43 @@ function TourDetail() {
 
   return (
     <Layout breadcrumb={breadcrumb}>
-      <div className="myContainer">
-        <img src={bannerImg} className="img-fluid w-100" alt="" />
-      </div>
-
-      <div className="myContainer">
-        <h1 className="text-uppercase my-4 ">{tour?.name}</h1>
-        <div className={styles.top}>
-          <div className={styles.carousel}>
-            <TourCarousel tour={tour} isLoading={isLoading} />
-          </div>
-
-          <div className={styles.contactTable}>
-            <ContactTable tour={tour} isLoading={isLoading} />
-          </div>
+      {tour && (
+        <div className="myContainer">
+          <img src={bannerImg} className="img-fluid w-100" alt="" />
         </div>
+      )}
 
-        <TourInfo tour={tour} isLoading={isLoading} />
+      {!error && (
+        <div className="myContainer">
+          {tour && <h1 className="text-uppercase my-4 ">{tour?.name}</h1>}
 
-        {tour && (
-          <FacebookComment
-            width="100%"
-            href={`https://travelling-website-funix-v1.web.app/danh-sach-tour/${tourId}`}
-          />
-        )}
-      </div>
+          <div className={styles.top}>
+            <div className={styles.carousel}>
+              <TourCarousel tour={tour} isLoading={isLoading} />
+            </div>
+
+            <div className={styles.contactTable}>
+              <ContactTable tour={tour} isLoading={isLoading} />
+            </div>
+          </div>
+
+          <div className="myContainer">
+            <TourInfo tour={tour} isLoading={isLoading} />
+          </div>
+
+          {tour && (
+            <FacebookComment
+              width="100%"
+              href={`https://travelling-website-funix-v1.web.app/danh-sach-tour/${tourId}`}
+            />
+          )}
+        </div>
+      )}
+
+      {error && error.httpCode === 404 && <ErrorPage />}
+      {error && error.httpCode !== 404 && (
+        <ErrorPage code={error.httpCode} message={error.message} />
+      )}
     </Layout>
   );
 }

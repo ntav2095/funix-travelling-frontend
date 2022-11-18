@@ -1,6 +1,6 @@
 // main
-import { Card, CardTitle, CardBody, CardSubtitle } from "reactstrap";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 // assets
 import { brokenImage } from "../../assets/images";
@@ -9,39 +9,48 @@ import { brokenImage } from "../../assets/images";
 import styles from "./TourCard.module.css";
 
 function TourCard({ tour }) {
+  const { i18n } = useTranslation();
+  const lang = i18n.language;
+
+  const translation = {
+    days: {
+      en: "days",
+      vi: "ngày",
+    },
+    nights: {
+      en: "nights",
+      vi: "đêm",
+    },
+    full_services: {
+      en: "Service package:",
+      vi: "Trọn gói",
+    },
+  };
+
+  const errorHandler = (e) => {
+    e.target.src = brokenImage;
+  };
   return (
-    <Card className={styles.card}>
-      <Link
-        className={styles.image}
-        to={`/danh-sach-tour/${tour._id}`}
-        style={{
-          backgroundImage: `url(${tour.thumb}), url(${brokenImage})`,
-        }}
-      ></Link>
-
-      <CardBody className={styles.textBox}>
-        <Link to={`/danh-sach-tour/${tour._id}`}>
-          <CardTitle tag="h5" className={styles.name} title={tour.name}>
-            {tour.name}
-          </CardTitle>
-        </Link>
-        <CardSubtitle tag="h6" className={styles.duration}>
-          {tour.days} ngày {tour.nights} đêm
-        </CardSubtitle>
-        <CardSubtitle tag="h6" className={styles.journey} title={tour.journey}>
-          {tour.journey}
-        </CardSubtitle>
-
-        <div className={styles.cardFooter}>
-          <p className={styles.price}>
-            {tour.currentPrice.toLocaleString()} ĐỒNG
-          </p>
-          <Link className={styles.seeDetail} to={`/danh-sach-tour/${tour._id}`}>
-            XEM CHI TIẾT
-          </Link>
+    <div className={styles.card}>
+      <Link to={`/danh-sach-tour/${tour._id}`}>
+        <div className={styles.image}>
+          <img src={tour.thumb} alt={tour.name} onError={errorHandler} />
         </div>
-      </CardBody>
-    </Card>
+        <div className={styles.textBox}>
+          <h2>{tour.name}</h2>
+
+          <p>{tour.journey}</p>
+          <p>
+            {tour.days} {translation.days[lang]} {tour.nights}{" "}
+            {translation.nights[lang]}
+          </p>
+          <p>
+            {translation.full_services[lang]}{" "}
+            <strong>{tour.currentPrice.toLocaleString()} đ</strong>
+          </p>
+        </div>
+      </Link>
+    </div>
   );
 }
 

@@ -1,102 +1,58 @@
 .card {
   box-shadow: var(--box-shadow);
-
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 3.8px;
+  overflow: hidden;
+  color: #050505;
+  max-width: 360px;
+  margin: 0 auto;
 }
 
-.img {
+.image {
+  height: 0;
+  padding-top: 60%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+.image img {
+  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  top: 0;
   object-position: center;
+  transition: 0.36s;
 }
 
-.card h5,
-.card h6 {
+.card:hover img {
+  transform: scale(1.03);
+}
+
+.textBox {
+  padding: 10px;
+}
+
+.card h2 {
+  color: #050505;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.card p {
+  color: #050505;
+  margin: 0;
+  margin-bottom: 3px;
+  position: relative;
   max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.image {
-  height: 0;
-  padding-top: 60%;
-  display: block;
-  background-position: center;
-  background-size: cover;
-  position: relative;
-}
-
-.image::after {
-  position: absolute;
-  content: "";
-  display: block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgb(211 211 211 / 21%);
-  width: 0;
-  height: 0;
-  transition: 0.2s;
-}
-
-.image:hover::after {
-  width: 100%;
-  height: 100%;
-}
-
-.name {
-  color: #555;
-  font-weight: 600;
-  padding-bottom: 8px;
-}
-
-.name:hover {
-  text-decoration: underline;
-}
-
-.duration {
-  color: rgb(114, 114, 114);
-  font-weight: 400;
-  padding-bottom: 6px;
-}
-
-.journey {
-  font-weight: 500;
-  color: rgb(114, 114, 114);
-  padding-bottom: 12px;
-}
-
-.cardFooter {
-  display: flex;
-  height: 40px;
-  align-items: stretch;
-}
-
-.cardFooter > * {
-  margin: 0;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  text-transform: uppercase;
-  transition: 0.2s;
-  font-size: 16px;
-  line-height: 40px;
-}
-
-.price {
-  color: red;
-  background: rgb(230, 241, 255);
-}
-
-.seeDetail {
-  background: #ff5a00;
-  color: white;
-}
-
-.seeDetail:hover {
-  color: white;
-  background: #ff600a;
+.card p::before {
+  content: "•";
+  padding-right: 6px;
 }

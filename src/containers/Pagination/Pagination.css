@@ -1,0 +1,27 @@
+.travel__pagination .rc-pagination {
+  display: flex;
+  padding: 0;
+}
+
+.travel__pagination .rc-pagination-item,
+.travel__pagination .rc-pagination-prev,
+.travel__pagination .rc-pagination-next {
+  min-width: 30px;
+  border: 1px solid #ccc;
+  text-align: center;
+  margin: 0 2px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 3.6px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.travel__pagination .rc-pagination-item-active {
+  background: #000;
+  color: white;
+}
+
+.travel__pagination .rc-pagination-next.rc-pagination-disabled,
+.travel__pagination .rc-pagination-prev.rc-pagination-disabled {
+  display: none;
+}
