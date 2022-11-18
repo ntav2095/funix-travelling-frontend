@@ -26,7 +26,7 @@ function TravelHandbookDetail() {
   const [sendRequestPosts, isLoadingPost, datapost, errorpost] = useAxios();
   const quill = useRef();
   const { id } = useParams();
-
+  console.log(data)
   useEffect(() => {
     sendRequest(postsApi.getSingleArticle(id));
     sendRequestPosts(postsApi.get({ page_size: 3 }));

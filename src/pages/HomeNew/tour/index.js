@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "./tour.css";
 import { useTranslation } from "react-i18next";
+import CardPlaceholder from "../../../components/placeholders/CardPlaceholder";
+import { Col } from "react-bootstrap";
 
 
 function Tour(props) {
@@ -74,6 +76,12 @@ function Tour(props) {
                 </div>
               </div>
             ))}
+            {isLoading &&
+          new Array(6).fill(1).map((item, index) => (
+            <Col key={index} className="mb-4">
+              <CardPlaceholder />
+            </Col>
+          ))}
         </Slider>
       </div>
       <div className={styles.tourdetail} onClick={() => navigation(naviga)}>
