@@ -22,6 +22,7 @@ import usePageTitle from "../../hooks/usePageTitle";
 import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
 import { useTranslation } from "react-i18next";
+import Placeholder from "../../components/placeholders/Placeholder";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -49,44 +50,47 @@ function TourDetail() {
   ];
 
   return (
-    <Layout breadcrumb={breadcrumb}>
-      {tour && (
-        <div className="myContainer">
-          <img src={bannerImg} className="img-fluid w-100" alt="" />
-        </div>
-      )}
-
-      {!error && (
-        <div className="myContainer">
-          {tour && <h1 className="text-uppercase my-4 ">{tour?.name}</h1>}
-
-          <div className={styles.top}>
-            <div className={styles.carousel}>
-              <TourCarousel tour={tour} isLoading={isLoading} />
-            </div>
-
-            <div className={styles.contactTable}>
-              <ContactTable tour={tour} isLoading={isLoading} />
-            </div>
-          </div>
-
-          <div className="myContainer">
-            <TourInfo tour={tour} isLoading={isLoading} />
-          </div>
-
-          {tour && (
-            <FacebookComment
-              width="100%"
-              href={`https://travelling-website-funix-v1.web.app/danh-sach-tour/${tourId}`}
-            />
+    <Layout>
+      <div className={styles.tourDetail}>
+        <div className={styles.banner}>
+          {tour && !isLoading && (
+            <img src={bannerImg} className="img-fluid w-100" alt="" />
           )}
+          {isLoading && <Placeholder height="100%" width="100%" />}
         </div>
-      )}
 
-      {error && error.httpCode === 404 && <ErrorPage />}
-      {error && error.httpCode !== 404 && (
-        <ErrorPage code={error.httpCode} message={error.message} />
-      )}
+        {!error && (
+          <div className="myContainer">
+            {tour && <h1 className="text-uppercase my-4 ">{tour?.name}</h1>}
+
+            <div className={styles.top}>
+              <div className={styles.carousel}>
+                <TourCarousel tour={tour} isLoading={isLoading} />
+              </div>
+
+              <div className={styles.contactTable}>
+                <ContactTable tour={tour} isLoading={isLoading} />
+              </div>
+            </div>
+
+            <div className="myContainer">
+              <TourInfo tour={tour} isLoading={isLoading} />
+            </div>
+
+            {tour && (
+              <FacebookComment
+                width="100%"
+                href={`https://travelling-website-funix-v1.web.app/danh-sach-tour/${tourId}`}
+              />
+            )}
+          </div>
+        )}
+
+        {error && error.httpCode === 404 && <ErrorPage />}
+        {error && error.httpCode !== 404 && (
+          <ErrorPage code={error.httpCode} message={error.message} />
+        )}
+      </div>
     </Layout>
   );
 }

@@ -8,10 +8,86 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 
 import styles from "./TourInfo.module.css";
+import { useTranslation } from "react-i18next";
 import "./tourinfo_override.css";
+
+const translation = {
+  tabTitle: {
+    overview: {
+      en: "Overview",
+      vi: "Tổng quan",
+    },
+    itinerary: {
+      en: "Itinerary",
+      vi: "Lịch trình",
+    },
+    price: {
+      en: "Price",
+      vi: "Bảng giá",
+    },
+    terms: {
+      en: "Terms",
+      vi: "Điều khoản",
+    },
+  },
+  tabContent: {
+    overview: {
+      tour_name: {
+        en: "Tour's name:",
+        vi: "Tên hành trình:",
+      },
+      itinerary: {
+        en: "Itinerary:",
+        vi: "Lộ trình:",
+      },
+      duration: {
+        en: "Duration: ",
+        vi: "Thời gian: ",
+      },
+      days: {
+        en: "days",
+        vi: "ngày",
+      },
+      nights: {
+        en: "nights",
+        vi: "đêm",
+      },
+      description: {
+        en: "Description: ",
+        vi: "Mô tả: ",
+      },
+      highlights: {
+        en: "Highlights:",
+        vi: "Điểm nổi bật: ",
+      },
+      points_of_departure: {
+        en: "Points of departure:",
+        vi: "Khởi hành:",
+      },
+    },
+    price: {
+      price_includes: {
+        en: "Price includes",
+        vi: "Giá bao gồm",
+      },
+      price_excludes: {
+        en: "Price excludes",
+        vi: "Giá không bao gồm",
+      },
+    },
+    terms: {
+      cancellation_policy: {
+        en: "Cancellation Policy",
+        vi: "Điều kiện hoàn hủy",
+      },
+    },
+  },
+};
 
 const TourInfo = ({ tour, isLoading }) => {
   const itineraryRef = useRef();
+  const { i18n } = useTranslation();
+  const lang = i18n.language;
 
   return (
     <div className={styles.tourInfo + " tourInfo"}>
@@ -22,32 +98,35 @@ const TourInfo = ({ tour, isLoading }) => {
           className="mb-3"
           tabClassName={styles.xxx}
         >
-          <Tab eventKey="home" title="Tổng quan">
+          <Tab eventKey="home" title={translation.tabTitle.overview[lang]}>
             <div className={styles.tabContent}>
               <div className={styles.tourDesc}>
-                <p>Tên hành trình</p>
+                <p>{translation.tabContent.overview.tour_name[lang]}</p>
                 <div>
                   <p>{tour.name}</p>
                 </div>
               </div>
               <div className={styles.tourDesc}>
-                <p>Lộ trình</p>
+                <p>{translation.tabContent.overview.itinerary[lang]}</p>
                 <div>
                   <p>{tour.journey}</p>
                 </div>
               </div>
 
               <div className={styles.tourDesc}>
-                <p>Thời gian</p>
+                <p>{translation.tabContent.overview.duration[lang]}</p>
                 <div>
                   <p>
-                    {tour.days} ngày {tour.nights} đêm
+                    {tour.days} {translation.tabContent.overview.days[lang]}{" "}
+                    {tour.nights} {translation.tabContent.overview.nights[lang]}
                   </p>
                 </div>
               </div>
 
               <div className={styles.tourDesc}>
-                <p>Khởi hành</p>
+                <p>
+                  {translation.tabContent.overview.points_of_departure[lang]}
+                </p>
                 <div>
                   <p>
                     {tour.departureDates
@@ -58,14 +137,14 @@ const TourInfo = ({ tour, isLoading }) => {
               </div>
 
               <div className={styles.tourDesc}>
-                <p>Mô tả</p>
+                <p>{translation.tabContent.overview.description[lang]}</p>
                 <div>
                   <p>{tour.description}</p>
                 </div>
               </div>
 
               <div className={styles.tourDesc}>
-                <p>Điểm nổi bật</p>
+                <p>{translation.tabContent.overview.highlights[lang]}</p>
                 <div>
                   <ul>
                     {tour.highlights
@@ -79,7 +158,10 @@ const TourInfo = ({ tour, isLoading }) => {
             </div>
           </Tab>
 
-          <Tab eventKey="itinerary" title="Lộ trình">
+          <Tab
+            eventKey="itinerary"
+            title={translation.tabTitle.itinerary[lang]}
+          >
             <div
               ref={itineraryRef}
               className={styles.itinerary + " " + styles.tabContent}
@@ -137,13 +219,13 @@ const TourInfo = ({ tour, isLoading }) => {
             </div>
           </Tab>
 
-          <Tab eventKey="price" title="Bảng giá">
+          <Tab eventKey="price" title={translation.tabTitle.price[lang]}>
             <div
               className={styles.price + " " + styles.tabContent}
               role="tabpanel"
               aria-labelledby="tab-title-gia-bao-gom"
             >
-              <h2>Giá bao gồm</h2>
+              <h2>{translation.tabContent.price.price_includes[lang]}</h2>
 
               <ul className="ps-2">
                 {tour.priceIncludes.map((item, index) => (
@@ -151,7 +233,7 @@ const TourInfo = ({ tour, isLoading }) => {
                 ))}
               </ul>
 
-              <h2>Giá không bao gồm</h2>
+              <h2>{translation.tabContent.price.price_excludes[lang]}</h2>
 
               <ul className="ps-2">
                 {tour.priceExcludes.map((item, index) => (
@@ -161,13 +243,13 @@ const TourInfo = ({ tour, isLoading }) => {
             </div>
           </Tab>
 
-          <Tab eventKey="term" title="Điều khoản">
+          <Tab eventKey="term" title={translation.tabTitle.terms[lang]}>
             <div
               className={styles.price + " " + styles.tabContent}
               role="tabpanel"
               aria-labelledby="tab-title-gia-bao-gom"
             >
-              <h2>Điều kiện hoàn hủy</h2>
+              <h2>{translation.tabContent.terms.cancellation_policy[lang]}</h2>
 
               <ul className="ps-3">
                 {tour.cancellationPolicy.map((item, index) => (

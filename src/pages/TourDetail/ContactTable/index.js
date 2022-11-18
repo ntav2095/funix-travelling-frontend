@@ -4,9 +4,55 @@ import { format } from "date-fns";
 import { home3 as phonePng } from "../../../assets/images";
 import { arrowRight as arrowSvg } from "../../../assets/svgs";
 import styles from "./ContactTable.module.css";
+import { useTranslation } from "react-i18next";
+
+const translation = {
+  fullPackage: {
+    en: "Full package: ",
+    vi: "Trọn gói: ",
+  },
+  dest: {
+    en: "Destinations: ",
+    vi: "Điểm đến: ",
+  },
+  duration: {
+    en: "Duration: ",
+    vi: "Thời gian: ",
+  },
+  days: {
+    en: "days",
+    vi: "ngày",
+  },
+  nights: {
+    en: "nights",
+    vi: "đêm",
+  },
+  pointOfDeparture: {
+    en: "Point of departure: ",
+    vi: "Điểm khởi hành: ",
+  },
+  departureDates: {
+    en: "Departure date",
+    vi: "Ngày khởi hành",
+  },
+  book: {
+    en: "Book now",
+    vi: "Đặt tour",
+  },
+  contactNow: {
+    en: "Contact us",
+    vi: "Liên hệ tư vấn",
+  },
+  contact: {
+    en: "Contact:",
+    vi: "Thông tin liên hệ",
+  },
+};
 
 function ContactTable({ tour, isLoading }) {
   const [modalShow, setModalShow] = React.useState(false);
+  const { i18n } = useTranslation();
+  const lang = i18n.language;
 
   const pointOfDeparture = tour ? tour.journey.split("-")[0].trim() : "";
   const destinations = tour
@@ -30,23 +76,24 @@ function ContactTable({ tour, isLoading }) {
           <div className={styles.card + " mx-auto"}>
             <ul className={styles.tourInfo}>
               <li>
-                <span>Trọn gói: </span>
+                <span>{translation.fullPackage[lang]}</span>
                 <strong className={styles.price}>
                   {tour.currentPrice.toLocaleString()} đ
                 </strong>
               </li>
               <li>
-                <span>Điểm đến: </span>
+                <span>{translation.dest[lang]}</span>
                 <strong>{destinations}</strong>
               </li>
               <li>
-                <span>Thời gian: </span>
+                <span>{translation.duration[lang]}</span>
                 <strong>
-                  {tour.days} ngày {tour.nights} đêm
+                  {tour.days} {translation.days[lang]} {tour.nights}{" "}
+                  {translation.nights[lang]}
                 </strong>
               </li>
               <li>
-                <span>Điểm khởi hành: </span>
+                <span>{translation.pointOfDeparture[lang]}</span>
                 <strong>{pointOfDeparture}</strong>
               </li>
             </ul>
@@ -55,7 +102,7 @@ function ContactTable({ tour, isLoading }) {
               className={styles.orderBtn}
               onClick={() => setModalShow(true)}
             >
-              Ngày khởi hành
+              {translation.departureDates[lang]}
               {arrowSvg}
             </button>
 
@@ -63,14 +110,14 @@ function ContactTable({ tour, isLoading }) {
               className={styles.orderBtn}
               onClick={() => setModalShow(true)}
             >
-              Đặt tour
+              {translation.book[lang]}
             </button>
 
             <button
               className={styles.orderBtn}
               onClick={() => setModalShow(true)}
             >
-              Liên hệ tư vấn
+              {translation.contactNow[lang]}
             </button>
           </div>
 
@@ -80,7 +127,7 @@ function ContactTable({ tour, isLoading }) {
             }
           >
             <div className="col-8 ">
-              <h4 className="mb-2">Thông tin liên hệ:</h4>
+              <h4 className="mb-2">{translation.contact[lang]}</h4>
               <ul>
                 <li>Hotline: 123456789</li>
                 <li>Zalo: 123456789</li>

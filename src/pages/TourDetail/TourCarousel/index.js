@@ -66,10 +66,6 @@ function TourCarousel({ tour, isLoading }) {
         </div>
       )}
 
-      {isLoading && (
-        <div className={styles.carouselItem + " " + styles.placeholder}></div>
-      )}
-
       <Modal
         show={isShowModal}
         onHide={closeModalHandler}

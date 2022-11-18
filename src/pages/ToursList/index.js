@@ -20,7 +20,6 @@ import { useTranslation } from "react-i18next";
 
 function ToursList() {
   const [sendRequest, isLoading, data, error] = useAxios();
-  // const [page, setPage] = useState(1);
   const location = useLocation();
   let page = new URLSearchParams(location.search).get("page");
   if (!page || isNaN(Number(page))) {

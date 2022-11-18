@@ -176,7 +176,7 @@ function Header() {
                     <button
                       className={styles.admin}
                       onClick={() => {
-                        navigation("./admin");
+                        navigation("/admin");
                       }}
                     >
                       {" "}
@@ -276,10 +276,9 @@ function Header() {
                   <button
                     className={styles.admin}
                     onClick={() => {
-                      navigation("./admin");
+                      navigation("/admin");
                     }}
                   >
-                    {" "}
                     <i
                       className="fas fa-user-cog"
                       style={{ fontSize: "1.5rem" }}
