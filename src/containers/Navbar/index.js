@@ -13,9 +13,6 @@ import React, { Component, useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useTranslation } from "react-i18next";
 
-// components
-import Search from "./Search";
-
 // lang
 import i18next from "../../services/languages/i18n";
 
