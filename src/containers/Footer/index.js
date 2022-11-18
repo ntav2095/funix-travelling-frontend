@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div className={styles.footer}>
       <div className="myContainer">
-        <p>Copyright funix</p>
+        <p>Copyright Funix</p>
       </div>
     </div>
   );

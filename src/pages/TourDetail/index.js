@@ -13,7 +13,6 @@ import useAxios from "../../hooks/useAxios";
 import { tourApi } from "../../services/apis";
 
 // assets
-import { hearder as bannerImg } from "../../assets/images";
 
 // hooks
 import usePageTitle from "../../hooks/usePageTitle";
@@ -22,7 +21,7 @@ import usePageTitle from "../../hooks/usePageTitle";
 import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
 import { useTranslation } from "react-i18next";
-import Placeholder from "../../components/placeholders/Placeholder";
+import Banner from "../../components/Banner";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -39,26 +38,9 @@ function TourDetail() {
     sendRequest(tourApi.getSingleTour(tourId));
   }, [i18n.language]);
 
-  const breadcrumb = [
-    { href: "/", active: false, text: "trang chủ" },
-    { href: "/danh-sach-tour", active: false, text: "danh sách tour" },
-    {
-      href: `/danh-sach-tour/${tourId}`,
-      active: true,
-      text: tour?.name || "Chi tiết tour",
-    },
-  ];
-
   return (
-    <Layout>
+    <Layout banner>
       <div className={styles.tourDetail}>
-        <div className={styles.banner}>
-          {tour && !isLoading && (
-            <img src={bannerImg} className="img-fluid w-100" alt="" />
-          )}
-          {isLoading && <Placeholder height="100%" width="100%" />}
-        </div>
-
         {!error && (
           <div className="myContainer">
             {tour && <h1 className="text-uppercase my-4 ">{tour?.name}</h1>}

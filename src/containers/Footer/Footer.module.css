@@ -3,3 +3,28 @@
   color: rgb(239, 239, 239);
   padding: 8px;
 }
+
+.footer p {
+  animation-name: example;
+  text-align: center;
+  animation-duration: 68s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes example {
+  0% {
+    color: red;
+  }
+  25% {
+    color: yellow;
+  }
+  50% {
+    color: blue;
+  }
+  75% {
+    color: green;
+  }
+  100% {
+    color: red;
+  }
+}

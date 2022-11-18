@@ -8,58 +8,29 @@ import Layout from "../../layout/Default";
 import usePageTitle from "../../hooks/usePageTitle";
 
 // css
-import classes from "./TravelHandbookDetail.module.css";
+import styles from "./TravelHandbookDetail.module.css";
 
 // mock
 import { useEffect, useRef, useState } from "react";
 import { postsApi } from "../../services/apis";
 import useAxios from "../../hooks/useAxios";
 import quillGetHTML from "../../services/helpers/quillGetHTML";
-import { getDate, getMonth, getYear } from "date-fns";
 import ArticlePlaceholder from "../../components/placeholders/ArticlePlaceholder";
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
-// import i18n from "../../services/languages/i18n";
 import { useTranslation } from "react-i18next";
+import { brokenImage } from "../../assets/images";
 
 function TravelHandbookDetail() {
-  const [state, setState] = useState();
-
   const { i18n } = useTranslation();
   const [sendRequest, isLoading, data, error] = useAxios();
+  const [sendRequestPosts, isLoadingPost, datapost, errorpost] = useAxios();
   const quill = useRef();
   const { id } = useParams();
-  function date(dateString) {
-    const dateStringtoformater = new Date(dateString);
-    const day = getDate(dateStringtoformater);
-    const month = getMonth(dateStringtoformater);
-    const year = getYear(dateStringtoformater);
-    return `${day}-${month}-${year}`;
-  }
-
-  function contentDes(content) {
-    let description = { text: [], image: [] };
-    content.map((item) => {
-      let t =
-        typeof item.insert === "string" && item.insert.length > 10
-          ? description.text.push(item.insert)
-          : null;
-      let e = item.insert.image
-        ? description.image.push(item.insert.image)
-        : null;
-      return item;
-    });
-    return description;
-  }
 
   useEffect(() => {
     sendRequest(postsApi.getSingleArticle(id));
+    sendRequestPosts(postsApi.get({ page_size: 3 }));
   }, [i18n.language]);
-
-  useEffect(() => {
-    if (data) {
-      setState(data.article);
-    }
-  }, [data, i18n.language]);
 
   useEffect(() => {
     if (data) {
@@ -67,69 +38,53 @@ function TravelHandbookDetail() {
     }
   }, [data]);
 
-  usePageTitle(`Cẩm nang --- đang cập nhật || Go Travel`);
-
-  const breadcrumb = [
-    { href: "/", active: false, text: "trang chủ" },
-    { href: "/cam-nang-du-lich", active: false, text: "cẩm nang du lịch" },
-    {
-      href: `/danh-sach-tour/${id}`,
-      active: true,
-      text: state?.title || "bài viết",
-    },
-  ];
+  usePageTitle(`${data?.data.item.title} || Cẩm nang du lịch || Go Travel`);
 
   const article = data ? data.data.item : null;
 
   return (
-    <Layout sidebarRight primary breadcrumb={breadcrumb}>
-      <div>
+    <Layout sidebarRight banner>
+      <div className={styles.container}>
         {article ? (
-          <div className={classes.storyHeader}>
-            <h1>{article.title}</h1>
-            <p className={classes.date}>
+          <div className={styles.storyHeader}>
+            <h1 className="mb-4 pb-1">{article.title}</h1>
+            <p className={styles.date}>
               Posted on{" "}
-              <span>{format(new Date(article.createdAt), "dd/MM/yyyy")}</span>
+              <span>{format(new Date(article.createdAt), "dd/MM/yyyy")}</span>{" "}
               by <Link to="/admin">{article.author}</Link>
             </p>
           </div>
         ) : null}
 
-        <div className={classes.storyContent}>
-          <div className={classes.quillContent} ref={quill}></div>
+        <div className={styles.storyContent}>
+          <div className={styles.quillContent} ref={quill}></div>
         </div>
 
         {isLoading && <ArticlePlaceholder />}
 
-        {/* <div className={classes.relatedStories}>
-          <p className={classes.relatedStoriesTitle}>Bài viết liên quan</p>
-          <ul className="row">
-            {data
-              ? data.items.map((item) => (
-                  <li key={item._id} className="col-12 col-sm-6 col-lg-4">
-                    <Link
-                      className={classes.relatedStory}
-                      to={`/cam-nang-du-lich/${item._id}`}
-                    >
-                      <div>
-                        <div
-                          className={classes.image}
-                          style={{
-                            backgroundImage: `url(${
-                              contentDes(item.content.ops).image[0]
-                            })`,
-                          }}
-                        ></div>
-
-                        <div className={classes.textBox}>
-                          <h4>{item.title}</h4>
-                          <p className={classes.date}>
-                            {date(item.updatedAt || item.createdAt)}
-                          </p>
+        <div className="mt-4">
+          <h4 className={styles.relatedStoriesTitle}>Bài viết liên quan</h4>
+          <div className="row">
+            {datapost
+              ? datapost.data.map((item) => (
+                  <div key={item._id} className="col-12 col-sm-6 col-lg-4">
+                    <div className={styles.relatedArticle}>
+                      <Link to={`/cam-nang-du-lich/${item._id}`}>
+                        <div className={styles.image}>
+                          <img
+                            src={item.thumb}
+                            alt={item.title}
+                            onError={(e) => (e.target.src = brokenImage)}
+                          />
                         </div>
-                      </div>
-                    </Link>
-                  </li>
+
+                        <div className={styles.textBox}>
+                          <h4>{item.title}</h4>
+                          <p>{item.lead.slice(0, 80)}...</p>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
                 ))
               : null}
 
@@ -139,8 +94,8 @@ function TravelHandbookDetail() {
                   <CardPlaceholder />
                 </li>
               ))}
-          </ul>
-        </div> */}
+          </div>
+        </div>
       </div>
     </Layout>
   );

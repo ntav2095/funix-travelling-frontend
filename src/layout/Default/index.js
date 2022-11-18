@@ -1,9 +1,16 @@
 import Sidebar from "../../containers/Sidebar";
 import Footer from "../../containers/Footer";
 import Navbar from "../../containers/Navbar";
+import Banner from "../../components/Banner";
 import styles from "./Layout.module.css";
 
-function DefaultLayout({ children, sidebarLeft, sidebarRight, primary }) {
+function DefaultLayout({
+  children,
+  sidebarLeft,
+  sidebarRight,
+  primary,
+  banner,
+}) {
   if (sidebarLeft || sidebarRight) {
     let classes = styles.container;
     if (sidebarLeft) {
@@ -17,6 +24,7 @@ function DefaultLayout({ children, sidebarLeft, sidebarRight, primary }) {
     return (
       <>
         <Navbar />
+        {banner && <Banner />}
         <div className={classes}>
           <div className={styles.sidebar}>
             <Sidebar primary={primary} />
@@ -33,7 +41,7 @@ function DefaultLayout({ children, sidebarLeft, sidebarRight, primary }) {
   return (
     <>
       <Navbar />
-
+      {banner && <Banner />}
       {children}
       <Footer />
     </>

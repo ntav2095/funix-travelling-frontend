@@ -55,14 +55,14 @@ function Header() {
   useEffect(() => {
     window.addEventListener("scroll", () => {
       const container = document.getElementById("container-navbar");
-      if (document.documentElement.scrollTop > 250) {
+      if (document.documentElement.scrollTop > 100) {
         container.classList.add(styles.fixed);
       } else if (document.documentElement.scrollTop <= 10) {
         container.classList.remove(styles.fixed);
       }
       if (
-        document.body.scrollTop > 250 ||
-        document.documentElement.scrollTop > 250
+        document.body.scrollTop > 100 ||
+        document.documentElement.scrollTop > 100
       ) {
         document.getElementById("Btn").style.display = "block";
       } else {
@@ -191,7 +191,7 @@ function Header() {
             </Offcanvas>
 
             <NavbarBrand className="mr-auto" href="/">
-              <h1 className={styles.logo}>TRAVEL LOGO</h1>
+              <h1 className={styles.logo}>TRAVEL JOYA</h1>
             </NavbarBrand>
 
             <Collapse isOpen={state.isNavOpen} navbar>

@@ -5,7 +5,6 @@ import React, { Suspense, useEffect } from "react";
 import Loading from "./components/loading";
 import { LiveChat } from "./containers/Livechat";
 import Category from "./pages/Admin/Category";
-import Panavigation from "./containers/panavigation";
 // components
 
 const RequireAuth = React.lazy(() => import("./components/RequireAuth"));

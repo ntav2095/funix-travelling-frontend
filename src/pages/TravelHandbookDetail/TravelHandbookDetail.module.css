@@ -55,70 +55,40 @@ span {
   border-bottom: 1px solid #ececec;
 }
 
-/* related stories  */
-.relatedStories {
-  border-top: 1px solid #ececec;
-  padding-top: 24px;
-}
-
-.relatedStories ul li {
-  padding: 8px;
-}
-
-.relatedStory {
-  box-shadow: var(--box-shadow);
-  display: block;
-}
-
-.relatedStoriesTitle {
-  font-size: 18px;
-  color: #777;
-  padding-bottom: 8px;
-  font-weight: 600;
-  margin-bottom: 0 !important;
-}
-
-.relatedStory a {
-  display: block;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-.relatedStory .image {
-  width: 100%;
-  height: 0;
-  padding-top: 56%;
-  background-position: center;
-  background-size: cover;
-}
-
-.relatedStory .textBox {
-  padding: 15px 15px 20px;
-  text-align: center;
-}
-
-.relatedStory h4 {
-  color: #555;
-  font-size: 17px;
-  min-height: 42px;
-  line-height: 1.3;
-  margin-top: 0.1em;
-  margin-bottom: 0.1em;
-  font-weight: 600;
-  max-width: 250px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.relatedStory .date {
-  font-size: 12px;
-  color: #777;
-  margin: 0;
-}
-
 .quillContent img {
   width: 70%;
   margin: auto;
   display: block;
+}
+
+/* =============== related articles ==================  */
+.relatedArticle {
+  border-radius: 3.8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  overflow: hidden;
+}
+
+.relatedArticle .image {
+  height: 0;
+  padding-top: 60%;
+  position: relative;
+}
+
+.relatedArticle .image img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  top: 0;
+}
+
+.relatedArticle .textBox {
+  padding: 8px;
+  color: #050505;
+}
+
+.relatedArticle .textBox p {
+  font-size: 13px;
 }
