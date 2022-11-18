@@ -9,6 +9,17 @@
   font-size: 15px;
 }
 
+.itinerary li,
+.itinerary p,
+.itinerary h1,
+.itinerary h2,
+.itinerary li h3,
+.itinerary h4,
+.itinerary h5,
+.itinerary h6 {
+  word-break: normal !important;
+}
+
 .itinerary .container {
   margin: 0 16px;
   padding: 0 8px;
