@@ -23,14 +23,12 @@ import { brokenImage } from "../../assets/images";
 function TravelHandbookDetail() {
   const { i18n } = useTranslation();
   const [sendRequest, isLoading, data, error] = useAxios();
-  const [sendRequestPosts, isLoadingPost, datapost, errorpost] = useAxios();
   const quill = useRef();
   const { id } = useParams();
 
   useEffect(() => {
     sendRequest(postsApi.getSingleArticle(id));
-    sendRequestPosts(postsApi.get({ page_size: 3 }));
-  }, [i18n.language]);
+  }, [i18n.language, id]);
 
   useEffect(() => {
     if (data) {
@@ -41,6 +39,7 @@ function TravelHandbookDetail() {
   usePageTitle(`${data?.data.item.title} || Cẩm nang du lịch || Go Travel`);
 
   const article = data ? data.data.item : null;
+  const relatedArtilces = data ? data.data.relatedItems : null;
 
   return (
     <Layout sidebarRight banner>
@@ -65,8 +64,9 @@ function TravelHandbookDetail() {
         <div className="mt-4">
           <h4 className={styles.relatedStoriesTitle}>Bài viết liên quan</h4>
           <div className="row">
-            {datapost
-              ? datapost.data.map((item) => (
+            {relatedArtilces &&
+              relatedArtilces.map((item) => {
+                return (
                   <div key={item._id} className="col-12 col-sm-6 col-lg-4">
                     <div className={styles.relatedArticle}>
                       <Link to={`/cam-nang-du-lich/${item._id}`}>
@@ -85,8 +85,8 @@ function TravelHandbookDetail() {
                       </Link>
                     </div>
                   </div>
-                ))
-              : null}
+                );
+              })}
 
             {isLoading &&
               new Array(3).fill(1).map((item, index) => (
