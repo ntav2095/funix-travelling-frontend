@@ -23,9 +23,10 @@ import { useTranslation } from "react-i18next";
 
 function TravelHandbookDetail() {
   const [state, setState] = useState();
-
   const { i18n } = useTranslation();
   const [sendRequest, isLoading, data, error] = useAxios();
+  const [sendRequestPosts, isLoadingPost, datapost, errorpost] = useAxios();
+  console.log(datapost)
   const quill = useRef();
   const { id } = useParams();
   function date(dateString) {
@@ -53,6 +54,7 @@ function TravelHandbookDetail() {
 
   useEffect(() => {
     sendRequest(postsApi.getSingleArticle(id));
+    sendRequestPosts(postsApi.get({page_size:3}))
   }, [i18n.language]);
 
   useEffect(() => {
@@ -90,7 +92,7 @@ function TravelHandbookDetail() {
             <p className={classes.date}>
               Posted on{" "}
               <span>{format(new Date(article.createdAt), "dd/MM/yyyy")}</span>
-              by <Link to="/admin">{article.author}</Link>
+              by{" "} <Link to="/admin">{article.author}</Link>
             </p>
           </div>
         ) : null}
@@ -101,11 +103,11 @@ function TravelHandbookDetail() {
 
         {isLoading && <ArticlePlaceholder />}
 
-        {/* <div className={classes.relatedStories}>
+        <div className={classes.relatedStories}>
           <p className={classes.relatedStoriesTitle}>Bài viết liên quan</p>
           <ul className="row">
-            {data
-              ? data.items.map((item) => (
+            {datapost
+              ? datapost.data.map((item) => (
                   <li key={item._id} className="col-12 col-sm-6 col-lg-4">
                     <Link
                       className={classes.relatedStory}
@@ -140,7 +142,7 @@ function TravelHandbookDetail() {
                 </li>
               ))}
           </ul>
-        </div> */}
+        </div>
       </div>
     </Layout>
   );

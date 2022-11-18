@@ -34,7 +34,7 @@ function ToursList() {
   function setpage(e) {
     setPage(e);
   }
-
+console.log(data)
   usePageTitle(`Danh sách tours || Go Travel`);
 
   return (
@@ -59,7 +59,7 @@ function ToursList() {
               ))}
           </Row>
 
-          <Panavigation totalPage={3} callback={setpage} />
+          <Panavigation totalPage={data?.metadata.page_count} callback={setpage} />
         </div>
       </div>
     </Layout>

@@ -22,7 +22,7 @@
 }
 
 .footer {
- background-image: url('../../assets/images/sec_video_tour_bg.jpg');
+ /* background-image: url('../../assets/images/sec_video_tour_bg.jpg'); */
   /* background-repeat: no-repeat;
   background-position:center;
   background-size: cover;
@@ -30,6 +30,7 @@
   opacity: 0.6; */ 
   /* background-color: #3c2f75; */
   color: #f1f1f1;
+  background-color: black;
 }
 .footer-title {
   font-size: 19px;

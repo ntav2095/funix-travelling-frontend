@@ -42,7 +42,7 @@ function TravelHandbook() {
   }
 
   useEffect(() => {
-    sendRequest(postsApi.get({ page: page, lang: i18n.language }));
+    sendRequest(postsApi.get({ page: page }));
   }, [page, i18n.language]);
 
   usePageTitle(`Cẩm nang du lịch || Go Travel`);
@@ -57,7 +57,7 @@ function TravelHandbook() {
               data &&
               data.data.length > 0 &&
               data.data.map((item) => (
-                <div key={item._id} className="col-12 col-md-6 col-lg-4">
+                <div key={item._id} className={" col-12 col-md-6 col-lg-4"}>
                   <Link
                     className={classes.story}
                     key={item._id}
@@ -68,6 +68,7 @@ function TravelHandbook() {
                         className={classes.image}
                         style={{
                           backgroundImage: `url(${item.thumb})`,
+                          borderRadius:'8px 8px 0px 0px'
                         }}
                       ></div>
                       <div className={classes.boxText}>

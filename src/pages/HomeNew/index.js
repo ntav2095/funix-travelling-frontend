@@ -5,12 +5,16 @@ import "./home.css";
 import useAxios from "../../hooks/useAxios";
 import { tourApi } from "../../services/apis";
 import Tour from "./tour";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 function HomeNew() {
+  const {i18n}=useTranslation()
+
   const [sendRequest, isLoading, data, error] = useAxios();
   useEffect(() => {
     sendRequest(tourApi.get({ page: 1, page_size: 6 }));
-  }, []);
+  }, [i18n.language]);
   return (
     <Layout>
       <div className="myContainer">
@@ -20,7 +24,7 @@ function HomeNew() {
       <div className="myContainer">
         <Tour
           tour={data?.data}
-          title={"TOUR CHÂU ÂU"}
+          title={i18next.t("homeMain.titleTourChauAu")}
           naviga={"/tour-chau-au"}
           isloading={isLoading}
         />
@@ -29,7 +33,7 @@ function HomeNew() {
       <div className="myContainer">
         <Tour
           tour={data?.data}
-          title={"TOUR TRONG NƯỚC"}
+          title={i18next.t("homeMain.titleTourTrongNuoc")}
           naviga={"/tour-trong-nuoc"}
           isloading={isLoading}
         />
@@ -38,7 +42,7 @@ function HomeNew() {
       <div className="myContainer">
         <Tour
           tour={data?.data}
-          title={"TOUR CẨM NANG DU LỊCH"}
+          title={i18next.t("homeMain.titleCamNang")}
           naviga={"/cam-nang-du-lich"}
           isloading={isLoading}
         />

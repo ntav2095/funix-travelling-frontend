@@ -4,9 +4,12 @@ import { brokenImage } from "../../../assets/images";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "./tour.css";
+import { useTranslation } from "react-i18next";
+
 
 function Tour(props) {
   const { title, tour, naviga, isLoading } = props;
+  const {i18n}=useTranslation()
   const navigation = useNavigate();
   const settings = {
     dots: false,
@@ -65,8 +68,8 @@ function Tour(props) {
                   <h5>{item.name}</h5>
                   <ul>
                     <li>{item.journey}</li>
-                    <li>{item.days + " ngày " + item.nights + " đêm"}</li>
-                    <li>{"Trọn gói:" + item.currentPrice + "đ"}</li>
+                    <li>{item.days + (i18n.language == 'vi'? " ngày ":' days ') + item.nights + (i18n.language=='vi'?" đêm.": ' nights.') }</li>
+                    <li>{(i18n.language=='vi'?"Trọn gói: ":'Lump-sum price: ') + item.currentPrice + (i18n.language=='vi'?"  đ":' VNĐ')}</li>
                   </ul>
                 </div>
               </div>
@@ -74,7 +77,7 @@ function Tour(props) {
         </Slider>
       </div>
       <div className={styles.tourdetail} onClick={() => navigation(naviga)}>
-        Xem tất cả
+        { i18n.language=='vi'? 'Xem tất cả':'ALL'}
       </div>
     </div>
   );
