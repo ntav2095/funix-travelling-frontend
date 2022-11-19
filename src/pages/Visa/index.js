@@ -1,5 +1,4 @@
 import { Col, Container, Row } from "react-bootstrap";
-import Layout from "../../layout/Default";
 import "./visa.css";
 import { Link } from "react-router-dom";
 import React, { useRef, useState } from "react";
@@ -62,7 +61,7 @@ function Visa() {
   usePageTitle(`Visa --- đang cập nhật || Go Travel`);
 
   return (
-    <Layout>
+    <div>
       <div className="banner-1">
         <img className="banner" src={visaBanner} alt="Visa banner" />
       </div>
@@ -335,7 +334,7 @@ function Visa() {
           </div>
         </Container>
       </div>
-    </Layout>
+    </div>
   );
 }
 

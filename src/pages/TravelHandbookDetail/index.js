@@ -2,7 +2,6 @@
 import { Link, useParams } from "react-router-dom";
 import { format } from "date-fns";
 // components
-import Layout from "../../layout/Default";
 
 // hooks
 import usePageTitle from "../../hooks/usePageTitle";
@@ -42,7 +41,7 @@ function TravelHandbookDetail() {
   const relatedArtilces = data ? data.data.relatedItems : null;
 
   return (
-    <Layout sidebarRight banner>
+    <div sidebarRight banner>
       <div className={styles.container}>
         {article ? (
           <div className={styles.storyHeader}>
@@ -97,7 +96,7 @@ function TravelHandbookDetail() {
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 }
 

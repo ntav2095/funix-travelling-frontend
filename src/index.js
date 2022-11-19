@@ -21,7 +21,6 @@ import "slick-carousel/slick/slick-theme.css";
 // general css
 import "./assets/css/variables.css";
 import "./assets/css/normalize.css";
-import "./assets/css/share.css";
 
 import "./App.css";
 

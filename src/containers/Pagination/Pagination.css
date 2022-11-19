@@ -1,6 +1,7 @@
 .travel__pagination .rc-pagination {
   display: flex;
   padding: 0;
+  margin-left: -4px;
 }
 
 .travel__pagination .rc-pagination-item,

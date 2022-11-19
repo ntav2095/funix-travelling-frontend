@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Layout from "../../layout/Default";
 import HomeHearder from "./HomeHearder";
 import "./home.css";
 import useAxios from "../../hooks/useAxios";
@@ -7,21 +6,22 @@ import { tourApi } from "../../services/apis";
 import Tour from "./tour";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import Banner from "../../components/Banner";
 
 function HomeNew() {
-  const {i18n}=useTranslation()
-
+  const { i18n } = useTranslation();
   const [sendRequest, isLoading, data, error] = useAxios();
   useEffect(() => {
     sendRequest(tourApi.get({ page: 1, page_size: 6 }));
   }, [i18n.language]);
   return (
-    <Layout>
-      <div className="myContainer">
+    <>
+      <Banner />
+      <div className="container-xl mb-5">
         <HomeHearder />
       </div>
 
-      <div className="myContainer">
+      <div className="container-xl mb-5">
         <Tour
           tour={data?.data}
           title={i18next.t("homeMain.titleTourChauAu")}
@@ -30,7 +30,7 @@ function HomeNew() {
         />
       </div>
 
-      <div className="myContainer">
+      <div className="container-xl mb-5">
         <Tour
           tour={data?.data}
           title={i18next.t("homeMain.titleTourTrongNuoc")}
@@ -39,7 +39,7 @@ function HomeNew() {
         />
       </div>
 
-      <div className="myContainer">
+      <div className="container-xl mb-5">
         <Tour
           tour={data?.data}
           title={i18next.t("homeMain.titleCamNang")}
@@ -47,7 +47,7 @@ function HomeNew() {
           isloading={isLoading}
         />
       </div>
-    </Layout>
+    </>
   );
 }
 export default HomeNew;

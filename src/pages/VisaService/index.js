@@ -1,6 +1,5 @@
 //
 
-import Layout from "../../layout/Default";
 import { Link } from "react-router-dom";
 import { phoneNumber, visaBanner, worldMap } from "../../assets/images";
 import Slider from "react-slick";
@@ -17,25 +16,26 @@ function VisaService() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const phone=useRef()
-  const handleClick= async ()=>{
-    if(phone.current.value){
-      const form =new FormData()
-      form.append('title','Gọi lại ngay')
-      form.append('phone',phone.current.value)
-      await axios.post('https://formspree.io/f/mgeqpdao',form)
-    .then(d=>d.json())
-    .then(data=>console.log(data))
-    .catch(err=>console.log(err))
+  const phone = useRef();
+  const handleClick = async () => {
+    if (phone.current.value) {
+      const form = new FormData();
+      form.append("title", "Gọi lại ngay");
+      form.append("phone", phone.current.value);
+      await axios
+        .post("https://formspree.io/f/mgeqpdao", form)
+        .then((d) => d.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
     }
-  }
+  };
   usePageTitle(`Dịch vụ visa || Go Travel`);
 
   return (
     <>
       <SignupConsultModal handleClose={handleClose} show={show} />
 
-      <Layout>
+      <div>
         <div id={styles.banner}>
           <img src={visaBanner} alt="Visa banner" className={styles.banner} />
         </div>
@@ -113,7 +113,13 @@ function VisaService() {
           <div className={styles.container}>
             <div className={styles.inner}>
               <div className={styles.input}>
-                <input type="number" placeholder="Số điện thoại của tôi là" ref={phone} minLength='9' required/>
+                <input
+                  type="number"
+                  placeholder="Số điện thoại của tôi là"
+                  ref={phone}
+                  minLength="9"
+                  required
+                />
                 <button onClick={handleClick}>YÊU CẦU GỌI LẠI</button>
               </div>
 
@@ -142,7 +148,7 @@ function VisaService() {
             </ul>
           </div>
         </div>
-      </Layout>
+      </div>
     </>
   );
 }

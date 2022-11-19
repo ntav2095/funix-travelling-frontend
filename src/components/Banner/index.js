@@ -3,7 +3,7 @@ import { hearder as bannerImg } from "../../assets/images";
 
 function Banner() {
   return (
-    <div className={styles.banner}>
+    <div className={styles.banner + " container-xl"}>
       <img src={bannerImg} className="img-fluid w-100" alt="banner" />
     </div>
   );

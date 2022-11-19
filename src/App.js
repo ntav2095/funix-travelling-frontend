@@ -5,6 +5,7 @@ import React, { Suspense, useEffect } from "react";
 import Loading from "./components/loading";
 import { LiveChat } from "./containers/Livechat";
 import Category from "./pages/Admin/Category";
+import DefaultLayout from "./layout/DefaultLayout";
 // components
 
 const RequireAuth = React.lazy(() => import("./components/RequireAuth"));
@@ -22,7 +23,6 @@ const TravelHandbookDetail = React.lazy(() =>
 );
 const HomeNew = React.lazy(() => import("./pages/HomeNew"));
 const TourDetail = React.lazy(() => import("./pages/TourDetail"));
-const Home = React.lazy(() => import("./pages/Home"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 // admin pages
 
@@ -54,21 +54,25 @@ function App() {
     <>
       <Suspense fallback={<Loading />}>
         <Routes>
-          <Route path="/" element={<HomeNew />} />
-          <Route path="/tour-chau-au" element={<ToursList />} />
-          <Route path="/tour-trong-nuoc" element={<ToursList />} />
-          <Route path="/lien-he" element={<Contact />} />
-          <Route path="/ve-cong-ty" element={<About />} />
-          <Route path="/dich-vu-visa/1" element={<Visa />} />
-          <Route path="/dich-vu-visa" element={<VisaService />} />
-          <Route path="/cam-nang-du-lich" element={<TravelHandbook />} />
-          <Route
-            path="/cam-nang-du-lich/:id"
-            element={<TravelHandbookDetail />}
-          />
-          <Route path="/danh-sach-tour/:tourId" element={<TourDetail />} />
-          <Route path="/*" element={<NotFound />} />
+          {/* =============================  CLIENT ROUTES ==============================  */}
+          <Route element={<DefaultLayout />}>
+            <Route path="/" element={<HomeNew />} />
+            <Route path="/tour-chau-au" element={<ToursList />} />
+            <Route path="/tour-trong-nuoc" element={<ToursList />} />
+            <Route path="/lien-he" element={<Contact />} />
+            <Route path="/ve-cong-ty" element={<About />} />
+            <Route path="/dich-vu-visa/1" element={<Visa />} />
+            <Route path="/dich-vu-visa" element={<VisaService />} />
+            <Route path="/cam-nang-du-lich" element={<TravelHandbook />} />
+            <Route
+              path="/cam-nang-du-lich/:id"
+              element={<TravelHandbookDetail />}
+            />
+            <Route path="/danh-sach-tour/:tourId" element={<TourDetail />} />
+            <Route path="/*" element={<NotFound />} />
+          </Route>
 
+          {/* =============================  ADMIN ROUTES ==============================  */}
           <Route path="/admin/login" element={<Login />} />
           <Route element={<RequireAuth />}>
             <Route path="/admin" element={<Dashboard />} />

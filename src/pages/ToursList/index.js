@@ -1,10 +1,8 @@
 // main
 import { useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { Col } from "react-bootstrap";
 
 // components
-import Layout from "../../layout/Default";
 import usePageTitle from "../../hooks/usePageTitle";
 import TourCard from "../../containers/TourCard";
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
@@ -17,6 +15,7 @@ import { tourApi } from "../../services/apis";
 import styles from "./TourList.module.css";
 import Pagination from "../../containers/Pagination";
 import { useTranslation } from "react-i18next";
+import Banner from "../../components/Banner";
 
 function ToursList() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -44,47 +43,49 @@ function ToursList() {
   usePageTitle(`Danh sách tours || Go Travel`);
 
   return (
-    <Layout>
-      <div className="myContainer">
-        <div className={styles.container}>
-          <div className="row">
-            {!isLoading &&
-              data &&
-              data.data.length > 0 &&
-              data.data.map((tour) => (
-                <div
-                  key={tour._id}
-                  className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
-                >
-                  <TourCard tour={tour} />
-                </div>
-              ))}
+    <>
+      <Banner />
+      <div className=" container-xl pt-5 pb-5 bg-white">
+        <h1 className="fs-4 text-uppercase text-center pb-2 fw-bold">
+          Danh sách tour châu Âu
+        </h1>
+        <div className="row">
+          {!isLoading &&
+            data &&
+            data.data.length > 0 &&
+            data.data.map((tour) => (
+              <div
+                key={tour._id}
+                className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+              >
+                <TourCard tour={tour} />
+              </div>
+            ))}
 
-            {isLoading &&
-              new Array(10).fill(1).map((item, index) => (
-                <div
-                  key={index}
-                  className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
-                >
-                  <CardPlaceholder key={index} />
-                </div>
-              ))}
-          </div>
-
-          {data && (
-            <div className="mt-4">
-              <Pagination
-                className="xxx"
-                pageSize={data.metadata.page_size}
-                total={data.metadata.total_count}
-                current={Number(page)}
-                onChange={changePageHandler}
-              />
-            </div>
-          )}
+          {isLoading &&
+            new Array(10).fill(1).map((item, index) => (
+              <div
+                key={index}
+                className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+              >
+                <CardPlaceholder key={index} />
+              </div>
+            ))}
         </div>
+
+        {data && (
+          <div className="mt-4">
+            <Pagination
+              className="xxx"
+              pageSize={data.metadata.page_size}
+              total={data.metadata.total_count}
+              current={Number(page)}
+              onChange={changePageHandler}
+            />
+          </div>
+        )}
       </div>
-    </Layout>
+    </>
   );
 }
 
