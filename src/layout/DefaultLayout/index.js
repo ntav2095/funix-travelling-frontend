@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Banner from "../../components/Banner";
 import styles from "./Layout.module.css";
+import Sidebar from "../../containers/Sidebar";
 
 function DefaultLayout({ banner, sidebar, children }) {
   return (
@@ -14,7 +15,7 @@ function DefaultLayout({ banner, sidebar, children }) {
           <div className="col-12 col-lg-9">{children}</div>
 
           <div className="col-12 col-lg-3">
-            <p>sidebar</p>
+            <Sidebar />
           </div>
         </div>
       )}

@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
-import HomeHearder from "./HomeHearder";
+import HomeHeader from "./HomeHeader";
 import "./home.css";
 import useAxios from "../../hooks/useAxios";
 import { tourApi } from "../../services/apis";
 import Tour from "./tour";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import Banner from "../../components/Banner";
 import DefaultLayout from "../../layout/DefaultLayout";
 
 function HomeNew() {
@@ -18,14 +17,14 @@ function HomeNew() {
   return (
     <DefaultLayout banner>
       <div className="mb-5">
-        <HomeHearder />
+        <HomeHeader />
       </div>
 
       <div className="mb-5">
         <Tour
           tour={data?.data}
           title={i18next.t("homeMain.titleTourChauAu")}
-          naviga={"/tour-chau-au"}
+          naviga={"/tours-chau-au"}
           isloading={isLoading}
         />
       </div>
@@ -34,7 +33,7 @@ function HomeNew() {
         <Tour
           tour={data?.data}
           title={i18next.t("homeMain.titleTourTrongNuoc")}
-          naviga={"/tour-trong-nuoc"}
+          naviga={"/tours-trong-nuoc"}
           isloading={isLoading}
         />
       </div>

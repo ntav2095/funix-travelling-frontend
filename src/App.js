@@ -65,8 +65,14 @@ function App() {
             <Routes>
               {/* =============================  CLIENT ROUTES ==============================  */}
               <Route path="/" element={<HomeNew />} />
-              <Route path="/tour-chau-au" element={<ToursList />} />
-              <Route path="/tour-trong-nuoc" element={<ToursList />} />
+              <Route
+                path="/tours-chau-au"
+                element={<ToursList cat_params={{ country_not: "vi" }} />}
+              />
+              <Route
+                path="/tours-trong-nuoc"
+                element={<ToursList cat_params={{ country: "vi" }} />}
+              />
               <Route path="/danh-sach-tour/:tourId" element={<TourDetail />} />
               <Route path="/lien-he" element={<Contact />} />
               <Route path="/ve-cong-ty" element={<About />} />

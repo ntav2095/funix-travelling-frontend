@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styles from "./tour.module.css";
+import { Link } from "react-router-dom";
 import { brokenImage } from "../../../assets/images";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
@@ -8,18 +9,33 @@ import { useTranslation } from "react-i18next";
 import CardPlaceholder from "../../../components/placeholders/CardPlaceholder";
 import { Col } from "react-bootstrap";
 
+const trans = {
+  days: {
+    en: "days",
+    vi: "ngày",
+  },
+  nights: {
+    en: "nights",
+    vi: "đêm",
+  },
+  full_package: {
+    en: "Full package: ",
+    vi: "Trọn gói: ",
+  },
+};
 
 function Tour(props) {
   const { title, tour, naviga, isLoading } = props;
-  const {i18n}=useTranslation()
-  const navigation = useNavigate();
+  const { i18n } = useTranslation();
+  const lang = i18n.language;
+
   const settings = {
     dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    initialSlide: 0,
+    initialSlide: 1,
     responsive: [
       {
         breakpoint: 1024,
@@ -40,53 +56,56 @@ function Tour(props) {
       },
     ],
   };
+
   const handlerBrokenImg = (e) => {
     e.target.src = brokenImage;
   };
 
   return (
-    <div className={styles.title}>
-      <div>
-        <h3>{title}</h3>
+    <div className="home__tours">
+      <div className={styles.title}>
+        <h3 className="fs-5 pb-2">{title}</h3>
       </div>
       <div className={styles.container}>
         <Slider {...settings}>
           {!isLoading &&
             tour &&
             tour.map((item, id) => (
-              <div
-                key={id}
-                className={styles.carouselItem}
-                onClick={() => navigation("/danh-sach-tour/" + item._id)}
-              >
-                <div className={styles.img}>
-                  <img
-                    src={item.thumb}
-                    alt={tour.name}
-                    onError={handlerBrokenImg}
-                  />
-                </div>
-                <div className={styles.content}>
-                  <h5>{item.name}</h5>
-                  <ul>
-                    <li>{item.journey}</li>
-                    <li>{item.days + (i18n.language == 'vi'? " ngày ":' days ') + item.nights + (i18n.language=='vi'?" đêm.": ' nights.') }</li>
-                    <li>{(i18n.language=='vi'?"Trọn gói: ":'Lump-sum price: ') + item.currentPrice + (i18n.language=='vi'?"  đ":' VNĐ')}</li>
-                  </ul>
-                </div>
+              <div key={id} className={styles.carouselItem}>
+                <Link to={`/danh-sach-tour/${item._id}`}>
+                  <div className={styles.img}>
+                    <img
+                      src={item.thumb}
+                      alt={tour.name}
+                      onError={handlerBrokenImg}
+                    />
+                  </div>
+                  <div className={styles.content}>
+                    <h5 className="text-uppercase">{item.name}</h5>
+                    <p>{item.journey}</p>
+                    <p>
+                      {item.days} {trans.days[lang]} {item.nights}{" "}
+                      {trans.nights[lang]}
+                    </p>
+                    <p>
+                      {trans.full_package[lang]}{" "}
+                      <strong>{item.currentPrice.toLocaleString()} đ</strong>
+                    </p>
+                  </div>
+                </Link>
               </div>
             ))}
-            {isLoading &&
-          new Array(6).fill(1).map((item, index) => (
-            <Col key={index} className="mb-4">
-              <CardPlaceholder />
-            </Col>
-          ))}
+          {!tour &&
+            new Array(6).fill(1).map((item, index) => (
+              <Col key={index} className="mb-4">
+                <CardPlaceholder />
+              </Col>
+            ))}
         </Slider>
       </div>
-      <div className={styles.tourdetail} onClick={() => navigation(naviga)}>
-        { i18n.language=='vi'? 'Xem tất cả':'ALL'}
-      </div>
+      <Link className={styles.tourdetail} to={naviga}>
+        {i18n.language == "vi" ? "Xem tất cả" : "ALL"}
+      </Link>
     </div>
   );
 }

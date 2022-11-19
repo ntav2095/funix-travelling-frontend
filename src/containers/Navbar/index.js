@@ -112,13 +112,13 @@ function Header() {
                     </NavItem>
 
                     <NavItem className="nav-bar-offcanvat">
-                      <NavLink className="nav-link" to="/tour-chau-au">
+                      <NavLink className="nav-link" to="/tours-chau-au">
                         {i18next.t("header.euTours")}
                       </NavLink>
                     </NavItem>
 
                     <NavItem className="nav-bar-offcanvat">
-                      <NavLink className="nav-link" to="/tour-trong-nuoc">
+                      <NavLink className="nav-link" to="/tours-trong-nuoc">
                         {i18next.t("header.viTours")}
                       </NavLink>
                     </NavItem>
@@ -215,12 +215,12 @@ function Header() {
                     </NavDropdown>
                   </NavItem>
                   <NavItem>
-                    <NavLink className="nav-link" to="/tour-chau-au">
+                    <NavLink className="nav-link" to="/tours-chau-au">
                       {i18next.t("header.euTours")}
                     </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink className="nav-link" to="/tour-trong-nuoc">
+                    <NavLink className="nav-link" to="/tours-trong-nuoc">
                       {i18next.t("header.viTours")}
                     </NavLink>
                   </NavItem>

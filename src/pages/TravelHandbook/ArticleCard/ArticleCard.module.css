@@ -1,6 +1,6 @@
 .card {
   box-shadow: var(--box-shadow);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-shadow: var(--box-shadow-border);
   border-radius: 3.8px;
   overflow: hidden;
   color: #050505;

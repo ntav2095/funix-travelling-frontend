@@ -17,10 +17,13 @@ import styles from "./TourList.module.css";
 import Pagination from "../../containers/Pagination";
 import { useTranslation } from "react-i18next";
 
-function ToursList() {
+function ToursList({ cat_params }) {
   const [sendRequest, isLoading, data, error] = useAxios();
   const location = useLocation();
+  console.log(location);
+
   let page = new URLSearchParams(location.search).get("page");
+
   if (!page || isNaN(Number(page))) {
     page = 1;
   }
@@ -28,16 +31,16 @@ function ToursList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    sendRequest(tourApi.get({ page: page, page_size: 8 }));
+    sendRequest(tourApi.get({ page: page, page_size: 8, ...cat_params }));
     window.scroll({
       top: 0,
       left: 0,
       behavior: "smooth",
     });
-  }, [page, i18n.language]);
+  }, [i18n.language, location.search, cat_params]);
 
   const changePageHandler = (num) => {
-    navigate(`/tour-chau-au/?page=${num}`);
+    navigate(`/tours-chau-au/?page=${num}`);
   };
 
   usePageTitle(`Danh sách tours || Go Travel`);
@@ -46,10 +49,12 @@ function ToursList() {
     <DefaultLayout banner>
       <div className="pt-5 pb-5 bg-white">
         <h1 className="fs-4 text-uppercase text-center pb-2 fw-bold">
-          Danh sách tour châu Âu
+          {cat_params?.country_not === "vi" && "Danh sách tour châu Âu"}
+          {cat_params?.country === "vi" && "Danh sách tour trong nước"}
         </h1>
         <div className="row">
           {data &&
+            !isLoading &&
             data.data.length > 0 &&
             data.data.map((tour) => (
               <div
@@ -61,7 +66,6 @@ function ToursList() {
             ))}
 
           {isLoading &&
-            !data &&
             new Array(10).fill(1).map((item, index) => (
               <div
                 key={index}
