@@ -7,13 +7,13 @@ function DefaultLayout({ banner, sidebar, children }) {
     <>
       {banner && <Banner />}
 
-      {!sidebar && <div className={"container-xl"}>{children}</div>}
+      {!sidebar && <div className={"container-lg "}>{children}</div>}
 
       {sidebar && (
-        <div className="row container-xl mx-auto">
-          <div className="col-12 col-lg-8">{children}</div>
+        <div className="row container-lg mx-auto ">
+          <div className="col-12 col-lg-9">{children}</div>
 
-          <div className="col-12 col-lg-4">
+          <div className="col-12 col-lg-3">
             <p>sidebar</p>
           </div>
         </div>
