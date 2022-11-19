@@ -7,7 +7,7 @@ import Slider from "react-slick";
 
 import styles from "./TourCarousel.module.css";
 import "./override.css";
-import { useEffect } from "react";
+import Placeholder from "../../../components/placeholders/Placeholder";
 
 const settings = {
   className: "center",
@@ -21,7 +21,6 @@ const settings = {
 function TourCarousel({ tour, isLoading }) {
   const [index, setIndex] = useState(0);
   const [isShowModal, setIsShowModal] = useState(false);
-  const sliderRef = useRef();
 
   const handleSelect = (selectedIndex) => {
     if (selectedIndex === -1) {
@@ -43,8 +42,8 @@ function TourCarousel({ tour, isLoading }) {
 
   return (
     <>
-      {tour && (
-        <div className="tourCarousel__container">
+      <div className="tourCarousel__container">
+        {tour && !isLoading && (
           <Slider
             {...settings}
             afterChange={(x) => {
@@ -63,8 +62,27 @@ function TourCarousel({ tour, isLoading }) {
                 </div>
               ))}
           </Slider>
-        </div>
-      )}
+        )}
+
+        {isLoading && (
+          <Slider
+            {...settings}
+            afterChange={(x) => {
+              setIndex(x);
+            }}
+          >
+            {new Array(3).fill(1).map((item, index) => (
+              <div
+                key={index}
+                className={styles.image}
+                onClick={() => setIsShowModal(true)}
+              >
+                <Placeholder width="100%" height="100%" />
+              </div>
+            ))}
+          </Slider>
+        )}
+      </div>
 
       <Modal
         show={isShowModal}

@@ -1,6 +1,6 @@
 import styles from "./Placeholder.module.css";
 
-function Placeholder({ col, height, width, rounded }) {
+function Placeholder({ col, height, width, rounded, circle }) {
   let classes = "placeholder bg-secondary";
 
   if (col) {
@@ -9,6 +9,10 @@ function Placeholder({ col, height, width, rounded }) {
 
   if (rounded) {
     classes += ` rounded`;
+  }
+
+  if (circle) {
+    classes += " " + styles.circle;
   }
 
   let style = {};

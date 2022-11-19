@@ -22,6 +22,7 @@ import FacebookComment from "../../containers/facebookComment";
 import { useTranslation } from "react-i18next";
 import Banner from "../../components/Banner";
 import DefaultLayout from "../../layout/DefaultLayout";
+import Placeholder from "../../components/placeholders/Placeholder";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -40,21 +41,20 @@ function TourDetail() {
 
   return (
     <DefaultLayout banner>
-      <div className={styles.tourDetail}>
+      <div className={styles.tourDetail + " pb-5"}>
         {!error && (
           <div>
-            {tour && (
-              <h1 className="text-uppercase my-4 fs-4 fw-bold ">
-                {tour?.name}
-              </h1>
-            )}
+            <h1 className="text-uppercase my-4 fs-4 fw-bold ">
+              {tour && !isLoading && tour?.name}
+              {isLoading && <Placeholder height={30} width={"60%"} />}
+            </h1>
 
-            <div className={styles.top}>
-              <div className={styles.carousel}>
+            <div className="row">
+              <div className="col-12 col-lg-8 mb-4">
                 <TourCarousel tour={tour} isLoading={isLoading} />
               </div>
 
-              <div className={styles.contactTable}>
+              <div className="col-12 col-lg-4 mb-4">
                 <ContactTable tour={tour} isLoading={isLoading} />
               </div>
             </div>
@@ -69,7 +69,6 @@ function TourDetail() {
             )}
           </div>
         )}
-
         {error && error.httpCode === 404 && <ErrorPage />}
         {error && error.httpCode !== 404 && (
           <ErrorPage code={error.httpCode} message={error.message} />

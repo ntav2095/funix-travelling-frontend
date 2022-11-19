@@ -11,3 +11,7 @@
 .tourInfo .nav.nav-tabs {
   margin-bottom: 0 !important;
 }
+
+.tourInfo .nav-tabs {
+  flex-wrap: nowrap;
+}

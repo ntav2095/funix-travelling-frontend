@@ -25,7 +25,7 @@ div.dropdown-menu.show {
   padding-right: 8px;
 }
 
-.nav-item .nav-link {
+#container-navbar .nav-item .nav-link {
   font-weight: 600;
   text-transform: uppercase;
 }
