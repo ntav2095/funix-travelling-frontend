@@ -5,6 +5,7 @@ import React, { Suspense, useEffect } from "react";
 import Loading from "./components/loading";
 import { LiveChat } from "./containers/Livechat";
 import Category from "./pages/Admin/Category";
+import Spinner from "./components/Spinner";
 // components
 
 const RequireAuth = React.lazy(() => import("./components/RequireAuth"));
@@ -52,7 +53,7 @@ function App() {
   }, []);
   return (
     <>
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Spinner show={true} />}>
         <Routes>
           <Route path="/" element={<HomeNew />} />
           <Route path="/tour-chau-au" element={<ToursList />} />
