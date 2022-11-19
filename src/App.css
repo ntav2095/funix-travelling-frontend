@@ -1,3 +1,14 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 80px;
+}
+
+.app__body {
+  flex: 1;
+}
+
 .body_container {
   margin-left: auto;
   margin-right: auto;
@@ -37,14 +48,12 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light {
 }
 
 #slider_h3 {
-  /* display: flex; */
   color: #fff !important;
 
   animation-name: example;
   animation-duration: 3s;
 }
 #slider_h3:hover {
-  /* display: flex; */
   color: #fff !important;
 
   animation-name: example;
@@ -53,15 +62,12 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light {
 @keyframes example {
   0% {
     opacity: 0;
-    /* top: 0%; */
   }
   50% {
     opacity: 0.5;
-    /* top: 34.7%; */
   }
   100% {
     opacity: 1;
-    /* bottom: 35%; */
   }
 }
 .button {
@@ -111,14 +117,7 @@ h1#Body-content_tour {
   font-weight: bolder;
   color: #fff;
 }
-/*footer*/
-/* content giới thiệu*/
-div#row-159726792 {
-  padding: 8em;
-}
-/* .footer.pt-5.pb-3 {
-  padding: 8em;
-} */
+
 .dropdown-menu.show {
   background: none;
   border: none;

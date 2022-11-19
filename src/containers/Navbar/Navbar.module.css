@@ -1,20 +1,15 @@
+.navbar {
+  background: white;
+}
+
 .container {
   background: var(--main-color);
   background: white;
-  position:absolute;
+  position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
-}
-
-.navbar {
-  width: 100%;
-  max-width: 1170px;
-  margin: 0 auto;
-  height: 80px;
   z-index: 999;
-  display: flex;
-  justify-content: space-between;
 }
 
 .logo {
@@ -22,12 +17,7 @@
   transition: 0.4s;
 }
 
-.navbar a {
-  font-weight: 700;
-  font-size: 16px;
-  /* text-transform: uppercase; */
-}
-.fixed{
+.fixed {
   position: fixed !important;
   left: 0;
   top: 0;
@@ -37,16 +27,21 @@
   z-index: 999;
   animation: scroll 0.5s;
   box-shadow: var(--box-shadow);
+  background: white;
 }
 @keyframes scroll {
-  from{top:-50px}
-  to{top:0px}
+  from {
+    top: -50px;
+  }
+  to {
+    top: 0px;
+  }
 }
-.fixed .logo{
-font-size: 24px;
-transition: 0.4s;
+.fixed .logo {
+  font-size: 24px;
+  transition: 0.4s;
 }
-.btn{
+.btn {
   display: none;
   position: fixed;
   bottom: 10px;
@@ -60,13 +55,12 @@ transition: 0.4s;
   border-radius: 4px;
   opacity: 0.4;
 }
-.btn:hover{
+.btn:hover {
   background-color: rgb(248, 244, 244);
   opacity: 1;
 }
 
-
-.admin{
+.admin {
   background-color: white;
   margin-left: 1rem;
   padding: 3px;
@@ -87,7 +81,6 @@ transition: 0.4s;
   display: none;
   /* margin-left: 0rem; */
   background-color: white;
-
 }
 
 .en {
@@ -99,6 +92,4 @@ transition: 0.4s;
   /* border: 1px solid #000; */
   /* margin-left: 16px; */
   background-color: white;
-
 }
-

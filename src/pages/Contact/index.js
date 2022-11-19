@@ -1,14 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import Layout from "../../layout/Default";
 import companyInfo from "../../services/constants/companyInfo.constant";
 import usePageTitle from "../../hooks/usePageTitle";
 import styles from "./Contact.module.css";
-
-const breadcrumb = [
-  { href: "/", active: false, text: "trang chủ" },
-  { href: "/lien-he", active: true, text: "giới thiệu" },
-  { href: "/lien-he", active: true, text: "thông tin liên hệ" },
-];
 
 function Contact() {
   usePageTitle("Liên hệ || Go Travel");
@@ -49,7 +42,7 @@ function Contact() {
     }, 400);
   };
   return (
-    <Layout sidebarLeft breadcrumb={breadcrumb}>
+    <div sidebarLeft>
       <div className={styles.contact}>
         <div className={styles.companyInfo}>
           <h2>{companyInfo.title1}</h2>
@@ -121,7 +114,7 @@ function Contact() {
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 }
 

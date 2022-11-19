@@ -5,7 +5,6 @@ import { postsApi } from "../../services/apis";
 
 // components
 import SpinnerModal from "../../components/SpinnerModal";
-import Layout from "../../layout/Default";
 import ArticleCard from "./ArticleCard";
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
 import Pagination from "../../containers/Pagination";
@@ -17,6 +16,8 @@ import useAxios from "../../hooks/useAxios";
 // css
 import styles from "./TravelHandbook.module.css";
 import { useTranslation } from "react-i18next";
+import Banner from "../../components/Banner";
+import DefaultLayout from "../../layout/DefaultLayout";
 
 function TravelHandbook() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -44,48 +45,47 @@ function TravelHandbook() {
   usePageTitle(`Cẩm nang du lịch || Go Travel`);
 
   return (
-    <>
-      <Layout>
-        <div className="myContainer">
-          <div className={styles.container}>
-            <div className="row">
-              {!isLoading &&
-                data &&
-                data.data.length > 0 &&
-                data.data.map((article) => (
-                  <div
-                    key={article._id}
-                    className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
-                  >
-                    <ArticleCard article={article} />
-                  </div>
-                ))}
-
-              {isLoading &&
-                new Array(8).fill(1).map((item, index) => (
-                  <div
-                    key={index}
-                    className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
-                  >
-                    <CardPlaceholder key={index} />
-                  </div>
-                ))}
-            </div>
-
-            {data && (
-              <div className="mt-4">
-                <Pagination
-                  pageSize={data.metadata.page_size}
-                  total={data.metadata.total_count}
-                  current={Number(page)}
-                  onChange={changePageHandler}
-                />
+    <DefaultLayout>
+      <div className="container-xl pt-5">
+        <h1 className="fs-4 pb-3 text-uppercase fw-bold text-center">
+          Cẩm nang du lịch
+        </h1>
+        <div className="row">
+          {!isLoading &&
+            data &&
+            data.data.length > 0 &&
+            data.data.map((article) => (
+              <div
+                key={article._id}
+                className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+              >
+                <ArticleCard article={article} />
               </div>
-            )}
-          </div>
+            ))}
+
+          {isLoading &&
+            new Array(8).fill(1).map((item, index) => (
+              <div
+                key={index}
+                className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+              >
+                <CardPlaceholder key={index} />
+              </div>
+            ))}
         </div>
-      </Layout>
-    </>
+
+        {data && (
+          <div className="mt-4">
+            <Pagination
+              pageSize={data.metadata.page_size}
+              total={data.metadata.total_count}
+              current={Number(page)}
+              onChange={changePageHandler}
+            />
+          </div>
+        )}
+      </div>
+    </DefaultLayout>
   );
 }
 

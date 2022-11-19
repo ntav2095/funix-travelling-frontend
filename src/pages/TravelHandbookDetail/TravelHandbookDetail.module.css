@@ -9,10 +9,6 @@
   font-weight: 700;
 }
 
-.storyHeader {
-  padding: 24px;
-}
-
 .storyHeader h1 {
   color: #555;
   width: 100%;
@@ -30,10 +26,6 @@
 .storyHeader .date a,
 span {
   color: #334862;
-}
-
-.storyContent {
-  padding: 0 24px 24px;
 }
 
 .travelHandbookDetail aside {
@@ -91,4 +83,5 @@ span {
 
 .relatedArticle .textBox p {
   font-size: 13px;
+  color: #4f4f4f;
 }

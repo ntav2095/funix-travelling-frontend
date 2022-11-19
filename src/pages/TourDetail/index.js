@@ -4,7 +4,6 @@ import { useEffect } from "react";
 // components
 import ContactTable from "./ContactTable";
 import TourInfo from "./TourInfo";
-import Layout from "../../layout/Default";
 import TourCarousel from "./TourCarousel";
 import ErrorPage from "../../containers/ErrorPage";
 
@@ -22,6 +21,7 @@ import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
 import { useTranslation } from "react-i18next";
 import Banner from "../../components/Banner";
+import DefaultLayout from "../../layout/DefaultLayout";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -39,11 +39,15 @@ function TourDetail() {
   }, [i18n.language]);
 
   return (
-    <Layout banner>
+    <DefaultLayout banner>
       <div className={styles.tourDetail}>
         {!error && (
-          <div className="myContainer">
-            {tour && <h1 className="text-uppercase my-4 ">{tour?.name}</h1>}
+          <div>
+            {tour && (
+              <h1 className="text-uppercase my-4 fs-4 fw-bold ">
+                {tour?.name}
+              </h1>
+            )}
 
             <div className={styles.top}>
               <div className={styles.carousel}>
@@ -55,9 +59,7 @@ function TourDetail() {
               </div>
             </div>
 
-            <div className="myContainer">
-              <TourInfo tour={tour} isLoading={isLoading} />
-            </div>
+            <TourInfo tour={tour} isLoading={isLoading} />
 
             {tour && (
               <FacebookComment
@@ -73,7 +75,7 @@ function TourDetail() {
           <ErrorPage code={error.httpCode} message={error.message} />
         )}
       </div>
-    </Layout>
+    </DefaultLayout>
   );
 }
 
