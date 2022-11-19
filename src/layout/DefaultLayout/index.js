@@ -2,23 +2,20 @@ import { Outlet } from "react-router-dom";
 import Banner from "../../components/Banner";
 import styles from "./Layout.module.css";
 import Sidebar from "../../containers/Sidebar";
+import Navbar from "../../containers/Navbar";
+import Footer from "../../containers/Footer";
 
-function DefaultLayout({ banner, sidebar, children }) {
+function DefaultLayout() {
   return (
     <>
-      {banner && <Banner />}
-
-      {!sidebar && <div className={"container-lg "}>{children}</div>}
-
-      {sidebar && (
-        <div className="row container-lg mx-auto ">
-          <div className="col-12 col-lg-9">{children}</div>
-
-          <div className="col-12 col-lg-3">
-            <Sidebar />
-          </div>
+      <Navbar />
+      <div className={styles.main}>
+        <div className={styles.body + " container-lg"}>
+          <Outlet />
         </div>
-      )}
+
+        <Footer />
+      </div>
     </>
   );
 }

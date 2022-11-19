@@ -7,6 +7,7 @@ import Tour from "./tour";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import DefaultLayout from "../../layout/DefaultLayout";
+import Banner from "../../components/Banner";
 
 function HomeNew() {
   const { i18n } = useTranslation();
@@ -15,7 +16,8 @@ function HomeNew() {
     sendRequest(tourApi.get({ page: 1, page_size: 6 }));
   }, [i18n.language]);
   return (
-    <DefaultLayout banner>
+    <>
+      <Banner />
       <div className="mb-5">
         <HomeHeader />
       </div>
@@ -46,7 +48,7 @@ function HomeNew() {
           isloading={isLoading}
         />
       </div>
-    </DefaultLayout>
+    </>
   );
 }
 export default HomeNew;

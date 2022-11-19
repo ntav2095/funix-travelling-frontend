@@ -56,72 +56,61 @@ function App() {
     LiveChat();
   }, []);
   return (
-    <>
-      <Navbar />
+    <Suspense fallback={<Spinner show={true} />}>
+      <Routes>
+        {/* =============================  CLIENT ROUTES ==============================  */}
+        <Route element={<DefaultLayout />}>
+          <Route path="/" element={<HomeNew />} />
+          <Route
+            path="/tours-chau-au"
+            element={<ToursList cat_params={{ country_not: "vi" }} />}
+          />
+          <Route
+            path="/tours-trong-nuoc"
+            element={<ToursList cat_params={{ country: "vi" }} />}
+          />
+          <Route path="/danh-sach-tour/:tourId" element={<TourDetail />} />
+          <Route path="/lien-he" element={<Contact />} />
+          <Route path="/ve-cong-ty" element={<About />} />
+          <Route path="/dich-vu-visa/1" element={<Visa />} />
+          <Route path="/dich-vu-visa" element={<VisaService />} />
+          <Route path="/cam-nang-du-lich" element={<TravelHandbook />} />
+          <Route path="/*" element={<NotFound />} />
+          <Route
+            path="/cam-nang-du-lich/:id"
+            element={<TravelHandbookDetail />}
+          />
+        </Route>
 
-      <div className="app">
-        <div className="app__body">
-          <Suspense fallback={<Spinner show={true} />}>
-            <Routes>
-              {/* =============================  CLIENT ROUTES ==============================  */}
-              <Route path="/" element={<HomeNew />} />
-              <Route
-                path="/tours-chau-au"
-                element={<ToursList cat_params={{ country_not: "vi" }} />}
-              />
-              <Route
-                path="/tours-trong-nuoc"
-                element={<ToursList cat_params={{ country: "vi" }} />}
-              />
-              <Route path="/danh-sach-tour/:tourId" element={<TourDetail />} />
-              <Route path="/lien-he" element={<Contact />} />
-              <Route path="/ve-cong-ty" element={<About />} />
-              <Route path="/dich-vu-visa/1" element={<Visa />} />
-              <Route path="/dich-vu-visa" element={<VisaService />} />
-              <Route path="/cam-nang-du-lich" element={<TravelHandbook />} />
-              <Route path="/*" element={<NotFound />} />
-              <Route
-                path="/cam-nang-du-lich/:id"
-                element={<TravelHandbookDetail />}
-              />
+        {/* =============================  ADMIN ROUTES ==============================  */}
+        <Route path="/admin/login" element={<Login />} />
+        <Route element={<RequireAuth />}>
+          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin/category" element={<Category />} />
 
-              {/* =============================  ADMIN ROUTES ==============================  */}
-              <Route path="/admin/login" element={<Login />} />
-              <Route element={<RequireAuth />}>
-                <Route path="/admin" element={<Dashboard />} />
-                <Route path="/admin/category" element={<Category />} />
+          {/* tour  */}
+          <Route path="/admin/new-tour" element={<NewTour />} />
+          <Route path="/admin/edit-tour/:tourId" element={<EditTour />} />
+          <Route path="/admin/tours" element={<Tours />} />
+          <Route
+            path="/admin/update-itinerary/:tourId"
+            element={<UpdateItinerary />}
+          />
 
-                {/* tour  */}
-                <Route path="/admin/new-tour" element={<NewTour />} />
-                <Route path="/admin/edit-tour/:tourId" element={<EditTour />} />
-                <Route path="/admin/tours" element={<Tours />} />
-                <Route
-                  path="/admin/update-itinerary/:tourId"
-                  element={<UpdateItinerary />}
-                />
-
-                {/* visa  */}
-                <Route path="/admin/visa-products" element={<Visas />} />
-                <Route path="/admin/add-visa-product" element={<AddVisa />} />
-                <Route
-                  path="/admin/edit-visa-product/:visaId"
-                  element={<EditVisa />}
-                />
-                {/* posts */}
-                <Route path="/admin/posts" element={<Posts />} />
-                <Route path="/admin/new-posts" element={<NewPosts />} />
-                <Route
-                  path="/admin/edit-posts/:articleId"
-                  element={<EditPosts />}
-                />
-              </Route>
-            </Routes>
-          </Suspense>
-        </div>
-
-        <Footer />
-      </div>
-    </>
+          {/* visa  */}
+          <Route path="/admin/visa-products" element={<Visas />} />
+          <Route path="/admin/add-visa-product" element={<AddVisa />} />
+          <Route
+            path="/admin/edit-visa-product/:visaId"
+            element={<EditVisa />}
+          />
+          {/* posts */}
+          <Route path="/admin/posts" element={<Posts />} />
+          <Route path="/admin/new-posts" element={<NewPosts />} />
+          <Route path="/admin/edit-posts/:articleId" element={<EditPosts />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }
 

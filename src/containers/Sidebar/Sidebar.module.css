@@ -3,9 +3,8 @@
   padding: 32px 16px;
   position: relative;
   box-shadow: var(--box-shadow-border);
-}
-
-.contactInfo {
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .contactInfo h6 {

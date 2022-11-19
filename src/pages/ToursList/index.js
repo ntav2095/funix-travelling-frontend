@@ -16,6 +16,7 @@ import { tourApi } from "../../services/apis";
 import styles from "./TourList.module.css";
 import Pagination from "../../containers/Pagination";
 import { useTranslation } from "react-i18next";
+import Banner from "../../components/Banner";
 
 function ToursList({ cat_params }) {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -46,7 +47,8 @@ function ToursList({ cat_params }) {
   usePageTitle(`Danh sách tours || Go Travel`);
 
   return (
-    <DefaultLayout banner>
+    <>
+      <Banner />
       <div className="pt-5 pb-5 bg-white">
         <h1 className="fs-4 text-uppercase text-center pb-2 fw-bold">
           {cat_params?.country_not === "vi" && "Danh sách tour châu Âu"}
@@ -88,7 +90,7 @@ function ToursList({ cat_params }) {
           </div>
         )}
       </div>
-    </DefaultLayout>
+    </>
   );
 }
 

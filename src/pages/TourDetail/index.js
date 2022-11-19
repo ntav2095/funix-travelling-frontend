@@ -40,7 +40,7 @@ function TourDetail() {
   }, [i18n.language]);
 
   return (
-    <DefaultLayout banner>
+    <>
       <div className={styles.tourDetail + " pb-5"}>
         {!error && (
           <div>
@@ -74,7 +74,7 @@ function TourDetail() {
           <ErrorPage code={error.httpCode} message={error.message} />
         )}
       </div>
-    </DefaultLayout>
+    </>
   );
 }
 
