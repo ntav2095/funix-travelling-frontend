@@ -18,6 +18,7 @@ import { visaBanner } from "../../assets/images";
 
 import Datvisa from "./datve";
 import axios from "axios";
+import DefaultLayout from "../../layout/DefaultLayout";
 
 function Visa() {
   const phone = useRef();
@@ -61,7 +62,7 @@ function Visa() {
   usePageTitle(`Visa --- đang cập nhật || Go Travel`);
 
   return (
-    <div>
+    <DefaultLayout>
       <div className="banner-1">
         <img className="banner" src={visaBanner} alt="Visa banner" />
       </div>
@@ -334,7 +335,7 @@ function Visa() {
           </div>
         </Container>
       </div>
-    </div>
+    </DefaultLayout>
   );
 }
 

@@ -21,6 +21,7 @@ import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
 import { useTranslation } from "react-i18next";
 import Banner from "../../components/Banner";
+import DefaultLayout from "../../layout/DefaultLayout";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -38,10 +39,10 @@ function TourDetail() {
   }, [i18n.language]);
 
   return (
-    <div banner>
+    <DefaultLayout banner>
       <div className={styles.tourDetail}>
         {!error && (
-          <div className="container-xl">
+          <div>
             {tour && (
               <h1 className="text-uppercase my-4 fs-4 fw-bold ">
                 {tour?.name}
@@ -74,7 +75,7 @@ function TourDetail() {
           <ErrorPage code={error.httpCode} message={error.message} />
         )}
       </div>
-    </div>
+    </DefaultLayout>
   );
 }
 

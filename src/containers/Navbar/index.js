@@ -9,7 +9,7 @@ import {
 } from "reactstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useTranslation } from "react-i18next";
 
@@ -29,26 +29,26 @@ function Header() {
     search: "",
     show: false,
   });
+
   const { i18n } = useTranslation();
+
   function handleClose() {
     setState({
       show: !state.show,
     });
   }
+
   function handleShow() {
     setState({
       show: !state.show,
     });
   }
-  function toggleNav() {
-    setState({
-      isNavOpen: !state.isNavOpen,
-    });
-  }
+
   function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       const container = document.getElementById("container-navbar");
@@ -84,7 +84,7 @@ function Header() {
 
   return (
     <>
-      <div className="container-xl">
+      <div className={styles.navbar + " container-xl"}>
         <div id="container-navbar" className={styles.container}>
           <Navbar id="navbar" expand="lg" className="container-xl ">
             <div className="container">

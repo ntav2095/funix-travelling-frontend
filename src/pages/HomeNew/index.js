@@ -7,6 +7,7 @@ import Tour from "./tour";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import Banner from "../../components/Banner";
+import DefaultLayout from "../../layout/DefaultLayout";
 
 function HomeNew() {
   const { i18n } = useTranslation();
@@ -15,13 +16,12 @@ function HomeNew() {
     sendRequest(tourApi.get({ page: 1, page_size: 6 }));
   }, [i18n.language]);
   return (
-    <>
-      <Banner />
-      <div className="container-xl mb-5">
+    <DefaultLayout banner>
+      <div className="mb-5">
         <HomeHearder />
       </div>
 
-      <div className="container-xl mb-5">
+      <div className="mb-5">
         <Tour
           tour={data?.data}
           title={i18next.t("homeMain.titleTourChauAu")}
@@ -30,7 +30,7 @@ function HomeNew() {
         />
       </div>
 
-      <div className="container-xl mb-5">
+      <div className="mb-5">
         <Tour
           tour={data?.data}
           title={i18next.t("homeMain.titleTourTrongNuoc")}
@@ -39,7 +39,7 @@ function HomeNew() {
         />
       </div>
 
-      <div className="container-xl mb-5">
+      <div className="mb-5">
         <Tour
           tour={data?.data}
           title={i18next.t("homeMain.titleCamNang")}
@@ -47,7 +47,7 @@ function HomeNew() {
           isloading={isLoading}
         />
       </div>
-    </>
+    </DefaultLayout>
   );
 }
 export default HomeNew;

@@ -6,6 +6,7 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import usePageTitle from "../../hooks/usePageTitle";
 import TourCard from "../../containers/TourCard";
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
+import DefaultLayout from "../../layout/DefaultLayout";
 
 // apis
 import useAxios from "../../hooks/useAxios";
@@ -15,7 +16,6 @@ import { tourApi } from "../../services/apis";
 import styles from "./TourList.module.css";
 import Pagination from "../../containers/Pagination";
 import { useTranslation } from "react-i18next";
-import Banner from "../../components/Banner";
 
 function ToursList() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -43,15 +43,13 @@ function ToursList() {
   usePageTitle(`Danh sách tours || Go Travel`);
 
   return (
-    <>
-      <Banner />
-      <div className=" container-xl pt-5 pb-5 bg-white">
+    <DefaultLayout banner>
+      <div className="pt-5 pb-5 bg-white">
         <h1 className="fs-4 text-uppercase text-center pb-2 fw-bold">
           Danh sách tour châu Âu
         </h1>
         <div className="row">
-          {!isLoading &&
-            data &&
+          {data &&
             data.data.length > 0 &&
             data.data.map((tour) => (
               <div
@@ -63,6 +61,7 @@ function ToursList() {
             ))}
 
           {isLoading &&
+            !data &&
             new Array(10).fill(1).map((item, index) => (
               <div
                 key={index}
@@ -85,7 +84,7 @@ function ToursList() {
           </div>
         )}
       </div>
-    </>
+    </DefaultLayout>
   );
 }
 

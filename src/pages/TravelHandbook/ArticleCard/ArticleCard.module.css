@@ -14,6 +14,7 @@
   background-position: center;
   background-size: cover;
   position: relative;
+  z-index: 2;
   overflow: hidden;
 }
 
@@ -25,6 +26,7 @@
   top: 0;
   object-position: center;
   transition: 0.36s;
+  z-index: 2;
 }
 
 .card:hover img {
@@ -42,7 +44,7 @@
 }
 
 .card p {
-  color: #050505;
+  color: #4f4f4f;
   margin: 0;
   margin-bottom: 3px;
 }

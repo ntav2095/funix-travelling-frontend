@@ -17,6 +17,7 @@ import useAxios from "../../hooks/useAxios";
 import styles from "./TravelHandbook.module.css";
 import { useTranslation } from "react-i18next";
 import Banner from "../../components/Banner";
+import DefaultLayout from "../../layout/DefaultLayout";
 
 function TravelHandbook() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -44,8 +45,7 @@ function TravelHandbook() {
   usePageTitle(`Cẩm nang du lịch || Go Travel`);
 
   return (
-    <>
-      <Banner />
+    <DefaultLayout>
       <div className="container-xl pt-5">
         <h1 className="fs-4 pb-3 text-uppercase fw-bold text-center">
           Cẩm nang du lịch
@@ -85,7 +85,7 @@ function TravelHandbook() {
           </div>
         )}
       </div>
-    </>
+    </DefaultLayout>
   );
 }
 

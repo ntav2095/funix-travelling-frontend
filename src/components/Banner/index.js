@@ -1,4 +1,5 @@
 import styles from "./Banner.module.css";
+import React from "react";
 import { hearder as bannerImg } from "../../assets/images";
 
 function Banner() {
@@ -9,4 +10,4 @@ function Banner() {
   );
 }
 
-export default Banner;
+export default React.memo(Banner);
