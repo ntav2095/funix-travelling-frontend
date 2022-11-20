@@ -119,9 +119,6 @@
   border-radius: 3.8px;
   transition: 0.2s;
 }
-.contentHeader .navigateBtn:hover {
-  background: var(--main-color-hover);
-}
 
 .title {
   font-size: 20px;

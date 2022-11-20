@@ -63,8 +63,8 @@ export const tourValidator = (values) => {
     errors.currentPrice = "Phải lớn hơn 0";
   }
 
-  if (values.oldPrice <= 0) {
-    errors.oldPrice = "Phải lớn hơn 0";
+  if (values.oldPrice < 0) {
+    errors.oldPrice = "Phải lớn hơn hoặc bằng 0";
   }
 
   if (!values.thumb) {

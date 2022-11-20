@@ -17,7 +17,6 @@ function HomeNew() {
   }, [i18n.language]);
   return (
     <>
-      <Banner />
       <div className="mb-5">
         <HomeHeader />
       </div>

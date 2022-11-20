@@ -4,6 +4,7 @@ import { exclamation as exclamationSVG } from "../../../../assets/svgs";
 import styles from "./TourForm.module.css";
 
 function TourForm({ initialValues, onSubmit, cat }) {
+  console.log(initialValues);
   const requiredField = (
     <span title="Trường này là bắt buộc">{exclamationSVG}</span>
   );
@@ -20,7 +21,7 @@ function TourForm({ initialValues, onSubmit, cat }) {
   };
 
   const cat_types = cat.reduce((p, c) => {
-    if (p.includes(c.type) || c.type === "language") {
+    if (p.includes(c.type) || c.type === "language" || c.type === "article") {
       return p;
     }
 
@@ -45,9 +46,20 @@ function TourForm({ initialValues, onSubmit, cat }) {
 
             {/* ----------------------- lộ trình ------------------------  */}
             <label className={styles.mediumTextArea}>
-              <p className={styles.label}>Lộ trình {requiredField}</p>
+              <p className={styles.label}>
+                Lộ trình <em>(cách nhau bởi gạch ngang "-")</em> {requiredField}
+              </p>
               <Field component="textarea" name="journey" />
               <ErrorMessage name="journey" component="h6" />
+            </label>
+
+            {/* ----------------------- countries ------------------------  */}
+            <label className={styles.mediumTextArea}>
+              <p className={styles.label}>
+                Nước <em>(cách nhau bởi gạch ngang "-")</em>
+              </p>
+              <Field name="countries" />
+              <ErrorMessage name="countries" component="h6" />
             </label>
 
             {/* ----------------------- mô tả ------------------------  */}
@@ -60,7 +72,7 @@ function TourForm({ initialValues, onSubmit, cat }) {
             {/* ----------------------- điểm nổi bật ------------------------  */}
             <label className={styles.bigTextArea}>
               <p className={styles.label}>
-                Điểm nổi bật <span>(enter xuống dòng)</span> {requiredField}
+                Điểm nổi bật <em>(enter xuống dòng)</em> {requiredField}
               </p>
               <Field component="textarea" name="highlights" />
               <ErrorMessage name="highlights" component="h6" />
@@ -69,8 +81,8 @@ function TourForm({ initialValues, onSubmit, cat }) {
             {/* ----------------------- ngày khởi hành ------------------------  */}
             <label className={styles.mediumTextArea}>
               <p className={styles.label}>
-                Ngày khởi hành <span>(dd/mm/yyyy)</span>{" "}
-                <span>(enter xuống dòng)</span> {requiredField}
+                Ngày khởi hành <em>(dd/mm/yyyy) (enter xuống dòng) </em>
+                {requiredField}
               </p>
               <Field component="textarea" name="departureDates" />
               <ErrorMessage name="departureDates" component="h6" />
@@ -92,7 +104,7 @@ function TourForm({ initialValues, onSubmit, cat }) {
             {/* ----------------------- giá hiện tại ------------------------  */}
             <label>
               <p className={styles.label}>
-                Giá hiện tại <span>(vnd)</span> {requiredField}
+                Giá hiện tại <em>(vnd)</em> {requiredField}
               </p>
               <Field type="number" name="currentPrice" />
               <ErrorMessage name="currentPrice" component="h6" />
@@ -110,7 +122,7 @@ function TourForm({ initialValues, onSubmit, cat }) {
             {/* ----------------------- giá bao gồm / không bao gồm ------------------------  */}
             <label className={styles.bigTextArea}>
               <p className={styles.label}>
-                Giá bao gồm <span>(enter xuống dòng)</span>
+                Giá bao gồm <em>(enter xuống dòng)</em>
               </p>
               <Field component="textarea" name="priceIncludes" />
               <ErrorMessage name="priceIncludes" component="h6" />
@@ -118,7 +130,7 @@ function TourForm({ initialValues, onSubmit, cat }) {
 
             <label className={styles.bigTextArea}>
               <p className={styles.label}>
-                Giá không bao gồm <span>(enter xuống dòng)</span>
+                Giá không bao gồm <em>(enter xuống dòng)</em>
               </p>
               <Field component="textarea" name="priceExcludes" />
               <ErrorMessage name="priceExcludes" component="h6" />
@@ -127,7 +139,7 @@ function TourForm({ initialValues, onSubmit, cat }) {
             {/* ----------------------- điều kiện hủy ------------------------  */}
             <label className={styles.bigTextArea}>
               <p className={styles.label}>
-                Điều kiện hoàn hủy đổi <span>(enter xuống dòng)</span>{" "}
+                Điều kiện hoàn hủy đổi <em>(enter xuống dòng)</em>{" "}
                 {requiredField}
               </p>
               <Field component="textarea" name="cancellationPolicy" />
@@ -144,17 +156,19 @@ function TourForm({ initialValues, onSubmit, cat }) {
                     .filter((catItem) => catItem.type === type)
                     .map((catItem) => (
                       <label key={catItem._id}>
-                        <span>{catItem.code}</span>
+                        <span>{catItem.name || catItem.code}</span>
                         <input
                           type="checkbox"
-                          value={catItem._id}
-                          checked={values.category.includes(catItem._id)}
+                          value={catItem.code}
+                          checked={values.category.includes(catItem.code)}
                           onChange={() => {
-                            const newCat = values.category.includes(catItem._id)
+                            const newCat = values.category.includes(
+                              catItem.code
+                            )
                               ? values.category.filter(
-                                  (item) => item !== catItem._id
+                                  (item) => item !== catItem.code
                                 )
-                              : [...values.category, catItem._id];
+                              : [...values.category, catItem.code];
 
                             setFieldValue("category", newCat);
                           }}
@@ -167,7 +181,7 @@ function TourForm({ initialValues, onSubmit, cat }) {
 
             {/* ----------------------- hình ------------------------  */}
             <label>
-              <p className={styles.label}>Ảnh slider</p>
+              <p className={styles.label}>Chọn ảnh slider</p>
               <input
                 type="file"
                 name="slider"
@@ -180,7 +194,7 @@ function TourForm({ initialValues, onSubmit, cat }) {
             </label>
 
             <label>
-              <p className={styles.label}>Ảnh preview (1 hình)</p>
+              <p className={styles.label}>Chọn ảnh preview</p>
               <input
                 type="file"
                 name="thumb"

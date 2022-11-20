@@ -16,10 +16,12 @@ const initialValues = {
   lead: "",
   content: null,
   thumb: null,
+  category: [],
 };
 
 function NewPosts() {
   const [sendRequest, isLoading, data, error] = useAxios();
+  const [fetchCat, isFetchingCat, cat, fetchingCatError] = useAxios();
 
   const submitHandler = async (values) => {
     const formData = new FormData();
@@ -30,9 +32,14 @@ function NewPosts() {
     formData.append("lead", values.lead);
     formData.append("content", JSON.stringify(values.content));
     formData.append("image", values.thumb);
+    formData.append("category", JSON.stringify(values.category));
 
     await sendRequest(adminApis.article.add(formData));
   };
+
+  useEffect(() => {
+    fetchCat(adminApis.category.get());
+  }, []);
 
   useEffect(() => {
     if (data) {
@@ -51,7 +58,13 @@ function NewPosts() {
       <SpinnerModal show={isLoading} />
       <AdminLayout title="Tạo bài viết mới">
         <div className={styles.container}>
-          <ArticleForm initialValues={initialValues} onSubmit={submitHandler} />
+          {cat && (
+            <ArticleForm
+              initialValues={initialValues}
+              onSubmit={submitHandler}
+              cat={cat.data}
+            />
+          )}
         </div>
       </AdminLayout>
     </>

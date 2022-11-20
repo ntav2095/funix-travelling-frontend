@@ -46,7 +46,6 @@ function TravelHandbook() {
 
   return (
     <>
-      <Banner />
       <div className="container-xl pt-5">
         <h1 className="fs-4 pb-3 text-uppercase fw-bold text-center">
           Cẩm nang du lịch

@@ -16,12 +16,10 @@ import { tourApi } from "../../services/apis";
 import styles from "./TourList.module.css";
 import Pagination from "../../containers/Pagination";
 import { useTranslation } from "react-i18next";
-import Banner from "../../components/Banner";
 
 function ToursList({ cat_params }) {
   const [sendRequest, isLoading, data, error] = useAxios();
   const location = useLocation();
-  console.log(location);
 
   let page = new URLSearchParams(location.search).get("page");
 
@@ -41,14 +39,17 @@ function ToursList({ cat_params }) {
   }, [i18n.language, location.search, cat_params]);
 
   const changePageHandler = (num) => {
-    navigate(`/tours-chau-au/?page=${num}`);
+    if (cat_params.cat === "vi") {
+      navigate(`/tours-trong-nuoc/?page=${num}`);
+    } else {
+      navigate(`/tours-chau-au/?page=${num}`);
+    }
   };
 
   usePageTitle(`Danh sách tours || Go Travel`);
 
   return (
     <>
-      <Banner />
       <div className="pt-5 pb-5 bg-white">
         <h1 className="fs-4 text-uppercase text-center pb-2 fw-bold">
           {cat_params?.country_not === "vi" && "Danh sách tour châu Âu"}

@@ -1,0 +1,28 @@
+.container label {
+  display: block;
+  width: 100%;
+  padding-bottom: 16px;
+}
+
+.container input {
+  width: 100%;
+  padding: 6px;
+  border-radius: 3.8px;
+}
+
+.container h6 {
+  font-size: 14px;
+}
+
+.container button {
+  padding: 8px 16px;
+  background: #050505;
+  color: white;
+  border-radius: 3.8px;
+}
+
+.container p {
+  margin-bottom: 0;
+  color: rgb(236, 0, 0);
+  font-size: 13px;
+}

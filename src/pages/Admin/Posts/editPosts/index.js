@@ -18,12 +18,13 @@ function EditPost() {
 
   const langs = fetchedData
     ? fetchedData.metadata.categories
-        .find((item) => item.type === "language")
-        .items.map((item) => item.code)
+        .filter((item) => item.type === "language")
+        .map((item) => item.code)
     : null;
 
   const submitHandler = async (values) => {
-    const { title, author, origin, lead, thumb, content, language } = values;
+    const { title, author, origin, lead, thumb, content, language, category } =
+      values;
     const formData = new FormData();
     formData.append("articleId", articleId);
     formData.append("language", language);
@@ -31,6 +32,7 @@ function EditPost() {
     formData.append("author", author);
     formData.append("origin", origin);
     formData.append("lead", lead);
+    formData.append("category", JSON.stringify(category));
     formData.append("content", JSON.stringify(content));
     if (typeof thumb !== "string") {
       formData.append("image", thumb);
@@ -55,6 +57,12 @@ function EditPost() {
     }
   }, [isSuccess]);
 
+  useEffect(() => {
+    if (editingError) {
+      alert("That bai");
+    }
+  }, [editingError]);
+
   const initialValues = article
     ? {
         title: article.title,
@@ -64,6 +72,7 @@ function EditPost() {
         thumb: article.thumb,
         content: article.content,
         language: lang,
+        category: article.category || [],
       }
     : null;
 
@@ -102,6 +111,7 @@ function EditPost() {
             <ArticleForm
               initialValues={initialValues}
               onSubmit={submitHandler}
+              cat={fetchedData.metadata.categories}
             />
           </div>
         )}

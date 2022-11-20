@@ -31,9 +31,11 @@ const validator = (values) => {
   return errors;
 };
 
-function ArticleForm({ onSubmit, initialValues }) {
+function ArticleForm({ onSubmit, initialValues, cat }) {
   const previewImageHandler = (img) =>
     typeof img === "string" ? img : URL.createObjectURL(img);
+
+  const articlesCat = cat.filter((item) => item.type === "article");
   return (
     <div className={styles.container}>
       <Formik
@@ -83,6 +85,34 @@ function ArticleForm({ onSubmit, initialValues }) {
                 <ErrorMessage name="content" component="p" />
               </div>
             </label>
+
+            {/* ----------------------- categories ------------------------  */}
+
+            <div className={styles.cat}>
+              <h6>Categories</h6>
+
+              <div className={styles.catItems}>
+                {articlesCat.map((catItem) => (
+                  <label key={catItem._id}>
+                    <span>{catItem.name || catItem.code}</span>
+                    <input
+                      type="checkbox"
+                      value={catItem.code}
+                      checked={values.category.includes(catItem.code)}
+                      onChange={() => {
+                        const newCat = values.category.includes(catItem.code)
+                          ? values.category.filter(
+                              (item) => item !== catItem.code
+                            )
+                          : [...values.category, catItem.code];
+
+                        setFieldValue("category", newCat);
+                      }}
+                    />
+                  </label>
+                ))}
+              </div>
+            </div>
 
             <label className={styles.previewImage}>
               <h6>Hình hiển thị trước </h6>

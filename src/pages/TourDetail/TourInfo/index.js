@@ -96,7 +96,6 @@ const TourInfo = ({ tour, isLoading }) => {
           defaultActiveKey="home"
           id="uncontrolled-tab-example"
           className="mb-3"
-          tabClassName={styles.xxx}
         >
           <Tab eventKey="home" title={translation.tabTitle.overview[lang]}>
             <div className={styles.tabContent}>

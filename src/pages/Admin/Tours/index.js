@@ -125,7 +125,7 @@ function Tours() {
             </>
           )}
 
-          {data && data.data.length === 0 && <h2>Hiện không có tour nào</h2>}
+          {data && data.data.length === 0 && <h5>Hiện không có tour nào</h5>}
 
           <ErrorMessage msg={errMsg} />
         </div>

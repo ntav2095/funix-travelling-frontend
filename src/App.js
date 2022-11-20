@@ -11,6 +11,7 @@ import Navbar from "./containers/Navbar";
 import Footer from "./containers/Footer";
 
 import Spinner from "./components/Spinner";
+import EditCatModal from "./pages/Admin/Category/EditCatModal";
 // components
 
 const RequireAuth = React.lazy(() => import("./components/RequireAuth"));
@@ -63,11 +64,11 @@ function App() {
           <Route path="/" element={<HomeNew />} />
           <Route
             path="/tours-chau-au"
-            element={<ToursList cat_params={{ country_not: "vi" }} />}
+            element={<ToursList cat_params={{ cat_not: "vi" }} />}
           />
           <Route
             path="/tours-trong-nuoc"
-            element={<ToursList cat_params={{ country: "vi" }} />}
+            element={<ToursList cat_params={{ cat: "vi" }} />}
           />
           <Route path="/danh-sach-tour/:tourId" element={<TourDetail />} />
           <Route path="/lien-he" element={<Contact />} />
@@ -86,7 +87,12 @@ function App() {
         <Route path="/admin/login" element={<Login />} />
         <Route element={<RequireAuth />}>
           <Route path="/admin" element={<Dashboard />} />
-          <Route path="/admin/category" element={<Category />} />
+          <Route path="/admin/category" element={<Category />}>
+            <Route
+              path="/admin/category/edit-cat/:catId"
+              element={<EditCatModal />}
+            />
+          </Route>
 
           {/* tour  */}
           <Route path="/admin/new-tour" element={<NewTour />} />

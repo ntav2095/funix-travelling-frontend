@@ -51,7 +51,6 @@ function TravelHandbookDetail() {
   const relatedArtilces = data ? data.data.relatedItems : null;
   return (
     <>
-      <Banner />
       <div className="row">
         <div className="col-12 col-lg-9">
           {article && !isLoading && (

@@ -11,6 +11,7 @@ function DefaultLayout() {
       <Navbar />
       <div className={styles.main}>
         <div className={styles.body + " container-lg"}>
+          <Banner />
           <Outlet />
         </div>
 

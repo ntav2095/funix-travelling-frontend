@@ -22,6 +22,7 @@ const initialValues = {
   name: "",
   journey: "",
   description: "",
+  countries: "",
   highlights: "",
 
   departureDates: "",
@@ -43,6 +44,7 @@ const dataPacker = (values) => {
 
   formData.append("name", values.name);
   formData.append("journey", values.journey);
+  formData.append("countries", values.countries);
   formData.append("description", values.description);
   formData.append("highlights", JSON.stringify(values.highlights.split("\n")));
 

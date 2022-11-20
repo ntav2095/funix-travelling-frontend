@@ -2,6 +2,7 @@ import {
   useEffect,
   AdminLayout,
   SpinnerModal,
+  EditCatModal,
   useAxios,
   adminApis,
   categoryApi,
@@ -9,77 +10,121 @@ import {
   CatGroup,
   styles,
 } from "./import";
+import ErrorMessage from "../../../components/ErrorMessage";
+import { Routes, Route, Outlet, useLocation } from "react-router-dom";
+import { useState } from "react";
+import CatForm from "./CatForm";
 
 function Category() {
   const [sendRequest, isLoading, data, error] = useAxios();
-  const [add, adding, result, addingError] = useAxios();
-  const codeRef = useRef();
-  const typeRef = useRef();
-  const parentRef = useRef();
+  const [add, adding, added, addingError] = useAxios();
+  const [goDelete, isDeleting, deleted, deletingError] = useAxios();
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const type = typeRef.current.value;
-    const code = codeRef.current.value;
-    const parent = parentRef.current.value;
-    if (!type || !code) {
-      alert("Thiếu trường");
-      return;
-    }
+  const location = useLocation();
+  const edited = location.state?.edited;
 
+  const deleteHandler = (catId) => {
+    goDelete(adminApis.category.delete(catId));
+  };
+
+  const submitHandler = (values) => {
     add(
       adminApis.category.add({
-        type,
-        code,
-        parent,
+        type: values.type,
+        code: values.code,
+        name: values.name,
+        parent: values.parent,
       })
     );
   };
 
   useEffect(() => {
     sendRequest(categoryApi.get());
-  }, []);
+  }, [deleted, added]);
 
   useEffect(() => {
-    if (result) {
-      alert("thanh cong");
+    if (edited) {
+      sendRequest(categoryApi.get());
     }
-  }, [result]);
+  }, [edited]);
+
+  useEffect(() => {
+    if (added) {
+      alert("Thêm thành công");
+    }
+  }, [added]);
 
   useEffect(() => {
     if (addingError) {
-      alert("that bai");
+      alert("Thêm thất bại");
     }
   }, [addingError]);
+
+  useEffect(() => {
+    if (deletingError) {
+      alert("Xóa thất bại");
+    }
+  }, [deletingError]);
+
+  useEffect(() => {
+    if (deleted) {
+      alert("Đã xóa");
+    }
+  }, [deleted]);
+
   return (
     <>
-      <SpinnerModal show={isLoading || adding} />
+      <SpinnerModal show={isLoading || adding || isDeleting} />
       <AdminLayout title="Category">
         <div className={styles.container}>
-          {error && <p>{error.message}</p>}
+          {error && <ErrorMessage msg={error.message} />}
 
-          {data && <CatGroup type="continent" cat={data.data} />}
-          {data && <CatGroup type="language" cat={data.data} />}
-          {data && <CatGroup type="country" cat={data.data} />}
-          {data && <CatGroup type="city" cat={data.data} />}
+          {data && (
+            <div className="pb-4 border-bottom">
+              <h6 className="pb-2">Thêm mới category item</h6>
+              {data && (
+                <CatForm
+                  categories={data.data}
+                  initialValues={{
+                    type: "",
+                    code: "",
+                    name: "",
+                  }}
+                  onSubmit={submitHandler}
+                />
+              )}
+            </div>
+          )}
 
-          <form onSubmit={submitHandler} className={styles.textForm}>
-            <input ref={typeRef} type="text" placeholder="type" />
-            <input ref={codeRef} type="text" placeholder="code" />
-            <select ref={parentRef}>
-              <option value="">Không</option>
-              {data &&
-                data.data.map((catItem, index) => (
-                  <option key={index} value={catItem._id}>
-                    {catItem.type}: {catItem.code}
-                  </option>
-                ))}
-            </select>
-            <br />
-            <button className="mt-4">Add</button>
-          </form>
+          {data && (
+            <CatGroup
+              type="continent"
+              cat={data.data}
+              onDelete={deleteHandler}
+            />
+          )}
+          {data && (
+            <CatGroup
+              type="language"
+              cat={data.data}
+              onDelete={deleteHandler}
+            />
+          )}
+
+          {data && (
+            <CatGroup type="country" cat={data.data} onDelete={deleteHandler} />
+          )}
+
+          {data && (
+            <CatGroup type="city" cat={data.data} onDelete={deleteHandler} />
+          )}
+
+          {data && (
+            <CatGroup type="article" cat={data.data} onDelete={deleteHandler} />
+          )}
         </div>
       </AdminLayout>
+      <Outlet />
     </>
   );
 }

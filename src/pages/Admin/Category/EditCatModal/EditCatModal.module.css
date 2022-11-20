@@ -1,0 +1,40 @@
+.container {
+  padding: 16px;
+  overflow: hidden;
+}
+
+.container label {
+  display: block;
+  width: 100%;
+  padding-bottom: 16px;
+}
+
+.container input {
+  width: 100%;
+  padding: 6px;
+  border-radius: 3.8px;
+}
+
+.container h6 {
+  font-size: 14px;
+}
+
+.container button {
+  padding: 8px 16px;
+  background: #050505;
+  color: white;
+  border-radius: 3.8px;
+}
+
+.spinnerContainer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.426);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

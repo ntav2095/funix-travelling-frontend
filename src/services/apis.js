@@ -13,7 +13,7 @@ export const tourApi = {
     data: formData,
   }),
   get: (params = {}) => ({
-    url: `/tour`,
+    url: `/tour/?hehe=chicken&hehe=bird`,
     method: "GET",
     params: params,
   }),
@@ -187,6 +187,16 @@ export const adminApis = {
     get: () => ({
       method: "GET",
       url: "/admin/categories",
+    }),
+    delete: (catId) => ({
+      method: "DELETE",
+      url: "/admin/categories",
+      data: { catId },
+    }),
+    update: (data) => ({
+      method: "PUT",
+      url: "/admin/categories",
+      data,
     }),
   },
 };
