@@ -100,7 +100,7 @@ function EditTour() {
 
           {!initialValues && !fetchingError && fetchedData && (
             <div>
-              <h2>Hiện chưa có version ngôn ngữ "{lang}" của tour này</h2>
+              <h6>Hiện chưa có version ngôn ngữ "{lang}" của tour này</h6>
               <button
                 className={styles.addLangBtn}
                 onClick={() => setTour(fetchedData.metadata.original)}
