@@ -82,7 +82,7 @@ function Tour(props) {
                   </div>
                   <div className={styles.content}>
                     <h5 className="text-uppercase">{item.name}</h5>
-                    <p>{item.journey}</p>
+                    <p>{item.countries || item.journey}</p>
                     <p>
                       {item.days} {trans.days[lang]} {item.nights}{" "}
                       {trans.nights[lang]}
