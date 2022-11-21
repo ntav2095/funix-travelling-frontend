@@ -1,7 +1,7 @@
 export function LiveChat() {
-  if (window.FB) {
-    window.FB.XFBML.parse();
-  }
+  // if (window.FB) {
+  //   window.FB.XFBML.parse();
+  // }
   var chatbox = document.getElementById("fb-customer-chat");
   chatbox.setAttribute("page_id", "114808643697032");
   chatbox.setAttribute("attribution", "biz_inbox");
