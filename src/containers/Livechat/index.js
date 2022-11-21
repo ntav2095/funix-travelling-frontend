@@ -3,7 +3,7 @@ export function LiveChat() {
   //   window.FB.XFBML.parse();
   // }
   var chatbox = document.getElementById("fb-customer-chat");
-  chatbox.setAttribute("page_id", "114808643697032");
+  chatbox.setAttribute("page_id", "107830641531056");
   chatbox.setAttribute("attribution", "biz_inbox");
 
   window.fbAsyncInit = function () {
