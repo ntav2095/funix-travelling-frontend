@@ -18,7 +18,6 @@ import ArticlePlaceholder from "../../components/placeholders/ArticlePlaceholder
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
 import { useTranslation } from "react-i18next";
 import { brokenImage } from "../../assets/images";
-import Banner from "../../components/Banner";
 import Sidebar from "../../containers/Sidebar";
 
 function TravelHandbookDetail() {

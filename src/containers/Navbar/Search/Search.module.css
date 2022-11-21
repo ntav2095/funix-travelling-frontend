@@ -59,6 +59,12 @@
 .itemsList li a {
   display: flex;
   margin-bottom: 6px;
+  color: #050505;
+  transition: 0.2s;
+}
+
+.itemsList li a:hover {
+  background: rgb(238, 240, 243);
 }
 
 .itemsList .image {
