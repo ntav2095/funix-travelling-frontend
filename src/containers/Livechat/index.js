@@ -10,6 +10,8 @@ export function LiveChat() {
     window.FB.init({
       xfbml: true,
       version: "v15.0",
+      appId: "107830641531056",
+      autoLogAppEvents: true,
     });
   };
 
