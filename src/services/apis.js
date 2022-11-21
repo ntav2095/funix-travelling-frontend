@@ -41,6 +41,11 @@ export const tourApi = {
     url: `/tour/hot-tours`,
     method: "GET",
   }),
+  search: (params) => ({
+    url: `/tour/search`,
+    method: "GET",
+    params,
+  }),
 };
 
 export const postsApi = {
@@ -70,6 +75,11 @@ export const postsApi = {
   getNewArticles: () => ({
     url: `/article/new-articles`,
     method: "GET",
+  }),
+  search: (params) => ({
+    url: `/article/search`,
+    method: "GET",
+    params,
   }),
 };
 

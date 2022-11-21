@@ -77,6 +77,17 @@ function useAxios(dataHandler = defaultDataHadnler) {
     if (type === "data") {
       setData(null);
     }
+
+    if (!type) {
+      setError(null);
+      setIsLoading(false);
+      setData(null);
+
+      if (abortController.current) {
+        abortController.current.abort();
+        abortController.current = null;
+      }
+    }
   };
 
   useEffect(() => {

@@ -93,3 +93,12 @@
   /* margin-left: 16px; */
   background-color: white;
 }
+
+.langOptions button {
+  display: block;
+  padding: 0;
+  font-size: 13px;
+  margin-top: 6px;
+  margin-right: 8px;
+  margin-left: 16px;
+}

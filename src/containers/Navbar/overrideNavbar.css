@@ -28,4 +28,11 @@ div.dropdown-menu.show {
 #container-navbar .nav-item .nav-link {
   font-weight: 600;
   text-transform: uppercase;
+  white-space: nowrap;
+  padding: 6px;
+  font-size: 13px;
+}
+
+#navbar {
+  padding-top: 16px;
 }

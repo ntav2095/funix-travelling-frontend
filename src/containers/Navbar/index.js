@@ -20,6 +20,7 @@ import i18next from "../../services/languages/i18n";
 import styles from "./Navbar.module.css";
 import "./overrideNavbar.css";
 import useLazyLoading, { loadingImg } from "../../hooks/uselazyLoading";
+import Search from "./Search";
 
 function Header() {
   const [lazy] = useLazyLoading(loadingImg);
@@ -187,7 +188,9 @@ function Header() {
               </Offcanvas>
 
               <NavbarBrand className="mr-auto" href="/">
-                <h1 className={styles.logo}>TRAVEL JOYA</h1>
+                <h1 className={styles.logo + " fs-4 fw-bold m-0"}>
+                  TRAVEL JOYA
+                </h1>
               </NavbarBrand>
 
               <Collapse isOpen={state.isNavOpen} navbar>
@@ -234,7 +237,7 @@ function Header() {
                       {i18next.t("header.travelHandbook")}
                     </NavLink>
                   </NavItem>
-                  <NavItem>
+                  <NavItem className={styles.langOptions}>
                     <button
                       id="btnvn"
                       className={
@@ -268,18 +271,8 @@ function Header() {
                       EN
                     </button>
                   </NavItem>
-                  <NavItem>
-                    <button
-                      className={styles.admin}
-                      onClick={() => {
-                        navigation("/admin");
-                      }}
-                    >
-                      <i
-                        className="fas fa-user-cog"
-                        style={{ fontSize: "1.5rem" }}
-                      ></i>
-                    </button>
+                  <NavItem className="d-flex align-items-center">
+                    <Search />
                   </NavItem>
                 </Nav>
               </Collapse>
