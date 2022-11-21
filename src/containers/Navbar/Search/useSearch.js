@@ -46,6 +46,9 @@ function useSearch() {
     }
 
     if (!text.trim()) {
+      resetSearchArticles();
+      resetTourResults();
+
       setTours(null);
       setArticles(null);
     }

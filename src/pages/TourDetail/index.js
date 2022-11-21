@@ -37,7 +37,7 @@ function TourDetail() {
 
   useEffect(() => {
     sendRequest(tourApi.getSingleTour(tourId));
-  }, [i18n.language]);
+  }, [i18n.language, tourId]);
 
   return (
     <>

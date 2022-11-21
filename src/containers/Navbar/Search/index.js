@@ -7,13 +7,14 @@ import { tourApi, postsApi } from "../../../services/apis";
 import { useEffect } from "react";
 import { debounce } from "debounce";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import useSearch from "./useSearch";
 
 function Search() {
   const [isFocus, setIsFocus] = useState(false);
   const searchRef = useRef();
+  const navigate = useNavigate();
 
   const {
     text,
@@ -32,9 +33,6 @@ function Search() {
     has_more_articles,
   } = useSearch();
 
-  console.log(isSearchingTours);
-  console.log(tours?.map((item) => item._id));
-
   // handle click outside
   useEffect(() => {
     if (isFocus) {
@@ -43,13 +41,13 @@ function Search() {
           setIsFocus(false);
           setText("");
 
-          window.removeEventListener("click", handler);
+          window.removeEventListener("mousedown", handler);
         }
       };
 
-      window.addEventListener("click", handler);
+      window.addEventListener("mousedown", handler);
 
-      return () => window.removeEventListener("click", handler);
+      return () => window.removeEventListener("mousedown", handler);
     }
   }, [isFocus, tours]);
 
@@ -67,18 +65,33 @@ function Search() {
       {isFocus && (
         <div className={styles.results}>
           <div className="tours border-bottom py-2">
-            <h6>Tours {tours && <em>({total_tours} results)</em>}</h6>
+            <h6>
+              Tours{" "}
+              {tours && (
+                <em>
+                  ({tours_count} of {total_tours} results)
+                </em>
+              )}
+            </h6>
             {tours && tours.length > 0 && (
               <ul className={styles.itemsList}>
                 {tours.map((tour) => (
                   <li key={tour._id}>
-                    <div className={styles.image}>
-                      <img src={tour.thumb} />
-                    </div>
-                    <div className={styles.textbox}>
-                      <p>{tour.name}</p>
-                      <em>{tour.countries || tour.journey}</em>
-                    </div>
+                    <Link
+                      to={`/danh-sach-tour/${tour._id}`}
+                      onClick={() => {
+                        navigate(`/danh-sach-tour/${tour._id}`);
+                        setIsFocus(false);
+                      }}
+                    >
+                      <div className={styles.image}>
+                        <img src={tour.thumb} />
+                      </div>
+                      <div className={styles.textbox}>
+                        <p>{tour.name}</p>
+                        <em>{tour.countries || tour.journey}</em>
+                      </div>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -101,29 +114,50 @@ function Search() {
           </div>
 
           <div className="articles py-2">
-            <h6>Articles {articles && <em>({total_articles} results)</em>}</h6>
-
+            <h6>
+              Articles{" "}
+              {articles && (
+                <em>
+                  ({articles_count} of {total_articles} results)
+                </em>
+              )}
+            </h6>
             {articles && articles.length > 0 && (
               <ul className={styles.itemsList}>
                 {articles.map((article) => (
                   <li key={article._id}>
-                    <div className={styles.image}>
-                      <img src={article.thumb} />
-                    </div>
-                    <div className={styles.textbox}>
-                      <p>{article.title}</p>
-                      <em>{article.lead.slice(0, 30)}...</em>
-                    </div>
+                    <Link
+                      to={`/cam-nang-du-lich/${article._id}`}
+                      onClick={() => {
+                        navigate(`/cam-nang-du-lich/${article._id}`);
+                        setIsFocus(false);
+                      }}
+                    >
+                      <div className={styles.image}>
+                        <img src={article.thumb} />
+                      </div>
+                      <div className={styles.textbox}>
+                        <p>{article.title}</p>
+                        <em>{article.lead.slice(0, 30)}...</em>
+                      </div>
+                    </Link>
                   </li>
                 ))}
               </ul>
             )}
-
             {articles && articles.length === 0 && (
               <em className="m-0">Not matches anything</em>
             )}
-
-            {!articles && <em>Search for articles</em>}
+            {!articles && <em>Search for articles</em>}{" "}
+            {articles && has_more_articles && (
+              <button
+                className={styles.searchMoreBtn}
+                onClick={searchArticlesNext}
+              >
+                Search more
+              </button>
+            )}
+            {isSearchingArticles && <em>is searching for articles</em>}
           </div>
         </div>
       )}
