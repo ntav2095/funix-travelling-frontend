@@ -73,7 +73,7 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
               </div>
             </label>
 
-            <label>
+            <div className={styles.label}>
               <h6>Nội dung</h6>
               <div className={styles.quillEditor}>
                 <Editor
@@ -86,7 +86,7 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
               <div className={styles.errorMsg}>
                 <ErrorMessage name="content" component="p" />
               </div>
-            </label>
+            </div>
 
             {/* ----------------------- categories ------------------------  */}
 

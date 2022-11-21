@@ -20,11 +20,16 @@
 
 .travel__pagination .rc-pagination-item-active {
   background: #000;
-  /* background: #1e8553; */
+
   color: white;
 }
 
 .travel__pagination .rc-pagination-next.rc-pagination-disabled,
 .travel__pagination .rc-pagination-prev.rc-pagination-disabled {
   display: none;
+}
+
+/* ===== custom ===  */
+.bg-active-green .rc-pagination-item-active {
+  background: #1e8553;
 }

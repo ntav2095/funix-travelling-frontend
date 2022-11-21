@@ -15,6 +15,9 @@ import ErrorMessage from "../../../../components/ErrorMessage";
 import useAxios from "../../../../hooks/useAxios";
 import { adminApis, tourApi } from "../../../../services/apis";
 
+// hooks
+import usePageTitle from "../../../../hooks/usePageTitle";
+
 // assets
 import { xMark as closeSVG } from "../../../../assets/svgs";
 
@@ -111,6 +114,8 @@ function UpdateItinerary() {
   }, [updatingError]);
 
   const langs = fetchedData ? fetchedData.metadata.available_lang : [];
+
+  usePageTitle("Cập nhật lộ tình tour | Admin | Travel Funix");
 
   return (
     <>

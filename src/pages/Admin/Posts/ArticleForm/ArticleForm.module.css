@@ -7,7 +7,8 @@
   margin-top: 24px;
 }
 
-.container label {
+.container label,
+.label {
   display: block;
   width: 100%;
   margin-bottom: 24px;
@@ -18,7 +19,8 @@
   font-size: 14px;
 }
 
-.container label h6 em {
+.container label h6 em,
+.container .label h6 em {
   color: #777;
   font-weight: 400;
   font-size: 14px;
@@ -75,6 +77,11 @@
   background: white;
 }
 
+.quillEditor img {
+  display: block;
+  margin: 16px auto;
+}
+
 /* ===========  categories ===========  */
 .cat .catItems label {
   display: flex;
@@ -84,10 +91,16 @@
   padding: 8px;
   margin-bottom: 0;
   border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+  background: white;
+  margin-bottom: 8px;
+  border-radius: 3.8px;
 }
 
 .cat .catItems label input {
   width: auto;
+  margin: 0;
 }
 
 /* ======= submit btn ========  */

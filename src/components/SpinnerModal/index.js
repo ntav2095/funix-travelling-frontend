@@ -2,16 +2,16 @@ import Modal from "react-bootstrap/Modal";
 import Spinner from "../Spinner";
 import styles from "./SpinnerModal.module.css";
 
-function SpinnerModal(props) {
+function SpinnerModal({ small, ...other }) {
   return (
     <Modal
-      {...props}
+      {...other}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
       contentClassName={styles.modalContent}
     >
-      <Spinner />
+      <Spinner small={small} />
     </Modal>
   );
 }

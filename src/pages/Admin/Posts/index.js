@@ -8,6 +8,7 @@ import styles from "./posts.module.css";
 import Pagination from "../../../containers/Pagination";
 import SpinnerModal from "../../../components/SpinnerModal";
 import ErrorMessage from "../../../components/ErrorMessage";
+import usePageTitle from "../../../hooks/usePageTitle";
 import "./override.css";
 
 const PAGE_SIZE = 6;
@@ -43,6 +44,8 @@ function Posts() {
       alert(`Xóa thành công.`);
     }
   }, [deleted]);
+
+  usePageTitle("Danh sách bài viết | Admin | Travel Funix");
 
   return (
     <>
@@ -101,6 +104,7 @@ function Posts() {
               </table>
 
               <Pagination
+                bgGreen
                 current={page}
                 pageSize={PAGE_SIZE}
                 total={postsData.metadata.total_count}

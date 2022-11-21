@@ -14,6 +14,7 @@ import ErrorMessage from "../../../components/ErrorMessage";
 import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 import { useState } from "react";
 import CatForm from "./CatForm";
+import usePageTitle from "../../../hooks/usePageTitle";
 
 function Category() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -71,6 +72,8 @@ function Category() {
       alert("Đã xóa");
     }
   }, [deleted]);
+
+  usePageTitle("Quản lý danh mục | Admin | Travel Funix");
 
   return (
     <>

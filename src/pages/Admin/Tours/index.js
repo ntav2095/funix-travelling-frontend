@@ -12,6 +12,7 @@ import {
   Pagination,
   PAGE_SIZE,
 } from "./import";
+import usePageTitle from "../../../hooks/usePageTitle";
 
 import "./override.css";
 
@@ -46,6 +47,8 @@ function Tours() {
   }, [deleted, page]);
 
   let errMsg = error ? error.message : null;
+
+  usePageTitle("Danh sách tours | Admin | Travel Funix");
 
   return (
     <>
@@ -117,6 +120,7 @@ function Tours() {
 
               <div className="pt-3 ps-1">
                 <Pagination
+                  bgGreen
                   current={page}
                   pageSize={PAGE_SIZE}
                   total={data.metadata.total_count}

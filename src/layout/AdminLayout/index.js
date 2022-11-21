@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { removeUser } from "../../store/user.slice";
 import { exit as exitSvg } from "../../assets/svgs";
+import { useState } from "react";
 
 // css
 import styles from "./AdminLayout.module.css";
@@ -25,6 +26,7 @@ const userSVG = (
 );
 
 function AdminLayout({ children, title, path, text }) {
+  const [hide, setHide] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
@@ -36,26 +38,16 @@ function AdminLayout({ children, title, path, text }) {
 
   const navLinkClasses = ({ isActive }) =>
     isActive ? styles.active : undefined;
+
+  let sidebarClasses = styles.sidebar;
+  if (hide) {
+    sidebarClasses += " " + styles.hide;
+  }
   return (
     <>
-      {/* <header className={styles.header}>
-        <div className={styles.inner}>
-          <h1>Admin page</h1>
-
-          {user && (
-            <div>
-              <p>
-                {userSVG} <span>{user.username}</span>
-              </p>
-
-              <button onClick={logoutHandler}>Log out</button>
-            </div>
-          )}
-        </div>
-      </header> */}
       <div className={styles.wrapper}>
         <main className={styles.main}>
-          <div className={styles.sidebar}>
+          <div className={sidebarClasses}>
             {user && (
               <div className={styles.userInfo}>
                 {userSVG}
@@ -105,7 +97,15 @@ function AdminLayout({ children, title, path, text }) {
 
           <div className={styles.content}>
             <div className={styles.contentHeader}>
-              <h2 className={styles.title}>{title}</h2>
+              <div className="d-flex align-items-center">
+                <button
+                  className={styles.toggleBtn + " me-4"}
+                  onClick={() => setHide((prev) => !prev)}
+                >
+                  {hide ? "show >>" : "<< hide"}
+                </button>
+                <h2 className={styles.title}>{title}</h2>
+              </div>
               {path && text && (
                 <Link className={styles.navigateBtn} to={path}>
                   {text}

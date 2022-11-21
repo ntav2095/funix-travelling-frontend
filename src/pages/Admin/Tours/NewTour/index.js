@@ -10,6 +10,7 @@ import {
 } from "./import";
 import { useState } from "react";
 import ErrorMessage from "../../../../components/ErrorMessage";
+import usePageTitle from "../../../../hooks/usePageTitle";
 
 function NewTour() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -37,6 +38,8 @@ function NewTour() {
   useEffect(() => {
     fetchCat(adminApis.category.get());
   }, []);
+
+  usePageTitle("Tạo tour mới | Admin | Travel Funix");
   return (
     <>
       <SpinnerModal show={isLoading || isFetchingCat} />

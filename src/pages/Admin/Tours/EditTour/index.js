@@ -1,3 +1,4 @@
+import usePageTitle from "../../../../hooks/usePageTitle";
 import {
   useState,
   useEffect,
@@ -67,6 +68,8 @@ function EditTour() {
         language: lang,
       }
     : null;
+
+  usePageTitle("Cập nhật tour | Admin | Travel Funix");
 
   return (
     <>

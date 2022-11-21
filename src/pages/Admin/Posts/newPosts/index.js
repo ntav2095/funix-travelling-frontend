@@ -8,6 +8,7 @@ import Editor from "../../../../containers/Editor";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import SpinnerModal from "../../../../components/SpinnerModal";
 import ArticleForm from "../ArticleForm";
+import usePageTitle from "../../../../hooks/usePageTitle";
 
 const initialValues = {
   title: "",
@@ -54,6 +55,8 @@ function NewPosts() {
       alert(`Thất bại: ${error.message}`);
     }
   }, [error]);
+
+  usePageTitle("Tạo bài viết mới | Admin | Travel Funix");
 
   return (
     <>
