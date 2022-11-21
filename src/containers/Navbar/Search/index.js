@@ -123,7 +123,7 @@ function Search() {
               <em className="m-0">Not matches anything</em>
             )}
 
-            {!articles && <em>Search for tours</em>}
+            {!articles && <em>Search for articles</em>}
           </div>
         </div>
       )}
