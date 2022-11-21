@@ -20,6 +20,7 @@ const initialValues = {
 };
 
 function NewPosts() {
+  const [formKey, setFormKey] = useState(1);
   const [sendRequest, isLoading, data, error] = useAxios();
   const [fetchCat, isFetchingCat, cat, fetchingCatError] = useAxios();
 
@@ -44,12 +45,13 @@ function NewPosts() {
   useEffect(() => {
     if (data) {
       alert("Thành công");
+      setFormKey((prev) => prev + 1);
     }
   }, [data]);
 
   useEffect(() => {
     if (error) {
-      alert("Thất bại");
+      alert(`Thất bại: ${error.message}`);
     }
   }, [error]);
 
@@ -60,6 +62,7 @@ function NewPosts() {
         <div className={styles.container}>
           {cat && (
             <ArticleForm
+              key={formKey}
               initialValues={initialValues}
               onSubmit={submitHandler}
               cat={cat.data}

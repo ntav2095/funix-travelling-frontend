@@ -5,7 +5,7 @@ import useAxios from "../../../hooks/useAxios";
 import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./posts.module.css";
-import Pagination from "rc-pagination";
+import Pagination from "../../../containers/Pagination";
 import SpinnerModal from "../../../components/SpinnerModal";
 import ErrorMessage from "../../../components/ErrorMessage";
 import "./override.css";
@@ -38,9 +38,15 @@ function Posts() {
     }
   }, [error]);
 
+  useEffect(() => {
+    if (deleted) {
+      alert(`Xóa thành công.`);
+    }
+  }, [deleted]);
+
   return (
     <>
-      <SpinnerModal show={isLoading} />
+      <SpinnerModal show={isLoading || isFetching} />
       <AdminLayout
         title="Danh sách các bài viết"
         path="/admin/new-posts"
@@ -52,33 +58,42 @@ function Posts() {
               <table className={styles.table}>
                 <thead>
                   <tr>
-                    <td>
+                    <th>
                       <div>STT</div>
-                    </td>
-                    <td style={{ width: "70%" }}>
+                    </th>
+                    <th style={{ width: "70%" }}>
                       <div>Title</div>
-                    </td>
-                    <td>
-                      <div></div>
-                    </td>
+                    </th>
+                    <th>
+                      <div>Actions</div>
+                    </th>
                   </tr>
                 </thead>
 
                 <tbody>
                   {postsData.data.map((item, index) => (
                     <tr key={item._id}>
-                      <td>{(page - 1) * PAGE_SIZE + index + 1}</td>
-                      <td>{item.title}</td>
                       <td>
-                        <Link to={`/admin/edit-posts/${item._id}`}>
-                          <Button variant="warning">Edit</Button>
-                        </Link>
-                        <Button
-                          variant="danger"
-                          onClick={(event) => deletePost(event, item._id)}
-                        >
-                          Delete
-                        </Button>
+                        <div>{(page - 1) * PAGE_SIZE + index + 1}</div>
+                      </td>
+                      <td>
+                        <div>{item.title}</div>
+                      </td>
+                      <td>
+                        <div className={styles.actionBtns}>
+                          <Link
+                            className={styles.editBtn}
+                            to={`/admin/edit-posts/${item._id}`}
+                          >
+                            Edit
+                          </Link>
+                          <button
+                            className={styles.removeBtn}
+                            onClick={(event) => deletePost(event, item._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -86,11 +101,10 @@ function Posts() {
               </table>
 
               <Pagination
-                className={styles.pagination + " toursPagination"}
                 current={page}
                 pageSize={PAGE_SIZE}
                 total={postsData.metadata.total_count}
-                onChange={(current, pageSize) => {
+                onChange={(current) => {
                   setPage(current);
                 }}
               />

@@ -9,6 +9,7 @@ import Title from "./Title";
 import Time from "./Time";
 import Paragraph from "./Paragraph";
 import SpinnerModal from "../../../../components/SpinnerModal";
+import ErrorMessage from "../../../../components/ErrorMessage";
 
 // apis
 import useAxios from "../../../../hooks/useAxios";
@@ -70,11 +71,15 @@ function UpdateItinerary() {
 
   // submit handler
   const submitHandler = () => {
+    if (plan.length === 0) {
+      alert("Bạn chưa điền nội dung");
+      return;
+    }
     goUpdate(
       adminApis.itinerary.update({
         tourId: tourId,
         itinerary: plan,
-        lang_ver: lang,
+        language: lang,
       })
     );
   };
@@ -110,8 +115,14 @@ function UpdateItinerary() {
   return (
     <>
       <SpinnerModal show={fetching || updating} />
-      <AdminLayout title="Cập nhật lộ trình tour">
+      <AdminLayout
+        title="Cập nhật lộ trình tour"
+        path={`/admin/edit-tour/${tourId}`}
+        text="Edit tour"
+      >
         <div className={styles.container}>
+          {fetchingError && <ErrorMessage msg={fetchingError.message} />}
+
           <label className="d-flex align-items-center mb-4">
             <h6 className="mb-0 me-2">Ngôn ngữ</h6>
             <select value={lang} onChange={(e) => setLang(e.target.value)}>
@@ -123,15 +134,20 @@ function UpdateItinerary() {
             </select>
           </label>
 
-          {lang !== "vi" && plan.length === 0 && (
-            <div>
-              <button
-                onClick={() => setPlan(fetchedData.metadata.original.itinerary)}
-              >
-                Copy nội dung bài gốc
-              </button>
-            </div>
-          )}
+          {lang !== "vi" &&
+            plan.length === 0 &&
+            fetchedData.metadata.original.itinerary.length > 0 && (
+              <div>
+                <button
+                  className={styles.copyOriginalPlanBtn}
+                  onClick={() => {
+                    setPlan(fetchedData.metadata.original.itinerary);
+                  }}
+                >
+                  Copy nội dung bài gốc
+                </button>
+              </div>
+            )}
 
           <div>
             {!fetching &&

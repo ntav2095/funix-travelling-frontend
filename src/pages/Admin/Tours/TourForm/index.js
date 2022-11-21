@@ -4,7 +4,6 @@ import { exclamation as exclamationSVG } from "../../../../assets/svgs";
 import styles from "./TourForm.module.css";
 
 function TourForm({ initialValues, onSubmit, cat }) {
-  console.log(initialValues);
   const requiredField = (
     <span title="Trường này là bắt buộc">{exclamationSVG}</span>
   );
@@ -35,7 +34,7 @@ function TourForm({ initialValues, onSubmit, cat }) {
         onSubmit={onSubmit}
         validate={tourValidator}
       >
-        {({ setFieldValue, values }) => (
+        {({ setFieldValue, values, handleReset }) => (
           <Form>
             {/* ----------------------- tên tour ------------------------  */}
             <label className={styles.smallTextArea}>

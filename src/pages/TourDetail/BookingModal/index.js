@@ -76,7 +76,7 @@ function BookingModal(props) {
                 <input type="text" name="name" required />
               </div>
               <div className=" large-4 col-md-4">
-                <p className="form-label-input">Địa chỉ email</p>
+                <p className="form-label-input">Email</p>
                 <input type="email" name="email" required />
               </div>
               <div className=" large-4 col-md-4">

@@ -1,7 +1,7 @@
 // main
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Pagination from "rc-pagination";
+import Pagination from "../../../containers/Pagination";
 
 // components
 import AdminLayout from "../../../layout/AdminLayout";

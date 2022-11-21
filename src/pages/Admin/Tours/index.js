@@ -17,7 +17,8 @@ import "./override.css";
 
 function Tours() {
   const [sendRequest, isLoading, data, error] = useAxios();
-  const [sendDelete, isDeleting, deleteResult, deleteError] = useAxios();
+  const [sendDelete, isDeleting, deleted, deleteError, deletingReset] =
+    useAxios();
   const [page, setPage] = useState(1);
 
   const deleteHandler = (tourId) => {
@@ -37,11 +38,12 @@ function Tours() {
   }, [deleteError]);
 
   useEffect(() => {
-    if (deleteResult) {
+    if (deleted) {
+      deletingReset("data");
       alert(`Xóa thành công`);
-      sendRequest(tourApi.get());
+      sendRequest(tourApi.get({ page, page_size: PAGE_SIZE }));
     }
-  }, [deleteResult]);
+  }, [deleted, page]);
 
   let errMsg = error ? error.message : null;
 
@@ -59,18 +61,18 @@ function Tours() {
               <table className={styles.table}>
                 <thead>
                   <tr>
-                    <td>
+                    <th>
                       <div>STT</div>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <div>ID</div>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <div>Name</div>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <div>Actions</div>
-                    </td>
+                    </th>
                   </tr>
                 </thead>
 
@@ -104,7 +106,7 @@ function Tours() {
                             className={styles.editItineraryBtn}
                             to={`/admin/update-itinerary/${item._id}`}
                           >
-                            Thêm/cập nhật lộ trình
+                            Thêm/sửa lộ trình
                           </Link>
                         </div>
                       </td>
@@ -113,15 +115,16 @@ function Tours() {
                 </tbody>
               </table>
 
-              <Pagination
-                className={styles.pagination + " toursPagination"}
-                current={page}
-                pageSize={PAGE_SIZE}
-                total={data.metadata.total_count}
-                onChange={(current, pageSize) => {
-                  setPage(current);
-                }}
-              />
+              <div className="pt-3 ps-1">
+                <Pagination
+                  current={page}
+                  pageSize={PAGE_SIZE}
+                  total={data.metadata.total_count}
+                  onChange={(current, pageSize) => {
+                    setPage(current);
+                  }}
+                />
+              </div>
             </>
           )}
 

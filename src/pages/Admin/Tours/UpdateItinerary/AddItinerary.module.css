@@ -48,7 +48,7 @@
 }
 
 .addBtns button:last-child {
-  background: rgb(125, 125, 125);
+  background: rgb(106, 106, 106);
   color: white;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .addBtns button:last-child:hover {
-  background: rgb(152, 152, 152);
+  background: rgb(122, 122, 122);
 }
 
 .addBtns button:nth-child(2):hover {
@@ -78,15 +78,10 @@
 
 .submitBtn button {
   border-radius: 3.8px;
-  background: rgb(10, 158, 74);
   padding: 6px 16px;
   color: white;
-  border: rgb(8, 141, 65);
   transition: 0.2s;
-}
-
-.submitBtn button:hover {
-  background: rgb(22, 181, 91);
+  background: #131b2a;
 }
 
 /* ======== remove btn =============  */
@@ -115,4 +110,12 @@
 
 .removeBtn svg {
   width: 15px;
+}
+
+/* ======= copy original plan button ===========  */
+.copyOriginalPlanBtn {
+  background: rgb(117, 10, 96);
+  padding: 6px 8px;
+  color: white;
+  border-radius: 3.8px;
 }

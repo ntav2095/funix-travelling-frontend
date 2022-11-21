@@ -72,7 +72,11 @@ function EditTour() {
     <>
       <SpinnerModal show={editing || fetching} />
 
-      <AdminLayout title={`Cập nhật tour ${tourId}`}>
+      <AdminLayout
+        title={`Cập nhật tour ${tourId}`}
+        path={`/admin/update-itinerary/${tourId}`}
+        text="Cập nhật lộ trình tour"
+      >
         <div className={styles.editPost}>
           {langs && (
             <label className={styles.langSelect}>

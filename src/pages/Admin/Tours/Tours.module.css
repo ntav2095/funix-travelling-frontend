@@ -8,14 +8,47 @@
   border-collapse: collapse;
 }
 
+.table th {
+  background: #1e8553;
+  color: rgb(241, 230, 230);
+  padding: 6px;
+}
+
+.tours table tr {
+  margin-bottom: 2px;
+}
+
 .tours table td,
 .tours table tr {
-  border: 1px solid #ccc;
+  border: 0.5px solid #1e8553;
+}
+
+.tours table td {
+  background: white;
+  margin-bottom: 2px;
 }
 
 .table thead div {
   padding: 2px 6px;
   font-weight: 600;
+  position: relative;
+}
+
+.table th {
+  position: relative;
+}
+
+.table th:not(:last-of-type)::after {
+  position: absolute;
+  display: block;
+  content: "";
+  height: 70%;
+  width: 1px;
+  background: rgb(238, 234, 234);
+  right: 0;
+  top: 50%;
+  transform: translate(0.5px, -50%);
+  z-index: 2;
 }
 
 .table tbody div {
@@ -42,7 +75,7 @@
   border: none;
   outline: none;
   margin-right: 8px;
-  min-width: 80px;
+  min-width: 70px;
   text-align: center;
   border-radius: 3.8px;
   display: block;
@@ -50,9 +83,10 @@
 }
 
 .actionBtns > * {
-  padding: 6px 8px;
-  color: white;
+  padding: 4px 8px;
+  color: rgb(244, 237, 237);
   transition: 0.2s;
+  font-weight: 300;
 }
 
 .actionBtns > *:hover {
@@ -60,35 +94,27 @@
 }
 
 .editBtn {
-  background: green;
+  background: #1e8553;
 }
 
 .editBtn:hover {
-  background: rgb(11, 177, 11);
+  background: #259961;
 }
 
 .removeTourBtn {
-  background: rgb(200, 33, 0);
+  background: rgb(166 64 64);
 }
 
 .removeTourBtn:hover {
-  background: rgb(223, 70, 40);
-}
-
-.addItineraryBtn {
-  background: rgb(7, 145, 199);
-}
-
-.addItineraryBtn:hover {
-  background: rgb(30, 160, 220);
+  background: rgb(184, 75, 75);
 }
 
 .editItineraryBtn {
-  background: rgb(211, 76, 8);
+  background: rgb(68 70 82);
 }
 
 .editItineraryBtn:hover {
-  background: rgb(228, 93, 25);
+  background: rgb(83, 86, 98);
 }
 
 .noTours {

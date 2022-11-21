@@ -75,12 +75,14 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
 
             <label>
               <h6>Nội dung</h6>
-              <Editor
-                placeholder="Nội dung"
-                onChange={(delta) => setFieldValue("content", delta)}
-                initialValue={values.content}
-                onBlur={() => setFieldTouched("content", true, true)}
-              />
+              <div className={styles.quillEditor}>
+                <Editor
+                  placeholder="Nội dung"
+                  onChange={(delta) => setFieldValue("content", delta)}
+                  initialValue={values.content}
+                  onBlur={() => setFieldTouched("content", true, true)}
+                />
+              </div>
               <div className={styles.errorMsg}>
                 <ErrorMessage name="content" component="p" />
               </div>
@@ -130,7 +132,9 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
                 </label>
               )}
             </label>
-            <button type="submit">Submit</button>
+            <button className={styles.submitBtn} type="submit">
+              Submit
+            </button>
           </Form>
         )}
       </Formik>

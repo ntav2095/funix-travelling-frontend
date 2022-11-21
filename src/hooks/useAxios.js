@@ -66,6 +66,19 @@ function useAxios(dataHandler = defaultDataHadnler) {
     }
   });
 
+  const resetStates = (type) => {
+    if (type === "error") {
+      setError(null);
+    }
+    if (type === "loading") {
+      setIsLoading(false);
+    }
+
+    if (type === "data") {
+      setData(null);
+    }
+  };
+
   useEffect(() => {
     if (error || data) {
       setIsLoading(false);
@@ -80,7 +93,7 @@ function useAxios(dataHandler = defaultDataHadnler) {
     };
   }, []);
 
-  return [sendRequest, isLoading, data, error];
+  return [sendRequest, isLoading, data, error, resetStates];
 }
 
 export default useAxios;

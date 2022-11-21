@@ -16,7 +16,8 @@
 
 .addLangBtn {
   padding: 8px 16px;
-  background: #050505;
-  color: white;
+  background: #131b2a;
+  color: rgb(244, 237, 237);
   cursor: pointer;
+  border-radius: 3.8px;
 }

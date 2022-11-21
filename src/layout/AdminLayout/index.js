@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { removeUser } from "../../store/user.slice";
+import { exit as exitSvg } from "../../assets/svgs";
 
 // css
 import styles from "./AdminLayout.module.css";
@@ -37,7 +38,7 @@ function AdminLayout({ children, title, path, text }) {
     isActive ? styles.active : undefined;
   return (
     <>
-      <header className={styles.header}>
+      {/* <header className={styles.header}>
         <div className={styles.inner}>
           <h1>Admin page</h1>
 
@@ -51,58 +52,70 @@ function AdminLayout({ children, title, path, text }) {
             </div>
           )}
         </div>
-      </header>
-
-      <main className={styles.main}>
-        <div className={styles.sidebar}>
-          <ul className={styles.nav}>
-            <li>
-              <NavLink end className={navLinkClasses} to="/">
-                Client page
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className={navLinkClasses} to="/admin/tours">
-                Tours
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className={navLinkClasses} to="/admin/visa-products">
-                Visa Products
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className={navLinkClasses} to="/admin/posts">
-                Posts
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className={navLinkClasses} to="/admin/category">
-                Category
-              </NavLink>
-            </li>
-            {!user && (
+      </header> */}
+      <div className={styles.wrapper}>
+        <main className={styles.main}>
+          <div className={styles.sidebar}>
+            {user && (
+              <div className={styles.userInfo}>
+                {userSVG}
+                <p>{user.username}</p>
+              </div>
+            )}
+            <ul className={styles.nav}>
               <li>
-                <NavLink className={navLinkClasses} to="/admin/login">
-                  Login
+                <NavLink end className={navLinkClasses} to="/">
+                  Client page
                 </NavLink>
               </li>
-            )}
-          </ul>
-        </div>
+              <li>
+                <NavLink className={navLinkClasses} to="/admin/tours">
+                  Tours
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className={navLinkClasses} to="/admin/visa-products">
+                  Visa Products
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className={navLinkClasses} to="/admin/posts">
+                  Posts
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className={navLinkClasses} to="/admin/category">
+                  Category
+                </NavLink>
+              </li>
+              {!user && (
+                <li>
+                  <NavLink className={navLinkClasses} to="/admin/login">
+                    Login
+                  </NavLink>
+                </li>
+              )}
+            </ul>
 
-        <div className={styles.content}>
-          <div className={styles.contentHeader}>
-            <h2 className={styles.title}>{title}</h2>
-            {path && text && (
-              <Link className={styles.navigateBtn} to={path}>
-                {text}
-              </Link>
-            )}
+            <div className={styles.logout}>
+              {exitSvg}
+              <button onClick={logoutHandler}>Log out</button>
+            </div>
           </div>
-          {children}
-        </div>
-      </main>
+
+          <div className={styles.content}>
+            <div className={styles.contentHeader}>
+              <h2 className={styles.title}>{title}</h2>
+              {path && text && (
+                <Link className={styles.navigateBtn} to={path}>
+                  {text}
+                </Link>
+              )}
+            </div>
+            <div className={styles.contentMain}>{children}</div>
+          </div>
+        </main>
+      </div>
     </>
   );
 }

@@ -1,33 +1,36 @@
 .form-control {
   display: flex;
   flex-direction: row;
+  font-size: 14px;
 }
-.form-tour {
-  padding-bottom: 30px;
-}
+
 .form-tour * {
   font-size: 1rem;
   padding: 5px;
 }
 .form-tour > div > div > input {
   width: 80%;
-  border: 1px solid gray;
+  border: 1px solid #ccc;
+  border-radius: 3.8px;
 }
 
 .form-tour > p {
   text-transform: uppercase;
-  background: #2d9ad9;
+  background: #050505;
+  border-radius: 3.8px;
   color: white;
 
   margin-bottom: 10px !important;
   margin-top: 10px !important;
 }
 .form-tour > input {
+  border: 1px solid #ccc;
+  border-radius: 3.8px;
   width: 100%;
 }
 .form-title {
   text-transform: uppercase;
-  background: #2d9ad9;
+  background: #050505;
   color: white;
 }
 
@@ -80,7 +83,15 @@
   font-size: 16px;
 }
 .form-button {
-  background: #2d9ad9;
+  background: #050505;
+  padding: 8px 16px;
+  border-radius: 3.8px;
   color: #fff;
-  margin-bottom: 30px;
+  margin-top: 8px;
+}
+
+p.form-label-input {
+  margin-bottom: 2px;
+  padding-bottom: 0;
+  font-size: 14px;
 }

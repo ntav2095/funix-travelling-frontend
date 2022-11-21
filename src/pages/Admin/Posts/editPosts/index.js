@@ -96,7 +96,7 @@ function EditPost() {
 
         {!initialValues && fetchedData && (
           <div>
-            <h2>Hiện chưa có version ngôn ngữ "{lang}" của bài viết này này</h2>
+            <h6>Hiện chưa có version ngôn ngữ "{lang}" của bài viết này</h6>
             <button
               className={styles.addLangBtn}
               onClick={() => setArticle(fetchedData.metadata.original)}

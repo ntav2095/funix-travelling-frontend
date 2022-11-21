@@ -1,19 +1,39 @@
-.container {
-  padding: 8px;
-}
-
 .container label {
   display: block;
   margin-bottom: 16px;
 }
 
-.container label h6 {
-  margin-bottom: 3.8px;
+.container form {
+  margin-top: 24px;
 }
 
-.container label input {
+.container label {
   display: block;
   width: 100%;
+  margin-bottom: 24px;
+}
+
+.container h6 {
+  margin-bottom: 3.8px;
+  font-size: 14px;
+}
+
+.container label h6 em {
+  color: #777;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.container input {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 3.8px;
+  background: white;
+}
+
+.container label h6 {
+  margin-bottom: 3.8px;
+  font-size: 14px;
 }
 
 .errorMsg p {
@@ -51,8 +71,29 @@
   width: 200px;
 }
 
-.container button {
+.quillEditor {
+  background: white;
+}
+
+/* ===========  categories ===========  */
+.cat .catItems label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 8px;
+  margin-bottom: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.cat .catItems label input {
+  width: auto;
+}
+
+/* ======= submit btn ========  */
+.submitBtn {
   padding: 8px 16px;
-  background: #050505;
-  color: white;
+  background: #131b2a;
+  border-radius: 3.8px;
+  color: rgb(248, 242, 242);
 }

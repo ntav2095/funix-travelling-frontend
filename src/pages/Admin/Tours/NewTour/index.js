@@ -1,6 +1,5 @@
 import {
   useEffect,
-  useNavigate,
   AdminLayout,
   SpinnerModal,
   useAxios,
@@ -9,12 +8,13 @@ import {
   initialValues,
   dataPacker,
 } from "./import";
+import { useState } from "react";
+import ErrorMessage from "../../../../components/ErrorMessage";
 
 function NewTour() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const [fetchCat, isFetchingCat, cat, fetchingCatError] = useAxios();
-
-  const navigate = useNavigate();
+  const [formKey, setFormKey] = useState(1);
 
   const submitHandler = (values) => {
     const formData = dataPacker(values);
@@ -23,8 +23,8 @@ function NewTour() {
 
   useEffect(() => {
     if (data) {
-      alert("Tạo tour mới thành công. Bạn sẽ được chuyển đến tranng tours.");
-      navigate("/admin/tours");
+      alert("Tạo tour mới thành công.");
+      setFormKey((prev) => prev + 1);
     }
   }, [data]);
 
@@ -39,11 +39,13 @@ function NewTour() {
   }, []);
   return (
     <>
-      <SpinnerModal show={isLoading} />
+      <SpinnerModal show={isLoading || isFetchingCat} />
 
       <AdminLayout title="Tạo tour mới">
+        {fetchingCatError && <ErrorMessage msg={fetchingCatError.message} />}
         {cat && (
           <TourForm
+            key={formKey}
             initialValues={initialValues}
             onSubmit={submitHandler}
             cat={cat.data}

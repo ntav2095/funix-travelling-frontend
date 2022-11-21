@@ -9,6 +9,7 @@
 .travel__pagination .rc-pagination-next {
   min-width: 30px;
   border: 1px solid #ccc;
+  background: white;
   text-align: center;
   margin: 0 2px;
   cursor: pointer;
@@ -19,6 +20,7 @@
 
 .travel__pagination .rc-pagination-item-active {
   background: #000;
+  /* background: #1e8553; */
   color: white;
 }
 
