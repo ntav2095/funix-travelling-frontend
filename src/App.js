@@ -54,7 +54,7 @@ const Login = React.lazy(() => import("./pages/Admin/Login"));
 
 function App() {
   useEffect(() => {
-    LiveChat();
+    // LiveChat();
   }, []);
   return (
     <Suspense fallback={<Spinner show={true} />}>
