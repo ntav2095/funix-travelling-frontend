@@ -97,6 +97,7 @@ const TourInfo = ({ tour, isLoading }) => {
           id="uncontrolled-tab-example"
           className="mb-3"
         >
+          {/* TỔng quan  */}
           <Tab eventKey="home" title={translation.tabTitle.overview[lang]}>
             <div className={styles.tabContent}>
               <div className={styles.tourDesc}>
@@ -156,10 +157,10 @@ const TourInfo = ({ tour, isLoading }) => {
               </div>
             </div>
           </Tab>
-
+          {/* Lịch trình */}
           <Tab
-            eventKey="itinerary"
             title={translation.tabTitle.itinerary[lang]}
+            eventKey="itinerary"
           >
             <div
               ref={itineraryRef}
@@ -217,7 +218,7 @@ const TourInfo = ({ tour, isLoading }) => {
               })}
             </div>
           </Tab>
-
+          {/* Bảng giá */}
           <Tab eventKey="price" title={translation.tabTitle.price[lang]}>
             <div
               className={styles.price + " " + styles.tabContent}
@@ -241,7 +242,7 @@ const TourInfo = ({ tour, isLoading }) => {
               </ul>
             </div>
           </Tab>
-
+          {/* Điều khaon */}
           <Tab eventKey="term" title={translation.tabTitle.terms[lang]}>
             <div
               className={styles.price + " " + styles.tabContent}
