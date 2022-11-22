@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 
-import styles from "./NotFound.module.css";
+import styles from "./ErrorPage.module.css";
 
-function NotFound({ code, message }) {
+function ErrorPage({ code, message }) {
   const navigate = useNavigate();
   return (
     <div className={styles.container}>
@@ -34,4 +34,4 @@ function NotFound({ code, message }) {
   );
 }
 
-export default NotFound;
+export default ErrorPage;

@@ -20,8 +20,6 @@ import usePageTitle from "../../hooks/usePageTitle";
 import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
 import { useTranslation } from "react-i18next";
-import Banner from "../../components/Banner";
-import DefaultLayout from "../../layout/DefaultLayout";
 import Placeholder from "../../components/placeholders/Placeholder";
 
 function TourDetail() {
@@ -41,7 +39,7 @@ function TourDetail() {
 
   return (
     <>
-      <div className={styles.tourDetail + " pb-5"}>
+      <div className={styles.tourDetail}>
         {!error && (
           <div>
             <h1 className="text-uppercase my-4 fs-4 fw-bold ">
@@ -61,18 +59,17 @@ function TourDetail() {
 
             <TourInfo tour={tour} isLoading={isLoading} />
 
-            {tour && (
-              <FacebookComment
-                width="100%"
-                href={`https://travelling-website-funix-v1.web.app/danh-sach-tour/${tourId}`}
-              />
-            )}
+            <div className="pb-5">
+              {tour && (
+                <FacebookComment
+                  width="100%"
+                  href={`https://travelling-website-funix-v1.web.app/danh-sach-tour/${tourId}`}
+                />
+              )}
+            </div>
           </div>
         )}
-        {error && error.httpCode === 404 && <ErrorPage />}
-        {error && error.httpCode !== 404 && (
-          <ErrorPage code={error.httpCode} message={error.message} />
-        )}
+        {error && <ErrorPage code={error.httpCode} message={error.message} />}
       </div>
     </>
   );

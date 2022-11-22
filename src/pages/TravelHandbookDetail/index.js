@@ -2,7 +2,7 @@
 import { Link, useParams } from "react-router-dom";
 import { format } from "date-fns";
 // components
-
+import ErrorPage from "../../containers/ErrorPage";
 // hooks
 import usePageTitle from "../../hooks/usePageTitle";
 
@@ -50,67 +50,76 @@ function TravelHandbookDetail() {
   const relatedArtilces = data ? data.data.relatedItems : null;
   return (
     <>
-      <div className="row">
-        <div className="col-12 col-lg-9">
-          {article && !isLoading && (
-            <div className={styles.storyHeader + " pt-4"}>
-              <h1 className="mb-4 pb-1 fs-4">{article.title}</h1>
-              <p className={styles.date}>
-                Posted on{" "}
-                <span>{format(new Date(article.createdAt), "dd/MM/yyyy")}</span>{" "}
-                by <Link to="/admin">{article.author}</Link>
-              </p>
+      {!error && (
+        <div className="row">
+          <div className="col-12 col-lg-9">
+            {article && !isLoading && (
+              <div className={styles.storyHeader + " pt-4"}>
+                <h1 className="mb-4 pb-1 fs-4">{article.title}</h1>
+                <p className={styles.date}>
+                  Posted on{" "}
+                  <span>
+                    {format(new Date(article.createdAt), "dd/MM/yyyy")}
+                  </span>{" "}
+                  by <Link to="/admin">{article.author}</Link>
+                </p>
+              </div>
+            )}
+
+            <div className={styles.storyContent}>
+              <div className={styles.quillContent} ref={quill}></div>
             </div>
-          )}
 
-          <div className={styles.storyContent}>
-            <div className={styles.quillContent} ref={quill}></div>
-          </div>
+            {isLoading && <ArticlePlaceholder />}
 
-          {isLoading && <ArticlePlaceholder />}
+            <div className="mt-4 border-top pt-4 pb-5">
+              <h5 className={styles.relatedStoriesTitle + " mb-3"}>
+                Bài viết liên quan
+              </h5>
+              <div className="row">
+                {relatedArtilces &&
+                  !isLoading &&
+                  relatedArtilces.map((item) => (
+                    <div
+                      key={item._id}
+                      className="col-12 col-sm-4 col-lg-4 mb-4"
+                    >
+                      <div className={styles.relatedArticle}>
+                        <Link to={`/cam-nang-du-lich/${item._id}`}>
+                          <div className={styles.image}>
+                            <img
+                              src={item.thumb}
+                              alt={item.title}
+                              onError={(e) => (e.target.src = brokenImage)}
+                            />
+                          </div>
 
-          <div className="mt-4 border-top pt-4 pb-5">
-            <h5 className={styles.relatedStoriesTitle + " mb-3"}>
-              Bài viết liên quan
-            </h5>
-            <div className="row">
-              {relatedArtilces &&
-                !isLoading &&
-                relatedArtilces.map((item) => (
-                  <div key={item._id} className="col-12 col-sm-4 col-lg-4 mb-4">
-                    <div className={styles.relatedArticle}>
-                      <Link to={`/cam-nang-du-lich/${item._id}`}>
-                        <div className={styles.image}>
-                          <img
-                            src={item.thumb}
-                            alt={item.title}
-                            onError={(e) => (e.target.src = brokenImage)}
-                          />
-                        </div>
-
-                        <div className={styles.textBox}>
-                          <h6>{item.title}</h6>
-                          <p>{item.lead.slice(0, 60)}...</p>
-                        </div>
-                      </Link>
+                          <div className={styles.textBox}>
+                            <h6>{item.title}</h6>
+                            <p>{item.lead.slice(0, 60)}...</p>
+                          </div>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
 
-              {isLoading &&
-                new Array(3).fill(1).map((item, index) => (
-                  <li key={index} className="col-12 col-sm-6 col-lg-4">
-                    <CardPlaceholder />
-                  </li>
-                ))}
+                {isLoading &&
+                  new Array(3).fill(1).map((item, index) => (
+                    <li key={index} className="col-12 col-sm-6 col-lg-4">
+                      <CardPlaceholder />
+                    </li>
+                  ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="col-12 col-lg-3">
-          <Sidebar />
+          <div className="col-12 col-lg-3">
+            <Sidebar />
+          </div>
         </div>
-      </div>
+      )}
+
+      {error && <ErrorPage code={error.httpCode} message={error.message} />}
     </>
   );
 }
