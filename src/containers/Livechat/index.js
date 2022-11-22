@@ -1,17 +1,10 @@
-export function LiveChat() {
-  // if (window.FB) {
-  //   window.FB.XFBML.parse();
-  // }
-  var chatbox = document.getElementById("fb-customer-chat");
-  chatbox.setAttribute("page_id", "107830641531056");
-  chatbox.setAttribute("attribution", "biz_inbox");
-
+export function liveChat() {
+  
   window.fbAsyncInit = function () {
     window.FB.init({
       xfbml: true,
       version: "v15.0",
-      appId: "107830641531056",
-      autoLogAppEvents: true,
+ 
     });
   };
 
@@ -24,4 +17,5 @@ export function LiveChat() {
     js.src = "https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js";
     fjs.parentNode.insertBefore(js, fjs);
   })(document, "script", "facebook-jssdk");
+
 }

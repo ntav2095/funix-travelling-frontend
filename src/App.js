@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import React, { Suspense, useEffect } from "react";
 // import HomeNew from "./pages/HomeNew";
 import Loading from "./components/loading";
-import { LiveChat } from "./containers/Livechat";
+import { liveChat } from "./containers/Livechat";
 import Category from "./pages/Admin/Category";
 import DefaultLayout from "./layout/DefaultLayout";
 
@@ -54,7 +54,9 @@ const Login = React.lazy(() => import("./pages/Admin/Login"));
 
 function App() {
   useEffect(() => {
-    LiveChat();
+    setTimeout(() => {
+      liveChat();
+    }, 2000); 
   }, []);
   return (
     <Suspense fallback={<Spinner show={true} />}>

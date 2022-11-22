@@ -30,7 +30,7 @@ export default function FacebookComment(props) {
   }
   useEffect(() => {
     initFacebookSDK();
-  });
+  },[]);
   return (
     <>
       <hr></hr>
