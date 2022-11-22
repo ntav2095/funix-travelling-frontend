@@ -32,7 +32,7 @@ function useSearch() {
   const searchBoth = debounce((query) => {
     searchTours(tourApi.search({ text: query }));
     searchArticles(postsApi.search({ text: query }));
-  }, 500);
+  }, 300);
 
   // khi text thay đổi thì set page = 1, reset lại kết quả, search cả 2
   useEffect(() => {

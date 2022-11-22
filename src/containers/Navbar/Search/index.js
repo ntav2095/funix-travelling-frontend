@@ -69,7 +69,8 @@ function Search() {
               Tours{" "}
               {tours && (
                 <em>
-                  ({tours_count} of {total_tours} results)
+                  ({tours_count > 0 && tours_count + " of "}
+                  {total_tours} results)
                 </em>
               )}
             </h6>
@@ -101,7 +102,9 @@ function Search() {
               <em className="m-0">Not matches anything</em>
             )}
 
-            {!tours && !isSearchingTours && !text && <em>Search for tours</em>}
+            {!tours && !isSearchingTours && !text.trim() && (
+              <em>Search for tours</em>
+            )}
             {isSearchingTours && <em>is searching for tours</em>}
             {tours && has_more_tours && (
               <button
@@ -118,7 +121,8 @@ function Search() {
               Articles{" "}
               {articles && (
                 <em>
-                  ({articles_count} of {total_articles} results)
+                  ({articles_count > 0 && articles_count + " of "}
+                  {total_articles} results)
                 </em>
               )}
             </h6>
@@ -148,7 +152,9 @@ function Search() {
             {articles && articles.length === 0 && (
               <em className="m-0">Not matches anything</em>
             )}
-            {!articles && <em>Search for articles</em>}{" "}
+            {!articles && !isSearchingArticles && !text.trim() && (
+              <em>Search for articles</em>
+            )}{" "}
             {articles && has_more_articles && (
               <button
                 className={styles.searchMoreBtn}
