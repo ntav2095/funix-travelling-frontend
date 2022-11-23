@@ -47,7 +47,6 @@
 }
 
 .itinerary h3 {
-  color: white;
   letter-spacing: 1px;
   font-size: 17px;
   text-transform: uppercase;
@@ -164,6 +163,50 @@
 .tabContent {
   border: 1px solid rgb(234, 234, 234);
 
-  padding: 16px;
   border-top: none;
+}
+.accordion-item > .accordion-header > .accordion-button > .tile {
+  color: #ccc !important;
+  background-color: #fff !important;
+  box-shadow: 0px !important;
+}
+.accordion-header + button.accordion-button:not(.collapsed) {
+  color: #ccc !important;
+  background-color: #fff !important;
+  box-shadow: 0px !important;
+}
+/* .box {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  left: -2px;
+  background-color: rgb(235, 29, 29);
+  border: 1px solid #ff9f55;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+} */
+.accordion {
+}
+.itinerary {
+  position: relative;
+}
+
+.itinerary::after {
+  position: absolute;
+  content: "";
+  width: 6px;
+  height: 100%;
+  background-color: rgb(220, 18, 18);
+  top: 0;
+  padding-top: 10px;
+  bottom: 10px;
+}
+.line {
+  width: 6px;
+  height: 100px;
+  background-color: rgb(220, 18, 18);
+  top: 0;
+  bottom: 0;
+  left: 50%;
 }

@@ -1,4 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import {
+  UncontrolledAccordion,
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+  AccordionItem,
+} from "reactstrap";
 import { useRef } from "react";
 // import { Tab } from "semantic-ui-react";
 import QuillReader from "./QuillReader";
@@ -8,6 +15,7 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 
 import styles from "./TourInfo.module.css";
+import "./TourInfo.module.css";
 import { useTranslation } from "react-i18next";
 import "./tourinfo_override.css";
 
@@ -83,12 +91,14 @@ const translation = {
     },
   },
 };
-
-const TourInfo = ({ tour, isLoading }) => {
+{
+}
+const TourInfo = ({ tour, isLoading, deltailtour }) => {
   const itineraryRef = useRef();
   const { i18n } = useTranslation();
   const lang = i18n.language;
-
+  console.log(tour);
+  console.log(deltailtour);
   return (
     <div className={styles.tourInfo + " tourInfo"}>
       {!isLoading && tour && (
@@ -168,54 +178,31 @@ const TourInfo = ({ tour, isLoading }) => {
               role="tabpanel"
               aria-labelledby="tab-title-lich-trinh"
             >
-              <h2 className={styles.mainTitle}>Lộ trình</h2>
-              {tour.itinerary.map((item) => {
-                if (item.type === "title") {
+              <div className="container">
+                {deltailtour.map((item) => {
                   return (
-                    <div className={styles.title} key={item.id}>
-                      <div className={styles.container}>
-                        <h3>{item.content}</h3>
-                      </div>
-                    </div>
-                  );
-                }
+                    <>
+                      <button type="button" className="collapsible">
+                        {item.day} {item.destination}
+                      </button>
 
-                if (item.type === "time") {
-                  return (
-                    <div
-                      className={styles.container + " " + styles.bgContent}
-                      key={item.id}
-                    >
-                      <div className={styles.time}>
-                        <p>
-                          <span>{item.content.session}</span>
-                        </p>
-                        <p>
-                          {clockSVG}
-                          <span>{item.content.time}</span>
-                        </p>
+                      <div className="content">
+                        <div className="tile" key={item.id}>
+                          <div className={styles.accordion}>
+                            <h6>{item.day}</h6>
+                            <h3>{item.destination}</h3>
+                          </div>
+                        </div>
+                        <div className="qill" key={item.id}>
+                          <div className="container">
+                            <QuillReader detail={item.qill} />
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </>
                   );
-                }
-
-                if (item.type === "para") {
-                  return (
-                    <div
-                      className={
-                        styles.container +
-                        " " +
-                        styles.bgContent +
-                        " " +
-                        styles.paragraph
-                      }
-                      key={item.id}
-                    >
-                      <QuillReader delta={item.content} />
-                    </div>
-                  );
-                }
-              })}
+                })}
+              </div>
             </div>
           </Tab>
           {/* Bảng giá */}
