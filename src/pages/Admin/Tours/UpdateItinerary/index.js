@@ -20,7 +20,6 @@ import { xMark as closeSVG } from "../../../../assets/svgs";
 
 // css
 import styles from "./AddItinerary.module.css";
-import imgToBase64 from "../../../../services/helpers/imgToBase64";
 import Editor from "../../../../containers/Editor";
 
 function UpdateItinerary() {
