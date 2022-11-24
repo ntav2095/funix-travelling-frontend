@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import {
-  UncontrolledAccordion,
-  Accordion,
-  AccordionBody,
-  AccordionHeader,
-  AccordionItem,
-} from "reactstrap";
+// import {
+//   UncontrolledAccordion,
+//   Accordion,
+//   AccordionBody,
+//   AccordionHeader,
+//   AccordionItem,
+// } from "reactstrap";
 import { useRef } from "react";
 // import { Tab } from "semantic-ui-react";
 import QuillReader from "./QuillReader";
@@ -13,12 +13,12 @@ import formatDate from "../../../services/helpers/formatDate";
 import { clock as clockSVG } from "../../../assets/svgs";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import Accordion from "react-bootstrap/Accordion";
 
 import styles from "./TourInfo.module.css";
 import "./TourInfo.module.css";
 import { useTranslation } from "react-i18next";
 import "./tourinfo_override.css";
-
 const translation = {
   tabTitle: {
     overview: {
@@ -93,6 +93,7 @@ const translation = {
 };
 {
 }
+
 const TourInfo = ({ tour, isLoading, deltailtour }) => {
   const itineraryRef = useRef();
   const { i18n } = useTranslation();
@@ -108,61 +109,46 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
           className="mb-3"
         >
           {/* TỔng quan  */}
-          <Tab eventKey="home" title={translation.tabTitle.overview[lang]}>
+          <Tab eventKey="home">
             <div className={styles.tabContent}>
               <div className={styles.tourDesc}>
-                <p>{translation.tabContent.overview.tour_name[lang]}</p>
+                <p></p>
                 <div>
-                  <p>{tour.name}</p>
+                  <p></p>
                 </div>
               </div>
               <div className={styles.tourDesc}>
-                <p>{translation.tabContent.overview.itinerary[lang]}</p>
+                <p>{}</p>
                 <div>
-                  <p>{tour.journey}</p>
-                </div>
-              </div>
-
-              <div className={styles.tourDesc}>
-                <p>{translation.tabContent.overview.duration[lang]}</p>
-                <div>
-                  <p>
-                    {tour.days} {translation.tabContent.overview.days[lang]}{" "}
-                    {tour.nights} {translation.tabContent.overview.nights[lang]}
-                  </p>
+                  <p></p>
                 </div>
               </div>
 
               <div className={styles.tourDesc}>
-                <p>
-                  {translation.tabContent.overview.points_of_departure[lang]}
-                </p>
+                <p>{}</p>
                 <div>
-                  <p>
-                    {tour.departureDates
-                      .map((item) => formatDate(item, "dd/MM/yyyy"))
-                      .join(", ")}
-                  </p>
+                  <p></p>
+                </div>
+              </div>
+
+              <div>
+                <p>{}</p>
+                <div>
+                  <p></p>
                 </div>
               </div>
 
               <div className={styles.tourDesc}>
-                <p>{translation.tabContent.overview.description[lang]}</p>
+                <p>{}</p>
                 <div>
-                  <p>{tour.description}</p>
+                  <p></p>
                 </div>
               </div>
 
               <div className={styles.tourDesc}>
-                <p>{translation.tabContent.overview.highlights[lang]}</p>
+                <p>{}</p>
                 <div>
-                  <ul>
-                    {tour.highlights
-                      .filter((item) => Boolean(item.trim()))
-                      .map((item, index) => (
-                        <li key={index}>- {item}</li>
-                      ))}
-                  </ul>
+                  <ul></ul>
                 </div>
               </div>
             </div>
@@ -179,71 +165,68 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
               aria-labelledby="tab-title-lich-trinh"
             >
               <div className="container">
-                {deltailtour.map((item) => {
-                  return (
-                    <>
-                      <button type="button" className="collapsible">
-                        {item.day} {item.destination}
-                      </button>
-
-                      <div className="content">
-                        <div className="tile" key={item.id}>
-                          <div className={styles.accordion}>
-                            <h6>{item.day}</h6>
-                            <h3>{item.destination}</h3>
-                          </div>
-                        </div>
-                        <div className="qill" key={item.id}>
-                          <div className="container">
-                            <QuillReader detail={item.qill} />
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  );
-                })}
+                <Accordion
+                  defaultActiveKey="0"
+                  id="accordion1"
+                  className="accordion"
+                >
+                  <div eventKey="0">
+                    {deltailtour.map((item) => {
+                      return (
+                        <>
+                          <span id="fa-regular">
+                            <i
+                              style={{
+                                position: "absolute",
+                                transform: "translateY(20px)",
+                                display: "block",
+                                zIndex: "1",
+                                background: "white",
+                              }}
+                              className="fa-regular fa-circle"
+                            ></i>
+                          </span>
+                          <Accordion.Header className="accordion-header1">
+                            {item.day} {item.destination}
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <div className="content">
+                              <div className="tile" key={item.id}>
+                                <div className={styles.accordion}>
+                                  <h6>{item.day}</h6>
+                                  <h3>{item.destination}</h3>
+                                </div>
+                              </div>
+                              <div className="qill" key={item.id}>
+                                <div className="container">
+                                  <QuillReader detail={item.qill} />
+                                </div>
+                              </div>
+                            </div>
+                          </Accordion.Body>
+                        </>
+                      );
+                    })}
+                  </div>
+                </Accordion>
               </div>
             </div>
           </Tab>
           {/* Bảng giá */}
-          <Tab eventKey="price" title={translation.tabTitle.price[lang]}>
+          <Tab eventKey="price">
             <div
-              className={styles.price + " " + styles.tabContent}
-              role="tabpanel"
+              className={+" " + styles.tabContent}
+              role="tabpan  el"
               aria-labelledby="tab-title-gia-bao-gom"
-            >
-              <h2>{translation.tabContent.price.price_includes[lang]}</h2>
-
-              <ul className="ps-2">
-                {tour.priceIncludes.map((item, index) => (
-                  <li key={index}>- {item}</li>
-                ))}
-              </ul>
-
-              <h2>{translation.tabContent.price.price_excludes[lang]}</h2>
-
-              <ul className="ps-2">
-                {tour.priceExcludes.map((item, index) => (
-                  <li key={index}>- {item}</li>
-                ))}
-              </ul>
-            </div>
+            ></div>
           </Tab>
           {/* Điều khaon */}
-          <Tab eventKey="term" title={translation.tabTitle.terms[lang]}>
+          <Tab eventKey="term">
             <div
               className={styles.price + " " + styles.tabContent}
               role="tabpanel"
               aria-labelledby="tab-title-gia-bao-gom"
-            >
-              <h2>{translation.tabContent.terms.cancellation_policy[lang]}</h2>
-
-              <ul className="ps-3">
-                {tour.cancellationPolicy.map((item, index) => (
-                  <li key={index}>- {item}</li>
-                ))}
-              </ul>
-            </div>
+            ></div>
           </Tab>
         </Tabs>
       )}

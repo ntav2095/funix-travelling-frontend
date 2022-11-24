@@ -195,12 +195,15 @@
 .itinerary::after {
   position: absolute;
   content: "";
-  width: 6px;
-  height: 100%;
-  background-color: rgb(220, 18, 18);
-  top: 0;
+  border: 2px dashed forestgreen;
+  height: 90%;
+  /* background-color: rgb(220, 18, 18); */
+
   padding-top: 10px;
   bottom: 10px;
+
+  left: 5px;
+  top: 25px;
 }
 .line {
   width: 6px;
@@ -209,4 +212,21 @@
   top: 0;
   bottom: 0;
   left: 50%;
+}
+.accordion-button1 {
+  left: 39px !important;
+  width: 95% !important;
+}
+i.fa-regular.fa-circle {
+  position: absolute;
+  transform: translateY(20px);
+  display: block;
+  z-index: 1;
+}
+div#accordion1 {
+  margin-left: 28px !important;
+}
+.accordion {
+  --bs-accordion-active-bg: none !important;
+  --bs-accordion-btn-bg: none !important;
 }
