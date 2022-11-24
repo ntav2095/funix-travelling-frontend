@@ -162,9 +162,9 @@ export const adminApis = {
         "Content-Type": "multipart/form-data",
       },
     }),
-    getSingle: (tourId, cat_lang) => ({
+    getSingle: (tourId, language) => ({
       method: "GET",
-      url: `/admin/tour/${tourId}/?cat_lang=${cat_lang}`,
+      url: `/admin/tour/${tourId}/?language=${language}`,
     }),
     edit: (formData) => ({
       method: "PUT",
@@ -182,10 +182,13 @@ export const adminApis = {
   },
 
   itinerary: {
-    update: (data) => ({
+    update: (formData) => ({
       method: "PUT",
       url: "/admin/tour/itinerary",
-      data,
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     }),
   },
   category: {

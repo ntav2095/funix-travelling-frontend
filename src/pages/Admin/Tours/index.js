@@ -68,7 +68,7 @@ function Tours() {
                       <div>STT</div>
                     </th>
                     <th>
-                      <div>ID</div>
+                      <div>Mã tour</div>
                     </th>
                     <th>
                       <div>Name</div>
@@ -86,7 +86,7 @@ function Tours() {
                         <div>{(page - 1) * PAGE_SIZE + index + 1}</div>
                       </td>
                       <td>
-                        <div>{item._id}</div>
+                        <div>{item.code}</div>
                       </td>
                       <td>
                         <div>{item.name}</div>

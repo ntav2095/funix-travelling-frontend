@@ -61,10 +61,20 @@ function EditTour() {
         departureDates: tour.departureDates
           .map((item) => format(new Date(item), "dd/MM/yyyy"))
           .join("\n"),
-        highlights: tour.highlights.join("\n"),
-        priceIncludes: tour.priceIncludes.join("\n"),
-        priceExcludes: tour.priceExcludes.join("\n"),
-        cancellationPolicy: tour.cancellationPolicy.join("\n"),
+        highlights: tour.highlights,
+
+        days: tour.duration.days,
+        nights: tour.duration.nights,
+
+        priceIncludes: tour.price_policies.includes,
+        priceExcludes: tour.price_policies.excludes,
+        priceOther: tour.price_policies.other,
+
+        cancellationPolicy: tour.terms.cancellation,
+        registrationPolicy: tour.terms.registration,
+        notes: tour.terms.notes,
+        paymentPolicy: tour.terms.payment,
+
         language: lang,
       }
     : null;

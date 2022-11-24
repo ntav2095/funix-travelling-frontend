@@ -5,9 +5,6 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 
 // components
 import AdminLayout from "../../../../layout/AdminLayout";
-import Title from "./Title";
-import Time from "./Time";
-import Paragraph from "./Paragraph";
 import SpinnerModal from "../../../../components/SpinnerModal";
 import ErrorMessage from "../../../../components/ErrorMessage";
 
@@ -23,6 +20,8 @@ import { xMark as closeSVG } from "../../../../assets/svgs";
 
 // css
 import styles from "./AddItinerary.module.css";
+import imgToBase64 from "../../../../services/helpers/imgToBase64";
+import Editor from "../../../../containers/Editor";
 
 function UpdateItinerary() {
   const [plan, setPlan] = useState([]);
@@ -31,70 +30,40 @@ function UpdateItinerary() {
   const [fetchTour, fetching, fetchedData, fetchingError] = useAxios();
   const { tourId } = useParams();
 
-  // handle thêm title/thời gian/đoạn văn
-  const addContentHandler = (type) => {
-    if (type === "title") {
-      setPlan((prev) => [...prev, { id: uuid(), type: "title", content: "" }]);
-    }
-
-    if (type === "time") {
-      setPlan((prev) => [
-        ...prev,
-        {
-          id: uuid(),
-          type: "time",
-          content: {
-            time: "",
-            duration: "",
-          },
-        },
-      ]);
-    }
-
-    if (type === "para") {
-      const newId = uuid();
-      setPlan((prev) => [...prev, { id: newId, type: "para", content: {} }]);
-    }
-  };
-
-  // handle lưu data vào plan mỗi khi người dùng nhập dữ liệu
-  const changeHandler = (id, content) => {
-    setPlan((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, content: content } : item
-      )
-    );
-  };
-
-  const removePortionHandler = (id) => {
-    if (window.confirm("Are you sure?")) {
-      setPlan((prev) => prev.filter((item) => item.id !== id));
-    }
-  };
-
   // submit handler
-  const submitHandler = () => {
-    if (plan.length === 0) {
-      alert("Bạn chưa điền nội dung");
-      return;
-    }
-    goUpdate(
-      adminApis.itinerary.update({
-        tourId: tourId,
-        itinerary: plan,
-        language: lang,
-      })
-    );
+  const submitHandler = async () => {
+    const images_arr = plan.map((item) => ({
+      id: item.id,
+      images: item.images,
+    }));
+
+    const textPlan = plan.map((item) => ({
+      id: item.id,
+      day: item.day,
+      destination: item.destination,
+      content: item.content,
+    }));
+
+    const f = new FormData();
+    images_arr.forEach((item, index) => {
+      item.images.forEach((img) => {
+        f.append(`plan${index}`, img);
+      });
+    });
+
+    f.append("itinerary", JSON.stringify(textPlan));
+    f.append("tourId", tourId);
+    f.append("language", lang);
+
+    goUpdate(adminApis.itinerary.update(f));
   };
 
-  const getContent = (id) => {
-    return plan.find((item) => item.id === id).content;
-  };
-
+  // fetch tour
   useEffect(() => {
     fetchTour(adminApis.tour.getSingle(tourId, lang));
   }, [lang]);
 
+  // set plan
   useEffect(() => {
     if (fetchedData) {
       setPlan(fetchedData.data.itinerary);
@@ -115,7 +84,33 @@ function UpdateItinerary() {
 
   const langs = fetchedData ? fetchedData.metadata.available_lang : [];
 
+  const addDayHandler = () => {
+    setPlan((prev) => [
+      ...prev,
+      { id: uuid(), day: "", destination: "", content: null, images: [] },
+    ]);
+  };
+
   usePageTitle("Cập nhật lộ tình tour | Admin | Travel Funix");
+
+  const changeHandler = (type, id, payload) => {
+    setPlan((prev) =>
+      prev.map((item) => {
+        if (item.id === id) {
+          item[type] = payload;
+        }
+
+        return item;
+      })
+    );
+  };
+
+  const removeHandler = (id) => {
+    console.log(id);
+    if (window.confirm("Are you sure?")) {
+      setPlan((prev) => prev.filter((item) => item.id !== id));
+    }
+  };
 
   return (
     <>
@@ -154,75 +149,104 @@ function UpdateItinerary() {
               </div>
             )}
 
-          <div>
-            {!fetching &&
-              plan.map((item) => {
-                if (item.type === "title") {
-                  return (
-                    <div key={item.id} className={styles.portion + " mt-4"}>
-                      <Title
-                        id={item.id}
-                        content={getContent(item.id)}
-                        onChange={changeHandler}
-                      />
-                      <button
-                        className={styles.removeBtn}
-                        onClick={() => removePortionHandler(item.id)}
-                      >
-                        {closeSVG}
-                      </button>
-                    </div>
-                  );
-                }
+          <button onClick={() => setPlan([])}>Clear all</button>
 
-                if (item.type === "time") {
-                  return (
-                    <div key={item.id} className={styles.portion}>
-                      <Time
-                        id={item.id}
-                        content={getContent(item.id)}
-                        onChange={changeHandler}
+          {/* ============================ plan creator ================  */}
+          <div className={styles.plan}>
+            {!fetching &&
+              plan.map((planItem) => (
+                <div key={planItem.id} className={styles.planItem}>
+                  <button
+                    className={styles.toggleBtn}
+                    onClick={() => removeHandler(planItem.id)}
+                  >
+                    {closeSVG}
+                  </button>
+                  <label>
+                    <h6>Ngày</h6>
+                    <input
+                      type="text"
+                      value={planItem.day}
+                      onChange={(e) =>
+                        changeHandler("day", planItem.id, e.target.value)
+                      }
+                    />
+                  </label>
+
+                  <label>
+                    <h6>Địa điểm</h6>
+                    <input
+                      type="text"
+                      onChange={(e) =>
+                        changeHandler(
+                          "destination",
+                          planItem.id,
+                          e.target.value
+                        )
+                      }
+                      value={planItem.destination}
+                    />
+                  </label>
+
+                  {lang === "vi" && (
+                    <>
+                      <label>
+                        <h6>Hình ảnh</h6>
+                        <input
+                          type="file"
+                          multiple
+                          onChange={(e) =>
+                            changeHandler(
+                              "images",
+                              planItem.id,
+                              Array.from(e.target.files)
+                            )
+                          }
+                        />
+                      </label>
+
+                      <div className={styles.previewImages}>
+                        {planItem.images.map((img, index) => (
+                          <div key={index} className={styles.image}>
+                            <img
+                              src={
+                                typeof img === "string"
+                                  ? img
+                                  : URL.createObjectURL(img)
+                              }
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  )}
+
+                  <div>
+                    <h6>Nội dung</h6>
+                    <div className={styles.editor}>
+                      <Editor
+                        placeholder="nhập nội dung ở đây..."
+                        onChange={(delta) =>
+                          changeHandler("content", planItem.id, delta)
+                        }
+                        initialValue={planItem.content}
                       />
-                      <button
-                        className={styles.removeBtn}
-                        onClick={() => removePortionHandler(item.id)}
-                      >
-                        {closeSVG}
-                      </button>
                     </div>
-                  );
-                } else {
-                  return (
-                    <div key={item.id} className={styles.portion}>
-                      <Paragraph
-                        id={item.id}
-                        content={item.content}
-                        onChange={changeHandler}
-                      />
-                      <button
-                        className={styles.removeBtn}
-                        onClick={() => removePortionHandler(item.id)}
-                      >
-                        {closeSVG}
-                      </button>
-                    </div>
-                  );
-                }
-              })}
+                  </div>
+                </div>
+              ))}
           </div>
 
           <div className={styles.addBtns}>
-            <button onClick={() => addContentHandler("title")}>
-              Add title
-            </button>
-            <button onClick={() => addContentHandler("time")}>Add time</button>
-            <button onClick={() => addContentHandler("para")}>
-              Add paragraph
+            <button onClick={addDayHandler} className="btn btn-primary mb-4">
+              add item
             </button>
           </div>
 
           <div className={styles.submitBtn}>
-            <button onClick={submitHandler}>Submit</button>
+            <button onClick={submitHandler} className="btn btn-success">
+              Submit
+            </button>
           </div>
         </div>
       </AdminLayout>

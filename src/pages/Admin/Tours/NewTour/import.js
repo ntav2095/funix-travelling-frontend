@@ -16,69 +16,79 @@ import { stringToDate } from "../../../../services/helpers/dateHandler";
 import TourForm from "../TourForm";
 
 const initialValues = {
-  language: "vie",
+  language: "vi",
   category: [],
 
+  code: "",
   name: "",
   journey: "",
-  description: "",
   countries: "",
-  highlights: "",
+  description: "",
+  highlights: null,
 
-  departureDates: "",
+  price: 0,
   days: 0,
   nights: 0,
 
-  currentPrice: 0,
-  oldPrice: 0,
-  priceIncludes: "",
-  priceExcludes: "",
+  departureDates: "",
 
-  cancellationPolicy: "",
-  slider: [],
+  priceIncludes: null,
+  priceExcludes: null,
+  priceOther: null,
+
+  cancellationPolicy: null,
+  registrationPolicy: null,
+  paymentPolicy: null,
+  notes: null,
+
   thumb: null,
 };
 
 const dataPacker = (values) => {
   const formData = new FormData();
 
+  // overview
+  formData.append("code", values.code);
   formData.append("name", values.name);
   formData.append("journey", values.journey);
   formData.append("countries", values.countries);
   formData.append("description", values.description);
-  formData.append("highlights", JSON.stringify(values.highlights.split("\n")));
+  formData.append("highlights", JSON.stringify(values.highlights));
 
-  formData.append("currentPrice", values.currentPrice);
-  formData.append("oldPrice", values.oldPrice);
-  formData.append(
-    "priceIncludes",
-    JSON.stringify(values.priceIncludes.split("\n"))
-  );
-  formData.append(
-    "priceExcludes",
-    JSON.stringify(values.priceExcludes.split("\n"))
-  );
+  formData.append("price", values.price);
+  formData.append("days", values.days);
+  formData.append("nights", values.nights);
 
+  // price policies
+  formData.append("priceIncludes", JSON.stringify(values.priceIncludes));
+  formData.append("priceExcludes", JSON.stringify(values.priceExcludes));
+  formData.append("priceOther", JSON.stringify(values.priceOther));
+
+  // departure dates
   formData.append(
     "departureDates",
     JSON.stringify(
       values.departureDates.split("\n").map((item) => stringToDate(item)[1])
     )
   );
-  formData.append("days", values.days);
-  formData.append("nights", values.nights);
 
+  // terms and policies
   formData.append(
     "cancellationPolicy",
-    JSON.stringify(values.cancellationPolicy.split("\n"))
+    JSON.stringify(values.cancellationPolicy)
   );
+  formData.append(
+    "registrationPolicy",
+    JSON.stringify(values.registrationPolicy)
+  );
+  formData.append("paymentPolicy", JSON.stringify(values.paymentPolicy));
+  formData.append("notes", JSON.stringify(values.notes));
 
-  values.slider.forEach((item) => {
-    formData.append("slider", item);
-  });
-
-  formData.append("thumb", values.thumb);
+  // category
   formData.append("category", JSON.stringify(values.category));
+
+  // thumb
+  formData.append("thumb", values.thumb);
 
   return formData;
 };

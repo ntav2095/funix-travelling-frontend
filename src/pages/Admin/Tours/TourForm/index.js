@@ -2,30 +2,30 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { tourValidator } from "../../../../services/validators";
 import { exclamation as exclamationSVG } from "../../../../assets/svgs";
 import styles from "./TourForm.module.css";
+import FormGroup from "./FormGroup";
+import CatGroup from "./CatGroup";
 
-function TourForm({ initialValues, onSubmit, cat }) {
-  const requiredField = (
-    <span title="Trường này là bắt buộc">{exclamationSVG}</span>
-  );
+function TourForm({ initialValues, onSubmit, cat, type }) {
+  // useMemo chỗ này
+  let cat_continent = [];
+  let cat_country = [];
+  let cat_city = [];
 
-  const checkHandler = (setFieldValue, values, src) => {
-    if (values.removedImages.includes(src)) {
-      setFieldValue(
-        "removedImages",
-        values.removedImages.filter((item) => item !== src)
-      );
-    } else {
-      setFieldValue("removedImages", [...values.removedImages, src]);
-    }
-  };
-
-  const cat_types = cat.reduce((p, c) => {
-    if (p.includes(c.type) || c.type === "language" || c.type === "article") {
-      return p;
+  cat.forEach((item) => {
+    if (item.type === "continent") {
+      cat_continent.push(item);
     }
 
-    return [...p, c.type];
-  }, []);
+    if (item.type === "country") {
+      cat_country.push(item);
+    }
+
+    if (item.type === "city") {
+      cat_city.push(item);
+    }
+  });
+
+  const isEdit = initialValues.language !== "vi";
 
   return (
     <div className={styles.container}>
@@ -34,213 +34,221 @@ function TourForm({ initialValues, onSubmit, cat }) {
         onSubmit={onSubmit}
         validate={tourValidator}
       >
-        {({ setFieldValue, values, handleReset }) => (
+        {({ setFieldValue, setFieldTouched, values }) => (
           <Form>
-            {/* ----------------------- tên tour ------------------------  */}
-            <label className={styles.smallTextArea}>
-              <p className={styles.label}>Tên tour {requiredField}</p>
-              <Field component="textarea" name="name" />
-              <ErrorMessage name="name" component="h6" />
-            </label>
+            <h5 className="text-center border-bottom pb-2">Tổng quan</h5>
 
-            {/* ----------------------- lộ trình ------------------------  */}
-            <label className={styles.mediumTextArea}>
-              <p className={styles.label}>
-                Lộ trình <em>(cách nhau bởi gạch ngang "-")</em> {requiredField}
-              </p>
-              <Field component="textarea" name="journey" />
-              <ErrorMessage name="journey" component="h6" />
-            </label>
+            {!isEdit && (
+              <FormGroup
+                label="Mã tour"
+                isRequired
+                component="input"
+                name="code"
+              />
+            )}
 
-            {/* ----------------------- countries ------------------------  */}
-            <label className={styles.mediumTextArea}>
-              <p className={styles.label}>
-                Nước <em>(cách nhau bởi gạch ngang "-")</em>
-              </p>
-              <Field name="countries" />
-              <ErrorMessage name="countries" component="h6" />
-            </label>
+            <FormGroup
+              label="Tên tour"
+              isRequired
+              component="input"
+              name="name"
+            />
 
-            {/* ----------------------- mô tả ------------------------  */}
-            <label className={styles.bigTextArea}>
-              <p className={styles.label}>Mô tả {requiredField}</p>
-              <Field component="textarea" name="description" />
-              <ErrorMessage name="description" component="h6" />
-            </label>
+            <FormGroup
+              label="Lộ trình"
+              isRequired
+              component="textarea"
+              name="journey"
+            />
 
-            {/* ----------------------- điểm nổi bật ------------------------  */}
-            <label className={styles.bigTextArea}>
-              <p className={styles.label}>
-                Điểm nổi bật <em>(enter xuống dòng)</em> {requiredField}
-              </p>
-              <Field component="textarea" name="highlights" />
-              <ErrorMessage name="highlights" component="h6" />
-            </label>
+            <FormGroup label="Nước" component="input" name="countries" />
 
-            {/* ----------------------- ngày khởi hành ------------------------  */}
-            <label className={styles.mediumTextArea}>
-              <p className={styles.label}>
-                Ngày khởi hành <em>(dd/mm/yyyy) (enter xuống dòng) </em>
-                {requiredField}
-              </p>
-              <Field component="textarea" name="departureDates" />
-              <ErrorMessage name="departureDates" component="h6" />
-            </label>
+            <FormGroup
+              label="Mô tả"
+              isRequired
+              component="textarea"
+              name="description"
+            />
 
-            {/* ----------------------- thời gian ------------------------  */}
-            <label>
-              <p className={styles.label}>Số ngày {requiredField}</p>
-              <Field type="Number" name="days" />
-              <ErrorMessage name="days" component="h6" />
-            </label>
+            <FormGroup
+              label="Điểm nổi bật"
+              isRequired
+              type="editor"
+              setFieldValue={setFieldValue}
+              setFieldTouched={setFieldTouched}
+              name="highlights"
+              values={values}
+            />
 
-            <label>
-              <p className={styles.label}>Số đêm {requiredField}</p>
-              <Field type="Number" name="nights" />
-              <ErrorMessage name="nights" component="h6" />
-            </label>
+            {!isEdit && (
+              <FormGroup
+                label="Ngày khởi hành"
+                note="(dd/mm/yyyy) (enter xuống dòng)"
+                isRequired
+                component="textarea"
+                name="departureDates"
+              />
+            )}
 
-            {/* ----------------------- giá hiện tại ------------------------  */}
-            <label>
-              <p className={styles.label}>
-                Giá hiện tại <em>(vnd)</em> {requiredField}
-              </p>
-              <Field type="number" name="currentPrice" />
-              <ErrorMessage name="currentPrice" component="h6" />
-            </label>
+            {!isEdit && (
+              <FormGroup label="Số ngày" isRequired type="Number" name="days" />
+            )}
+            {!isEdit && (
+              <FormGroup
+                label="Số đêm"
+                isRequired
+                type="Number"
+                name="nights"
+              />
+            )}
 
-            {/* ----------------------- giá cũ ------------------------  */}
-            <label>
-              <p className={styles.label}>
-                Giá cũ <span>(vnd)</span>
-              </p>
-              <Field type="number" name="oldPrice" />
-              <ErrorMessage name="oldPrice" component="h6" />
-            </label>
+            {!isEdit && (
+              <FormGroup
+                label="Giá"
+                note="(vnd)"
+                isRequired
+                type="Number"
+                name="price"
+              />
+            )}
 
-            {/* ----------------------- giá bao gồm / không bao gồm ------------------------  */}
-            <label className={styles.bigTextArea}>
-              <p className={styles.label}>
-                Giá bao gồm <em>(enter xuống dòng)</em>
-              </p>
-              <Field component="textarea" name="priceIncludes" />
-              <ErrorMessage name="priceIncludes" component="h6" />
-            </label>
+            {/* ----------------------- price policies ------------------------  */}
+            <h5 className="text-center border-bottom pb-2">Bảng giá</h5>
 
-            <label className={styles.bigTextArea}>
-              <p className={styles.label}>
-                Giá không bao gồm <em>(enter xuống dòng)</em>
-              </p>
-              <Field component="textarea" name="priceExcludes" />
-              <ErrorMessage name="priceExcludes" component="h6" />
-            </label>
+            <FormGroup
+              label="Giá bao gồm"
+              isRequired
+              name="priceIncludes"
+              type="editor"
+              setFieldValue={setFieldValue}
+              setFieldTouched={setFieldTouched}
+              values={values}
+            />
 
-            {/* ----------------------- điều kiện hủy ------------------------  */}
-            <label className={styles.bigTextArea}>
-              <p className={styles.label}>
-                Điều kiện hoàn hủy đổi <em>(enter xuống dòng)</em>{" "}
-                {requiredField}
-              </p>
-              <Field component="textarea" name="cancellationPolicy" />
-              <ErrorMessage name="cancellationPolicy" component="h6" />
-            </label>
+            <FormGroup
+              label="Giá không bao gồm"
+              isRequired
+              name="priceExcludes"
+              type="editor"
+              setFieldValue={setFieldValue}
+              setFieldTouched={setFieldTouched}
+              values={values}
+            />
 
-            {/* ----------------------- categories ------------------------  */}
-            {cat_types.map((type) => (
-              <div className={styles.cat} key={type}>
-                <h6>{type}</h6>
+            <FormGroup
+              label="Giá trẻ em và phụ thu"
+              isRequired
+              name="priceOther"
+              type="editor"
+              setFieldValue={setFieldValue}
+              setFieldTouched={setFieldTouched}
+              values={values}
+            />
 
-                <div className={styles.catItems}>
-                  {cat
-                    .filter((catItem) => catItem.type === type)
-                    .map((catItem) => (
-                      <label key={catItem._id}>
-                        <span>{catItem.name || catItem.code}</span>
-                        <input
-                          type="checkbox"
-                          value={catItem.code}
-                          checked={values.category.includes(catItem.code)}
-                          onChange={() => {
-                            const newCat = values.category.includes(
-                              catItem.code
-                            )
-                              ? values.category.filter(
-                                  (item) => item !== catItem.code
-                                )
-                              : [...values.category, catItem.code];
+            {/* ----------------------- terms ------------------------  */}
+            <h5 className="text-center border-bottom pb-2">
+              Điều khoản và chính sách
+            </h5>
 
-                            setFieldValue("category", newCat);
-                          }}
+            <FormGroup
+              label="Điều kiện đăng ký"
+              isRequired
+              name="registrationPolicy"
+              type="editor"
+              setFieldValue={setFieldValue}
+              setFieldTouched={setFieldTouched}
+              values={values}
+            />
+
+            <FormGroup
+              label="Điều kiện hoàn hủy"
+              isRequired
+              name="cancellationPolicy"
+              type="editor"
+              setFieldValue={setFieldValue}
+              setFieldTouched={setFieldTouched}
+              values={values}
+            />
+
+            <FormGroup
+              label="Phương thức thanh toán"
+              isRequired
+              name="paymentPolicy"
+              type="editor"
+              setFieldValue={setFieldValue}
+              setFieldTouched={setFieldTouched}
+              values={values}
+            />
+
+            <FormGroup
+              label="Lưu ý"
+              isRequired
+              name="notes"
+              type="editor"
+              setFieldValue={setFieldValue}
+              setFieldTouched={setFieldTouched}
+              values={values}
+            />
+
+            {!isEdit && (
+              <>
+                <h5 className="text-center border-bottom  pb-2">Ảnh preview</h5>
+
+                <FormGroup
+                  label="Chọn ảnh preview"
+                  isRequired
+                  name="thumb"
+                  type="file"
+                  setFieldValue={setFieldValue}
+                />
+
+                {values.thumb && (
+                  <div className={styles.currentImages}>
+                    <h6>Hình đại diện</h6>
+                    <div className={styles.preview}>
+                      <label>
+                        <img
+                          src={
+                            typeof values.thumb === "string"
+                              ? values.thumb
+                              : URL.createObjectURL(values.thumb)
+                          }
                         />
                       </label>
-                    ))}
-                </div>
-              </div>
-            ))}
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
 
-            {/* ----------------------- hình ------------------------  */}
-            <label>
-              <p className={styles.label}>Chọn ảnh slider</p>
-              <input
-                type="file"
-                name="slider"
-                multiple
-                onChange={(e) =>
-                  setFieldValue("slider", Array.from(e.target.files))
-                }
-              />
-              <ErrorMessage name="slider" component="h6" />
-            </label>
+            {/* ----------------------- categories ------------------------  */}
+            {!isEdit && (
+              <>
+                <h5 className="text-center border-bottom pb-2">
+                  Phân loại danh mục
+                </h5>
 
-            <label>
-              <p className={styles.label}>Chọn ảnh preview</p>
-              <input
-                type="file"
-                name="thumb"
-                onChange={(e) =>
-                  setFieldValue("thumb", Array.from(e.target.files)[0])
-                }
-              />
-              <ErrorMessage name="thumb" component="h6" />
-            </label>
+                <CatGroup
+                  cat={cat_continent}
+                  type="Continent"
+                  values={values}
+                  setFieldValue={setFieldValue}
+                />
 
-            {initialValues?.thumb && (
-              <div className={styles.currentImages}>
-                <h3 className="text-center mb-2 mt-4">Hình hiện tại</h3>
-                <h6>Hình slider</h6>
-                <div className={styles.preview}>
-                  {initialValues.slider.map((item) => (
-                    <label key={item}>
-                      <input
-                        type="checkbox"
-                        checked={values.removedImages.includes(item)}
-                        onChange={() =>
-                          checkHandler(setFieldValue, values, item)
-                        }
-                      />
-                      <img src={item} />
-                    </label>
-                  ))}
-                </div>
+                <CatGroup
+                  cat={cat_country}
+                  type="Country"
+                  values={values}
+                  setFieldValue={setFieldValue}
+                />
 
-                <h6>Hình đại diện</h6>
-                <div className={styles.preview}>
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={() =>
-                        checkHandler(setFieldValue, values, initialValues.thumb)
-                      }
-                    />
-                    <img
-                      src={initialValues.thumb}
-                      checked={values.removedImages.includes(
-                        initialValues.thumb
-                      )}
-                    />
-                  </label>
-                </div>
-              </div>
+                <CatGroup
+                  cat={cat_city}
+                  type="City"
+                  values={values}
+                  setFieldValue={setFieldValue}
+                />
+              </>
             )}
 
             <button className={styles.submitBtn} type="submit">

@@ -1,6 +1,6 @@
 import { stringToDate } from "./helpers/dateHandler";
 
-const REQUIRED = "Trường này là bắt buộc";
+const REQUIRED = "Bắt buộc";
 
 export const tourValidator = (values) => {
   const errors = {};
@@ -55,24 +55,16 @@ export const tourValidator = (values) => {
     errors.cancellationPolicy = REQUIRED;
   }
 
-  if (!values.currentPrice) {
-    errors.currentPrice = REQUIRED;
+  if (!values.price) {
+    errors.price = REQUIRED;
   }
 
-  if (values.currentPrice <= 0) {
-    errors.currentPrice = "Phải lớn hơn 0";
-  }
-
-  if (values.oldPrice < 0) {
-    errors.oldPrice = "Phải lớn hơn hoặc bằng 0";
+  if (values.price <= 0) {
+    errors.price = "Phải lớn hơn 0";
   }
 
   if (!values.thumb) {
     errors.thumb = REQUIRED;
-  }
-
-  if (values.slider.length === 0) {
-    errors.slider = REQUIRED;
   }
 
   return errors;

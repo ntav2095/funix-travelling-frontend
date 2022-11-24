@@ -1,121 +1,54 @@
-.container {
-  padding-right: 40px;
-}
-
-.langSelect {
+.plan label {
+  display: block;
   margin-bottom: 16px;
-  display: flex;
-  align-items: center;
 }
 
-.addDayForm {
-  display: flex;
-  align-items: center;
+.plan label h6 {
+  margin-bottom: 3px;
 }
 
-.addDayForm input {
-  flex: 1;
-  outline: none;
-  border: 1px solid #ccc;
+.plan label input {
   padding: 6px 8px;
+  width: 100%;
+  background: rgb(241, 245, 242);
+  border: 1px solid rgb(125, 184, 125);
 }
 
-.addDayForm button {
-  padding: 6px 16px;
-  border: none;
-  background: #000;
-  color: white;
-  margin-left: 8px;
+.editor > * {
+  background: white;
 }
 
-/* =============== add buttons ============= */
-.addBtns {
-  margin-top: 16px;
-}
-
-.addBtns button {
-  padding: 6px 8px;
-  border: none;
-  margin: 6px 8px;
-  transition: 0.2s;
-  border-radius: 3.8px;
-}
-
-.addBtns button:first-child {
-  margin-left: 0;
-  background: #4f5dd3;
-  color: white;
-}
-
-.addBtns button:last-child {
-  background: rgb(106, 106, 106);
-  color: white;
-}
-
-.addBtns button:nth-child(2) {
-  background: rgb(159, 31, 8);
-  color: white;
-}
-
-.addBtns button:first-child:hover {
-  background: #6c79eb;
-}
-
-.addBtns button:last-child:hover {
-  background: rgb(122, 122, 122);
-}
-
-.addBtns button:nth-child(2):hover {
-  background: rgb(187, 46, 21);
-}
-
-/* =============== submit button ============= */
-.submitBtn {
-  border-top: 1px solid #ccc;
-  margin-top: 16px;
-  padding-top: 16px;
-}
-
-.submitBtn button {
-  border-radius: 3.8px;
-  padding: 6px 16px;
-  color: white;
-  transition: 0.2s;
-  background: #131b2a;
-}
-
-/* ======== remove btn =============  */
-.portion {
+.planItem {
+  margin-bottom: 32px;
+  border-bottom: 2px solid #ccc;
+  padding: 36px;
+  background: white;
   position: relative;
-  margin-bottom: 6px;
+  box-shadow: var(--box-shadow);
 }
 
-.removeBtn {
-  position: absolute;
-  left: 100%;
-  top: 0;
-  width: 30px;
-  height: 30px;
+.previewImages {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #44444461;
+  gap: 8px;
+  padding-bottom: 32px;
+}
+
+.previewImages .image {
+  max-width: 300px;
+}
+
+.previewImages .image img {
+  width: 100%;
+}
+
+.toggleBtn {
+  background: rgb(23, 155, 62);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.toggleBtn svg {
+  width: 20px;
   color: white;
-  transition: 0.2s;
-}
-
-.removeBtn:hover {
-  background: #050505;
-}
-
-.removeBtn svg {
-  width: 15px;
-}
-
-/* ======= copy original plan button ===========  */
-.copyOriginalPlanBtn {
-  background: rgb(117, 10, 96);
-  padding: 6px 8px;
-  color: white;
-  border-radius: 3.8px;
 }
