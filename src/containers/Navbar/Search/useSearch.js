@@ -30,8 +30,8 @@ function useSearch() {
   };
 
   const searchBoth = debounce((query) => {
-    searchTours(tourApi.search({ search: query }));
-    searchArticles(postsApi.search({ search: query }));
+    searchTours(tourApi.get({ search: query }));
+    searchArticles(postsApi.get({ search: query }));
   }, 300);
 
   // khi text thay đổi thì set page = 1, reset lại kết quả, search cả 2
