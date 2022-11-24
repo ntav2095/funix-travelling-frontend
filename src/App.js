@@ -1,14 +1,9 @@
 // main
 import { Route, Routes } from "react-router-dom";
 import React, { Suspense, useEffect } from "react";
-// import HomeNew from "./pages/HomeNew";
-import Loading from "./components/loading";
 import { liveChat } from "./containers/Livechat";
 import Category from "./pages/Admin/Category";
 import DefaultLayout from "./layout/DefaultLayout";
-
-import Navbar from "./containers/Navbar";
-import Footer from "./containers/Footer";
 
 import Spinner from "./components/Spinner";
 import EditCatModal from "./pages/Admin/Category/EditCatModal";
@@ -56,7 +51,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       liveChat();
-    }, 2000); 
+    }, 2000);
   }, []);
   return (
     <Suspense fallback={<Spinner show={true} />}>
