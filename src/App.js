@@ -7,6 +7,7 @@ import DefaultLayout from "./layout/DefaultLayout";
 
 import Spinner from "./components/Spinner";
 import EditCatModal from "./pages/Admin/Category/EditCatModal";
+import LayoutManager from "./pages/Admin/LayoutManager";
 // components
 
 const RequireAuth = React.lazy(() => import("./components/RequireAuth"));
@@ -111,6 +112,9 @@ function App() {
           <Route path="/admin/posts" element={<Posts />} />
           <Route path="/admin/new-posts" element={<NewPosts />} />
           <Route path="/admin/edit-posts/:articleId" element={<EditPosts />} />
+
+          {/* layout */}
+          <Route path="/admin/manage-layout" element={<LayoutManager />} />
         </Route>
       </Routes>
     </Suspense>
