@@ -11,3 +11,5 @@ export const home2 = require("./home2.png");
 export const home3 = require("./home3.png");
 export const home4 = require("./home4.png");
 export const hearder = require("./hearder.PNG");
+export const giangsinh = require("./cho_giang_sinh_o_paris_12.jpg");
+export const giangsinh2 = require("./cho_giang_sinh_o_paris_2.jpg");

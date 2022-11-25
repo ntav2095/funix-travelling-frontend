@@ -8,6 +8,7 @@ import "./tour.css";
 import { useTranslation } from "react-i18next";
 import CardPlaceholder from "../../../components/placeholders/CardPlaceholder";
 import { Col } from "react-bootstrap";
+import {placeholder} from '../../../assets/images'
 
 const trans = {
   days: {
@@ -84,8 +85,9 @@ function Tour(props) {
                 <Link to={`/danh-sach-tour/${item._id}`}>
                   <div className={styles.img}>
                     <img
-                      src={item.thumb}
+                      src={placeholder}
                       alt={tour.name}
+                      lazy={item.thumb}
                       onError={handlerBrokenImg}
                     />
                   </div>
@@ -98,7 +100,7 @@ function Tour(props) {
                     </p>
                     <p>
                       {trans.full_package[lang]}{" "}
-                      <strong>{item.currentPrice.toLocaleString()} đ</strong>
+                      <strong>{item.price.toLocaleString()} đ</strong>
                     </p>
                   </div>
                 </Link>

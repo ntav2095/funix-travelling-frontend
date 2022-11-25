@@ -1,9 +1,21 @@
 .footer {
   background: #000;
   color: rgb(239, 239, 239);
-  padding: 8px;
+  padding: 16px;
 }
-
+.footer >div>div{
+  margin-top: 8px;
+}
+.footer >div>div>div>li>span{
+  font-weight: 600;
+}
+.footer >div>div>ul>div>li>span{
+  font-weight: 600;
+}
+.footer >div>div>li>i{
+  width: 17px;
+  font-size: 15px;
+}
 .footer p {
   animation-name: example;
   text-align: center;
@@ -27,4 +39,10 @@
   100% {
     color: red;
   }
+}
+
+.footer_colum{
+ 
+  display:inline-table;
+  list-style-type: none;
 }

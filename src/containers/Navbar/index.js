@@ -23,7 +23,6 @@ import useLazyLoading, { loadingImg } from "../../hooks/uselazyLoading";
 import Search from "./Search";
 
 function Header() {
-  const [lazy] = useLazyLoading(loadingImg);
   const navigation = useNavigate();
   const [state, setState] = useState({
     isNavOpen: false,
@@ -69,9 +68,7 @@ function Header() {
     });
   }, []);
 
-  useEffect(() => {
-    lazy();
-  });
+
 
   useEffect(() => {
     if (i18n.language === "vi") {

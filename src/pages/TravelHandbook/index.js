@@ -34,7 +34,7 @@ function TravelHandbook() {
   };
 
   useEffect(() => {
-    sendRequest(postsApi.get({ page: page, page_size: 8 }));
+    sendRequest(postsApi.get({ page: page, page_size: 24 }));
     window.scroll({
       top: 0,
       left: 0,

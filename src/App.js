@@ -1,14 +1,12 @@
 // main
 import { Route, Routes } from "react-router-dom";
 import React, { Suspense, useEffect } from "react";
+import {ErrorBoundary} from 'react-error-boundary'
 // import HomeNew from "./pages/HomeNew";
 import Loading from "./components/loading";
 import { liveChat } from "./containers/Livechat";
 import Category from "./pages/Admin/Category";
 import DefaultLayout from "./layout/DefaultLayout";
-
-import Navbar from "./containers/Navbar";
-import Footer from "./containers/Footer";
 
 import Spinner from "./components/Spinner";
 import EditCatModal from "./pages/Admin/Category/EditCatModal";
@@ -18,7 +16,7 @@ const RequireAuth = React.lazy(() => import("./components/RequireAuth"));
 
 // client pages
 
-const ToursList = React.lazy(() => import("./pages/ToursList"));
+const ToursList = React.lazy(() => import("./pages/ToursList/tourList"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const About = React.lazy(() => import("./pages/About"));
 const Visa = React.lazy(() => import("./pages/Visa"));
@@ -53,16 +51,18 @@ const Dashboard = React.lazy(() => import("./pages/Admin/Dashboard"));
 const Login = React.lazy(() => import("./pages/Admin/Login"));
 
 function App() {
+  
   useEffect(() => {
     setTimeout(() => {
       liveChat();
     }, 2000); 
   }, []);
   return (
+    <ErrorBoundary fallbackRender={({ error }) => <NotFound />}>
     <Suspense fallback={<Spinner show={true} />}>
       <Routes>
         {/* =============================  CLIENT ROUTES ==============================  */}
-        <Route element={<DefaultLayout />}>
+        <Route element={<DefaultLayout  />}>
           <Route path="/" element={<HomeNew />} />
           <Route
             path="/tours-chau-au"
@@ -84,7 +84,7 @@ function App() {
             element={<TravelHandbookDetail />}
           />
         </Route>
-
+        
         {/* =============================  ADMIN ROUTES ==============================  */}
         <Route path="/admin/login" element={<Login />} />
         <Route element={<RequireAuth />}>
@@ -119,6 +119,7 @@ function App() {
         </Route>
       </Routes>
     </Suspense>
+    </ErrorBoundary>
   );
 }
 

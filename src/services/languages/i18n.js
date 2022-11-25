@@ -9,7 +9,7 @@ const resources = {
         about: "Về công ty",
         contact: "Liên hệ",
         viTours: "Tours trong nước",
-        euTours: "Tours châu Âu",
+        euTours: "Tours châu âu",
         visaService: "Visa",
         travelHandbook: "Cẩm nang du lịch",
         intro: "Giới thiệu",
@@ -22,8 +22,13 @@ const resources = {
         titleTourTrongNuoc:'TOUR TRONG NƯỚC',
         titleCamNang:'CẨM NANG DU LỊCH',
         session1:'Chúng tôi cam kết đem lại cho quý khách những dịch vụ uy tín nhất về lữ hành, khách sạn và nghỉ dưỡng, đảm bảo các tiêu chuẩn quốc tế về an toàn trong toàn bộ hành trình.',
-        session2:'Không chỉ là khám phá những địa danh nổi tiếng hay tháng cảnh độc đáo, hành trình cùng JOYA còn đem tới những trải nghiệm đáng nhớ về phong tục, văn hóa, ẩm thực và nhiều câu chuyện lịch sử thủ vị xoay quanh các điểm đến.',
+        session2:'Không chỉ là khám phá những địa danh nổi tiếng hay thắng cảnh độc đáo, hành trình cùng JOYA còn đem tới những trải nghiệm đáng nhớ về phong tục, văn hóa, ẩm thực và nhiều câu chuyện lịch sử thú vị xoay quanh các điểm đến.',
         session3:'Với đội ngũ nhân viên chuyên nghiệp và chu đáo, JOYA luôn sẵn sàng hỗ trợ quý khách trong mọi trường hợp và tận tình chăm sóc khách hàng xuyên suốt các hành trình.',
+      },
+      footer:{
+        collum1:['CÔNG TY CỔ PHẦN JOYA','Địa chỉ: Hoa Sữa 11-52 Vinhomes Riveside, Long Biên, Hà Nội.','Điện thoại: 123456789 | Hotline : 123456789','Email: info@joya.vn','Website: joya.vn','','GIẤY PHÉP KINH DOANH DỊCH VỤ LỮ HÀNH QUỐC TẾ','Số GP/No: 79-042/2022/TCDL-GP LHQT','Do TCDL cấp ngày 30/10/2022'],
+        collum2:['DU LỊCH','Du lịch châu Âu','Du lịch trong nước','Guides','Dịch vụ visa'],
+        collum3:['ĐIỀU KHOẢN','Điều kiện đăng ký','Điều kiện hủy đối','Thông tin cần lưu ý','Phương thức thanh toán','Bảo mật dữ liệu khách hàng']
       },
       errorMessage: {
         offline: "Bạn đang offline. Vui lòng kiểm tra kết nối internet.",
@@ -54,6 +59,11 @@ const resources = {
         session2:'Not only discovering famous landmarks or unique sights, the journey with JOYA also brings memorable experiences about customs, culture, cuisine and many interesting historical stories revolving around the destinations.',
         session3:'With a team of professional and attentive staff, JOYA is always ready to support you in all cases and take care of customers throughout the journey.',
       
+      },
+      footer:{
+        collum1:['CÔNG TY CỔ PHẦN JOYA','Địa chỉ: Hoa Sữa 11-52 Vinhomes Riveside, Long Biên, Hà Nội.','Điện thoại: 123456789 | Hotline : 123456789','Email: info@joya.vn','Website: joya.vn','','GIẤY PHÉP KINH DOANH DỊCH VỤ LỮ HÀNH QUỐC TẾ','Số GP/No: 79-042/2022/TCDL-GP LHQT','Do TCDL cấp ngày 30/10/2022'],
+        collum2:['DU LỊCH','Du lịch châu Âu','Du lịch trong nước','Guides','Dịch vụ visa'],
+        collum3:['ĐIỀU KHOẢN','Điều kiện đăng ký','Điều kiện hủy đối','Thông tin cần lưu ý','Phương thức thanh toán','Bảo mật dữ liệu khách hàng']
       },
       errorMessage: {
         offline: "You are offline. Please check your internet connection.",
