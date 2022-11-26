@@ -5,31 +5,35 @@ import Slider from "react-slick";
 import Placeholder from "../placeholders/Placeholder";
 import {hearder,giangsinh,giangsinh2}from '../../assets/images/index'
 import { useLocation } from "react-router-dom";
+import './banner.css'
+import { layoutApi } from "../../services/apis";
+import useAxios from '../../hooks/useAxios'
 
 function Banner() {
-  // const [sendRequest, isLoading, data, error] = useAxios();
+  const [sendRequest, isLoading, data, error] = useAxios();
   const pathPage=useLocation()
-  
-console.log('page path',pathPage)
-  const data={
-    home:{slider:[giangsinh,hearder,giangsinh2,hearder,giangsinh2], session:[]},
-    tourEu:hearder,
-    tourVn:giangsinh2,
-    guides:giangsinh,
-    image:hearder
-  }
-  const isLoading=false
+  const images=data?.data.images
+console.log('page path',data)
+  // const data={
+  //   home:{slider:[giangsinh,hearder,giangsinh2,hearder,giangsinh2], session:[]},
+  //   tourEu:hearder,
+  //   tourVn:giangsinh2,
+  //   guides:giangsinh,
+  //   image:hearder
+  // }
+  // const isLoading=false
   const handleBanner=()=>{
     const path=pathPage.pathname
     console.log('path',path)
+    if(images){
     if(path=="/tours-chau-au"){
-      return data.tourEu
+      return images.eu_tours
     }else if(path=="/tours-trong-nuoc"){
-      return data.tourVn
+      return images.vn_tours
     }else if(path=="/cam-nang-du-lich"){
-      return data.guides
+      return images.guides
     }
-    return data.image
+    return images.vi_tours}
   }
 
   const settings = {
@@ -45,13 +49,18 @@ console.log('page path',pathPage)
     e.target.src = brokenImage;
   };
 
+  useEffect(() => {
+    sendRequest(layoutApi.get())
+  }, [])
+  
+
   return (
     <>
     {pathPage.pathname==='/'
       ?<div className={styles.banner}>
         {!isLoading && (
         <Slider {...settings} >
-          {data?.home.slider.map((item,index) => (
+          {images?.home.map((item,index) => (
           <div
             key={index}
             className={styles.image}

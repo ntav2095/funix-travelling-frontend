@@ -1,5 +1,6 @@
 // main
-import { useEffect, useState } from "react";
+import useLazyLoading, { loadingImg } from "../../hooks/uselazyLoading";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 // components
@@ -17,13 +18,26 @@ import styles from "./TourList.module.css";
 import Pagination from "../../containers/Pagination";
 import { useTranslation } from "react-i18next";
 import Slider from "react-slick";
+import './tourlist.css'
 
 function ToursList({ cat_params }) {
   const [sendRequest, isLoading, data, error] = useAxios();
+  const [lazy] = useLazyLoading(loadingImg);
   const location = useLocation();
+  const [search,setSearch ]=useState({
+    text:'',
+    sort:'time-asc'
+  })
+  const refSelect=useRef()
+  console.log(refSelect.current)
 
   console.log('data',data)
-  
+  const hangdleInput=(e)=>{
+    setSearch({...search,text:e.target.value})
+  }
+  const hangdleChangeSelect=(e)=>{
+    setSearch({...search,sort:e.target.value})
+  }
   const settings = {
     dots: false,
     infinite: false,
@@ -36,7 +50,7 @@ function ToursList({ cat_params }) {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToScroll: 2,
           infinite: false,
           dots: false,
         },
@@ -44,8 +58,8 @@ function ToursList({ cat_params }) {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           infinite: false,
           dots: false,
         },
@@ -53,8 +67,8 @@ function ToursList({ cat_params }) {
       {
         breakpoint: 576,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           initialSlide: 0,
         },
       },
@@ -70,13 +84,17 @@ function ToursList({ cat_params }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    sendRequest(tourApi.get({ page: page, page_size: 24, ...cat_params }));
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-  }, [i18n.language, location.search, cat_params]);
+    sendRequest(tourApi.get({ search: search.text,sort:search.sort, page: page, page_size: 24, ...cat_params }));
+    // window.scroll({
+    //   top: 0,
+    //   left: 0,
+    //   behavior: "smooth",
+    // });
+  }, [i18n.language, location.search, cat_params,search]);
+
+  useEffect(() => {
+    lazy();
+  },[isLoading]);
 
   const changePageHandler = (num) => {
     if (cat_params.cat === "vi") {
@@ -92,21 +110,25 @@ function ToursList({ cat_params }) {
     <>
       <div className="pt-5 pb-5 bg-white">
         <div className="container">
-        <h1 className={styles.title +" fs-4 text-uppercase text-center pb-2 fw-bold"}>
-          {cat_params?.country_not === "vi" && "Danh sách tour châu Âu"}
-          {cat_params?.country === "vi" && "Danh sách tour trong nước"}
-        </h1>
+        <div className={styles.title +" fs-4 text-uppercase text-center pb-2 fw-bold"}>
+          {cat_params?.cat_not === "vi" && "Danh sách tour châu Âu"}
+          {cat_params?.cat === "vi" && "Danh sách tour trong nước"}
+        </div>
         <div className={styles.search}>
-          <div>
-            <select>
-              <option>Mới nhất</option>
-              <option>Giá tăng dần</option>
-              <option>Giá giảm dần</option>
+          <div className={styles.search_container}>
+            <select onChange={hangdleChangeSelect} ref={refSelect} >
+              <option value={'time-asc'} >Mới nhất</option>
+              <option value={'price-asc'}>Giá tăng dần</option>
+              <option value={'price-desc'}>Giá giảm dần</option>
+              <option value={'price-desc'}>Số ngày giảm dần</option>
+              <option value={'price-desc'}>Số ngày tăng dần</option>
             </select>
+            <input type='text' placeholder="Nhập từ khóa" />
+            <div className={styles.svg} onClick={hangdleInput}><i class="fa fa-search"></i></div>
           </div>
         </div>
         </div>
-        <div className="">
+        <div className={styles.slider}>
           {data &&
             data.data.length > 0 &&
             <div className={styles.container}>

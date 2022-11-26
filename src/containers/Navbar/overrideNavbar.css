@@ -36,3 +36,8 @@ div.dropdown-menu.show {
 #navbar {
   padding-top: 16px;
 }
+@media screen and (max-width: 991px)  {
+  .nav-bar-offcanvat {
+    text-align: center;
+  }
+}

@@ -46,7 +46,7 @@ function TourCard({ tour }) {
           </p>
           <p>
             {translation.full_services[lang]}{" "}
-            <strong>{tour.currentPrice.toLocaleString()} đ</strong>
+            <strong>{tour.price.toLocaleString()} đ</strong>
           </p>
         </div>
       </Link>

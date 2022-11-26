@@ -7,12 +7,12 @@ import {
   Collapse,
   NavItem,
 } from "reactstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import React, { useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useTranslation } from "react-i18next";
-
+import useWindowSize from '../../hooks/useResize'
 // lang
 import i18next from "../../services/languages/i18n";
 
@@ -23,6 +23,9 @@ import useLazyLoading, { loadingImg } from "../../hooks/uselazyLoading";
 import Search from "./Search";
 
 function Header() {
+ 
+  const {width,height}=useWindowSize()
+  console.log(width)
   const navigation = useNavigate();
   const [state, setState] = useState({
     isNavOpen: false,
@@ -274,6 +277,7 @@ function Header() {
                 </Nav>
               </Collapse>
             </div>
+            
           </Navbar>
           <button
             onClick={topFunction}
@@ -287,6 +291,7 @@ function Header() {
             ></i>
           </button>
         </div>
+        {width<1024 && <Search />}
       </div>
     </>
   );

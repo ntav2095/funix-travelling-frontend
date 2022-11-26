@@ -210,3 +210,10 @@ export const adminApis = {
     }),
   },
 };
+export const layoutApi = {
+ 
+  get: () => ({
+    url: `/layout`,
+    method: "GET",
+  }),
+}
