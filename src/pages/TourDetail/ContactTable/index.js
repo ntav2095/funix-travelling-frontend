@@ -78,9 +78,9 @@ function ContactTable({ tour, isLoading }) {
             <ul className={styles.tourInfo}>
               <li>
                 <span>{translation.fullPackage[lang]}</span>
-                {/* <strong className={styles.price}>
-                  {tour.currentPrice.toLocaleString()} đ
-                </strong> */}
+                <strong className={styles.price}>
+                  {tour.price.toLocaleString()} đ
+                </strong>
               </li>
               <li>
                 <span>{translation.dest[lang]}</span>
@@ -89,8 +89,8 @@ function ContactTable({ tour, isLoading }) {
               <li>
                 <span>{translation.duration[lang]}</span>
                 <strong>
-                  {tour.days} {translation.days[lang]} {tour.nights}{" "}
-                  {translation.nights[lang]}
+                  {tour.duration.days} {translation.days[lang]}{" "}
+                  {tour.duration.nights} {translation.nights[lang]}
                 </strong>
               </li>
               <li>

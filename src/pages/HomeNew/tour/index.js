@@ -98,7 +98,7 @@ function Tour(props) {
                     </p>
                     <p>
                       {trans.full_package[lang]}{" "}
-                      <strong>{item.currentPrice.toLocaleString()} đ</strong>
+                      <strong>{item.price.toLocaleString()} đ</strong>
                     </p>
                   </div>
                 </Link>

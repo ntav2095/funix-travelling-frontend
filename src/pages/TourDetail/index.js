@@ -36,7 +36,7 @@ function TourDetail() {
   useEffect(() => {
     sendRequest(tourApi.getSingleTour(tourId));
   }, [i18n.language, tourId]);
-
+  console.log(tour);
   return (
     <>
       <div className={styles.tourDetail}>
