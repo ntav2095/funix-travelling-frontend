@@ -86,10 +86,11 @@
 
 .contentHeader .navigateBtn {
   background: #5772a5;
-  color: #02031a;
+  color: rgb(247, 242, 242);
   padding: 6px 16px;
   border-radius: 3.8px;
   transition: 0.2s;
+  white-space: nowrap;
 }
 
 .title {
@@ -136,4 +137,29 @@
   color: white;
   font-weight: 300;
   border-radius: 3.8px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+/* go to top btn  */
+.goToTopBtn {
+  width: 40px;
+  height: 40px;
+  background: #1e8553;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  border-radius: 8px;
+  color: white;
+  border: 2px solid #197b4b;
+  opacity: 0.7;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  transition: 0.2s;
+}
+
+.goToTopBtn:hover {
+  opacity: 1;
+  transform: scale(1.02);
 }

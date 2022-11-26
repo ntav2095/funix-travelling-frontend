@@ -1,19 +1,19 @@
 // main
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 // components
 import AdminLayout from "../../../../layout/AdminLayout";
 import SpinnerModal from "../../../../components/SpinnerModal";
+import ErrorMessage from "../../../../components/ErrorMessage";
+import TourForm from "../TourForm";
 
 // apis
 import useAxios from "../../../../hooks/useAxios";
 import { adminApis } from "../../../../services/apis";
 
-// helpers
+// other
 import { stringToDate } from "../../../../services/helpers/dateHandler";
-
-import TourForm from "../TourForm";
+import usePageTitle from "../../../../hooks/usePageTitle";
 
 const initialValues = {
   language: "vi",
@@ -45,64 +45,57 @@ const initialValues = {
 };
 
 const dataPacker = (values) => {
+  const duration = {
+    days: values.days,
+    nights: values.nights,
+  };
+
+  const price_policies = {
+    includes: values.priceIncludes,
+    excludes: values.priceExcludes,
+    other: values.priceOther,
+  };
+
+  const terms = {
+    registration: values.registrationPolicy,
+    cancellation: values.cancellationPolicy,
+    payment: values.paymentPolicy,
+    notes: values.notes,
+  };
+
+  const departureDates = values.departureDates
+    .split("\n")
+    .map((item) => stringToDate(item)[1]);
+
   const formData = new FormData();
 
-  // overview
   formData.append("code", values.code);
   formData.append("name", values.name);
   formData.append("journey", values.journey);
   formData.append("countries", values.countries);
   formData.append("description", values.description);
   formData.append("highlights", JSON.stringify(values.highlights));
-
   formData.append("price", values.price);
-  formData.append("days", values.days);
-  formData.append("nights", values.nights);
-
-  // price policies
-  formData.append("priceIncludes", JSON.stringify(values.priceIncludes));
-  formData.append("priceExcludes", JSON.stringify(values.priceExcludes));
-  formData.append("priceOther", JSON.stringify(values.priceOther));
-
-  // departure dates
-  formData.append(
-    "departureDates",
-    JSON.stringify(
-      values.departureDates.split("\n").map((item) => stringToDate(item)[1])
-    )
-  );
-
-  // terms and policies
-  formData.append(
-    "cancellationPolicy",
-    JSON.stringify(values.cancellationPolicy)
-  );
-  formData.append(
-    "registrationPolicy",
-    JSON.stringify(values.registrationPolicy)
-  );
-  formData.append("paymentPolicy", JSON.stringify(values.paymentPolicy));
-  formData.append("notes", JSON.stringify(values.notes));
-
-  // category
+  formData.append("duration", JSON.stringify(duration));
+  formData.append("price_policies", JSON.stringify(price_policies));
+  formData.append("departureDates", JSON.stringify(departureDates));
+  formData.append("terms", JSON.stringify(terms));
   formData.append("category", JSON.stringify(values.category));
-
-  // thumb
-  formData.append("thumb", values.thumb);
+  formData.append("image", values.thumb);
 
   return formData;
 };
 
 export {
-  useState,
+  useState, // main state
   useEffect,
-  useNavigate,
-  AdminLayout,
+  AdminLayout, // components
   SpinnerModal,
-  useAxios,
-  adminApis,
-  stringToDate,
   TourForm,
+  ErrorMessage,
+  useAxios, // apis
+  adminApis,
+  usePageTitle, // other
   initialValues,
   dataPacker,
 };

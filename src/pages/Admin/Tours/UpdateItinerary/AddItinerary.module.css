@@ -14,6 +14,13 @@
   border: 1px solid rgb(125, 184, 125);
 }
 
+.plan label input::placeholder {
+  font-size: 13px;
+  font-style: italic;
+  color: grey;
+  font-weight: 300;
+}
+
 .editor > * {
   background: white;
 }
@@ -41,14 +48,30 @@
   width: 100%;
 }
 
-.toggleBtn {
-  background: rgb(23, 155, 62);
+.removeDayBtn {
+  background: #f44336;
   position: absolute;
   top: 0;
-  right: 0;
+  right: 0px;
+  width: 30px;
+  height: 30px;
+  opacity: 0.6;
+  transition: 0.1s;
 }
 
-.toggleBtn svg {
+.removeDayBtn:hover {
+  opacity: 1;
+}
+
+.removeDayBtn svg {
   width: 20px;
   color: white;
+}
+
+.questionMark svg {
+  width: 16px;
+  color: grey;
+  margin-left: 6px;
+  margin-bottom: 1px;
+  cursor: pointer;
 }

@@ -1,16 +1,16 @@
 import {
+  useState,
   useEffect,
   AdminLayout,
   SpinnerModal,
+  TourForm,
+  ErrorMessage,
   useAxios,
   adminApis,
-  TourForm,
+  usePageTitle,
   initialValues,
   dataPacker,
 } from "./import";
-import { useState } from "react";
-import ErrorMessage from "../../../../components/ErrorMessage";
-import usePageTitle from "../../../../hooks/usePageTitle";
 
 function NewTour() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -25,7 +25,7 @@ function NewTour() {
   useEffect(() => {
     if (data) {
       alert("Tạo tour mới thành công.");
-      setFormKey((prev) => prev + 1);
+      setFormKey((prev) => prev + 1); // re-render form mới
     }
   }, [data]);
 
@@ -46,6 +46,7 @@ function NewTour() {
 
       <AdminLayout title="Tạo tour mới">
         {fetchingCatError && <ErrorMessage msg={fetchingCatError.message} />}
+
         {cat && (
           <TourForm
             key={formKey}

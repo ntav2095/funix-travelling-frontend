@@ -7,6 +7,7 @@
   width: 100%;
   padding: 6px;
   background: white;
+  display: block;
 }
 .container textarea {
   min-height: 100px;
@@ -17,9 +18,9 @@
   font-weight: 500;
 }
 
-.label svg {
-  width: 15px;
-  color: rgb(209, 58, 58);
+.label em {
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .editor > * {
@@ -29,6 +30,9 @@
 .errorMessage h6 {
   font-weight: 400;
   font-size: 13px;
-  color: rgb(209, 58, 58);
   padding-top: 2px;
+  background: rgb(209, 58, 58);
+  color: white;
+  padding: 3px 6px;
+  margin-top: 2px;
 }

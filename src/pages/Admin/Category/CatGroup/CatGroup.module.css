@@ -3,58 +3,28 @@
   margin: 24px 0;
 }
 
-.catGroup table {
+.table {
   margin: 16px 0;
   border-collapse: collapse;
+  background: white;
 }
 
-.catGroup td,
-.catGroup th {
+.table td,
+.table th {
   border: 0.5px solid #ccc;
   padding: 3.8px 8px;
 }
 
-.catGroup ul {
-  display: flex;
-  gap: 16px;
-  padding: 0;
+.table th {
+  background: #1e8553;
+  color: white;
+  font-weight: 500;
 }
 
-.catGroup ul li {
-  border: 1px solid #050505;
-  padding: 2px 6px;
-}
-
-.catGroup table td:last-of-type {
+.table td:last-of-type {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.catGroup table button,
-.catGroup table a {
-  height: 36px;
-  display: inline-block;
-  padding: 0px 16px;
-  color: white;
-  background: #050505;
-  line-height: 36px;
-  border-radius: 3.6px;
-}
-
-.catGroup table a {
-  color: orange;
-}
-
-.catGroup table button {
-  color: rgb(255, 85, 85);
-}
-
-.addCatBtn {
-  background: #050505;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 3.8px;
 }
 
 /* =========== show hide menu ============  */

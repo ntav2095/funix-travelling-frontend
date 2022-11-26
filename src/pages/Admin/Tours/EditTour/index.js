@@ -1,4 +1,3 @@
-import usePageTitle from "../../../../hooks/usePageTitle";
 import {
   useState,
   useEffect,
@@ -12,6 +11,7 @@ import {
   ErrorMessage,
   styles,
   formPacker,
+  usePageTitle,
 } from "./import";
 
 function EditTour() {
@@ -21,6 +21,7 @@ function EditTour() {
   const [lang, setLang] = useState("vi");
   const { tourId } = useParams();
 
+  // lấy các ngôn ngữ hiện có (trong category type = language)
   const langs = fetchedData
     ? fetchedData.metadata.categories
         .filter((item) => item.type === "language")

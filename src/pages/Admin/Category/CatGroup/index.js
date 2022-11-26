@@ -43,6 +43,7 @@ const CatGroup = ({ type, cat, onDelete }) => {
                 <td>{item.parent?.code}</td>
                 <td>
                   <Link
+                    className="btn btn-primary btn-sm"
                     to={`/admin/category/edit-cat/${item._id}`}
                     state={{
                       isShowModal: true,
@@ -52,7 +53,10 @@ const CatGroup = ({ type, cat, onDelete }) => {
                   >
                     Edit
                   </Link>
-                  <button onClick={() => deleteHandler(item._id)}>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => deleteHandler(item._id)}
+                  >
                     Delete
                   </button>
                 </td>

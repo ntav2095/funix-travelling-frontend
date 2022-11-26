@@ -63,6 +63,9 @@ function Posts() {
                   <tr>
                     <th>
                       <div>STT</div>
+                    </th>{" "}
+                    <th>
+                      <div>ID</div>
                     </th>
                     <th style={{ width: "70%" }}>
                       <div>Title</div>
@@ -78,6 +81,9 @@ function Posts() {
                     <tr key={item._id}>
                       <td>
                         <div>{(page - 1) * PAGE_SIZE + index + 1}</div>
+                      </td>{" "}
+                      <td>
+                        <div>{item._id}</div>
                       </td>
                       <td>
                         <div>{item.title}</div>

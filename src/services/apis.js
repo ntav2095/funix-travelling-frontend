@@ -124,6 +124,13 @@ export const categoryApi = {
   }),
 };
 
+export const layoutApi = {
+  get: () => ({
+    method: "GET",
+    url: "/layout/",
+  }),
+};
+
 export const adminApis = {
   article: {
     add: (formData) => ({
@@ -210,6 +217,16 @@ export const adminApis = {
       method: "PUT",
       url: "/admin/categories",
       data,
+    }),
+  },
+  layout: {
+    updateImages: (formData) => ({
+      method: "POST",
+      url: "/admin/layout/image",
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     }),
   },
 };

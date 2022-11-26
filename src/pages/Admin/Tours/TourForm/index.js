@@ -1,31 +1,27 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { tourValidator } from "../../../../services/validators";
-import { exclamation as exclamationSVG } from "../../../../assets/svgs";
-import styles from "./TourForm.module.css";
+import { useMemo } from "react";
 import FormGroup from "./FormGroup";
 import CatGroup from "./CatGroup";
+import styles from "./TourForm.module.css";
 
-function TourForm({ initialValues, onSubmit, cat, type }) {
-  // useMemo chỗ này
-  let cat_continent = [];
-  let cat_country = [];
-  let cat_city = [];
+function TourForm({ initialValues, onSubmit, cat }) {
+  let cat_continent = useMemo(
+    () => cat.filter((item) => item.type === "continent"),
+    [cat]
+  );
 
-  cat.forEach((item) => {
-    if (item.type === "continent") {
-      cat_continent.push(item);
-    }
+  let cat_country = useMemo(
+    () => cat.filter((item) => item.type === "country"),
+    [cat]
+  );
 
-    if (item.type === "country") {
-      cat_country.push(item);
-    }
+  let cat_city = useMemo(
+    () => cat.filter((item) => item.type === "city"),
+    [cat]
+  );
 
-    if (item.type === "city") {
-      cat_city.push(item);
-    }
-  });
-
-  const isEdit = initialValues.language !== "vi";
+  const not_vi = initialValues.language !== "vi"; // không phải ngôn ngữ tiếng Việt thì ẩn 1 số fields
 
   return (
     <div className={styles.container}>
@@ -36,9 +32,9 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
       >
         {({ setFieldValue, setFieldTouched, values }) => (
           <Form>
-            <h5 className="text-center border-bottom pb-2">Tổng quan</h5>
+            <h2 className={styles.title}>Tổng quan</h2>
 
-            {!isEdit && (
+            {!not_vi && (
               <FormGroup
                 label="Mã tour"
                 isRequired
@@ -72,7 +68,6 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
 
             <FormGroup
               label="Điểm nổi bật"
-              isRequired
               type="editor"
               setFieldValue={setFieldValue}
               setFieldTouched={setFieldTouched}
@@ -80,7 +75,7 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
               values={values}
             />
 
-            {!isEdit && (
+            {!not_vi && (
               <FormGroup
                 label="Ngày khởi hành"
                 note="(dd/mm/yyyy) (enter xuống dòng)"
@@ -90,10 +85,10 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
               />
             )}
 
-            {!isEdit && (
+            {!not_vi && (
               <FormGroup label="Số ngày" isRequired type="Number" name="days" />
             )}
-            {!isEdit && (
+            {!not_vi && (
               <FormGroup
                 label="Số đêm"
                 isRequired
@@ -102,7 +97,7 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
               />
             )}
 
-            {!isEdit && (
+            {!not_vi && (
               <FormGroup
                 label="Giá"
                 note="(vnd)"
@@ -113,11 +108,10 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
             )}
 
             {/* ----------------------- price policies ------------------------  */}
-            <h5 className="text-center border-bottom pb-2">Bảng giá</h5>
+            <h2 className={styles.title}>Bảng giá</h2>
 
             <FormGroup
               label="Giá bao gồm"
-              isRequired
               name="priceIncludes"
               type="editor"
               setFieldValue={setFieldValue}
@@ -127,7 +121,6 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
 
             <FormGroup
               label="Giá không bao gồm"
-              isRequired
               name="priceExcludes"
               type="editor"
               setFieldValue={setFieldValue}
@@ -137,7 +130,6 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
 
             <FormGroup
               label="Giá trẻ em và phụ thu"
-              isRequired
               name="priceOther"
               type="editor"
               setFieldValue={setFieldValue}
@@ -146,13 +138,10 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
             />
 
             {/* ----------------------- terms ------------------------  */}
-            <h5 className="text-center border-bottom pb-2">
-              Điều khoản và chính sách
-            </h5>
+            <h2 className={styles.title}>Điều khoản và chính sách</h2>
 
             <FormGroup
               label="Điều kiện đăng ký"
-              isRequired
               name="registrationPolicy"
               type="editor"
               setFieldValue={setFieldValue}
@@ -162,7 +151,6 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
 
             <FormGroup
               label="Điều kiện hoàn hủy"
-              isRequired
               name="cancellationPolicy"
               type="editor"
               setFieldValue={setFieldValue}
@@ -172,7 +160,6 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
 
             <FormGroup
               label="Phương thức thanh toán"
-              isRequired
               name="paymentPolicy"
               type="editor"
               setFieldValue={setFieldValue}
@@ -182,7 +169,6 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
 
             <FormGroup
               label="Lưu ý"
-              isRequired
               name="notes"
               type="editor"
               setFieldValue={setFieldValue}
@@ -190,9 +176,9 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
               values={values}
             />
 
-            {!isEdit && (
+            {!not_vi && (
               <>
-                <h5 className="text-center border-bottom  pb-2">Ảnh preview</h5>
+                <h2 className={styles.title}>Ảnh preview</h2>
 
                 <FormGroup
                   label="Chọn ảnh preview"
@@ -222,11 +208,9 @@ function TourForm({ initialValues, onSubmit, cat, type }) {
             )}
 
             {/* ----------------------- categories ------------------------  */}
-            {!isEdit && (
+            {!not_vi && (
               <>
-                <h5 className="text-center border-bottom pb-2">
-                  Phân loại danh mục
-                </h5>
+                <h2 className={styles.title}>Phân loại danh mục</h2>
 
                 <CatGroup
                   cat={cat_continent}

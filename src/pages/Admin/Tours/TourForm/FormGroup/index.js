@@ -1,9 +1,8 @@
 import { Field, ErrorMessage } from "formik";
-import { exclamation as exclamationSVG } from "../../../../../assets/svgs";
-import styles from "./FormGroup.module.css";
 import Editor from "../../../../../containers/Editor";
+import styles from "./FormGroup.module.css";
 
-const requiredField = <span title="Bắt buộc">{exclamationSVG}</span>;
+const requiredField = <em title="Bắt buộc">(bắt buộc)</em>;
 
 function FormGroup(props) {
   const {
@@ -17,8 +16,6 @@ function FormGroup(props) {
     setFieldTouched,
     values,
   } = props;
-
-  console.log(values);
 
   // label
   let form_label = (

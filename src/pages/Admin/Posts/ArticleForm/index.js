@@ -66,7 +66,10 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
             </label>
 
             <label>
-              <h6>Đoạn mở đầu</h6>
+              <h6>
+                Đoạn mở đầu{" "}
+                <em>(đoạn văn đầu tiên hoặc một đoạn mô tả ngắn)</em>
+              </h6>
               <Field type="text" name="lead" />
               <div className={styles.errorMsg}>
                 <ErrorMessage name="lead" component="p" />

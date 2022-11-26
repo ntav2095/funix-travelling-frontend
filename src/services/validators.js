@@ -5,6 +5,10 @@ const REQUIRED = "Bắt buộc";
 export const tourValidator = (values) => {
   const errors = {};
 
+  if (!values.code) {
+    errors.code = REQUIRED;
+  }
+
   if (!values.name) {
     errors.name = REQUIRED;
   }
@@ -45,14 +49,6 @@ export const tourValidator = (values) => {
 
   if (!values.nights) {
     errors.nights = REQUIRED;
-  }
-
-  if (!values.highlights) {
-    errors.highlights = REQUIRED;
-  }
-
-  if (!values.cancellationPolicy) {
-    errors.cancellationPolicy = REQUIRED;
   }
 
   if (!values.price) {
