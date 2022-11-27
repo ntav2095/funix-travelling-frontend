@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./ArticleCard.module.css";
-
+import './article.css'
 function ArticleCard({ article }) {
   return (
     <div className={styles.card}>

@@ -8,6 +8,7 @@ import "./tour.css";
 import { useTranslation } from "react-i18next";
 import CardPlaceholder from "../../../components/placeholders/CardPlaceholder";
 import { Col } from "react-bootstrap";
+import {placeholder} from '../../../assets/images'
 
 const trans = {
   days: {
@@ -41,7 +42,7 @@ function Tour(props) {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToScroll: 2,
           infinite: false,
           dots: false,
         },
@@ -49,8 +50,8 @@ function Tour(props) {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           infinite: false,
           dots: false,
         },
@@ -58,8 +59,8 @@ function Tour(props) {
       {
         breakpoint: 576,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           initialSlide: 0,
         },
       },
@@ -84,8 +85,9 @@ function Tour(props) {
                 <Link to={`/danh-sach-tour/${item._id}`}>
                   <div className={styles.img}>
                     <img
-                      src={item.thumb}
+                      src={placeholder}
                       alt={tour.name}
+                      lazy={item.thumb}
                       onError={handlerBrokenImg}
                     />
                   </div>

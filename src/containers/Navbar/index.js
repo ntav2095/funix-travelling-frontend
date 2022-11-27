@@ -7,23 +7,25 @@ import {
   Collapse,
   NavItem,
 } from "reactstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import React, { useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useTranslation } from "react-i18next";
-
+import useWindowSize from '../../hooks/useResize'
+import {imagevietnam,imageMy} from '../../assets/images'
 // lang
 import i18next from "../../services/languages/i18n";
 
 // css
 import styles from "./Navbar.module.css";
 import "./overrideNavbar.css";
-import useLazyLoading, { loadingImg } from "../../hooks/uselazyLoading";
 import Search from "./Search";
 
 function Header() {
-  const [lazy] = useLazyLoading(loadingImg);
+ 
+  const {width,height}=useWindowSize()
+  console.log(width)
   const navigation = useNavigate();
   const [state, setState] = useState({
     isNavOpen: false,
@@ -69,9 +71,7 @@ function Header() {
     });
   }, []);
 
-  useEffect(() => {
-    lazy();
-  });
+
 
   useEffect(() => {
     if (i18n.language === "vi") {
@@ -149,9 +149,13 @@ function Header() {
                             .changeLanguage("vi")
                             .then()
                             .catch((err) => console.error(err));
+                            handleClose();
                         }}
                       >
-                        VN
+                        <h6>VN</h6>
+                        <div className={styles.laco}>
+                          <img src={imagevietnam} />
+                        </div>
                       </button>
                       <button
                         id="btnen"
@@ -165,9 +169,13 @@ function Header() {
                             .changeLanguage("en")
                             .then(() => console.log(2))
                             .catch((err) => console.error(err));
+                            handleClose();
                         }}
                       >
-                        EN
+                        <h6>EN</h6>
+                        <div className={styles.laco}>
+                          <img src={imageMy} />
+                        </div>
                       </button>
 
                       <button
@@ -250,9 +258,13 @@ function Header() {
                           .changeLanguage("vi")
                           .then()
                           .catch((err) => console.error(err));
+                          
                       }}
                     >
-                      VN
+                      <h6>VN</h6>
+                      <div className={styles.laco}>
+                        <img src={imagevietnam} />
+                      </div>
                     </button>
                     <button
                       id="btnen"
@@ -268,7 +280,10 @@ function Header() {
                           .catch((err) => console.error(err));
                       }}
                     >
-                      EN
+                      <h6>EN</h6>
+                      <div className={styles.laco}>
+                        <img src={imageMy} />
+                      </div>
                     </button>
                   </NavItem>
                   <NavItem className="d-flex align-items-center">
@@ -290,6 +305,7 @@ function Header() {
             ></i>
           </button>
         </div>
+        {width < 1024 && <Search />}
       </div>
     </>
   );

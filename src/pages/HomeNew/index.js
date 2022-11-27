@@ -8,13 +8,21 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import DefaultLayout from "../../layout/DefaultLayout";
 import Banner from "../../components/Banner";
+import useLazyLoading, { loadingImg } from "../../hooks/uselazyLoading";
 
 function HomeNew() {
   const { i18n } = useTranslation();
+  const [lazy] = useLazyLoading(loadingImg);
+
   const [sendRequest, isLoading, data, error] = useAxios();
   useEffect(() => {
     sendRequest(tourApi.get({ page: 1, page_size: 6 }));
   }, [i18n.language]);
+
+
+  useEffect(() => {
+    lazy();
+},[isLoading]);
   return (
     <>
       <div className="mb-5">

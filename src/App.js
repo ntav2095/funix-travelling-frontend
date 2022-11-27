@@ -1,12 +1,16 @@
 // main
 import { Route, Routes } from "react-router-dom";
 import React, { Suspense, useEffect } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+// import HomeNew from "./pages/HomeNew";
+import Loading from "./components/loading";
 import { liveChat } from "./containers/Livechat";
 import Category from "./pages/Admin/Category";
 import DefaultLayout from "./layout/DefaultLayout";
 
 import Spinner from "./components/Spinner";
 import EditCatModal from "./pages/Admin/Category/EditCatModal";
+import ArticleCategory from "./pages/TravelHandbook/articleCategory";
 import LayoutManager from "./pages/Admin/LayoutManager";
 // components
 
@@ -14,7 +18,7 @@ const RequireAuth = React.lazy(() => import("./components/RequireAuth"));
 
 // client pages
 
-const ToursList = React.lazy(() => import("./pages/ToursList"));
+const ToursList = React.lazy(() => import("./pages/ToursList/tourList"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const About = React.lazy(() => import("./pages/About"));
 const Visa = React.lazy(() => import("./pages/Visa"));
@@ -55,69 +59,82 @@ function App() {
     }, 2000);
   }, []);
   return (
-    <Suspense fallback={<Spinner show={true} />}>
-      <Routes>
-        {/* =============================  CLIENT ROUTES ==============================  */}
-        <Route element={<DefaultLayout />}>
-          <Route path="/" element={<HomeNew />} />
-          <Route
-            path="/tours-chau-au"
-            element={<ToursList cat_params={{ cat_not: "vi" }} />}
-          />
-          <Route
-            path="/tours-trong-nuoc"
-            element={<ToursList cat_params={{ cat: "vi" }} />}
-          />
-          <Route path="/danh-sach-tour/:tourId" element={<TourDetail />} />
-          <Route path="/lien-he" element={<Contact />} />
-          <Route path="/ve-cong-ty" element={<About />} />
-          <Route path="/dich-vu-visa/1" element={<Visa />} />
-          <Route path="/dich-vu-visa" element={<VisaService />} />
-          <Route path="/cam-nang-du-lich" element={<TravelHandbook />} />
-          <Route path="/*" element={<NotFound />} />
-          <Route
-            path="/cam-nang-du-lich/:id"
-            element={<TravelHandbookDetail />}
-          />
-        </Route>
-
-        {/* =============================  ADMIN ROUTES ==============================  */}
-        <Route path="/admin/login" element={<Login />} />
-        <Route element={<RequireAuth />}>
-          <Route path="/admin" element={<Dashboard />} />
-          <Route path="/admin/category" element={<Category />}>
+    <ErrorBoundary
+      fallbackRender={({ error }) => (
+        <h1 style={{ color: "red", margin: "30px" }}>{error.message}</h1>
+      )}
+    >
+      <Suspense fallback={<Spinner show={true} />}>
+        <Routes>
+          {/* =============================  CLIENT ROUTES ==============================  */}
+          <Route element={<DefaultLayout />}>
+            <Route path="/" element={<HomeNew />} />
             <Route
-              path="/admin/category/edit-cat/:catId"
-              element={<EditCatModal />}
+              path="/tours-chau-au"
+              element={<ToursList cat_params={{ cat_not: "vi" }} />}
+            />
+            <Route
+              path="/tours-trong-nuoc"
+              element={<ToursList cat_params={{ cat: "vi" }} />}
+            />
+            <Route path="/danh-sach-tour/:tourId" element={<TourDetail />} />
+            <Route path="/lien-he" element={<Contact />} />
+            <Route path="/ve-cong-ty" element={<About />} />
+            <Route path="/dich-vu-visa/1" element={<Visa />} />
+            <Route path="/dich-vu-visa" element={<VisaService />} />
+            <Route path="/cam-nang-du-lich" element={<TravelHandbook />} />
+            <Route path="/*" element={<NotFound />} />
+            <Route
+              path="/cam-nang-du-lich/:id"
+              element={<TravelHandbookDetail />}
+            />
+            <Route
+              path="/cam-nang-du-lich/danh-muc/:id"
+              element={<ArticleCategory />}
             />
           </Route>
 
-          {/* tour  */}
-          <Route path="/admin/new-tour" element={<NewTour />} />
-          <Route path="/admin/edit-tour/:tourId" element={<EditTour />} />
-          <Route path="/admin/tours" element={<Tours />} />
-          <Route
-            path="/admin/update-itinerary/:tourId"
-            element={<UpdateItinerary />}
-          />
+          {/* =============================  ADMIN ROUTES ==============================  */}
+          <Route path="/admin/login" element={<Login />} />
+          <Route element={<RequireAuth />}>
+            <Route path="/admin" element={<Dashboard />} />
+            <Route path="/admin/category" element={<Category />}>
+              <Route
+                path="/admin/category/edit-cat/:catId"
+                element={<EditCatModal />}
+              />
+            </Route>
 
-          {/* visa  */}
-          <Route path="/admin/visa-products" element={<Visas />} />
-          <Route path="/admin/add-visa-product" element={<AddVisa />} />
-          <Route
-            path="/admin/edit-visa-product/:visaId"
-            element={<EditVisa />}
-          />
-          {/* posts */}
-          <Route path="/admin/posts" element={<Posts />} />
-          <Route path="/admin/new-posts" element={<NewPosts />} />
-          <Route path="/admin/edit-posts/:articleId" element={<EditPosts />} />
+            {/* tour  */}
+            <Route path="/admin/new-tour" element={<NewTour />} />
+            <Route path="/admin/edit-tour/:tourId" element={<EditTour />} />
+            <Route path="/admin/tours" element={<Tours />} />
+            <Route
+              path="/admin/update-itinerary/:tourId"
+              element={<UpdateItinerary />}
+            />
 
-          {/* layout */}
-          <Route path="/admin/manage-layout" element={<LayoutManager />} />
-        </Route>
-      </Routes>
-    </Suspense>
+            {/* visa  */}
+            <Route path="/admin/visa-products" element={<Visas />} />
+            <Route path="/admin/add-visa-product" element={<AddVisa />} />
+            <Route
+              path="/admin/edit-visa-product/:visaId"
+              element={<EditVisa />}
+            />
+            {/* posts */}
+            <Route path="/admin/posts" element={<Posts />} />
+            <Route path="/admin/new-posts" element={<NewPosts />} />
+            <Route
+              path="/admin/edit-posts/:articleId"
+              element={<EditPosts />}
+            />
+
+            {/* layout */}
+            <Route path="/admin/manage-layout" element={<LayoutManager />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 

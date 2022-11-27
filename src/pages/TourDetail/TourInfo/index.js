@@ -210,7 +210,7 @@ const TourInfo = ({ tour, isLoading }) => {
                       }
                       key={item.id}
                     >
-                      <QuillReader delta={item.content} />
+                      <QuillReader delta={item.content} /> 
                     </div>
                   );
                 }
