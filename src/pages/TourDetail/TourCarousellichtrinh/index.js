@@ -41,17 +41,20 @@ function TourCarousellichtrinh({ tour, isLoading }) {
 
   return (
     <>
-      <div className="tourCarousel__container" id="tourCarousel__container1">
-        {tour && !isLoading && (
-          <Slider
-            {...settings}
-            afterChange={(x) => {
-              setIndex(x);
-            }}
-          >
-            {!isLoading &&
-              tour.images.length != 0 &&
-              tour.images.map((img, id) => (
+      {tour && !isLoading && (
+        <Slider
+          {...settings}
+          afterChange={(x) => {
+            setIndex(x);
+          }}
+        >
+          {!isLoading &&
+            tour.images.length != 0 &&
+            tour.images.map((img, id) => (
+              <div
+                className="tourCarousel__container"
+                id="tourCarousel__container1"
+              >
                 <div
                   key={id}
                   className={styles.image}
@@ -64,18 +67,23 @@ function TourCarousellichtrinh({ tour, isLoading }) {
                     onError={handlerBrokenImg}
                   />
                 </div>
-              ))}
-          </Slider>
-        )}
+              </div>
+            ))}
+        </Slider>
+      )}
 
-        {isLoading && (
-          <Slider
-            {...settings}
-            afterChange={(x) => {
-              setIndex(x);
-            }}
-          >
-            {new Array(3).fill(1).map((item, index) => (
+      {isLoading && (
+        <Slider
+          {...settings}
+          afterChange={(x) => {
+            setIndex(x);
+          }}
+        >
+          {new Array(3).fill(1).map((item, index) => (
+            <div
+              className="tourCarousel__container"
+              id="tourCarousel__container1"
+            >
               <div
                 key={index}
                 className={styles.image}
@@ -83,10 +91,10 @@ function TourCarousellichtrinh({ tour, isLoading }) {
               >
                 <Placeholder width="100%" height="100%" />
               </div>
-            ))}
-          </Slider>
-        )}
-      </div>
+            </div>
+          ))}
+        </Slider>
+      )}
 
       <Modal
         show={isShowModal}
