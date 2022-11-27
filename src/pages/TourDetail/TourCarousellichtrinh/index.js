@@ -10,11 +10,12 @@ import "./overridelichtrinh.css";
 import Placeholder from "../../../components/placeholders/Placeholder";
 
 const settings = {
-  dots: true,
+  className: "center",
+  centerMode: true,
   infinite: true,
-  speed: 500,
+  centerPadding: "0",
   slidesToShow: 1,
-  slidesToScroll: 1,
+  speed: 500,
 };
 
 function TourCarousellichtrinh({ tour, isLoading }) {
@@ -41,49 +42,45 @@ function TourCarousellichtrinh({ tour, isLoading }) {
 
   return (
     <>
-      {tour && !isLoading && (
-        <Slider
-          {...settings}
-          afterChange={(x) => {
-            setIndex(x);
-          }}
-        >
-          {!isLoading &&
-            tour.images.length != 0 &&
-            tour.images.map((img, id) => (
-              <div
-                className="tourCarousel__container"
-                id="tourCarousel__container1"
-              >
-                <div
-                  key={id}
-                  className={styles.image}
-                  onClick={() => setIsShowModal(true)}
-                >
-                  <img
-                    style={{ display: "block" }}
-                    src={img}
-                    alt={tour.name}
-                    onError={handlerBrokenImg}
-                  />
-                </div>
-              </div>
-            ))}
-        </Slider>
-      )}
-
-      {isLoading && (
-        <Slider
-          {...settings}
-          afterChange={(x) => {
-            setIndex(x);
-          }}
-        >
-          {new Array(3).fill(1).map((item, index) => (
-            <div
-              className="tourCarousel__container"
-              id="tourCarousel__container1"
+      <div>
+        {tour && !isLoading && tour.images.length != 0 && (
+          <div
+            className="tourCarousel__container"
+            id="tourCarousel__container1"
+          >
+            <Slider
+              {...settings}
+              afterChange={(x) => {
+                setIndex(x);
+              }}
             >
+              {!isLoading &&
+                tour.images.map((img, id) => (
+                  <div
+                    key={id}
+                    className={styles.image}
+                    onClick={() => setIsShowModal(true)}
+                  >
+                    <img
+                      style={{ display: "block" }}
+                      src={img}
+                      alt={tour.name}
+                      onError={handlerBrokenImg}
+                    />
+                  </div>
+                ))}
+            </Slider>
+          </div>
+        )}
+
+        {isLoading && (
+          <Slider
+            {...settings}
+            afterChange={(x) => {
+              setIndex(x);
+            }}
+          >
+            {new Array(3).fill(1).map((item, index) => (
               <div
                 key={index}
                 className={styles.image}
@@ -91,10 +88,10 @@ function TourCarousellichtrinh({ tour, isLoading }) {
               >
                 <Placeholder width="100%" height="100%" />
               </div>
-            </div>
-          ))}
-        </Slider>
-      )}
+            ))}
+          </Slider>
+        )}
+      </div>
 
       <Modal
         show={isShowModal}
