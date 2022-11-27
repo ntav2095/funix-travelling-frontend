@@ -8,6 +8,7 @@ function QuillReader({ delta }) {
   useEffect(() => {
     containerRef.current.innerHTML = quillGetHTML(delta);
   }, []);
+  console.log(delta);
   return <div className="quillReader" ref={containerRef}></div>;
 }
 

@@ -89,8 +89,8 @@ function ContactTable({ tour, isLoading }) {
               <li>
                 <span>{translation.duration[lang]}</span>
                 <strong>
-                  {tour.days} {translation.days[lang]} {tour.nights}{" "}
-                  {translation.nights[lang]}
+                  {tour.duration.days} {translation.days[lang]}{" "}
+                  {tour.duration.nights} {translation.nights[lang]}
                 </strong>
               </li>
               <li>

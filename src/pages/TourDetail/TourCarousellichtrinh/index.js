@@ -5,20 +5,20 @@ import { brokenImage } from "../../../assets/images";
 import { xMark as closeSVG } from "../../../assets/svgs";
 import Slider from "react-slick";
 
-import styles from "./TourCarousel.module.css";
-import "./override.css";
+import styles from "./TourCarousellichtrinh.module.css";
+import "./overridelichtrinh.css";
 import Placeholder from "../../../components/placeholders/Placeholder";
 
 const settings = {
   className: "center",
   centerMode: true,
   infinite: true,
-  centerPadding: "30px",
+  centerPadding: "0",
   slidesToShow: 1,
   speed: 500,
 };
 
-function TourCarousel({ tour, isLoading }) {
+function TourCarousellichtrinh({ tour, isLoading }) {
   const [index, setIndex] = useState(0);
   const [isShowModal, setIsShowModal] = useState(false);
 
@@ -31,7 +31,7 @@ function TourCarousel({ tour, isLoading }) {
       setIndex(selectedIndex);
     }
   };
-
+  console.log(tour.images.length);
   const handlerBrokenImg = (e) => {
     e.target.src = brokenImage;
   };
@@ -39,30 +39,38 @@ function TourCarousel({ tour, isLoading }) {
   const closeModalHandler = () => {
     setIsShowModal(false);
   };
-  console.log(tour);
 
   return (
     <>
-      <div className="tourCarousel__container">
-        {tour && !isLoading && (
-          <Slider
-            {...settings}
-            afterChange={(x) => {
-              setIndex(x);
-            }}
+      <div>
+        {tour && !isLoading && tour.images.length != 0 && (
+          <div
+            className="tourCarousel__container"
+            id="tourCarousel__container1"
           >
-            {!isLoading &&
-              tour &&
-              tour.slider.map((img, id) => (
-                <div
-                  key={id}
-                  className={styles.image}
-                  onClick={() => setIsShowModal(true)}
-                >
-                  <img src={img} alt={tour.name} onError={handlerBrokenImg} />
-                </div>
-              ))}
-          </Slider>
+            <Slider
+              {...settings}
+              afterChange={(x) => {
+                setIndex(x);
+              }}
+            >
+              {!isLoading &&
+                tour.images.map((img, id) => (
+                  <div
+                    key={id}
+                    className={styles.image}
+                    onClick={() => setIsShowModal(true)}
+                  >
+                    <img
+                      style={{ display: "block" }}
+                      src={img}
+                      alt={tour.name}
+                      onError={handlerBrokenImg}
+                    />
+                  </div>
+                ))}
+            </Slider>
+          </div>
         )}
 
         {isLoading && (
@@ -103,7 +111,7 @@ function TourCarousel({ tour, isLoading }) {
           <Carousel activeIndex={index} onSelect={handleSelect}>
             {!isLoading &&
               tour &&
-              tour.slider.map((img, id) => (
+              tour.images.map((img, id) => (
                 <Carousel.Item key={id} className={styles.carouselItemModal}>
                   <div className={styles.imageModal}>
                     <img src={img} alt={tour.name} onError={handlerBrokenImg} />
@@ -117,4 +125,4 @@ function TourCarousel({ tour, isLoading }) {
   );
 }
 
-export default TourCarousel;
+export default TourCarousellichtrinh;

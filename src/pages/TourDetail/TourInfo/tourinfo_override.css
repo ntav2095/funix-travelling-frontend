@@ -1,8 +1,3 @@
-.tourInfo .nav-link {
-  color: #050505;
-  border: 1px solid rgb(234, 234, 234);
-}
-
 .tourInfo .nav-tabs .nav-link.active {
   /* border: 1px solid #ccc; */
   /* border-bottom: none; */
@@ -10,8 +5,66 @@
 
 .tourInfo .nav.nav-tabs {
   margin-bottom: 0 !important;
+  margin-right: 5px;
 }
 
 .tourInfo .nav-tabs {
   flex-wrap: nowrap;
+}
+li.nav-item {
+  margin-right: 2px;
+}
+.padding30px {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+@media only screen and (max-width: 500px) {
+  .tourInfo .nav-link {
+    color: #050505;
+    padding: 8px;
+    font-size: 12px;
+    border: 1px solid rgb(234, 234, 234);
+  }
+  .TourInfo_itinerary__Jssul ul {
+    margin: 0;
+    list-style: disc inside;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: -5px;
+    margin-right: 5px;
+  }
+  .padding30px {
+    padding-left: 0px;
+    padding-right: 5px;
+  }
+  .quillReader {
+    margin-left: 14px;
+  }
+  .accordion-body {
+    padding: 0px !important;
+  }
+  .quillReader p {
+    margin-left: 15px;
+    margin-right: 5px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .tourInfo .nav-link {
+    color: #050505;
+    border: 1px solid rgb(234, 234, 234);
+    padding: 11px 55px;
+    font-size: 16px;
+  }
+}
+@media only screen and (min-width: 750px) {
+  .tourInfo .nav-link {
+    color: #050505;
+    border: 1px solid rgb(234, 234, 234);
+    padding: 5px 20px;
+    font-size: 16px;
+  }
+}
+.quillReader p {
+  margin-left: 15px;
+  margin-right: 5px;
 }

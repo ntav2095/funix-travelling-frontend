@@ -15,7 +15,7 @@ import { tourApi } from "../../services/apis";
 
 // hooks
 import usePageTitle from "../../hooks/usePageTitle";
-
+import { deltailtour } from "./TourInfo/deltailtour";
 //  css
 import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
@@ -36,7 +36,7 @@ function TourDetail() {
   useEffect(() => {
     sendRequest(tourApi.getSingleTour(tourId));
   }, [i18n.language, tourId]);
-
+  console.log(tour);
   return (
     <>
       <div className={styles.tourDetail}>
@@ -57,7 +57,11 @@ function TourDetail() {
               </div>
             </div>
 
-            <TourInfo tour={tour} isLoading={isLoading} />
+            <TourInfo
+              tour={tour}
+              isLoading={isLoading}
+              deltailtour={deltailtour}
+            />
 
             <div className="pb-5">
               {tour && (

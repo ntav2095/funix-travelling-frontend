@@ -57,13 +57,13 @@ function useSearch() {
   // khi page thay đổi và > 1 thì search cái thay đổi
   useEffect(() => {
     if (text && tourPage > 1) {
-      searchTours(tourApi.search({ text, page: tourPage }));
+      searchTours(tourApi.get({ text, page: tourPage }));
     }
   }, [tourPage]);
 
   useEffect(() => {
     if (text && articlePage > 1) {
-      searchArticles(postsApi.search({ text, page: articlePage }));
+      searchArticles(postsApi.get({ text, page: articlePage }));
     }
   }, [articlePage]);
 
