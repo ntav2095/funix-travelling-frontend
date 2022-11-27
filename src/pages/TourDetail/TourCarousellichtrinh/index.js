@@ -10,12 +10,11 @@ import "./overridelichtrinh.css";
 import Placeholder from "../../../components/placeholders/Placeholder";
 
 const settings = {
-  className: "center",
-  centerMode: true,
+  dots: true,
   infinite: true,
-  centerPadding: "60px",
-  slidesToShow: 1,
   speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
 };
 
 function TourCarousellichtrinh({ tour, isLoading }) {

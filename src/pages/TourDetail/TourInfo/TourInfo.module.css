@@ -263,9 +263,11 @@ div#accordion1 {
   padding-left: 50px;
 }
 
-@media only screen and (max-width: 992px) {
-  .tourInfo .nav-link {
-    padding: 0px;
-    font-size: 11px;
-  }
+@media only screen and (max-width: 500px) {
+  /* .tourDesc {
+    display: flex;
+    margin-bottom: 16px;
+    margin-left: 15px;
+    margin-right: 15px;
+  } */
 }

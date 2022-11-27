@@ -13,7 +13,7 @@ const settings = {
   className: "center",
   centerMode: true,
   infinite: true,
-  centerPadding: "60px",
+  centerPadding: "30px",
   slidesToShow: 1,
   speed: 500,
 };

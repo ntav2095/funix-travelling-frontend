@@ -46,3 +46,13 @@
 .tourCarousel__container .slick-initialized .slick-slide {
   padding: 0px 2px 0px 2px;
 }
+@media only screen and (max-width: 500px) {
+  .tourCarousel__container .slick-arrow::before {
+    font-size: 22px;
+    text-shadow: var(--box-shadow);
+    color: white;
+  }
+}
+/* .slick-list {
+  padding: 60px 60px;
+} */

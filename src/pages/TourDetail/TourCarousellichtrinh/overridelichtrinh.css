@@ -3,6 +3,7 @@
   height: 250px;
   position: relative;
 } */
+
 #tourCarousel__container1 {
   width: 50%;
   height: 250px;
@@ -65,4 +66,30 @@
   background-color: #fff !important ;
   box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0
     var(--bs-accordion-border-color);
+}
+
+@media only screen and (max-width: 500px) {
+  .tourCarousel__container .slick-arrow::before {
+    font-size: 22px;
+    text-shadow: var(--box-shadow);
+    color: white;
+  }
+  #tourCarousel__container1 .slick-slider {
+    top: 0;
+
+    right: 0;
+    bottom: 0;
+    width: 81vw;
+    left: -55px;
+    position: absolute;
+  }
+}
+.tourCarousel__container .slick-slider {
+  top: 0;
+
+  right: 0;
+  bottom: 0;
+  /* width: 81vw; */
+  left: 0;
+  position: absolute;
 }

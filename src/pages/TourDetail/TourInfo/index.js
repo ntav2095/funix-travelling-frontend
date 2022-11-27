@@ -214,11 +214,11 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
                           }}
                         >
                           <button
-                            className="accordion-button"
+                            className="accordion-button collapsed"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target={"#f" + item.id}
-                            aria-expanded="true"
+                            aria-expanded="flase"
                             aria-controls={"f" + item.id}
                           >
                             {item.day.toUpperCase()}: {item.destination}
@@ -227,7 +227,7 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
 
                         <div
                           id={"f" + item.id}
-                          class="accordion-collapse collapse show"
+                          class="accordion-collapse collapse "
                           aria-labelledby="panelsStayOpen-headingOne"
                         >
                           <div class="accordion-body">
@@ -270,12 +270,9 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
               <div className="container">
                 <div class="accordion" id="accordionPanelsStayOpenExample">
                   <div
-                    class="accordion-item"
+                    class="accordion-item padding30px"
                     style={{
                       borderTop: "none",
-                      borderTop: "none",
-                      paddingLeft: "30px",
-                      paddingRight: "30px",
                     }}
                   >
                     <h2
@@ -296,7 +293,7 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
 
                     <div
                       id={"f" + 1}
-                      class="accordion-collapse collapse show"
+                      class="accordion-collapse collapse "
                       aria-labelledby="panelsStayOpen-headingOne"
                     >
                       <div class="accordion-body">
@@ -318,12 +315,9 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
                     </div>
                   </div>
                   <div
-                    class="accordion-item"
+                    class="accordion-item padding30px"
                     style={{
                       borderTop: "none",
-                      borderTop: "none",
-                      paddingLeft: "30px",
-                      paddingRight: "30px",
                     }}
                   >
                     <h2
@@ -344,7 +338,7 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
 
                     <div
                       id={"f" + 2}
-                      class="accordion-collapse collapse show"
+                      class="accordion-collapse collapse "
                       aria-labelledby="panelsStayOpen-headingOne"
                     >
                       <div class="accordion-body">
@@ -366,12 +360,9 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
                     </div>
                   </div>
                   <div
-                    class="accordion-item"
+                    class="accordion-item padding30px"
                     style={{
                       borderTop: "none",
-                      borderTop: "none",
-                      paddingLeft: "30px",
-                      paddingRight: "30px",
                     }}
                   >
                     <h2
@@ -392,7 +383,7 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
 
                     <div
                       id={"f" + 3}
-                      class="accordion-collapse collapse show"
+                      class="accordion-collapse collapse "
                       aria-labelledby="panelsStayOpen-headingOne"
                     >
                       <div class="accordion-body">
@@ -432,11 +423,9 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
                 <div className="container">
                   <div class="accordion" id="accordionPanelsStayOpenExample">
                     <div
-                      className="accordion-item"
+                      className="accordion-item padding30px"
                       style={{
                         borderTop: "none",
-                        paddingLeft: "30px",
-                        paddingRight: "30px",
                       }}
                     >
                       <h2
@@ -457,7 +446,7 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
 
                       <div
                         id={"f" + 1}
-                        class="accordion-collapse collapse show"
+                        class="accordion-collapse collapse "
                         aria-labelledby="panelsStayOpen-headingOne"
                       >
                         <div class="accordion-body">
@@ -478,13 +467,7 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
                         </div>
                       </div>
                     </div>
-                    <div
-                      class="accordion-item"
-                      style={{
-                        paddingLeft: "30px",
-                        paddingRight: "30px",
-                      }}
-                    >
+                    <div class="accordion-item padding30px">
                       <h2
                         className="accordion-header"
                         id="panelsStayOpen-headingOne"
@@ -503,7 +486,7 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
 
                       <div
                         id={"f" + 2}
-                        class="accordion-collapse collapse show"
+                        class="accordion-collapse collapse "
                         aria-labelledby="panelsStayOpen-headingOne"
                       >
                         <div class="accordion-body">
@@ -524,13 +507,7 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
                         </div>
                       </div>
                     </div>
-                    <div
-                      class="accordion-item"
-                      style={{
-                        paddingLeft: "30px",
-                        paddingRight: "30px",
-                      }}
-                    >
+                    <div class="accordion-item padding30px">
                       <h2
                         className="accordion-header"
                         id="panelsStayOpen-headingOne"
@@ -549,7 +526,7 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
 
                       <div
                         id={"f" + 3}
-                        class="accordion-collapse collapse show"
+                        class="accordion-collapse collapse "
                         aria-labelledby="panelsStayOpen-headingOne"
                       >
                         <div class="accordion-body">
@@ -568,19 +545,13 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
                         </div>
                       </div>
                     </div>
-                    <div
-                      class="accordion-item"
-                      style={{
-                        paddingLeft: "30px",
-                        paddingRight: "30px",
-                      }}
-                    >
+                    <div class="accordion-item padding30px">
                       <h2
                         className="accordion-header"
                         id="panelsStayOpen-headingOne"
                       >
                         <button
-                          className="accordion-button"
+                          className="accordion-button "
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target={"#f" + 4}
@@ -593,7 +564,7 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
 
                       <div
                         id={"f" + 4}
-                        class="accordion-collapse collapse show"
+                        class="accordion-collapse collapse "
                         aria-labelledby="panelsStayOpen-headingOne"
                       >
                         <div class="accordion-body">
