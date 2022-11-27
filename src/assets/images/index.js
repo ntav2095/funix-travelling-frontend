@@ -13,3 +13,5 @@ export const home4 = require("./home4.png");
 export const hearder = require("./hearder.PNG");
 export const giangsinh = require("./cho_giang_sinh_o_paris_12.jpg");
 export const giangsinh2 = require("./cho_giang_sinh_o_paris_2.jpg");
+export const imagevietnam = require("./la-co-viet-nam.png");
+export const imageMy = require("./american-flag-g1192aabb9_640.png");

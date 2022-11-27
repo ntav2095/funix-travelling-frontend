@@ -13,15 +13,13 @@ import React, { useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useTranslation } from "react-i18next";
 import useWindowSize from '../../hooks/useResize'
-import imagevietnam from '../../assets/images/la-co-viet-nam.png'
-import imageMy from "../../assets/images/american-flag-g1192aabb9_640.png";
+import {imagevietnam,imageMy} from '../../assets/images'
 // lang
 import i18next from "../../services/languages/i18n";
 
 // css
 import styles from "./Navbar.module.css";
 import "./overrideNavbar.css";
-import useLazyLoading, { loadingImg } from "../../hooks/uselazyLoading";
 import Search from "./Search";
 
 function Header() {

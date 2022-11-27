@@ -53,8 +53,8 @@ function ArticleCategory() {
     <>
       <div className="pt-5 pb-5 bg-white">
         <h1 className="fs-4 text-uppercase text-center pb-2 fw-bold">
-          {id === "Diem-den" && "Điểm Đến hấp dẫn"}
-          {id === "Nhat-ky" && "Nhật ký hành trình"}
+          {id === "diem-den" && "Điểm Đến hấp dẫn"}
+          {id === "nhat-ky" && "Nhật ký hành trình"}
           {id === "cam-nang" && "Cẩm nang du lịch"}
           {id === "trai-nghiem" && "trãi nghiệm - khám phá"}
         </h1>
