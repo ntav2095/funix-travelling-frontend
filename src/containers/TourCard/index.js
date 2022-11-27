@@ -41,7 +41,7 @@ function TourCard({ tour }) {
 
           <p>{tour.journey}</p>
           <p>
-            {tour.days} {translation.days[lang]} {tour.nights}{" "}
+            {tour.duration.days} {translation.days[lang]} {tour.duration.nights}{" "}
             {translation.nights[lang]}
           </p>
           <p>

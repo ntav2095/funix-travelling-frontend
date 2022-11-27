@@ -13,6 +13,8 @@ import React, { useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useTranslation } from "react-i18next";
 import useWindowSize from '../../hooks/useResize'
+import imagevietnam from '../../assets/images/la-co-viet-nam.png'
+import imageMy from "../../assets/images/american-flag-g1192aabb9_640.png";
 // lang
 import i18next from "../../services/languages/i18n";
 
@@ -149,9 +151,13 @@ function Header() {
                             .changeLanguage("vi")
                             .then()
                             .catch((err) => console.error(err));
+                            handleClose();
                         }}
                       >
-                        VN
+                        <h6>VN</h6>
+                        <div className={styles.laco}>
+                          <img src={imagevietnam} />
+                        </div>
                       </button>
                       <button
                         id="btnen"
@@ -165,9 +171,13 @@ function Header() {
                             .changeLanguage("en")
                             .then(() => console.log(2))
                             .catch((err) => console.error(err));
+                            handleClose();
                         }}
                       >
-                        EN
+                        <h6>EN</h6>
+                        <div className={styles.laco}>
+                          <img src={imageMy} />
+                        </div>
                       </button>
 
                       <button
@@ -250,9 +260,13 @@ function Header() {
                           .changeLanguage("vi")
                           .then()
                           .catch((err) => console.error(err));
+                          
                       }}
                     >
-                      VN
+                      <h6>VN</h6>
+                      <div className={styles.laco}>
+                        <img src={imagevietnam} />
+                      </div>
                     </button>
                     <button
                       id="btnen"
@@ -268,7 +282,10 @@ function Header() {
                           .catch((err) => console.error(err));
                       }}
                     >
-                      EN
+                      <h6>EN</h6>
+                      <div className={styles.laco}>
+                        <img src={imageMy} />
+                      </div>
                     </button>
                   </NavItem>
                   <NavItem className="d-flex align-items-center">
@@ -277,7 +294,6 @@ function Header() {
                 </Nav>
               </Collapse>
             </div>
-            
           </Navbar>
           <button
             onClick={topFunction}
@@ -291,7 +307,7 @@ function Header() {
             ></i>
           </button>
         </div>
-        {width<1024 && <Search />}
+        {width < 1024 && <Search />}
       </div>
     </>
   );

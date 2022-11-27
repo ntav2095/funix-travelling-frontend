@@ -21,37 +21,12 @@ import DefaultLayout from "../../layout/DefaultLayout";
 import ArticleList from "./articleList/articleList";
 
 function TravelHandbook() {
-  const location = useLocation();
-  let page = new URLSearchParams(location.search).get("page");
-  if (!page || isNaN(Number(page))) {
-    page = 1;
-  }
- 
-  const navigate = useNavigate();
-
-  const changePageHandler = (num) => {
-    navigate(`/cam-nang-du-lich/?page=${num}`);
-  };
-
-
-
   usePageTitle(`Cẩm nang du lịch || Go Travel`);
 
   return (
     <>
       <div className="container-xl pt-5">
-       
-        <ArticleList page={Number(page)}/>
-       
-          <div className="mt-4">
-            <Pagination
-              pageSize={40}
-              total={2}
-              current={Number(page)}
-              onChange={changePageHandler}
-            />
-          </div>
-     
+        <ArticleList />
       </div>
     </>
   );

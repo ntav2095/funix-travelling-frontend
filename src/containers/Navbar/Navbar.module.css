@@ -93,13 +93,31 @@
   /* margin-left: 16px; */
   background-color: white;
 }
-
+.vi h6,
+.en h6{
+  display: inline-table;
+  margin-top: 2px;
+}
 .langOptions button {
   display: block;
-  padding: 0;
+  padding: 2px 0px 2px 0px;
+  width: 55px;
   font-size: 13px;
   margin-top: 6px;
   margin-right: 8px;
-  margin-left: 16px;
+  margin-left: 8px;
 }
 
+.laco{
+  width: 24px;
+  height: 16px;
+  display: inline-table;
+  margin-left: 3px;
+  margin-bottom: 8px;
+}
+.laco img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+}

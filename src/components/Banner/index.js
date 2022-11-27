@@ -33,7 +33,7 @@ console.log('page path',data)
     }else if(path=="/cam-nang-du-lich"){
       return images.guides
     }
-    return images.vi_tours}
+    return images.vn_tours}
   }
 
   const settings = {
