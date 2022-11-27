@@ -124,13 +124,6 @@ export const categoryApi = {
   }),
 };
 
-export const layoutApi = {
-  get: () => ({
-    method: "GET",
-    url: "/layout/",
-  }),
-};
-
 export const adminApis = {
   article: {
     add: (formData) => ({
@@ -231,9 +224,8 @@ export const adminApis = {
   },
 };
 export const layoutApi = {
- 
   get: () => ({
     url: `/layout`,
     method: "GET",
   }),
-}
+};
