@@ -12,10 +12,12 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import React, { useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useTranslation } from "react-i18next";
-import useWindowSize from '../../hooks/useResize'
-import {imagevietnam,imageMy} from '../../assets/images'
+import useWindowSize from "../../hooks/useResize";
+import { imagevietnam, imageMy } from "../../assets/images";
 // lang
 import i18next from "../../services/languages/i18n";
+
+import { earth as earthSVG } from "../../assets/svgs";
 
 // css
 import styles from "./Navbar.module.css";
@@ -23,9 +25,8 @@ import "./overrideNavbar.css";
 import Search from "./Search";
 
 function Header() {
- 
-  const {width,height}=useWindowSize()
-  console.log(width)
+  const { width, height } = useWindowSize();
+  console.log(width);
   const navigation = useNavigate();
   const [state, setState] = useState({
     isNavOpen: false,
@@ -70,18 +71,6 @@ function Header() {
       }
     });
   }, []);
-
-
-
-  useEffect(() => {
-    if (i18n.language === "vi") {
-      document.getElementById("btnvn").style.display = "none";
-      document.getElementById("btnen").style.display = "block";
-    } else {
-      document.getElementById("btnen").style.display = "none";
-      document.getElementById("btnvn").style.display = "block";
-    }
-  }, [i18n.language]);
 
   return (
     <>
@@ -136,47 +125,20 @@ function Header() {
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <button
-                        id="btnvn"
-                        className={
-                          styles.vi +
-                          " " +
-                          (i18n.language === "vi" ? styles.active : undefined)
-                        }
-                        style={{ display: "inline-block" }}
-                        onClick={() => {
+                      <NavLink
+                        onClick={(e) => {
+                          e.preventDefault();
                           i18n
                             .changeLanguage("vi")
                             .then()
                             .catch((err) => console.error(err));
-                            handleClose();
+                          handleClose();
                         }}
+                        className="nav-link"
+                        to="/"
                       >
-                        <h6>VN</h6>
-                        <div className={styles.laco}>
-                          <img src={imagevietnam} />
-                        </div>
-                      </button>
-                      <button
-                        id="btnen"
-                        className={
-                          styles.en +
-                          " " +
-                          (i18n.language === "en" ? styles.active : undefined)
-                        }
-                        onClick={() => {
-                          i18n
-                            .changeLanguage("en")
-                            .then(() => console.log(2))
-                            .catch((err) => console.error(err));
-                            handleClose();
-                        }}
-                      >
-                        <h6>EN</h6>
-                        <div className={styles.laco}>
-                          <img src={imageMy} />
-                        </div>
-                      </button>
+                        VN
+                      </NavLink>
 
                       <button
                         className={styles.admin}
@@ -246,45 +208,19 @@ function Header() {
                     </NavLink>
                   </NavItem>
                   <NavItem className={styles.langOptions}>
-                    <button
-                      id="btnvn"
-                      className={
-                        styles.vi +
-                        " " +
-                        (i18n.language === "vi" ? styles.active : undefined)
-                      }
-                      onClick={() => {
+                    <NavLink
+                      className="nav-link"
+                      to="/cam-nang-du-lich"
+                      onClick={(e) => {
+                        e.preventDefault();
                         i18n
                           .changeLanguage("vi")
                           .then()
                           .catch((err) => console.error(err));
-                          
                       }}
                     >
-                      <h6>VN</h6>
-                      <div className={styles.laco}>
-                        <img src={imagevietnam} />
-                      </div>
-                    </button>
-                    <button
-                      id="btnen"
-                      className={
-                        styles.en +
-                        " " +
-                        (i18n.language === "en" ? styles.active : undefined)
-                      }
-                      onClick={() => {
-                        i18n
-                          .changeLanguage("en")
-                          .then(() => console.log(2))
-                          .catch((err) => console.error(err));
-                      }}
-                    >
-                      <h6>EN</h6>
-                      <div className={styles.laco}>
-                        <img src={imageMy} />
-                      </div>
-                    </button>
+                      <span> {earthSVG} VN</span>
+                    </NavLink>
                   </NavItem>
                   <NavItem className="d-flex align-items-center">
                     <Search />

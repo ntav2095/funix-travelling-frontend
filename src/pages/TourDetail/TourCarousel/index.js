@@ -18,7 +18,7 @@ const settings = {
   speed: 500,
 };
 
-function TourCarousel({ tour, isLoading }) {
+function TourCarousel({ tour, isLoading, height }) {
   const [index, setIndex] = useState(0);
   const [isShowModal, setIsShowModal] = useState(false);
 
@@ -39,11 +39,13 @@ function TourCarousel({ tour, isLoading }) {
   const closeModalHandler = () => {
     setIsShowModal(false);
   };
-  console.log(tour);
 
   return (
     <>
-      <div className="tourCarousel__container">
+      <div
+        style={{ height: height }}
+        className={styles.container + " tourCarousel__container"}
+      >
         {tour && !isLoading && (
           <Slider
             {...settings}

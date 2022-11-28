@@ -29,6 +29,7 @@
 
 .card ul {
   padding: 0;
+  list-style-type: none;
   padding-left: 16px;
 }
 
@@ -86,6 +87,7 @@
 .contactInfo ul {
   padding: 0;
   margin: 0;
+  list-style-type: none;
 }
 
 .contactInfo li {

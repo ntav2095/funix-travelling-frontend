@@ -16,10 +16,6 @@ button {
   border: none;
 }
 
-ul {
-  list-style-type: none;
-}
-
 a:active {
   color: inherit;
 }
