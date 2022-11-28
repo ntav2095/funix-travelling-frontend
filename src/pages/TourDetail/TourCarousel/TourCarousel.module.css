@@ -1,5 +1,5 @@
 .container {
-  height: 350px;
+  height: 450px;
 }
 
 .container div {
@@ -7,7 +7,6 @@
 }
 
 .image {
-  /* height: 500px; */
   height: 100%;
   width: 100%;
 }
@@ -94,5 +93,3 @@
   background: var(--skeleton-color);
   height: 400px;
 }
-
-/* ============ not found =============  */

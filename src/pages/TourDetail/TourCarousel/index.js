@@ -2,7 +2,11 @@ import React, { useState, useRef } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import Modal from "react-bootstrap/Modal";
 import { brokenImage } from "../../../assets/images";
-import { xMark as closeSVG } from "../../../assets/svgs";
+import {
+  xMark as closeSVG,
+  chevronLeft,
+  chevronRight,
+} from "../../../assets/svgs";
 import Slider from "react-slick";
 
 import styles from "./TourCarousel.module.css";
@@ -13,9 +17,11 @@ const settings = {
   className: "center",
   centerMode: true,
   infinite: true,
-  centerPadding: "30px",
   slidesToShow: 1,
   speed: 500,
+  centerPadding: "60px",
+  nextArrow: <button className={styles.indicator}>{chevronLeft}</button>,
+  prevArrow: <button className={styles.indicator}>{chevronRight}</button>,
 };
 
 function TourCarousel({ tour, isLoading, height }) {
