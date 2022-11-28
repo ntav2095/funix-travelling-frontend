@@ -1,0 +1,92 @@
+//package
+import { Col } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
+
+
+//compument
+import ArticleCard from "../../pages/TravelHandbook/ArticleCard";
+import Arrow from "../customerArrowSlider";
+//hook
+
+//css
+import './article.css'
+import styles from './slider.module.css'
+
+
+function SliderArticle({title,data,loading,category}) {
+
+  const {i18n}=useTranslation()
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    nextArrow: <Arrow />,
+    prevArrow:<Arrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          infinite: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 0,
+        },
+      },
+    ],
+  };
+    return (
+      <div className={styles.container}>
+        <div className={styles.title + " fs-4 text-uppercase pb-2 fw-bold"}>
+          {data?.data.length > 0 && `${title}`}
+        </div>
+        <Slider {...settings}>
+          {!loading &&
+            data?.data.map((article) => (
+              <div
+                key={article._id}
+                className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+              >
+                <ArticleCard article={article} />
+              </div>
+            ))}
+          {!data &&
+            new Array(6).fill(1).map((item, index) => (
+              <Col key={index} className="mb-4">
+                <CardPlaceholder />
+              </Col>
+            ))}
+        </Slider>
+        <Link
+          className={styles.articleCategory}
+          to={`/cam-nang-du-lich/danh-muc/${category}`}
+        >
+          {i18n.language == "vi" ? "Xem tất cả" : "ALL"}
+        </Link>
+      </div>
+    );
+}
+
+export default SliderArticle;

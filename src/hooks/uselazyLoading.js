@@ -11,16 +11,18 @@ console.log('img',img)
   
   
 }
-export default function useLazyLoading(loading){
+export default function useLazyLoading(loadingimage){
   const observer =useMemo(()=>
   new IntersectionObserver((entry) =>entry.forEach(item=>{
       console.log('item',item)
          
       if(item.isIntersecting){
-        loading(item.target)
+        loadingimage(item.target);
         observer.unobserve(item.target)
       }
-    })
+    }),{
+      rootMargin:'30px'
+    }
   ),[])
     
   function lazzy(){

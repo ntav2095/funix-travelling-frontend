@@ -1,10 +1,11 @@
 .title{
-    font-size: 3rem;
+    font-size: 17px;
     font-weight: 600;
+    margin-left: 3px;
     width: 50%;
     display:inline-table
 }
-.search{
+/* .search{
     width: 50%;
     text-align: right;
     display:inline-table;
@@ -37,7 +38,7 @@
     width: 16px;
     display: inline-table;
     background-color: rgba(239,243,246,255);
-}
+} */
 .slider{
     margin-top: 16px;
 }
