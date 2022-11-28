@@ -98,10 +98,10 @@ function ToursList({ cat_params }) {
     //   behavior: "smooth",
     // });
   }, [i18n.language, location.search, cat_params, search]);
-
+console.log(isLoading,data)
   useEffect(() => {
     lazy();
-  }, [isLoading]);
+  }, [data,isLoading]);
 
   const changePageHandler = (num) => {
     if (cat_params.cat === "vi") {
@@ -119,7 +119,7 @@ function ToursList({ cat_params }) {
         <div className="container">
           <div
             className={
-              styles.title + " fs-4 text-uppercase text-center pb-2 fw-bold"
+              styles.title + " fs-5 text-uppercase pb-2 fw-bold"
             }
           >
             {cat_params?.cat_not === "vi" && "Danh sách tour châu Âu"}
@@ -212,20 +212,20 @@ function ToursList({ cat_params }) {
               </Slider>
             </div>
           )}
-         
+          {!isLoading && data?.data.length > 0 && (
             <div className={styles.container}>
               <Slider {...settings}>
-                {data&&
-                data.data
-                  .filter((tour, index) => index > 17)
-                  .map((tour) => (
-                    <div
-                      key={tour._id}
-                      className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
-                    >
-                      <TourCard tour={tour} />
-                    </div>
-                  ))}
+                {data &&
+                  data.data
+                    .filter((tour, index) => index > 17)
+                    .map((tour) => (
+                      <div
+                        key={tour._id}
+                        className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+                      >
+                        <TourCard tour={tour} />
+                      </div>
+                    ))}
                 {!data &&
                   new Array(6).fill(1).map((item, index) => (
                     <Col key={index} className="mb-4">
@@ -234,7 +234,7 @@ function ToursList({ cat_params }) {
                   ))}
               </Slider>
             </div>
-          
+          )}
         </div>
 
         {data && (
