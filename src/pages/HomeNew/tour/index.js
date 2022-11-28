@@ -36,7 +36,7 @@ function Tour(props) {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    initialSlide: 1,
+    initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
