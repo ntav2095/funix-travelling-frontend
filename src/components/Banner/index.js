@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import { brokenImage, hearder as bannerImg } from "../../assets/images";
 import Slider from "react-slick";
 import Placeholder from "../placeholders/Placeholder";
-import {hearder,giangsinh,giangsinh2}from '../../assets/images/index'
+import { chevronLeft ,chevronRight} from "../../assets/svgs";
 import { useLocation } from "react-router-dom";
 import './banner.css'
 import { layoutApi } from "../../services/apis";
 import useAxios from '../../hooks/useAxios'
+
+
 
 function Banner() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -42,7 +44,9 @@ console.log('page path',data)
     slidesToScroll: 1,
     speed: 1000,
     autoplay: true,
-    autoplaySpeed:2500,
+    autoplaySpeed: 2500,
+    nextArrow: <button>{chevronLeft}</button>,
+    prevArrow: <button>{chevronRight}</button>,
   };
 
   const handlerBrokenImg = (e) => {
@@ -57,7 +61,8 @@ console.log('page path',data)
   return (
     <>
     {pathPage.pathname==='/'
-      ?<div className={styles.banner}>
+      ?<div className={styles.banner + ' home__banner'}>
+        
         {!isLoading && (
         <Slider {...settings} >
           {images?.home.map((item,index) => (

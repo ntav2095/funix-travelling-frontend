@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import CardPlaceholder from "../../../components/placeholders/CardPlaceholder";
 import { Col } from "react-bootstrap";
 import {placeholder} from '../../../assets/images'
-
+import { chevronLeft, chevronRight } from "../../../assets/svgs";
 const trans = {
   days: {
     en: "days",
@@ -37,6 +37,8 @@ function Tour(props) {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
+    nextArrow: <button>{chevronLeft}</button>,
+    prevArrow: <button>{chevronRight}</button>,
     responsive: [
       {
         breakpoint: 1024,

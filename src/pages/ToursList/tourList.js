@@ -8,7 +8,7 @@ import usePageTitle from "../../hooks/usePageTitle";
 import TourCard from "../../containers/TourCard";
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
 import DefaultLayout from "../../layout/DefaultLayout";
-
+import {chevronLeft,chevronRight} from '../../assets/svgs'
 // apis
 import useAxios from "../../hooks/useAxios";
 import { tourApi } from "../../services/apis";
@@ -44,6 +44,8 @@ function ToursList({ cat_params }) {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 1,
+    nextArrow: <button>{chevronLeft}</button>,
+    prevArrow: <button>{chevronRight}</button>,
     responsive: [
       {
         breakpoint: 1024,
@@ -191,7 +193,7 @@ function ToursList({ cat_params }) {
               </Slider>
             </div>
           )}
-          <div className={styles.container}>
+          <div className={styles.container + " tourList"}>
             {/* <Slider {...settings}> */}
             {!isLoading && data && (
               <Slider {...settings}>
@@ -216,7 +218,7 @@ function ToursList({ cat_params }) {
             {/* </Slider> */}
           </div>
 
-          <div className={styles.container}>
+          <div className={styles.container + " tourList"}>
             <Slider {...settings}>
               {!isLoading &&
                 data &&
@@ -239,7 +241,7 @@ function ToursList({ cat_params }) {
             </Slider>
           </div>
 
-          <div className={styles.container}>
+          <div className={styles.container + " tourList"}>
             <Slider {...settings}>
               {!isLoading &&
                 data &&
@@ -262,7 +264,7 @@ function ToursList({ cat_params }) {
             </Slider>
           </div>
 
-          <div className={styles.container}>
+          <div className={styles.container + " tourList"}>
             <Slider {...settings}>
               {!isLoading &&
                 data &&
