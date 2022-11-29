@@ -73,13 +73,14 @@ function SliderArticle({title,data,loading,category}) {
                 <ArticleCard article={article} />
               </div>
             ))}
+          </Slider>
           {!data &&
             new Array(6).fill(1).map((item, index) => (
               <Col key={index} className="mb-4">
                 <CardPlaceholder />
               </Col>
             ))}
-        </Slider>
+        
         <Link
           className={styles.articleCategory}
           to={`/cam-nang-du-lich/danh-muc/${category}`}

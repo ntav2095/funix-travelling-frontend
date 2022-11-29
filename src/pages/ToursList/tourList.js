@@ -98,17 +98,17 @@ function ToursList({ cat_params }) {
     //   behavior: "smooth",
     // });
   }, [i18n.language, location.search, cat_params, search]);
-console.log(isLoading,data)
+  console.log(isLoading, data);
   useEffect(() => {
     lazy();
-  }, [data,isLoading]);
-useEffect(()=>{
-  const option =document.querySelectorAll('option#option')
-  console.log(option)
-  option.forEach((item)=>{
-    item.classList.add("select-items");
-  })
-})
+  }, [data, isLoading]);
+  useEffect(() => {
+    const option = document.querySelectorAll("option#option");
+    console.log(option);
+    option.forEach((item) => {
+      item.classList.add("select-items");
+    });
+  });
   const changePageHandler = (num) => {
     if (cat_params.cat === "vi") {
       navigate(`/tours-trong-nuoc/?page=${num}`);
@@ -158,11 +158,44 @@ useEffect(()=>{
           </div>
         </div>
         <div className={styles.slider}>
+          {!data && (
+            <div className={styles.container}>
+              <Slider {...settings}>
+                {new Array(6).fill(1).map((item, index) => (
+                  <Col key={index} className="mb-4">
+                    <CardPlaceholder />
+                  </Col>
+                ))}
+              </Slider>
+            </div>
+          )}
+          {!data && (
+            <div className={styles.container}>
+              <Slider {...settings}>
+                {new Array(6).fill(1).map((item, index) => (
+                  <Col key={index} className="mb-4">
+                    <CardPlaceholder />
+                  </Col>
+                ))}
+              </Slider>
+            </div>
+          )}
+          {!data && (
+            <div className={styles.container}>
+              <Slider {...settings}>
+                {new Array(6).fill(1).map((item, index) => (
+                  <Col key={index} className="mb-4">
+                    <CardPlaceholder />
+                  </Col>
+                ))}
+              </Slider>
+            </div>
+          )}
           <div className={styles.container}>
-            <Slider {...settings}>
-              {!isLoading &&
-                data &&
-                data.data
+            {/* <Slider {...settings}> */}
+            {!isLoading && data && (
+              <Slider {...settings}>
+                {data.data
                   .filter((tour, index) => index < 6)
                   .map((tour) => (
                     <div
@@ -172,13 +205,15 @@ useEffect(()=>{
                       <TourCard tour={tour} />
                     </div>
                   ))}
-              {!data &&
+              </Slider>
+            )}
+            {/* {!data &&
                 new Array(6).fill(1).map((item, index) => (
                   <Col key={index} className="mb-4">
                     <CardPlaceholder />
                   </Col>
-                ))}
-            </Slider>
+                ))} */}
+            {/* </Slider> */}
           </div>
 
           <div className={styles.container}>
@@ -195,12 +230,12 @@ useEffect(()=>{
                       <TourCard tour={tour} />
                     </div>
                   ))}
-              {!data &&
+              {/* {!data &&
                 new Array(6).fill(1).map((item, index) => (
                   <Col key={index} className="mb-4">
                     <CardPlaceholder />
                   </Col>
-                ))}
+                ))} */}
             </Slider>
           </div>
 
@@ -218,12 +253,12 @@ useEffect(()=>{
                       <TourCard tour={tour} />
                     </div>
                   ))}
-              {!data &&
+              {/* {!data &&
                 new Array(6).fill(1).map((item, index) => (
                   <Col key={index} className="mb-4">
                     <CardPlaceholder />
                   </Col>
-                ))}
+                ))} */}
             </Slider>
           </div>
 
@@ -241,12 +276,12 @@ useEffect(()=>{
                       <TourCard tour={tour} />
                     </div>
                   ))}
-              {!data &&
+              {/* {!data &&
                 new Array(6).fill(1).map((item, index) => (
                   <Col key={index} className="mb-4">
                     <CardPlaceholder />
                   </Col>
-                ))}
+                ))} */}
             </Slider>
           </div>
         </div>
