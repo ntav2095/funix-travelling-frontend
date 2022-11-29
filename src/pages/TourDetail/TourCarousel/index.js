@@ -10,23 +10,29 @@ import {
 import Slider from "react-slick";
 
 import styles from "./TourCarousel.module.css";
-import "./override.css";
 import Placeholder from "../../../components/placeholders/Placeholder";
+import "./override.css";
 
-const settings = {
-  className: "center",
-  centerMode: true,
-  infinite: true,
-  slidesToShow: 1,
-  speed: 500,
-  centerPadding: "60px",
-  nextArrow: <button className={styles.indicator}>{chevronLeft}</button>,
-  prevArrow: <button className={styles.indicator}>{chevronRight}</button>,
-};
-
-function TourCarousel({ tour, isLoading, height }) {
+function TourCarousel({
+  tour,
+  isLoading,
+  height,
+  centerPadding = "60px",
+  size = "md",
+}) {
   const [index, setIndex] = useState(0);
   const [isShowModal, setIsShowModal] = useState(false);
+
+  const settings = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    slidesToShow: 1,
+    speed: 500,
+    centerPadding: size === "sm" ? "35px" : "50px",
+    nextArrow: <button>{chevronLeft}</button>,
+    prevArrow: <button>{chevronRight}</button>,
+  };
 
   const handleSelect = (selectedIndex) => {
     if (selectedIndex === -1) {
@@ -46,12 +52,14 @@ function TourCarousel({ tour, isLoading, height }) {
     setIsShowModal(false);
   };
 
+  let classes = styles.container + " tourCarousel__container ";
+  if (size === "sm") {
+    classes += "sm";
+  }
+
   return (
     <>
-      <div
-        style={{ height: height }}
-        className={styles.container + " tourCarousel__container"}
-      >
+      <div style={{ height: height }} className={classes}>
         {tour && !isLoading && (
           <Slider
             {...settings}

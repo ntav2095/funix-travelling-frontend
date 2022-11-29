@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import useSearch from "./useSearch";
+import { brokenImage } from "../../../assets/images";
 
 function Search() {
   const [isFocus, setIsFocus] = useState(false);
@@ -86,7 +87,10 @@ function Search() {
                       }}
                     >
                       <div className={styles.image}>
-                        <img src={tour.thumb} />
+                        <img
+                          src={tour.thumb}
+                          onError={(e) => (e.target.src = brokenImage)}
+                        />
                       </div>
                       <div className={styles.textbox}>
                         <p>{tour.name}</p>
@@ -138,7 +142,10 @@ function Search() {
                       }}
                     >
                       <div className={styles.image}>
-                        <img src={article.thumb} />
+                        <img
+                          src={article.thumb}
+                          onError={(e) => (e.target.src = brokenImage)}
+                        />
                       </div>
                       <div className={styles.textbox}>
                         <p>{article.title}</p>

@@ -42,6 +42,8 @@ function Itinerary({ data }) {
                     height={"250px"}
                     isLoading={false}
                     tour={{ slider: item.images }}
+                    size="sm"
+                    centerPadding="40px"
                   />
                 </div>
               )}
