@@ -7,7 +7,8 @@
   position: relative;
   align-items: center;
   text-align: left;
-  height: 25px;
+  height: 23px;
+  margin-left: 10px;
 }
 
 .searchbar input {
@@ -62,6 +63,7 @@
   margin-bottom: 6px;
   color: #050505;
   transition: 0.2s;
+  text-decoration: none;
 }
 
 .itemsList li a:hover {
@@ -103,10 +105,10 @@
 }
 
 @media screen and (max-width: 991px) {
-
   .searchbar {
     width: 100%;
-    margin-top: 8px;
+    max-width: 300px;
+    /* margin-top: 48px; */
     border-radius: 999px;
     border: 1px solid #ccc;
     padding: 2px 6px;
@@ -117,7 +119,7 @@
     text-align: left;
     height: 25px;
     position: relative;
-    top: 60px;
+    /* top: 60px; */
   }
   .results {
     position: absolute;
@@ -128,10 +130,9 @@
     border-radius: 3.8px;
     padding: 6px;
     border: 1px solid #ccc;
-    max-height: calc(100vh - 100px);
+    max-height: calc(100vh - 150px);
     overflow: auto;
-    width: 300px;
+    width: 100%;
     z-index: 30;
   }
 }
-
