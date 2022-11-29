@@ -14,7 +14,7 @@ import Arrow from "../customerArrowSlider";
 //css
 import './article.css'
 import styles from './slider.module.css'
-
+import {chevronLeft,chevronRight} from '../../assets/svgs'
 
 function SliderArticle({title,data,loading,category}) {
 
@@ -26,8 +26,8 @@ function SliderArticle({title,data,loading,category}) {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
-    nextArrow: <Arrow />,
-    prevArrow:<Arrow />,
+    nextArrow: <button>{chevronLeft}</button>,
+    prevArrow: <button>{chevronRight}</button>,
     responsive: [
       {
         breakpoint: 1024,
@@ -58,7 +58,7 @@ function SliderArticle({title,data,loading,category}) {
     ],
   };
     return (
-      <div className={styles.container}>
+      <div className={styles.container + ' slider_Article'}>
         <div className={styles.title + " fs-4 text-uppercase pb-2 fw-bold"}>
           {`${title}`}
         </div>
@@ -73,13 +73,14 @@ function SliderArticle({title,data,loading,category}) {
                 <ArticleCard article={article} />
               </div>
             ))}
+          </Slider>
           {!data &&
             new Array(6).fill(1).map((item, index) => (
               <Col key={index} className="mb-4">
                 <CardPlaceholder />
               </Col>
             ))}
-        </Slider>
+        
         <Link
           className={styles.articleCategory}
           to={`/cam-nang-du-lich/danh-muc/${category}`}
