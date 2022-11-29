@@ -1,311 +1,122 @@
-// main
-import {
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavbarToggler,
-  Collapse,
-  NavItem,
-} from "reactstrap";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { NavLink, useLocation, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import Offcanvas from "react-bootstrap/Offcanvas";
 import { useTranslation } from "react-i18next";
-import useWindowSize from '../../hooks/useResize'
-import {imagevietnam,imageMy} from '../../assets/images'
 // lang
-import i18next from "../../services/languages/i18n";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import Offcanvas from "react-bootstrap/Offcanvas";
 
 // css
-import styles from "./Navbar.module.css";
-import "./overrideNavbar.css";
+import "./navbar.css";
 import Search from "./Search";
+import NavTopBar from "./NavTopBar";
+
+const navItems = [
+  {
+    label: {
+      vi: "TRANG CHỦ",
+      en: "HOME",
+    },
+    to: "/",
+  },
+  {
+    label: {
+      vi: "DU LỊCH CHÂU ÂU",
+      en: "EUROPE TOURS",
+    },
+    to: "/tours-chau-au",
+  },
+  {
+    label: {
+      vi: "DU LỊCH TRONG NƯỚC",
+      en: "VIETNAM TOURS",
+    },
+    to: "/tours-trong-nuoc",
+  },
+  {
+    label: {
+      vi: "DỊCH VỤ VISA",
+      en: "VISA SERVICES",
+    },
+    to: "/dich-vu-visa",
+  },
+  {
+    label: {
+      vi: "GIỚI THIỆU",
+      en: "ABOUT",
+    },
+    to: "/gioi-thieu",
+  },
+  {
+    label: {
+      vi: "GUIDES",
+      en: "GUIDES",
+    },
+    to: "/guides",
+  },
+];
 
 function Header() {
- 
-  const {width,height}=useWindowSize()
-  console.log(width)
-  const navigation = useNavigate();
-  const [state, setState] = useState({
-    isNavOpen: false,
-    search: "",
-    show: false,
-  });
+  const [expanded, setExpanded] = useState(false);
 
-  const { i18n } = useTranslation();
-
-  function handleClose() {
-    setState({
-      show: !state.show,
-    });
-  }
-
-  function handleShow() {
-    setState({
-      show: !state.show,
-    });
-  }
-
-  function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
+  const location = useLocation();
+  const lang = useTranslation().i18n.language;
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      const container = document.getElementById("container-navbar");
-      if (document.documentElement.scrollTop > 100) {
-        container.classList.add(styles.fixed);
-      } else if (document.documentElement.scrollTop <= 10) {
-        container.classList.remove(styles.fixed);
-      }
-      if (
-        document.body.scrollTop > 100 ||
-        document.documentElement.scrollTop > 100
-      ) {
-        document.getElementById("Btn").style.display = "block";
-      } else {
-        document.getElementById("Btn").style.display = "none";
-      }
-    });
-  }, []);
-
-
-
-  useEffect(() => {
-    if (i18n.language === "vi") {
-      document.getElementById("btnvn").style.display = "none";
-      document.getElementById("btnen").style.display = "block";
-    } else {
-      document.getElementById("btnen").style.display = "none";
-      document.getElementById("btnvn").style.display = "block";
+    if (expanded) {
+      setExpanded(false);
     }
-  }, [i18n.language]);
-
+  }, [location]);
   return (
     <>
-      <div className={styles.navbar + " container-xl"}>
-        <div id="container-navbar" className={styles.container}>
-          <Navbar id="navbar" expand="lg" className="container-xl ">
-            <div className="container">
-              <NavbarToggler onClick={handleShow} />
-              <Offcanvas show={state.show} onHide={handleClose}>
-                <Offcanvas.Header closeButton></Offcanvas.Header>
-                <Offcanvas.Body>
-                  <Nav navbar>
-                    <NavItem className="nav-bar-offcanvat">
-                      <NavLink className="nav-link" to="/">
-                        {i18next.t("header.home")}
-                      </NavLink>
-                    </NavItem>
-
-                    <NavItem className="nav-bar-offcanvat">
-                      <NavLink className="nav-link" to="/ve-cong-ty">
-                        {i18next.t("header.about")}
-                      </NavLink>
-                    </NavItem>
-
-                    <NavItem className="nav-bar-offcanvat">
-                      <NavLink className="nav-link" to="/lien-he">
-                        {i18next.t("header.contact")}
-                      </NavLink>
-                    </NavItem>
-
-                    <NavItem className="nav-bar-offcanvat">
-                      <NavLink className="nav-link" to="/tours-chau-au">
-                        {i18next.t("header.euTours")}
-                      </NavLink>
-                    </NavItem>
-
-                    <NavItem className="nav-bar-offcanvat">
-                      <NavLink className="nav-link" to="/tours-trong-nuoc">
-                        {i18next.t("header.viTours")}
-                      </NavLink>
-                    </NavItem>
-
-                    <NavItem className="nav-bar-offcanvat">
-                      <NavLink className="nav-link" to="/dich-vu-visa">
-                        {i18next.t("header.visaService")}
-                      </NavLink>
-                    </NavItem>
-
-                    <NavItem className="nav-bar-offcanvat">
-                      <NavLink className="nav-link" to="/cam-nang-du-lich">
-                        {i18next.t("header.travelHandbook")}
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <button
-                        id="btnvn"
-                        className={
-                          styles.vi +
-                          " " +
-                          (i18n.language === "vi" ? styles.active : undefined)
-                        }
-                        style={{ display: "inline-block" }}
-                        onClick={() => {
-                          i18n
-                            .changeLanguage("vi")
-                            .then()
-                            .catch((err) => console.error(err));
-                            handleClose();
-                        }}
-                      >
-                        <h6>VN</h6>
-                        <div className={styles.laco}>
-                          <img src={imagevietnam} />
-                        </div>
-                      </button>
-                      <button
-                        id="btnen"
-                        className={
-                          styles.en +
-                          " " +
-                          (i18n.language === "en" ? styles.active : undefined)
-                        }
-                        onClick={() => {
-                          i18n
-                            .changeLanguage("en")
-                            .then(() => console.log(2))
-                            .catch((err) => console.error(err));
-                            handleClose();
-                        }}
-                      >
-                        <h6>EN</h6>
-                        <div className={styles.laco}>
-                          <img src={imageMy} />
-                        </div>
-                      </button>
-
-                      <button
-                        className={styles.admin}
-                        onClick={() => {
-                          navigation("/admin");
-                        }}
-                      >
-                        {" "}
-                        <i
-                          className="fas fa-user-cog"
-                          style={{ fontSize: "1.5rem" }}
-                        ></i>
-                      </button>
-                    </NavItem>
-                  </Nav>
-                </Offcanvas.Body>
-              </Offcanvas>
-
-              <NavbarBrand className="mr-auto" href="/">
-                <h1 className={styles.logo + " fs-4 fw-bold m-0"}>
-                  TRAVEL JOYA
-                </h1>
-              </NavbarBrand>
-
-              <Collapse isOpen={state.isNavOpen} navbar>
-                <Nav navbar>
-                  <NavItem>
-                    <NavLink className="nav-link" to="/" end>
-                      {i18next.t("header.home")}
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavDropdown
-                      title={i18next.t("header.intro")}
-                      id="basic-nav-dropdown"
-                    >
-                      <NavDropdown.Item>
-                        <NavLink className="nav-link" to="/ve-cong-ty">
-                          {i18next.t("header.about")}
-                        </NavLink>
-                      </NavDropdown.Item>
-                      <NavDropdown.Item to="/lien-he">
-                        <NavLink className="nav-link" to="/lien-he">
-                          {i18next.t("header.contact")}
-                        </NavLink>
-                      </NavDropdown.Item>
-                    </NavDropdown>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink className="nav-link" to="/tours-chau-au">
-                      {i18next.t("header.euTours")}
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink className="nav-link" to="/tours-trong-nuoc">
-                      {i18next.t("header.viTours")}
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink className="nav-link" to="/dich-vu-visa">
-                      {i18next.t("header.visaService")}
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink className="nav-link" to="/cam-nang-du-lich">
-                      {i18next.t("header.travelHandbook")}
-                    </NavLink>
-                  </NavItem>
-                  <NavItem className={styles.langOptions}>
-                    <button
-                      id="btnvn"
-                      className={
-                        styles.vi +
-                        " " +
-                        (i18n.language === "vi" ? styles.active : undefined)
-                      }
-                      onClick={() => {
-                        i18n
-                          .changeLanguage("vi")
-                          .then()
-                          .catch((err) => console.error(err));
-                          
-                      }}
-                    >
-                      <h6>VN</h6>
-                      <div className={styles.laco}>
-                        <img src={imagevietnam} />
-                      </div>
-                    </button>
-                    <button
-                      id="btnen"
-                      className={
-                        styles.en +
-                        " " +
-                        (i18n.language === "en" ? styles.active : undefined)
-                      }
-                      onClick={() => {
-                        i18n
-                          .changeLanguage("en")
-                          .then(() => console.log(2))
-                          .catch((err) => console.error(err));
-                      }}
-                    >
-                      <h6>EN</h6>
-                      <div className={styles.laco}>
-                        <img src={imageMy} />
-                      </div>
-                    </button>
-                  </NavItem>
-                  <NavItem className="d-flex align-items-center">
-                    <Search />
-                  </NavItem>
-                </Nav>
-              </Collapse>
-            </div>
-          </Navbar>
-          <button
-            onClick={topFunction}
-            id="Btn"
-            className={styles.btn}
-            title="Go to top"
+      <div className="travel__navbar">
+        <div className="container-fluid travel__navbar__inner">
+          <NavTopBar />
+          <Navbar
+            expand="lg"
+            bg="white"
+            expanded={expanded}
+            onToggle={() => setExpanded((prev) => !prev)}
           >
-            <i
-              className="fas fa-arrow-circle-up"
-              style={{ fontSize: "30px" }}
-            ></i>
-          </button>
+            <Container fluid>
+              <Navbar.Brand>
+                <Link to="/" className="travel__navbar__branch">
+                  <h5 className="m-0 text-center">JOYA LOGO</h5>
+                  <h6 className="m-0 text-center">Slogan here</h6>
+                </Link>
+              </Navbar.Brand>
+
+              <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
+
+              <Navbar.Offcanvas placement="end">
+                <Offcanvas.Header closeButton>
+                  <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
+                    <div className="travel__navbar__branch">
+                      <h5 className="m-0 text-center">JOYA LOGO</h5>
+                      <h6 className="m-0 text-center">Slogan here</h6>
+                    </div>
+                  </Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                  <Nav className="justify-content-end flex-grow-1 pe-3">
+                    {navItems.map((item) => (
+                      <NavLink key={item.to} end to={item.to}>
+                        {item.label[lang]}
+                      </NavLink>
+                    ))}
+                  </Nav>
+                  <Form className="d-lg-flex align-items-center d-none">
+                    <Search />
+                  </Form>
+                </Offcanvas.Body>
+              </Navbar.Offcanvas>
+            </Container>
+          </Navbar>
+
+          {/* {width < 1024 && <Search />} */}
         </div>
-        {width < 1024 && <Search />}
       </div>
     </>
   );

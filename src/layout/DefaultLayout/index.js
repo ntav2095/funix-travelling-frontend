@@ -6,14 +6,13 @@ import Navbar from "../../containers/Navbar";
 import Footer from "../../containers/Footer";
 
 function DefaultLayout() {
-  
   return (
     <>
       <Navbar />
       <div className={styles.main}>
+        <Banner />
         <div className={styles.body + " container-fluid"}>
-          <Banner />
-          <Outlet  />
+          <Outlet />
         </div>
 
         <Footer />

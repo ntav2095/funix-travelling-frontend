@@ -1,5 +1,13 @@
+.container {
+  height: 450px;
+}
+
+.container div {
+  height: 100%;
+}
+
 .image {
-  height: 500px;
+  height: 100%;
   width: 100%;
 }
 
@@ -85,5 +93,3 @@
   background: var(--skeleton-color);
   height: 400px;
 }
-
-/* ============ not found =============  */
