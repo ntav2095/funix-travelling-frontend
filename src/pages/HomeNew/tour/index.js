@@ -74,7 +74,7 @@ function Tour(props) {
   return (
     <div className="home__tours">
       <div className={styles.title}>
-        <h3 className="fs-5 pb-2">{title}</h3>
+        <p className="fs-5 ">{title}</p>
       </div>
       <div className={styles.container}>
         <Slider {...settings}>

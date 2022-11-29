@@ -40,7 +40,7 @@
     background-color: rgba(239,243,246,255);
 } */
 .slider{
-    margin-top: 16px;
+    margin: 43px 14px !important;
 }
 .articleCategory{
     width: 9rem;

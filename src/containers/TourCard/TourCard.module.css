@@ -1,12 +1,13 @@
 .card {
   box-shadow: var(--box-shadow);
-  border-radius: 3.8px;
+  border-radius: 12px;
   overflow: hidden;
   color: #050505;
   max-width: 360px;
   margin: 0 auto;
   box-shadow: var(--box-shadow-border);
   height: 100%;
+
 }
 
 .image {

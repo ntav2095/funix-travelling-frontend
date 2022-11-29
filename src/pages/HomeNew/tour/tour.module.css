@@ -1,7 +1,7 @@
-.title h3 {
+.title p {
   font-size: 17px;
   font-weight: 600;
-  margin-left: 5px;
+  margin-left: 14px;
 }
 
 .carouselItem {
@@ -12,9 +12,8 @@
 .carouselItem > a {
   display: block;
   color: #050505;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: var(--box-shadow-border);
-  border-radius: 6px;
   overflow: hidden;
 }
 
