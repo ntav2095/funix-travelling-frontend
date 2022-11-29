@@ -13,7 +13,7 @@ import useAxios from "../../../hooks/useAxios";
 
 
 // css
-
+import './article.css'
 import Pagination from "../../../containers/Pagination";
 import { useTranslation } from "react-i18next";
 import { postsApi } from "../../../services/apis";
@@ -51,8 +51,8 @@ function ArticleCategory() {
 
   return (
     <>
-      <div className="pt-5 pb-5 bg-white">
-        <h1 className="fs-4 text-uppercase text-center pb-2 fw-bold">
+      <div className="containerArticle">
+        <h1 className="fs-4 text-uppercase pb-2 fw-bold">
           {id === "diem-den" && "Điểm Đến hấp dẫn"}
           {id === "nhat-ky" && "Nhật ký hành trình"}
           {id === "cam-nang" && "Cẩm nang du lịch"}

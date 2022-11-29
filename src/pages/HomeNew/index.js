@@ -25,11 +25,11 @@ function HomeNew() {
 },[isLoading]);
   return (
     <>
-      <div className="mb-5">
+      <div className="containerHomeabout">
         <HomeHeader />
       </div>
 
-      <div className="mb-5">
+      <div className="containerHome">
         <Tour
           tour={data?.data}
           title={i18next.t("homeMain.titleTourChauAu")}
@@ -38,7 +38,7 @@ function HomeNew() {
         />
       </div>
 
-      <div className="mb-5">
+      <div className="containerHome">
         <Tour
           tour={data?.data}
           title={i18next.t("homeMain.titleTourTrongNuoc")}
@@ -47,7 +47,7 @@ function HomeNew() {
         />
       </div>
 
-      <div className="mb-5">
+      <div className="containerHome">
         <Tour
           tour={data?.data}
           title={i18next.t("homeMain.titleCamNang")}

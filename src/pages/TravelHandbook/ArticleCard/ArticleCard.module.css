@@ -1,7 +1,7 @@
 .card {
   box-shadow: var(--box-shadow);
   box-shadow: var(--box-shadow-border);
-  border-radius: 3.8px;
+  border-radius: 12px;
   overflow: hidden;
   color: #050505;
   max-width: 360px;

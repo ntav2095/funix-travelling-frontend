@@ -50,8 +50,6 @@ function ArticleList({ page }) {
   }, [isLoading1, isLoading2, isLoading3, isLoading4]);
 
   return (
-    <>
-      <div className="pt-5 pb-5 bg-white">
         <div className={styles.slider}>
           <SliderArticle
             title={"điểm dến hấp dẫn"}
@@ -82,8 +80,7 @@ function ArticleList({ page }) {
             error={error4}
           />
         </div>
-      </div>
-    </>
+     
   );
 }
 

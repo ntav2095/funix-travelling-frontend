@@ -60,11 +60,12 @@ function SliderArticle({title,data,loading,category}) {
     return (
       <div className={styles.container}>
         <div className={styles.title + " fs-4 text-uppercase pb-2 fw-bold"}>
-          {data?.data.length > 0 && `${title}`}
+          {`${title}`}
         </div>
         <Slider {...settings}>
-          {!loading &&
-            data?.data.map((article) => (
+          {!loading&&
+            data&&
+            data.data.map((article) => (
               <div
                 key={article._id}
                 className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"

@@ -1,3 +1,14 @@
+.containerTourList{
+    width: 100%;
+    max-width: 1500px;
+}
+
+.containerTitle{
+    margin: 43px 14px !important;
+    padding: 0px 20px !important;
+    margin: auto;
+}
+
 @media screen and (max-width:779px) {
     .TourList_title__AtY-u {
         font-size: 3rem;
@@ -46,7 +57,7 @@
 }
 
 .slick-initialized .slick-slide {
-    padding: 0px 8px 0px 8px;
+    padding: 0px 16px 0px 16px;
     display: block;
 }
 

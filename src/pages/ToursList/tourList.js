@@ -102,7 +102,13 @@ console.log(isLoading,data)
   useEffect(() => {
     lazy();
   }, [data,isLoading]);
-
+useEffect(()=>{
+  const option =document.querySelectorAll('option#option')
+  console.log(option)
+  option.forEach((item)=>{
+    item.classList.add("select-items");
+  })
+})
   const changePageHandler = (num) => {
     if (cat_params.cat === "vi") {
       navigate(`/tours-trong-nuoc/?page=${num}`);
@@ -115,24 +121,30 @@ console.log(isLoading,data)
 
   return (
     <>
-      <div className="pt-5 pb-5 bg-white">
-        <div className="container">
-          <div
-            className={
-              styles.title + " fs-5 text-uppercase pb-2 fw-bold"
-            }
-          >
+      <div className="containerTourList">
+        <div className="containerTitle">
+          <div className={styles.title + " fs-5 text-uppercase pb-2 fw-bold"}>
             {cat_params?.cat_not === "vi" && "Danh sách tour châu Âu"}
             {cat_params?.cat === "vi" && "Danh sách tour trong nước"}
           </div>
           <div className={styles.search}>
             <div className={styles.search_container}>
               <select onChange={hangdleChangeSelect}>
-                <option value={"time-asc"}>Mới nhất</option>
-                <option value={"price-asc"}>Giá tăng dần</option>
-                <option value={"price-desc"}>Giá giảm dần</option>
-                <option value={"duration-desc"}>Số ngày giảm dần</option>
-                <option value={"duration-asc"}>Số ngày tăng dần</option>
+                <option id="option" value={"time-asc"}>
+                  Mới nhất
+                </option>
+                <option id="option" value={"price-asc"}>
+                  Giá tăng dần
+                </option>
+                <option id="option" value={"price-desc"}>
+                  Giá giảm dần
+                </option>
+                <option id="option" value={"duration-desc"}>
+                  Số ngày giảm dần
+                </option>
+                <option id="option" value={"duration-asc"}>
+                  Số ngày tăng dần
+                </option>
               </select>
               <input
                 type="text"
@@ -146,10 +158,11 @@ console.log(isLoading,data)
           </div>
         </div>
         <div className={styles.slider}>
-          {!isLoading && data?.data.length > 0 && (
-            <div className={styles.container}>
-              <Slider {...settings}>
-                {data.data
+          <div className={styles.container}>
+            <Slider {...settings}>
+              {!isLoading &&
+                data &&
+                data.data
                   .filter((tour, index) => index < 6)
                   .map((tour) => (
                     <div
@@ -159,19 +172,20 @@ console.log(isLoading,data)
                       <TourCard tour={tour} />
                     </div>
                   ))}
-                {!data &&
-                  new Array(6).fill(1).map((item, index) => (
-                    <Col key={index} className="mb-4">
-                      <CardPlaceholder />
-                    </Col>
-                  ))}
-              </Slider>
-            </div>
-          )}
-          {!isLoading && data?.data.length > 0 && (
-            <div className={styles.container}>
-              <Slider {...settings}>
-                {data.data
+              {!data &&
+                new Array(6).fill(1).map((item, index) => (
+                  <Col key={index} className="mb-4">
+                    <CardPlaceholder />
+                  </Col>
+                ))}
+            </Slider>
+          </div>
+
+          <div className={styles.container}>
+            <Slider {...settings}>
+              {!isLoading &&
+                data &&
+                data.data
                   .filter((tour, index) => index > 5 && index < 12)
                   .map((tour) => (
                     <div
@@ -181,19 +195,20 @@ console.log(isLoading,data)
                       <TourCard tour={tour} />
                     </div>
                   ))}
-                {!data &&
-                  new Array(6).fill(1).map((item, index) => (
-                    <Col key={index} className="mb-4">
-                      <CardPlaceholder />
-                    </Col>
-                  ))}
-              </Slider>
-            </div>
-          )}
-          {!isLoading && data?.data.length > 0 && (
-            <div className={styles.container}>
-              <Slider {...settings}>
-                {data.data
+              {!data &&
+                new Array(6).fill(1).map((item, index) => (
+                  <Col key={index} className="mb-4">
+                    <CardPlaceholder />
+                  </Col>
+                ))}
+            </Slider>
+          </div>
+
+          <div className={styles.container}>
+            <Slider {...settings}>
+              {!isLoading &&
+                data &&
+                data.data
                   .filter((tour, index) => index > 11 && index < 18)
                   .map((tour) => (
                     <div
@@ -203,38 +218,37 @@ console.log(isLoading,data)
                       <TourCard tour={tour} />
                     </div>
                   ))}
-                {!data &&
-                  new Array(6).fill(1).map((item, index) => (
-                    <Col key={index} className="mb-4">
-                      <CardPlaceholder />
-                    </Col>
+              {!data &&
+                new Array(6).fill(1).map((item, index) => (
+                  <Col key={index} className="mb-4">
+                    <CardPlaceholder />
+                  </Col>
+                ))}
+            </Slider>
+          </div>
+
+          <div className={styles.container}>
+            <Slider {...settings}>
+              {!isLoading &&
+                data &&
+                data.data
+                  .filter((tour, index) => index > 17)
+                  .map((tour) => (
+                    <div
+                      key={tour._id}
+                      className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+                    >
+                      <TourCard tour={tour} />
+                    </div>
                   ))}
-              </Slider>
-            </div>
-          )}
-          {!isLoading && data?.data.length > 0 && (
-            <div className={styles.container}>
-              <Slider {...settings}>
-                {data &&
-                  data.data
-                    .filter((tour, index) => index > 17)
-                    .map((tour) => (
-                      <div
-                        key={tour._id}
-                        className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
-                      >
-                        <TourCard tour={tour} />
-                      </div>
-                    ))}
-                {!data &&
-                  new Array(6).fill(1).map((item, index) => (
-                    <Col key={index} className="mb-4">
-                      <CardPlaceholder />
-                    </Col>
-                  ))}
-              </Slider>
-            </div>
-          )}
+              {!data &&
+                new Array(6).fill(1).map((item, index) => (
+                  <Col key={index} className="mb-4">
+                    <CardPlaceholder />
+                  </Col>
+                ))}
+            </Slider>
+          </div>
         </div>
 
         {data && (

@@ -1,5 +1,5 @@
 .banner {
-  height: 400px;
+  height: 500px;
 }
 
 .banner img {
@@ -9,8 +9,7 @@
   object-position: center;
 }
 .image {
-  
-  height: 400px;
+  height: 500px;
   width: 100%;
 }
 

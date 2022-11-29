@@ -1,6 +1,18 @@
-.container {
+.containerHome {
     width: 100%;
-    max-width: 1170px;
-    margin: 0 auto;
-    padding: 0px 8px;
+    max-width: 1500px;
+    margin-bottom:  43px  !important;
+    padding: 0px 20px !important;
+    margin: auto;
+    
   }
+.containerHomeabout{
+  width: 100%;
+    max-width: 1500px;
+    margin-bottom:  43px !important;
+    margin: auto;
+}
+   /* .hearder_hearder__aB9Dl {
+    margin-top: 16px;
+    width: 100%;
+   } */
