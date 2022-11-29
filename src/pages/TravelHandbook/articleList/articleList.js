@@ -13,7 +13,7 @@ import { postsApi } from "../../../services/apis";
 
 // css
 import styles from "./articleList.module.css";
-import "./article.css";
+
 import SliderArticle from "../../../containers/SliderArticle";
 
 function ArticleList({ page }) {

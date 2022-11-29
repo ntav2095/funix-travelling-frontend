@@ -3,11 +3,15 @@ import React, { useEffect, useState } from "react";
 import { brokenImage, hearder as bannerImg } from "../../assets/images";
 import Slider from "react-slick";
 import Placeholder from "../placeholders/Placeholder";
-import { hearder, giangsinh, giangsinh2 } from "../../assets/images/index";
+import { chevronLeft ,chevronRight} from "../../assets/svgs";
 import { useLocation } from "react-router-dom";
 import "./banner.css";
 import { layoutApi } from "../../services/apis";
 import useAxios from "../../hooks/useAxios";
+
+
+
+
 
 function Banner() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -43,6 +47,8 @@ function Banner() {
     speed: 1000,
     autoplay: true,
     autoplaySpeed: 2500,
+    nextArrow: <button>{chevronLeft}</button>,
+    prevArrow: <button>{chevronRight}</button>,
   };
 
   const handlerBrokenImg = (e) => {
@@ -55,28 +61,36 @@ function Banner() {
 
   return (
     <>
-      {pathPage.pathname === "/" ? (
-        <div className={styles.banner}>
-          {!isLoading && (
-            <Slider {...settings}>
-              {images?.home.map((item, index) => (
-                <div key={index} className={styles.image}>
-                  <img src={item} alt={"banner"} onError={handlerBrokenImg} />
-                </div>
-              ))}
-            </Slider>
-          )}
-          {isLoading && (
-            <Slider {...settings}>
-              {new Array(4).fill(1).map((item, index) => (
-                <div key={index} className={styles.image}>
-                  <Placeholder width="100%" height="100%" />
-                </div>
-              ))}
-            </Slider>
-          )}
-        </div>
-      ) : (
+    {pathPage.pathname==='/'
+      ?<div className={styles.banner + ' home__banner'}>
+        
+        {!isLoading && (
+        <Slider {...settings} >
+          {images?.home.map((item,index) => (
+          <div
+            key={index}
+            className={styles.image}
+          >
+            <img src={item} alt={'baner'} onError={handlerBrokenImg} />
+          </div>
+          ))}
+        </Slider>)}
+        {isLoading && (
+          <Slider
+            {...settings}
+          >
+            {new Array(4).fill(1).map((item, index) => (
+              <div
+                key={index}
+                className={styles.image}
+              >
+                <Placeholder width="100%" height="100%" />
+              </div>
+            ))}
+          </Slider>
+        )}
+      </div>
+      :(
         <div className={styles.banner}>
           <img
             src={handleBanner()}
