@@ -1,5 +1,50 @@
 import styles from "./Footer.module.css";
 
+const footerItems = [
+  {
+    title: "CÔNG TY CỔ PHẦN JOYA",
+    items: [
+      {
+        url: "",
+        label: `Địa chỉ: Hoa Sữa 11-52 Vinhomes Riveside, Long Biên, Hà Nội.`,
+      },
+      {
+        url: "",
+        label: `Điện thoại: 123456789 | Hotline : 123456789`,
+      },
+      {
+        url: "",
+        label: `Email: info@joya.vn`,
+      },
+      {
+        url: "",
+        label: `Website: joya.vn`,
+      },
+    ],
+  },
+  {
+    title: "DU LỊCH",
+    items: [
+      {
+        url: "/tours-chau-au",
+        label: `Du lịch châu Âu`,
+      },
+      {
+        url: "",
+        label: `Du lịch trong nước`,
+      },
+      {
+        url: "",
+        label: `Email: info@joya.vn`,
+      },
+      {
+        url: "",
+        label: `Website: joya.vn`,
+      },
+    ],
+  },
+];
+
 export default function Footer() {
   return (
     <div className={styles.footer}>
@@ -61,9 +106,6 @@ export default function Footer() {
             <i class="fab fa-youtube"></i> Youtube
           </li>
         </div>
-      </div>
-      <div className="container-xl">
-        <p className="m-0 p-1">Copyright Funix</p>
       </div>
     </div>
   );

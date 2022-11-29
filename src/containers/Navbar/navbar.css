@@ -14,6 +14,15 @@
 }
 
 /* =========== logo =============  */
+.travel__navbar__branch {
+  text-decoration: none;
+  color: #050505;
+}
+
+.travel__navbar__branch:hover {
+  color: #050505;
+}
+
 .travel__navbar__branch h5 {
   font-size: 20px;
   font-weight: 600;

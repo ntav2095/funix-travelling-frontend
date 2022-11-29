@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 // lang
@@ -82,10 +82,10 @@ function Header() {
           >
             <Container fluid>
               <Navbar.Brand>
-                <div className="travel__navbar__branch">
+                <Link to="/" className="travel__navbar__branch">
                   <h5 className="m-0 text-center">JOYA LOGO</h5>
                   <h6 className="m-0 text-center">Slogan here</h6>
-                </div>
+                </Link>
               </Navbar.Brand>
 
               <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />

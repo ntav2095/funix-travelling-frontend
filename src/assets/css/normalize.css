@@ -19,3 +19,7 @@ button {
 a:active {
   color: inherit;
 }
+
+a {
+  text-decoration: none;
+}
