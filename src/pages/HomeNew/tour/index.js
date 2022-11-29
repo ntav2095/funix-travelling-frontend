@@ -8,7 +8,7 @@ import "./tour.css";
 import { useTranslation } from "react-i18next";
 import CardPlaceholder from "../../../components/placeholders/CardPlaceholder";
 import { Col } from "react-bootstrap";
-import {placeholder} from '../../../assets/images'
+import { placeholder } from "../../../assets/images";
 import { chevronLeft, chevronRight } from "../../../assets/svgs";
 const trans = {
   days: {
@@ -97,8 +97,8 @@ function Tour(props) {
                     <h5 className="text-uppercase">{item.name}</h5>
                     <p>{item.countries || item.journey}</p>
                     <p>
-                      {item.days} {trans.days[lang]} {item.nights}{" "}
-                      {trans.nights[lang]}
+                      {item.duration.days} {trans.days[lang]}{" "}
+                      {item.duration.nights} {trans.nights[lang]}
                     </p>
                     <p>
                       {trans.full_package[lang]}{" "}
