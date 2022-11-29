@@ -34,7 +34,7 @@ function NavTopBar() {
         </label>
       </div>
 
-      <div className="d-flex justify-content-end d-lg-none w-100">
+      <div className="d-none justify-content-end d-lg-none d-md-flex  w-100">
         <Search />
       </div>
     </div>

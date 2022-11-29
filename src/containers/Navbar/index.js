@@ -54,7 +54,7 @@ const navItems = [
       vi: "GUIDES",
       en: "GUIDES",
     },
-    to: "/guides",
+    to: "/cam-nang-du-lich",
   },
 ];
 
@@ -116,6 +116,9 @@ function Header() {
           </Navbar>
 
           {/* {width < 1024 && <Search />} */}
+          <div className="d-block d-md-none pb-2 w-100">
+            <Search />
+          </div>
         </div>
       </div>
     </>
