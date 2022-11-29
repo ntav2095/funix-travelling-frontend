@@ -1,48 +1,29 @@
 .footer {
   background: #000;
-  color: rgb(239, 239, 239);
-  padding: 16px;
-}
-.footer >div>div{
-  margin-top: 8px;
-}
-.footer >div>div>div>li>span{
-  font-weight: 600;
-}
-.footer >div>div>ul>div>li>span{
-  font-weight: 600;
-}
-.footer >div>div>li>i{
-  width: 17px;
-  font-size: 15px;
-}
-.footer p {
-  animation-name: example;
-  text-align: center;
-  animation-duration: 68s;
-  animation-iteration-count: infinite;
+  color: white;
+  font-size: 13px;
 }
 
-@keyframes example {
-  0% {
-    color: red;
-  }
-  25% {
-    color: yellow;
-  }
-  50% {
-    color: blue;
-  }
-  75% {
-    color: green;
-  }
-  100% {
-    color: red;
-  }
+.inner {
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
-.footer_colum{
- 
-  display:inline-table;
+.footer ul {
   list-style-type: none;
+  padding: 0;
+}
+
+.footer h6 {
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+.footer a {
+  color: white;
+}
+
+.footer a:hover {
+  color: white;
+  text-decoration: underline;
 }

@@ -1,110 +1,212 @@
+import { Link } from "react-router-dom";
+import FooterGroup from "./FooterGroup";
 import styles from "./Footer.module.css";
+import { useTranslation } from "react-i18next";
 
-const footerItems = [
-  {
-    title: "CÔNG TY CỔ PHẦN JOYA",
+const footerItems = {
+  contact: {
+    title: {
+      vi: "CÔNG TY CỔ PHẦN JOYA",
+      en: "JOYA JOINT STOCK COMPANY",
+    },
+    classes: "col-12 col-sm-9 col-lg-5",
     items: [
       {
         url: "",
-        label: `Địa chỉ: Hoa Sữa 11-52 Vinhomes Riveside, Long Biên, Hà Nội.`,
+        label: {
+          en: `Address: Hoa Sua 11-52 Vinhomes Riveside, Long Bien, Ha Noi.`,
+          vi: `Địa chỉ: Hoa Sữa 11-52 Vinhomes Riveside, Long Biên, Hà Nội.`,
+        },
       },
       {
         url: "",
-        label: `Điện thoại: 123456789 | Hotline : 123456789`,
+        label: {
+          vi: `Điện thoại: 123456789 | Hotline : 123456789`,
+          en: `Phone number: 123456789 | Hotline : 123456789`,
+        },
       },
       {
         url: "",
-        label: `Email: info@joya.vn`,
+        label: {
+          en: `Email: info@joya.vn`,
+          vi: `Email: info@joya.vn`,
+        },
       },
       {
         url: "",
-        label: `Website: joya.vn`,
+        label: {
+          en: `Website: joya.vn`,
+          vi: `Website: joya.vn`,
+        },
       },
     ],
   },
-  {
-    title: "DU LỊCH",
+  business_registration: {
+    title: {
+      vi: "GIẤY PHÉP KINH DOANH DỊCH VỤ LỮ HÀNH QUỐC TẾ",
+      en: "INTERNATIONAL FESTIVAL SERVICE BUSINESS LICENSE",
+    },
+    classes: "col-12 col-lg-5",
+    items: [
+      {
+        url: "",
+        label: {
+          vi: `Số GP/No: 79-042/2022/TCDL - GP LHQT`,
+          en: `License number: 79-042/2022/TCDL - GP LHQT`,
+        },
+      },
+      {
+        url: "",
+        label: {
+          vi: `Do TCDL cấp ngày 30/10/2022`,
+          en: `Issued by TCDL on October 30, 2022`,
+        },
+      },
+    ],
+  },
+  services: {
+    title: {
+      vi: "DU LỊCH",
+      en: "TRAVEL",
+    },
+    classes: "col-12 col-sm-3 col-lg-2",
     items: [
       {
         url: "/tours-chau-au",
-        label: `Du lịch châu Âu`,
+        label: {
+          vi: `Du lịch châu Âu`,
+          en: "Europe tours",
+        },
       },
       {
         url: "",
-        label: `Du lịch trong nước`,
+        path: "/tours-trong-nuoc",
+        label: {
+          vi: `Du lịch trong nước`,
+          en: "Vietnam tours",
+        },
       },
       {
         url: "",
-        label: `Email: info@joya.vn`,
+        path: "/cam-nang-du-lich",
+        label: {
+          vi: `Guides`,
+          en: `Guides`,
+        },
       },
       {
         url: "",
-        label: `Website: joya.vn`,
+        path: "/dich-vu-visa",
+        label: {
+          vi: `Dịch vụ visa`,
+          en: "Visa services",
+        },
       },
     ],
   },
-];
+  terms: {
+    title: {
+      vi: "ĐIỀU KHOẢN",
+      en: "TERMS",
+    },
+    classes: "col-12  col-sm-9 col-lg-3",
+    items: [
+      {
+        url: "https://www.facebook.com",
+        path: "",
+        label: {
+          vi: `Điều kiện đăng ký`,
+          en: `Registration Conditions`,
+        },
+      },
+      {
+        url: "https://www.facebook.com",
+        path: "",
+        label: `Điều kiện hủy đổi`,
+      },
+      {
+        url: "https://www.facebook.com",
+        path: "",
+        label: {
+          vi: `Thông tin cần lưu ý`,
+          en: `Notes`,
+        },
+      },
+      {
+        url: "https://www.facebook.com",
+        path: "",
+        label: {
+          vi: `Phương thức thanh toán`,
+          en: "Payment method",
+        },
+      },
+      {
+        url: "https://www.facebook.com",
+        path: "",
+        label: {
+          vi: `Bảo mật dữ liệu khách hàng`,
+          en: "Privacy policy",
+        },
+      },
+    ],
+  },
+  links: {
+    title: {
+      vi: "LIÊN KẾT",
+      en: "LINKS",
+    },
+    classes: "col-12  col-sm-3 col-lg-2",
+    items: [
+      {
+        url: "https://www.facebook.com",
+        path: "",
+        icon: <i class="fab fa-facebook"></i>,
+        label: {
+          vi: `Facebook`,
+          en: `Facebook`,
+        },
+      },
+      {
+        url: "https://www.instagram.com",
+        path: "",
+        icon: <i class="fab fa-instagram"></i>,
+        label: {
+          vi: `Instagram`,
+          en: `Instagram`,
+        },
+      },
+      {
+        url: "https://www.youtube.com",
+        path: "",
+        icon: <i class="fab fa-youtube"></i>,
+        label: {
+          vi: `Youtube`,
+          en: `Youtube`,
+        },
+      },
+    ],
+  },
+};
 
 export default function Footer() {
   return (
     <div className={styles.footer}>
-      <div className="container-xl">
-        <div className={styles.footer_colum + " col-12 col-sm-6 col-md-5"}>
-          <div>
-            <li>
-              <span>CÔNG TY CỔ PHẦN JOYA</span>
-            </li>
-          </div>
-          <li>Địa chỉ: Hoa Sữa 11-52 Vinhomes Riveside, Long Biên, Hà Nội.</li>
-          <li>Điện thoại: 123456789 | Hotline : 123456789</li>
-          <li>Email: info@joya.vn</li>
-          <li>Website: joya.vn</li>
-          <br />
-          <li>GIẤY PHÉP KINH DOANH DỊCH VỤ LỮ HÀNH QUỐC TẾ</li>
-          <li>Số GP/No: 79-042/2022/TCDL-GP LHQT</li>
-          <li>Do TCDL cấp ngày 30/10/2022</li>
+      <div className={styles.inner + " row pt-5 container-fluid"}>
+        <div className="col-12 col-sm-9 col-lg-5">
+          <FooterGroup footerItem={footerItems.contact} />
+          <FooterGroup footerItem={footerItems.business_registration} />
         </div>
-        <div className={styles.footer_colum + " col-12 col-sm-6  col-md-2"}>
-          <div>
-            <li>
-              <span>DU LỊCH</span>
-            </li>
-          </div>
-          <li>Du lịch châu Âu</li>
-          <li>Du lịch trong nước</li>
-          <li>Du lịch trong nước</li>
-          <li>Guides</li>
-          <li>Dịch vụ visa</li>
+
+        <div className="col-12 col-sm-3 col-lg-2">
+          <FooterGroup footerItem={footerItems.services} />
         </div>
-        <div className={styles.footer_colum + " col-12 col-sm-6  col-md-3"}>
-          <div>
-            <li>
-              <span>ĐIỀU KHOẢN</span>
-            </li>
-          </div>
-          <li>Điều kiện đăng ký</li>
-          <li>Điều kiện hủy đổi</li>
-          <li>Thông tin cần lưu ý</li>
-          <li>Phương thức thanh toán</li>
-          <li>Bảo mật dữ liệu khách hàng</li>
+
+        <div className="col-12 col-sm-9 col-lg-3">
+          <FooterGroup footerItem={footerItems.terms} />
         </div>
-        <div
-          className={styles.footer_colum + " col-12 col-sm-6  col-md-2 pe-1"}
-        >
-          <div>
-            <li>
-              <span>LIÊN KẾT</span>
-            </li>
-          </div>
-          <li>
-            <i class="fab fa-facebook"></i> Facebook
-          </li>
-          <li>
-            <i class="fab fa-instagram"></i> Instagram
-          </li>
-          <li>
-            <i class="fab fa-youtube"></i> Youtube
-          </li>
+
+        <div className="col-12 col-sm-3 col-lg-2">
+          <FooterGroup footerItem={footerItems.links} />
         </div>
       </div>
     </div>
