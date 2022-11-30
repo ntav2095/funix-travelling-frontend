@@ -35,6 +35,7 @@ function HomeNew() {
           title={i18next.t("homeMain.titleTourChauAu")}
           naviga={"/tours-chau-au"}
           isloading={isLoading}
+          
         />
       </div>
 

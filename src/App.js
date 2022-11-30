@@ -19,7 +19,7 @@ const RequireAuth = React.lazy(() => import("./components/RequireAuth"));
 
 // client pages
 
-const ToursList = React.lazy(() => import("./pages/ToursList/tourList"));
+const ToursList = React.lazy(() => import("./pages/tourListNew"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const About = React.lazy(() => import("./pages/About"));
 const Visa = React.lazy(() => import("./pages/Visa"));
