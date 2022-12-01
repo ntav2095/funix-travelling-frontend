@@ -36,7 +36,7 @@ export default function CustomPagination({total,pagenumber,callback}) {
     },[pagenumber])
     return (
       <div className="container__pagination">
-        {/* <div className="pagination"> */}
+        
           <button className='button__number'>{pagenumber}</button>
           <span>{"  of " + total +' '}</span>
           <button id="chevronLeft" type='button' onClick={() =>pagenumber>1&& setState(state - 1)}>
@@ -47,7 +47,7 @@ export default function CustomPagination({total,pagenumber,callback}) {
             {" "}
             {chevronLeft}{" "}
           </button>
-        {/* </div> */}
+       
       </div>
     );
 }

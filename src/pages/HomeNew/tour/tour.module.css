@@ -51,7 +51,10 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
+.content p::before {
+  content: "•";
+  padding-right: 6px;
+}
 /* ============== button ===============  */
 
 .tourdetail {

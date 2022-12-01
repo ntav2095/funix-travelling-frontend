@@ -30,6 +30,9 @@
   text-shadow: var(--box-shadow);
   color: rgb(255, 255, 255);
 } */
+.Slider{
+  margin-bottom: 43px;
+}
 .Slider .slick-arrow {
   top: 50%;
   transform: translateY(-50%);

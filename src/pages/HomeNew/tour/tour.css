@@ -1,6 +1,6 @@
-.slick-next.slick-disabled:before,
-.slick-prev.slick-disabled:before {
-  display: none;
+.slick-next.slick-disabled,
+.slick-prev.slick-disabled {
+  display: none !important;
 }
 .slick-prev:before,
 .slick-next:before {

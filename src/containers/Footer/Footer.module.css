@@ -1,7 +1,11 @@
 .footer {
   background: #000;
   color: rgb(239, 239, 239);
-  padding: 16px;
+  padding: 16px 0px 16px 43px;
+}
+.footer >div>div{
+  max-width: 1500px;
+  margin: auto;
 }
 .footer >div>div{
   margin-top: 8px;

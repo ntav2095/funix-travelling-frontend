@@ -85,7 +85,7 @@ function SliderCard(props) {
       {loadingCard && (
         <div className="Slider">
           <div className={styles.title}>
-            <p className="fs-5 ">{title}</p>
+            <p className="fs-5 text-uppercase">{title}</p>
           </div>
           <div className={styles.container}>
             <Slider {...settings}>
@@ -113,7 +113,7 @@ function SliderCard(props) {
                         {page == "article" ? (
                           <>
                             <h5 className="text-uppercase">{item.title}</h5>
-                            <p>{item.lead.slice(0, 100)}...</p>
+                            <p>{title}</p>
                           </>
                         ) : (
                           <>

@@ -21,7 +21,7 @@ export default function useLazyLoading(loadingimage){
         observer.unobserve(item.target)
       }
     }),{
-      rootMargin:'30px'
+      rootMargin:'50px'
     }
   ),[])
     

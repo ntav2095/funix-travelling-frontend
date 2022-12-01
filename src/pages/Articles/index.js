@@ -1,133 +1,103 @@
 import React, { useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
-import { tourApi } from "../../services/apis";
-import SliderCard from "./SliderCard";
 import { useTranslation } from "react-i18next";
 import useLazyLoading, { loadingImg } from "../../hooks/uselazyLoading";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import usePageTitle from "../../hooks/usePageTitle";
-// import styles from './tourList.module.css'
-import "./tourlist.css";
-import CustomPagination from "../../containers/customerPagination";
-function ToursList({ cat_params }) {
+
+import "./articleList.css";
+import SliderCard from "../../containers/SliderCard";
+import { postsApi } from "../../services/apis";
+
+
+function ArticleList() {
   const { i18n } = useTranslation();
   const [lazy] = useLazyLoading(loadingImg);
-  const location = useLocation();
-  const navigate = useNavigate();
 
-  const [sendRequest, isLoading, data, error] = useAxios();
-  const [search, setSearch] = useState({
-    sort: "time-asc",
-  });
 
-  let page = new URLSearchParams(location.search).get("page");
 
-  if (!page || isNaN(Number(page))) {
-    page = 1;
-  }
-  console.log("datatourlisst", data);
-  console.log("loading", isLoading);
-  const hangdleChangeSelect = (e) => {
-    setSearch({ sort: e.target.value });
-  };
-
-  const changePageHandler = (num) => {
-    if (cat_params.cat === "vi") {
-      navigate(`/tours-trong-nuoc/?page=${num}`);
-    } else {
-      navigate(`/tours-chau-au/?page=${num}`);
-    }
-  };
-  const handleLoadingSlider= (datacard)=>{
+  const [sendRequestNhatKy, isLoading1, dataNhatKy, error1] = useAxios();
+  const [sendRequestDiemDen, isLoading2, dataDiemDen, error2] = useAxios();
+  const [sendRequestCamNang, isLoading3, dataCamnang, error3] = useAxios();
+  const [sendRequestTraiNghiem, isLoading4, dataTraiNgiem, error4] = useAxios();
+  console.log(dataNhatKy)
+  const handleLoadingSlider= (datacard,isLoading)=>{
     const loadingSlider=(!isLoading&&datacard)?datacard.length==0?false:true:true
     return loadingSlider
   }
-  useEffect(() => {
-    sendRequest(
-      tourApi.get({
-        sort: search.sort,
-        page: page,
-        page_size: 24,
-        ...cat_params,
-      })
-    );
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-  }, [i18n.language, location.search, cat_params, search]);
+
+   useEffect(() => {
+     sendRequestDiemDen(
+       postsApi.get({  page_size: 6, cat: "diem-den" })
+     );
+     sendRequestTraiNghiem(
+       postsApi.get({  page_size: 6, cat: "trai-nghiem" })
+     );
+     sendRequestCamNang(
+       postsApi.get({  page_size: 6, cat: "cam-nang" })
+     );
+     sendRequestNhatKy(
+       postsApi.get({  page_size: 6, cat: "nhat-ky" })
+     );
+     window.scroll({
+       top: 0,
+       left: 0,
+       behavior: "smooth",
+     });
+   }, [i18n.language,]);
 
   useEffect(() => {
     lazy();
-  }, [isLoading]);
+  }, [isLoading1, isLoading2, isLoading3, isLoading4]);
 
   usePageTitle(`Danh sách tours || Go Travel`);
 console.log('tour New')
   return (
-    <div className="tours__list">
-      <div className={"container__header"}>
-        <div className={"title text-uppercase fw-bold"}>
-          {cat_params?.cat_not === "vi" && "Danh sách tour châu Âu"}
-          {cat_params?.cat === "vi" && "Danh sách tour trong nước"}
-        </div>
-        <div className={"container__sort"}>
-          <div className={"sort"}>
-            <select onChange={hangdleChangeSelect}>
-              <option value={"time-asc"}>Mới nhất</option>
-              <option value={"price-asc"}>Giá tăng dần</option>
-              <option value={"price-desc"}>Giá giảm dần</option>
-              <option value={"duration-desc"}>số Ngày lưu trú giảm dần</option>
-              <option value={"duration-asc"}>Số ngày lưu trú tăng dần</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
+    <div className="article__list">
       <div className={"container__Slider"}>
         <SliderCard
-          data={data?.data.slice(0, 6)}
-          isloading={isLoading}
-          page={"tour-list"}
-          loadingCard={handleLoadingSlider(data?.data.slice(0, 6))}
+          title={"Điểm đến hấp dẫn"}
+          data={dataDiemDen?.data}
+          isloading={isLoading1}
+          page={"article"}
+          naviga={"/cam-nang-du-lich/danh-muc/diem-den"}
+          loadingCard={handleLoadingSlider(dataDiemDen, isLoading1)}
         />
       </div>
 
       <div className={"container__Slider"}>
         <SliderCard
-          data={data?.data.slice(6, 12)}
-          isloading={isLoading}
-          page={"tour-list"}
-          loadingCard={handleLoadingSlider(data?.data.slice(6, 12))}
+          title={"Trải nghiệm - khám phá"}
+          data={dataTraiNgiem?.data}
+          isloading={isLoading2}
+          naviga={"/cam-nang-du-lich/danh-muc/trai-nghiem"}
+          page={"article"}
+          loadingCard={handleLoadingSlider(dataTraiNgiem, isLoading2)}
         />
       </div>
 
       <div className={"container__Slider"}>
         <SliderCard
-          data={data?.data.slice(12, 18)}
-          isloading={isLoading}
-          page={"tour-list"}
-          loadingCard={handleLoadingSlider(data?.data.slice(12, 18))}
+          title={"Cẩm nang du lịch"}
+          data={dataCamnang?.data}
+          isloading={isLoading3}
+          naviga={"/cam-nang-du-lich/danh-muc/cam-nang"}
+          page={"article"}
+          loadingCard={handleLoadingSlider(dataCamnang, isLoading3)}
         />
       </div>
 
       <div className={"container__Slider"}>
         <SliderCard
-          data={data?.data.slice(18, 24)}
-          isloading={isLoading}
-          page={"tour-list"}
-          loadingCard={handleLoadingSlider(data?.data.slice(18, 24))}
-        />
-      </div>
-
-      <div className={"container__Slider"}>
-        <CustomPagination
-          total={data?.metadata.total_count}
-          pagenumber={Number(page)}
-          callback={changePageHandler}
+          title={"Nhật ký hành trình"}
+          data={dataNhatKy?.data}
+          isloading={isLoading4}
+          naviga={"/cam-nang-du-lich/danh-muc/nhat-ky"}
+          page={"article"}
+          loadingCard={handleLoadingSlider(dataNhatKy, isLoading4)}
         />
       </div>
     </div>
   );
 }
-export default ToursList;
+export default ArticleList;
