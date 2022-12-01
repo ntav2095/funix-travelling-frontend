@@ -48,3 +48,7 @@
   margin: 0;
   margin-bottom: 3px;
 }
+.card p::before {
+  content: "•";
+  padding-right: 6px;
+}

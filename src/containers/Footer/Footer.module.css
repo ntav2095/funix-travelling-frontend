@@ -27,3 +27,8 @@
   color: white;
   text-decoration: underline;
 }
+
+.footer_colum {
+  display: inline-table;
+  list-style-type: none;
+}

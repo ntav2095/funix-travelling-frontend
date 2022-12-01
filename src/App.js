@@ -11,7 +11,7 @@ import DefaultLayout from "./layout/DefaultLayout";
 
 import Spinner from "./components/Spinner";
 import EditCatModal from "./pages/Admin/Category/EditCatModal";
-import ArticleCategory from "./pages/TravelHandbook/articleCategory";
+import ArticleCategory from "./pages/articleCategory";
 import LayoutManager from "./pages/Admin/LayoutManager";
 // components
 
@@ -19,12 +19,12 @@ const RequireAuth = React.lazy(() => import("./components/RequireAuth"));
 
 // client pages
 
-const ToursList = React.lazy(() => import("./pages/ToursList/tourList"));
+const ToursList = React.lazy(() => import("./pages/tourList"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const About = React.lazy(() => import("./pages/About"));
 const Visa = React.lazy(() => import("./pages/Visa"));
 const VisaService = React.lazy(() => import("./pages/VisaService"));
-const TravelHandbook = React.lazy(() => import("./pages/TravelHandbook"));
+const TravelHandbook = React.lazy(() => import("./pages/Articles"));
 const TravelHandbookDetail = React.lazy(() =>
   import("./pages/TravelHandbookDetail")
 );

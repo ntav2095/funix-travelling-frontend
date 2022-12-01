@@ -3,20 +3,21 @@ import { useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 // components
-import usePageTitle from "../../../hooks/usePageTitle";
-import ArticleCard from "../ArticleCard";
-import CardPlaceholder from "../../../components/placeholders/CardPlaceholder";
-import DefaultLayout from "../../../layout/DefaultLayout";
+import usePageTitle from "../../hooks/usePageTitle";
+import ArticleCard from "../../containers/ArticleCard";
+import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
+
 
 // apis
-import useAxios from "../../../hooks/useAxios";
+import useAxios from "../../hooks/useAxios";
 
 
 // css
 import './article.css'
-import Pagination from "../../../containers/Pagination";
+import Pagination from "../../containers/Pagination";
 import { useTranslation } from "react-i18next";
-import { postsApi } from "../../../services/apis";
+import { postsApi } from "../../services/apis";
+import CustomPagination from "../../containers/customerPagination";
 
 function ArticleCategory() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -44,7 +45,7 @@ function ArticleCategory() {
   }, [i18n.language, location.search, id]);
 
   const changePageHandler = (num) => {
-      navigate(`/cam-nang-du-lich/?page=${num}&`);
+      navigate(`/cam-nang-du-lich/danh-muc/nhat-ky?page=${num}&`);
   };
 
   usePageTitle(`Danh sách bài viết || Go Travel`);
@@ -72,7 +73,7 @@ function ArticleCategory() {
             ))}
 
           {isLoading &&
-            new Array(10).fill(1).map((item, index) => (
+            new Array(18).fill(1).map((item, index) => (
               <div
                 key={index}
                 className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
@@ -83,13 +84,11 @@ function ArticleCategory() {
         </div>
 
         {data && (
-          <div className="mt-4">
-            <Pagination
-              className="xxx"
-              pageSize={data.metadata.page_size}
-              total={data.metadata.total_count}
-              current={Number(page)}
-              onChange={changePageHandler}
+          <div className="container__Slider">
+            <CustomPagination
+              total={data?.metadata.page_count}
+              pagenumber={Number(page)}
+              callback={changePageHandler}
             />
           </div>
         )}

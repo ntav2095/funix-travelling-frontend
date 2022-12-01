@@ -134,3 +134,37 @@
     z-index: 30;
   }
 }
+@media screen and (max-width: 768px) {
+  .searchbar {
+      width: 100%;
+      max-width: 100%;
+      margin-left: 0px;
+      /* margin-top: 48px; */
+      border-radius: 999px;
+      border: 1px solid #ccc;
+      padding: 2px 6px;
+      display: flex;
+      padding-right: 0px;
+      position: relative;
+      align-items: center;
+      text-align: left;
+      height: 25px;
+      position: relative;
+      /* top: 60px; */
+    }
+  
+    .results {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      background: white;
+      box-shadow: var(--box-shadow);
+      border-radius: 3.8px;
+      padding: 6px;
+      border: 1px solid #ccc;
+      max-height: calc(100vh - 150px);
+      overflow: auto;
+      width: 100%;
+      z-index: 30;
+    }
+}

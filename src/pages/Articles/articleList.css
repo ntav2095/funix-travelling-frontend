@@ -1,0 +1,32 @@
+.article__list  {
+    width: 100%;
+    max-width: 1500px;
+    margin: 50px auto 44px auto;
+    padding: 0px 20px;
+}
+
+
+
+.article__list .container__Slider {
+    width: 100%;
+    max-width: 1500px;
+    margin-bottom: 43px ;
+    padding: 0px 20px ;
+    margin: auto;
+}
+
+
+
+@media screen and (max-width:576px) {
+   
+    .article__list .container__header {
+        width: 100%;
+        margin: 15px 0px 12px 0px;
+        padding: 0px 5px;
+    }
+
+    .article__list .container__Slider {
+        margin-bottom: 15px;
+        padding: 0px 5px;
+    }
+}
