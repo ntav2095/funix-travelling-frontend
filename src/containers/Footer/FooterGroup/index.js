@@ -9,18 +9,18 @@ function FooterGroup({ footerItem }) {
       <h6>{footerItem.title[lang]}</h6>
 
       <ul>
-        {footerItem.items.map((item) => (
-          <li key={item.label}>
+        {footerItem.items.map((item, index) => (
+          <li key={index}>
             {item.url ? (
-              <a className="d-block mb-1 text-nowrap" href={item.url}>
+              <a className="d-block mb-1 " href={item.url}>
                 {item.icon} {item.label[lang]}
               </a>
             ) : item.path ? (
-              <Link className="d-block mb-1 text-nowrap" to={item.path}>
+              <Link className="d-block mb-1 " to={item.path}>
                 {item.icon} {item.label[lang]}
               </Link>
             ) : (
-              <p className="mb-1 text-nowrap">
+              <p className="mb-1 ">
                 {item.icon} {item.label[lang]}
               </p>
             )}

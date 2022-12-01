@@ -5,7 +5,7 @@ import SpinnerModal from "../../../../components/SpinnerModal";
 
 const spinner = (
   <span
-    class="spinner-border spinner-border-sm"
+    className="spinner-border spinner-border-sm"
     role="status"
     aria-hidden="true"
   ></span>

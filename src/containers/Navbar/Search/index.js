@@ -1,21 +1,58 @@
 import { manifyingGlass as searchSVG } from "../../../assets/svgs";
 
-import styles from "./Search.module.css";
-import Spinner from "../../../components/Spinner";
-import useAxios from "../../../hooks/useAxios";
-import { tourApi, postsApi } from "../../../services/apis";
 import { useEffect } from "react";
-import { debounce } from "debounce";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import useSearch from "./useSearch";
 import { brokenImage } from "../../../assets/images";
+import styles from "./Search.module.css";
+import { useTranslation } from "react-i18next";
+
+const trans = {
+  tours: {
+    en: "Tours",
+    vi: "Tours",
+  },
+  articles: {
+    en: "Articles",
+    vi: "Bài viết",
+  },
+  not_matches: {
+    en: "Not matches anything",
+    vi: "Không tìm thấy kết quả phù hợp",
+  },
+  search_for_tours: {
+    en: "Search for tours",
+    vi: "Tìm kiếm tour",
+  },
+  search_for_articles: {
+    en: "Search for articles",
+    vi: "Tìm kiếm bài viết",
+  },
+  search_more: {
+    en: "Search more",
+    vi: "Tìm kiếm thêm",
+  },
+  is_searching: {
+    en: "Is searching",
+    vi: "Đang tìm kiếm",
+  },
+  results: {
+    en: "results",
+    vi: "kết quả",
+  },
+  of: {
+    en: "of",
+    vi: "của",
+  },
+};
 
 function Search() {
   const [isFocus, setIsFocus] = useState(false);
   const searchRef = useRef();
   const navigate = useNavigate();
+  const lang = useTranslation().i18n.language;
 
   const {
     text,
@@ -67,11 +104,11 @@ function Search() {
         <div className={styles.results}>
           <div className="tours border-bottom py-2">
             <h6>
-              Tours{" "}
+              {trans.tours[lang]}{" "}
               {tours && (
                 <em>
-                  ({tours_count > 0 && tours_count + " of "}
-                  {total_tours} results)
+                  ({tours_count > 0 && tours_count + " " + trans.of[lang] + " "}
+                  {total_tours} {trans.results[lang]})
                 </em>
               )}
             </h6>
@@ -103,30 +140,32 @@ function Search() {
             )}
 
             {tours && tours.length === 0 && (
-              <em className="m-0">Not matches anything</em>
+              <em className="m-0">{trans.not_matches[lang]}</em>
             )}
 
             {!tours && !isSearchingTours && !text.trim() && (
-              <em>Search for tours</em>
+              <em>{trans.search_for_tours[lang]}</em>
             )}
-            {isSearchingTours && <em>is searching for tours</em>}
+            {isSearchingTours && <em>{trans.is_searching[lang]}</em>}
             {tours && has_more_tours && (
               <button
                 className={styles.searchMoreBtn}
                 onClick={searchToursNext}
               >
-                Search more
+                {trans.search_more[lang]}
               </button>
             )}
           </div>
 
           <div className="articles py-2">
             <h6>
-              Articles{" "}
+              {trans.articles[lang]}{" "}
               {articles && (
                 <em>
-                  ({articles_count > 0 && articles_count + " of "}
-                  {total_articles} results)
+                  (
+                  {articles_count > 0 &&
+                    articles_count + " " + trans.of[lang] + " "}
+                  {total_articles} {trans.results[lang]})
                 </em>
               )}
             </h6>
@@ -157,20 +196,20 @@ function Search() {
               </ul>
             )}
             {articles && articles.length === 0 && (
-              <em className="m-0">Not matches anything</em>
+              <em className="m-0">{trans.not_matches[lang]}</em>
             )}
             {!articles && !isSearchingArticles && !text.trim() && (
-              <em>Search for articles</em>
+              <em>{trans.search_for_articles[lang]}</em>
             )}{" "}
             {articles && has_more_articles && (
               <button
                 className={styles.searchMoreBtn}
                 onClick={searchArticlesNext}
               >
-                Search more
+                {trans.search_more[lang]}
               </button>
             )}
-            {isSearchingArticles && <em>is searching for articles</em>}
+            {isSearchingArticles && <em> {trans.is_searching[lang]}</em>}
           </div>
         </div>
       )}

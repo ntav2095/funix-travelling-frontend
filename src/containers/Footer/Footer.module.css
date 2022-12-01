@@ -16,10 +16,16 @@
 
 .footer h6 {
   font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.3px;
+  font-weight: 600;
+  /* white-space: nowrap; */
 }
 
-.footer a {
+.footer a,
+.footer p,
+.footer li {
+  font-size: 13px;
   color: white;
 }
 
@@ -28,7 +34,24 @@
   text-decoration: underline;
 }
 
-.footer_colum {
-  display: inline-table;
-  list-style-type: none;
+@media screen and (max-width: 992px) {
+  .inner {
+    flex-wrap: wrap;
+  }
+
+  .inner > div:nth-of-type(1),
+  .inner > div:nth-of-type(3) {
+    width: 60%;
+  }
+
+  .inner > div:nth-of-type(2),
+  .inner > div:nth-of-type(4) {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .inner > div {
+    width: 100% !important;
+  }
 }

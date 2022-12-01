@@ -20,9 +20,11 @@ import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
 import { useTranslation } from "react-i18next";
 import Placeholder from "../../components/placeholders/Placeholder";
+import Calendar from "../../containers/Calendar";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
+
   const { tourId } = useParams();
   const { i18n } = useTranslation();
 
@@ -30,15 +32,14 @@ function TourDetail() {
 
   const tourName = tour ? tour.name : "Tour du lịch";
   usePageTitle(`${tourName} || Go Travel`);
-  console.log("xxx", i18n.language);
 
   useEffect(() => {
     sendRequest(tourApi.getSingleTour(tourId));
   }, [i18n.language, tourId]);
-  console.log(tour);
+
   return (
     <>
-      <div className={styles.tourDetail}>
+      <div className={styles.tourDetail + " container-fluid"}>
         {!error && (
           <div>
             <h1 className="text-uppercase my-4 fs-4 fw-bold ">
@@ -49,6 +50,10 @@ function TourDetail() {
             <div className="row">
               <div className="col-12 col-lg-8 mb-4">
                 <TourCarousel tour={tour} isLoading={isLoading} />
+
+                <div className="pt-5">
+                  <TourInfo tour={tour} isLoading={isLoading} />
+                </div>
               </div>
 
               <div className="col-12 col-lg-4 mb-4">
@@ -56,9 +61,7 @@ function TourDetail() {
               </div>
             </div>
 
-            <TourInfo tour={tour} isLoading={isLoading} />
-
-            <div className="pb-5">
+            <div className="pb-5 pt-5">
               {tour && (
                 <FacebookComment
                   width="100%"
