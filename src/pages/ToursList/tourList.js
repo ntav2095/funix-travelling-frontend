@@ -8,7 +8,7 @@ import usePageTitle from "../../hooks/usePageTitle";
 import TourCard from "../../containers/TourCard";
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
 import DefaultLayout from "../../layout/DefaultLayout";
-import {chevronLeft,chevronRight} from '../../assets/svgs'
+import { chevronLeft, chevronRight } from "../../assets/svgs";
 // apis
 import useAxios from "../../hooks/useAxios";
 import { tourApi } from "../../services/apis";
@@ -154,7 +154,7 @@ function ToursList({ cat_params }) {
                 onChange={hangdleInput}
               />
               <div className={styles.svg}>
-                <i class="fa fa-search"></i>
+                <i className="fa fa-search"></i>
               </div>
             </div>
           </div>

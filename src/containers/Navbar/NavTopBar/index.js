@@ -26,7 +26,8 @@ function NavTopBar() {
       </div>
       <div className="ms-2 travel__language">
         <label className="d-flex align-items-center text-nowrap">
-          {earthSVG} {trans.language[lang]}
+          {earthSVG}{" "}
+          <span className="d-none d-md-inline">{trans.language[lang]}</span>
           <select onChange={langChangeHandler} value={lang}>
             <option value="vi">Tiếng Việt</option>
             <option value="en">English</option>
@@ -34,7 +35,7 @@ function NavTopBar() {
         </label>
       </div>
 
-      <div className="d-flex justify-content-end d-lg-none w-100">
+      <div className="d-none d-sm-flex d-lg-none justify-content-end  w-100">
         <Search />
       </div>
     </div>

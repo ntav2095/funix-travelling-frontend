@@ -1,11 +1,13 @@
-import React from "react";
-import BookingModal from "../BookingModal";
-import { format } from "date-fns";
+import React, { useState } from "react";
+import BookingModal from "./BookingModal";
 import { home3 as phonePng } from "../../../assets/images";
 import { arrowRight as arrowSvg } from "../../../assets/svgs";
 import styles from "./ContactTable.module.css";
 import { useTranslation } from "react-i18next";
 import Placeholder from "../../../components/placeholders/Placeholder";
+import DatePickerModal from "./DatePickerModal";
+import { useEffect } from "react";
+import ContactModal from "./ContactModal";
 
 const translation = {
   fullPackage: {
@@ -51,7 +53,9 @@ const translation = {
 };
 
 function ContactTable({ tour, isLoading }) {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(""); // "" | "pick-date" | "book" | "contact"
+  const [selectedDate, setSelectedDate] = useState(null);
+
   const { i18n } = useTranslation();
   const lang = i18n.language;
 
@@ -63,9 +67,32 @@ function ContactTable({ tour, isLoading }) {
         .filter((item) => item.toLowerCase() !== pointOfDeparture.toLowerCase())
         .join(" - ")
     : "";
+
   return (
     <>
-      <BookingModal show={modalShow} onHide={() => setModalShow(false)} />
+      {tour && (
+        <BookingModal
+          show={modalShow === "book"}
+          onHide={() => setModalShow("")}
+          tour={tour}
+          selectedDate={selectedDate}
+        />
+      )}
+
+      {tour && (
+        <DatePickerModal
+          show={modalShow === "pick-date"}
+          onHide={() => setModalShow("")}
+          tour={tour}
+          setSelectedDate={setSelectedDate}
+          setModalShow={setModalShow}
+        />
+      )}
+
+      <ContactModal
+        show={modalShow === "contact"}
+        onHide={() => setModalShow("")}
+      />
 
       <div
         className={
@@ -101,7 +128,7 @@ function ContactTable({ tour, isLoading }) {
 
             <button
               className={styles.orderBtn}
-              onClick={() => setModalShow(true)}
+              onClick={() => setModalShow("pick-date")}
             >
               {translation.departureDates[lang]}
               {arrowSvg}
@@ -109,14 +136,14 @@ function ContactTable({ tour, isLoading }) {
 
             <button
               className={styles.orderBtn}
-              onClick={() => setModalShow(true)}
+              onClick={() => setModalShow("book")}
             >
               {translation.book[lang]}
             </button>
 
             <button
               className={styles.orderBtn}
-              onClick={() => setModalShow(true)}
+              onClick={() => setModalShow("contact")}
             >
               {translation.contactNow[lang]}
             </button>

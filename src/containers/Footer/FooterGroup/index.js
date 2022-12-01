@@ -9,8 +9,8 @@ function FooterGroup({ footerItem }) {
       <h6>{footerItem.title[lang]}</h6>
 
       <ul>
-        {footerItem.items.map((item) => (
-          <li key={item.label}>
+        {footerItem.items.map((item, index) => (
+          <li key={index}>
             {item.url ? (
               <a className="d-block mb-1 text-nowrap" href={item.url}>
                 {item.icon} {item.label[lang]}

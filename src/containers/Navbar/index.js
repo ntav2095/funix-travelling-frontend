@@ -107,15 +107,17 @@ function Header() {
                       </NavLink>
                     ))}
                   </Nav>
-                  <Form className="d-lg-flex align-items-center d-none">
+                  <div className="d-lg-flex align-items-center d-none">
                     <Search />
-                  </Form>
+                  </div>
                 </Offcanvas.Body>
               </Navbar.Offcanvas>
             </Container>
           </Navbar>
 
-          {/* {width < 1024 && <Search />} */}
+          <div className="container-fluid pb-3 d-block d-sm-none">
+            <Search />
+          </div>
         </div>
       </div>
     </>

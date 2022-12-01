@@ -17,6 +17,7 @@
 .footer h6 {
   font-size: 14px;
   letter-spacing: 0.3px;
+  white-space: nowrap;
 }
 
 .footer a {
@@ -26,4 +27,26 @@
 .footer a:hover {
   color: white;
   text-decoration: underline;
+}
+
+@media screen and (max-width: 992px) {
+  .inner {
+    flex-wrap: wrap;
+  }
+
+  .inner > div:nth-of-type(1),
+  .inner > div:nth-of-type(3) {
+    width: 60%;
+  }
+
+  .inner > div:nth-of-type(2),
+  .inner > div:nth-of-type(4) {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .inner > div {
+    width: 100% !important;
+  }
 }

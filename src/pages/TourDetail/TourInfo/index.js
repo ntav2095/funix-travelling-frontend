@@ -1,39 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { useRef } from "react";
-import QuillReader from "./QuillReader";
-import formatDate from "../../../services/helpers/formatDate";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 
-import styles from "./TourInfo.module.css";
 import "./TourInfo.module.css";
 import { useTranslation } from "react-i18next";
 import "./tourinfo_override.css";
 import Overview from "./Overview";
-import Xxx from "./Tabs";
+import DropdownItems from "./Tabs";
 import Itinerary from "./Itinerary";
-const translation = {
+import styles from "./TourInfo.module.css";
+
+const trans = {
   tabTitle: {
     overview: {
-      en: "DES",
-      vi: "Mô tả",
+      en: "OVERVIEW",
+      vi: "MÔ TẢ",
     },
     itinerary: {
-      en: "Itinerary",
-      vi: "Lịch trình",
+      en: "ITINERARY",
+      vi: "LỊCH TRÌNH",
     },
     price: {
-      en: "Price",
-      vi: "Bảng giá",
+      en: "PRICE",
+      vi: "BẢNG GIÁ",
     },
     terms: {
-      en: "Terms",
-      vi: "Điều khoản",
+      en: "TERMS",
+      vi: "ĐIỀU KHOẢN",
     },
-    Evaluate: {
-      en: "Evaluate",
-      vi: "Đánh giá",
+    rating: {
+      en: "RATING",
+      vi: "ĐÁNH GIÁ",
     },
   },
   tabContent: {
@@ -92,10 +91,8 @@ const translation = {
 {
 }
 
-const TourInfo = ({ tour, isLoading, deltailtour }) => {
-  const itineraryRef = useRef();
-  const { i18n } = useTranslation();
-  const lang = i18n.language;
+const TourInfo = ({ tour, isLoading }) => {
+  const lang = useTranslation().i18n.language;
 
   const pricePolicies = tour
     ? [
@@ -149,22 +146,30 @@ const TourInfo = ({ tour, isLoading, deltailtour }) => {
       )}
 
       {/* ==================================================================  */}
-      <Tabs defaultActiveKey="profile" className="mb-3">
-        <Tab eventKey="overview" title="MÔ TẢ">
-          {tour && <Overview tour={tour} />}
+      <Tabs defaultActiveKey="overview" className="mb-0 border-0">
+        <Tab eventKey="overview" title={trans.tabTitle.overview[lang]}>
+          <div className="p-3 border rounded-0">
+            {tour && <Overview tour={tour} />}
+          </div>
         </Tab>
-        <Tab eventKey="itinerary" title="LỘ TRÌNH">
-          <Itinerary data={itinerary} />
+        <Tab eventKey="itinerary" title={trans.tabTitle.itinerary[lang]}>
+          <div className="p-3 border rounded-0">
+            <Itinerary data={itinerary} />
+          </div>
         </Tab>
-        <Tab eventKey="price" title="BẢNG GIÁ">
-          <Xxx data={pricePolicies} />
+        <Tab eventKey="price" title={trans.tabTitle.price[lang]}>
+          <div className="p-3 border rounded-0">
+            <DropdownItems data={pricePolicies} />
+          </div>
         </Tab>
 
-        <Tab eventKey="terms" title="ĐIỀU KHOẢN">
-          <Xxx data={terms} />
+        <Tab eventKey="terms" title={trans.tabTitle.terms[lang]}>
+          <div className="p-3 border rounded-0">
+            <DropdownItems data={terms} />
+          </div>
         </Tab>
-        <Tab eventKey="rating" title="ĐÁNH GIÁ">
-          xxx
+        <Tab eventKey="rating" title={trans.tabTitle.rating[lang]}>
+          <div className="p-3 border rounded-0">rating</div>
         </Tab>
       </Tabs>
     </div>

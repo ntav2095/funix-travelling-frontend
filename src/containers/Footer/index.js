@@ -160,7 +160,7 @@ const footerItems = {
       {
         url: "https://www.facebook.com",
         path: "",
-        icon: <i class="fab fa-facebook"></i>,
+        icon: <i className="fab fa-facebook"></i>,
         label: {
           vi: `Facebook`,
           en: `Facebook`,
@@ -169,7 +169,7 @@ const footerItems = {
       {
         url: "https://www.instagram.com",
         path: "",
-        icon: <i class="fab fa-instagram"></i>,
+        icon: <i className="fab fa-instagram"></i>,
         label: {
           vi: `Instagram`,
           en: `Instagram`,
@@ -178,7 +178,7 @@ const footerItems = {
       {
         url: "https://www.youtube.com",
         path: "",
-        icon: <i class="fab fa-youtube"></i>,
+        icon: <i className="fab fa-youtube"></i>,
         label: {
           vi: `Youtube`,
           en: `Youtube`,
@@ -191,22 +191,24 @@ const footerItems = {
 export default function Footer() {
   return (
     <div className={styles.footer}>
-      <div className={styles.inner + " row pt-5 container-fluid"}>
-        <div className="col-12 col-sm-9 col-lg-5">
-          <FooterGroup footerItem={footerItems.contact} />
-          <FooterGroup footerItem={footerItems.business_registration} />
-        </div>
+      <div className="container-fluid  pt-5">
+        <div className={styles.inner + " d-flex justify-content-between"}>
+          <div>
+            <FooterGroup footerItem={footerItems.contact} />
+            <FooterGroup footerItem={footerItems.business_registration} />
+          </div>
 
-        <div className="col-12 col-sm-3 col-lg-2">
-          <FooterGroup footerItem={footerItems.services} />
-        </div>
+          <div>
+            <FooterGroup footerItem={footerItems.services} />
+          </div>
 
-        <div className="col-12 col-sm-9 col-lg-3">
-          <FooterGroup footerItem={footerItems.terms} />
-        </div>
+          <div>
+            <FooterGroup footerItem={footerItems.terms} />
+          </div>
 
-        <div className="col-12 col-sm-3 col-lg-2">
-          <FooterGroup footerItem={footerItems.links} />
+          <div>
+            <FooterGroup footerItem={footerItems.links} />
+          </div>
         </div>
       </div>
     </div>

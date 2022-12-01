@@ -13,25 +13,46 @@ import styles from "./TourCarousel.module.css";
 import Placeholder from "../../../components/placeholders/Placeholder";
 import "./override.css";
 
-function TourCarousel({
-  tour,
-  isLoading,
-  height,
-  centerPadding = "60px",
-  size = "md",
-}) {
+const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
+  <button
+    {...props}
+    className={
+      "slick-prev slick-arrow" + (currentSlide === 0 ? " slick-disabled" : "")
+    }
+    aria-hidden="true"
+    aria-disabled={currentSlide === 0 ? true : false}
+    type="button"
+  >
+    {chevronRight}
+  </button>
+);
+const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
+  <button
+    {...props}
+    className={
+      "slick-next slick-arrow" +
+      (currentSlide === slideCount - 1 ? " slick-disabled" : "")
+    }
+    aria-hidden="true"
+    aria-disabled={currentSlide === slideCount - 1 ? true : false}
+    type="button"
+  >
+    {chevronLeft}
+  </button>
+);
+
+function TourCarousel({ tour, isLoading, height, size = "md" }) {
   const [index, setIndex] = useState(0);
   const [isShowModal, setIsShowModal] = useState(false);
 
   const settings = {
     className: "center",
     centerMode: true,
-    infinite: true,
     slidesToShow: 1,
     speed: 500,
     centerPadding: size === "sm" ? "35px" : "50px",
-    nextArrow: <button>{chevronLeft}</button>,
-    prevArrow: <button>{chevronRight}</button>,
+    prevArrow: <SlickArrowLeft />,
+    nextArrow: <SlickArrowRight />,
   };
 
   const handleSelect = (selectedIndex) => {

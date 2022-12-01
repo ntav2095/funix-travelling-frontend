@@ -34,7 +34,13 @@ function useAxios(dataHandler = defaultDataHadnler) {
 
       setData(dataHandler(response.data));
     } catch (error) {
+      if (error.code === "ERR_CANCELED") {
+        setIsLoading(false);
+        return;
+      }
+
       console.error(error);
+
       if (error.response) {
         setError({
           httpCode: error.response.status,
