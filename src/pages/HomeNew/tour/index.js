@@ -38,7 +38,7 @@ function Tour(props) {
   const settings = {
     dots: false,
     infinite: false,
-    speed: 10000,
+    speed: 300,
     slidesToShow: 4,
     slidesToScroll: 1,
     useTransform: false,
@@ -71,6 +71,7 @@ function Tour(props) {
         breakpoint: 576,
         settings: {
           slidesToShow: 2,
+          nextArrow: <SlickArrowRight slidesToShow={2} slidesToScroll={2} />,
           slidesToScroll: 2,
           initialSlide: 0,
         },

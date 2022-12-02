@@ -44,8 +44,6 @@ function SliderCard(props) {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
-    // nextArrow: <button>{chevronLeft}</button>,
-    // prevArrow: <button>{chevronRight}</button>,
     nextArrow: <SlickArrowRight slidesToScroll={1} slidesToShow={4} />,
     prevArrow: <SlickArrowLeft />,
     responsive: [
