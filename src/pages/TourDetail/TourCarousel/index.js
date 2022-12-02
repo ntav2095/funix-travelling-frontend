@@ -12,34 +12,10 @@ import Slider from "react-slick";
 import styles from "./TourCarousel.module.css";
 import Placeholder from "../../../components/placeholders/Placeholder";
 import "./override.css";
-
-const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
-  <button
-    {...props}
-    className={
-      "slick-prev slick-arrow" + (currentSlide === 0 ? " slick-disabled" : "")
-    }
-    aria-hidden="true"
-    aria-disabled={currentSlide === 0 ? true : false}
-    type="button"
-  >
-    {chevronRight}
-  </button>
-);
-const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
-  <button
-    {...props}
-    className={
-      "slick-next slick-arrow" +
-      (currentSlide === slideCount - 1 ? " slick-disabled" : "")
-    }
-    aria-hidden="true"
-    aria-disabled={currentSlide === slideCount - 1 ? true : false}
-    type="button"
-  >
-    {chevronLeft}
-  </button>
-);
+import {
+  SlickArrowLeft,
+  SlickArrowRight,
+} from "../../../components/slickArrows";
 
 function TourCarousel({ tour, isLoading, height, size = "md" }) {
   const [index, setIndex] = useState(0);
@@ -52,7 +28,7 @@ function TourCarousel({ tour, isLoading, height, size = "md" }) {
     speed: 500,
     centerPadding: size === "sm" ? "35px" : "50px",
     prevArrow: <SlickArrowLeft />,
-    nextArrow: <SlickArrowRight />,
+    nextArrow: <SlickArrowRight slidesToShow={1} slidesToScroll={1} />,
   };
 
   const handleSelect = (selectedIndex) => {

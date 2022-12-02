@@ -11,6 +11,7 @@ import Overview from "./Overview";
 import DropdownItems from "./Tabs";
 import Itinerary from "./Itinerary";
 import styles from "./TourInfo.module.css";
+import Rating from "./Rating";
 
 const trans = {
   tabTitle: {
@@ -169,7 +170,9 @@ const TourInfo = ({ tour, isLoading }) => {
           </div>
         </Tab>
         <Tab eventKey="rating" title={trans.tabTitle.rating[lang]}>
-          <div className="p-3 border rounded-0">rating</div>
+          <div className="p-3 border rounded-0">
+            <Rating />
+          </div>
         </Tab>
       </Tabs>
     </div>

@@ -20,6 +20,7 @@ import { useTranslation } from "react-i18next";
 import Slider from "react-slick";
 import "./tourlist.css";
 import { Col } from "react-bootstrap";
+import { SlickArrowLeft, SlickArrowRight } from "../../components/slickArrows";
 
 function ToursList({ cat_params }) {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -30,7 +31,6 @@ function ToursList({ cat_params }) {
     sort: "time-asc",
   });
 
-  console.log("data", search);
   const hangdleInput = (e) => {
     setSearch({ ...search, text: e.target.value });
   };
@@ -44,8 +44,10 @@ function ToursList({ cat_params }) {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 1,
-    nextArrow: <button>{chevronLeft}</button>,
-    prevArrow: <button>{chevronRight}</button>,
+    // nextArrow: <button>{chevronLeft}</button>,
+    // prevArrow: <button>{chevronRight}</button>,
+    nextArrow: <SlickArrowRight />,
+    prevArrow: <SlickArrowLeft />,
     responsive: [
       {
         breakpoint: 1024,
@@ -100,13 +102,11 @@ function ToursList({ cat_params }) {
     //   behavior: "smooth",
     // });
   }, [i18n.language, location.search, cat_params, search]);
-  console.log(isLoading, data);
   useEffect(() => {
     lazy();
   }, [data, isLoading]);
   useEffect(() => {
     const option = document.querySelectorAll("option#option");
-    console.log(option);
     option.forEach((item) => {
       item.classList.add("select-items");
     });
@@ -118,7 +118,6 @@ function ToursList({ cat_params }) {
       navigate(`/tours-chau-au/?page=${num}`);
     }
   };
-  console.log("tour list");
   usePageTitle(`Danh sách tours || Go Travel`);
 
   return (

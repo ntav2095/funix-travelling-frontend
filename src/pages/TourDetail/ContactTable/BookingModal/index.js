@@ -9,6 +9,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { format } from "date-fns";
 import NotificationModal from "../notificationModal/notification";
+import * as Yup from "yup";
 
 const trans = {
   firstname: {
@@ -71,48 +72,32 @@ const trans = {
     en: "Something wrong happens. Please try again, hoặc yêu cầu gọi lại, or contact us: 123456789",
     vi: "Có lỗi xảy ra. Vui lòng thử lại, hoặc yêu cầu gọi lại, hoặc liên hệ với chúng tôi theo số: 123456789",
   },
+  form_validation: {
+    too_short: {
+      en: "Too short",
+      vi: "Quá ngắn",
+    },
+    too_long: {
+      en: "Too long",
+      vi: "Quá dài",
+    },
+    required: {
+      en: "Required",
+      vi: "Bắt buộc",
+    },
+    invalid_email: {
+      en: "Invalid email",
+      vi: "Email không hợp lệ",
+    },
+    invalid_phone: {
+      en: "Invalid phone number",
+      vi: "Số điện thoại không hợp lệ",
+    },
+  },
 };
 
-const validator = (values) => {
-  const errors = {};
-  if (!values.firstname) {
-    errors.firstname = "required";
-  }
-
-  if (!values.surname) {
-    errors.surname = "required";
-  }
-
-  if (!values.email) {
-    errors.email = "required";
-  }
-
-  if (!values.phone) {
-    errors.phone = "required";
-  }
-
-  if (!values.address) {
-    errors.address = "required";
-  }
-
-  if (!values.gender) {
-    errors.gender = "required";
-  }
-
-  if (!values.adult) {
-    errors.adult = "required";
-  }
-
-  if (!values.children) {
-    errors.children = "required";
-  }
-
-  if (!values.date) {
-    errors.date = "required";
-  }
-
-  return errors;
-};
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const initialValues = {
   firstname: "",
@@ -121,8 +106,8 @@ const initialValues = {
   address: "",
   phone: "",
   gender: "",
-  adult: 0,
-  children: 0,
+  adult: "",
+  children: "",
   date: "",
 };
 
@@ -151,7 +136,7 @@ function BookingModal(props) {
     formData.append("adults", values.adult);
     formData.append("children", values.children);
 
-    const request1 = axios.post("https://sheetdb.io/api/v1/31iln4h8j6ok", {
+    const request1 = axios.post("https://sheetdb.io/api/v1/31iln4h8j6ok8", {
       data: {
         tour: `${tour.name} [${tour.code}]`,
         firstname: values.firstname,
@@ -187,6 +172,27 @@ function BookingModal(props) {
     }
   };
 
+  const bookingTourSchema = Yup.object().shape({
+    firstname: Yup.string()
+      .min(2, trans.form_validation.too_short[lang])
+      .max(50, trans.form_validation.too_long[lang])
+      .required(trans.form_validation.required[lang]),
+    surname: Yup.string()
+      .min(2, trans.form_validation.too_short[lang])
+      .max(50, trans.form_validation.too_long[lang])
+      .required(trans.form_validation.required[lang]),
+    email: Yup.string()
+      .email(trans.form_validation.invalid_email[lang])
+      .required(trans.form_validation.required[lang]),
+    address: Yup.string().required(trans.form_validation.required[lang]),
+    phone: Yup.string()
+      .matches(phoneRegExp, trans.form_validation.invalid_phone[lang])
+      .required(trans.form_validation.required[lang]),
+    gender: Yup.string().required(trans.form_validation.required[lang]),
+    adult: Yup.number().min(1).required(trans.form_validation.required[lang]),
+    date: Yup.string().required(trans.form_validation.required[lang]),
+  });
+
   useEffect(() => {
     if (showCalendar) {
       const handler = (e) => {
@@ -207,7 +213,6 @@ function BookingModal(props) {
   useEffect(() => {
     if (error) {
       console.log("error", error);
-     
     }
   }, [error]);
 
@@ -249,7 +254,7 @@ function BookingModal(props) {
               ...initialValues,
               date: props.selectedDate || "",
             }}
-            validate={validator}
+            validationSchema={bookingTourSchema}
             onSubmit={submitHandler}
           >
             {({ setFieldValue, values }) => (
@@ -258,7 +263,7 @@ function BookingModal(props) {
                   <div className="col-12 col-sm-6">
                     <div className={styles.label}>
                       <h6>{trans.firstname[lang]}:</h6>
-                      <Field type="text" name="firstname" required />
+                      <Field type="text" name="firstname" />
                       <ErrorMessage name="firstname" component="h5" />
                     </div>
                   </div>
@@ -266,7 +271,7 @@ function BookingModal(props) {
                   <div className="col-12 col-sm-6">
                     <div className={styles.label}>
                       <h6>{trans.surname[lang]}:</h6>
-                      <Field type="text" name="surname" required />
+                      <Field type="text" name="surname" />
                       <ErrorMessage name="surname" component="h5" />
                     </div>
                   </div>
@@ -276,7 +281,7 @@ function BookingModal(props) {
                   <div className="col-12 col-sm-6">
                     <div className={styles.label}>
                       <h6>{trans.email[lang]}:</h6>
-                      <Field type="email" name="email" required />
+                      <Field type="email" name="email" />
                       <ErrorMessage name="email" component="h5" />
                     </div>
                   </div>
@@ -284,7 +289,7 @@ function BookingModal(props) {
                   <div className="col-12 col-sm-6">
                     <div className={styles.label}>
                       <h6>{trans.phone[lang]}:</h6>
-                      <Field type="tel" name="phone" required />
+                      <Field type="tel" name="phone" />
                       <ErrorMessage name="phone" component="h5" />
                     </div>
                   </div>
@@ -304,7 +309,6 @@ function BookingModal(props) {
                         <input
                           type="radio"
                           name="gender"
-                          required
                           value="male"
                           checked={values.gender === "male"}
                           onChange={(e) =>
@@ -325,7 +329,6 @@ function BookingModal(props) {
                         <input
                           type="radio"
                           name="gender"
-                          required
                           value="female"
                           checked={values.gender === "female"}
                           onChange={(e) =>
@@ -346,7 +349,6 @@ function BookingModal(props) {
                         <input
                           type="radio"
                           name="gender"
-                          required
                           value="other"
                           checked={values.gender === "other"}
                           onChange={(e) =>
@@ -362,7 +364,7 @@ function BookingModal(props) {
                 <div className={styles.label}>
                   <h6>{trans.address[lang]}:</h6>
                   <Field type="text" name="address" />
-                  <ErrorMessage name="address" component="h5" required />
+                  <ErrorMessage name="address" component="h5" />
                 </div>
 
                 <div className="row">
@@ -408,7 +410,7 @@ function BookingModal(props) {
                   <div className="col-6 col-sm-4">
                     <div className={styles.label}>
                       <h6>{trans.adults[lang]}:</h6>
-                      <Field type="number" name="adult" required />
+                      <Field type="number" name="adult" />
                       <ErrorMessage name="adult" component="h5" />
                     </div>
                   </div>
@@ -417,11 +419,16 @@ function BookingModal(props) {
                     <div className={styles.label}>
                       <h6>{trans.children[lang]}:</h6>
                       <Field type="number" name="children" />
-                      <ErrorMessage name="children" component="h5" required />
+                      <ErrorMessage name="children" component="h5" />
                     </div>
                   </div>
                 </div>
 
+                {error && (
+                  <p className={styles.errorMessage + " fs-6 text-danger"}>
+                    {trans.booked_failed[lang]}
+                  </p>
+                )}
                 <button className="btn btn-dark" type="submit">
                   {trans.book_now[lang]}
                 </button>

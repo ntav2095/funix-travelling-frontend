@@ -7,13 +7,11 @@ import usePageTitle from "../../hooks/usePageTitle";
 import ArticleCard from "../../containers/ArticleCard";
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
 
-
 // apis
 import useAxios from "../../hooks/useAxios";
 
-
 // css
-import './article.css'
+import "./article.css";
 import Pagination from "../../containers/Pagination";
 import { useTranslation } from "react-i18next";
 import { postsApi } from "../../services/apis";
@@ -23,10 +21,7 @@ function ArticleCategory() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const location = useLocation();
   const { id } = useParams();
-  console.log(id)
-  console.log("danhmuc",data)
   let page = new URLSearchParams(location.search).get("page");
-    console.log('danhmuc')
   if (!page || isNaN(Number(page))) {
     page = 1;
   }
@@ -34,9 +29,7 @@ function ArticleCategory() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    sendRequest(
-      postsApi.get({ page: page, page_size: 12, cat: id })
-    );
+    sendRequest(postsApi.get({ page: page, page_size: 12, cat: id }));
     window.scroll({
       top: 0,
       left: 0,
@@ -45,7 +38,7 @@ function ArticleCategory() {
   }, [i18n.language, location.search, id]);
 
   const changePageHandler = (num) => {
-      navigate(`/cam-nang-du-lich/danh-muc/nhat-ky?page=${num}&`);
+    navigate(`/cam-nang-du-lich/danh-muc/nhat-ky?page=${num}&`);
   };
 
   usePageTitle(`Danh sách bài viết || Go Travel`);

@@ -10,6 +10,11 @@ import CardPlaceholder from "../../../components/placeholders/CardPlaceholder";
 import { Col } from "react-bootstrap";
 import { placeholder } from "../../../assets/images";
 import { chevronLeft, chevronRight } from "../../../assets/svgs";
+import {
+  SlickArrowLeft,
+  SlickArrowRight,
+} from "../../../components/slickArrows";
+
 const trans = {
   days: {
     en: "days",
@@ -37,8 +42,8 @@ function Tour(props) {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
-    nextArrow: <button>{chevronLeft}</button>,
-    prevArrow: <button>{chevronRight}</button>,
+    nextArrow: <SlickArrowRight slidesToShow={4} slidesToScroll={1} />,
+    prevArrow: <SlickArrowLeft />,
     responsive: [
       {
         breakpoint: 1024,

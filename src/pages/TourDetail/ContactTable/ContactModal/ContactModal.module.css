@@ -32,10 +32,14 @@
   font-size: 13px;
 }
 
-.label input {
+.label input,
+.label select,
+.label option {
+  display: block;
   width: 100%;
   padding: 4px 6px;
   border-radius: 3.8px;
+  height: 30px;
 }
 
 .form .gendersGroup .label {

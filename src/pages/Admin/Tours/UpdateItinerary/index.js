@@ -112,7 +112,6 @@ function UpdateItinerary() {
 
   const removeImagesHandler = (id, e) => {
     const fileInput = e.target.parentElement.querySelector("input");
-    console.log(fileInput);
     fileInput.value = "";
     setPlan((prev) =>
       prev.map((item) => (item.id === id ? { ...item, images: [] } : item))

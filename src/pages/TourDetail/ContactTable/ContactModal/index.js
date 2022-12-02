@@ -5,6 +5,10 @@ import { useState } from "react";
 import styles from "./ContactModal.module.css";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import * as Yup from "yup";
+
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const trans = {
   firstname: {
@@ -19,6 +23,22 @@ const trans = {
     en: "Phone number",
     vi: "Số điện thoại",
   },
+  gender: {
+    en: "Gender",
+    vi: "Giới tính",
+  },
+  male: {
+    en: "Male",
+    vi: "Nam",
+  },
+  female: {
+    en: "Female",
+    vi: "Nữ",
+  },
+  other: {
+    en: "Other",
+    vi: "Khác",
+  },
   requested_successfully: {
     en: "Requested successfully. We will contact you in 2 hours.",
     vi: "Yêu cầu gọi lại thành công. Chúng tôi sẽ liên hệ với bạn trong vòng 2 giờ.",
@@ -30,6 +50,28 @@ const trans = {
   call_me: {
     en: "Call me",
     vi: "Yêu cầu gọi lại",
+  },
+  form_validation: {
+    too_short: {
+      en: "Too short",
+      vi: "Quá ngắn",
+    },
+    too_long: {
+      en: "Too long",
+      vi: "Quá dài",
+    },
+    required: {
+      en: "Required",
+      vi: "Bắt buộc",
+    },
+    invalid_email: {
+      en: "Invalid email",
+      vi: "Email không hợp lệ",
+    },
+    invalid_phone: {
+      en: "Invalid phone number",
+      vi: "Số điện thoại không hợp lệ",
+    },
   },
 };
 
@@ -92,6 +134,21 @@ function ContactModal(props) {
     }
   };
 
+  const contactFormSchema = Yup.object().shape({
+    firstname: Yup.string()
+      .min(2, trans.form_validation.too_short[lang])
+      .max(50, trans.form_validation.too_long[lang])
+      .required(trans.form_validation.required[lang]),
+    surname: Yup.string()
+      .min(2, trans.form_validation.too_short[lang])
+      .max(50, trans.form_validation.too_long[lang])
+      .required(trans.form_validation.required[lang]),
+    phone: Yup.string()
+      .matches(phoneRegExp, trans.form_validation.invalid_phone[lang])
+      .required(trans.form_validation.required[lang]),
+    gender: Yup.string().required(trans.form_validation.required[lang]),
+  });
+
   useEffect(() => {
     if (error) {
       // alert(trans.requested_failed[lang]);
@@ -100,7 +157,7 @@ function ContactModal(props) {
 
   useEffect(() => {
     if (isSuccess) {
-      props.success(true)
+      props.success(true);
       props.onHide();
     }
   }, [isSuccess]);
@@ -130,7 +187,7 @@ function ContactModal(props) {
 
             <Formik
               initialValues={initialValues}
-              validate={validator}
+              validationSchema={contactFormSchema}
               onSubmit={submitHandler}
             >
               {() => (
@@ -139,7 +196,7 @@ function ContactModal(props) {
                     <div className="col-12 col-sm-6">
                       <div className={styles.label}>
                         <h6>{trans.firstname[lang]}:</h6>
-                        <Field type="text" name="firstname" required />
+                        <Field type="text" name="firstname" />
                         <ErrorMessage name="firstname" component="p" />
                       </div>
                     </div>
@@ -147,7 +204,7 @@ function ContactModal(props) {
                     <div className="col-12 col-sm-6">
                       <div className={styles.label}>
                         <h6>{trans.surname[lang]}:</h6>
-                        <Field type="text" name="surname" required />
+                        <Field type="text" name="surname" />
                         <ErrorMessage name="surname" component="p" />
                       </div>
                     </div>
@@ -155,12 +212,30 @@ function ContactModal(props) {
                     <div className="col-12 col-sm-6">
                       <div className={styles.label}>
                         <h6>{trans.phone[lang]}:</h6>
-                        <Field type="tel" name="phone" required />
+                        <Field type="tel" name="phone" />
                         <ErrorMessage name="phone" component="p" />
+                      </div>
+                    </div>
+
+                    <div className="col-12 col-sm-6">
+                      <div className={styles.label}>
+                        <h6>{trans.phone[lang]}:</h6>
+                        <Field as="select" name="gender">
+                          <option value="">{trans.gender[lang]}</option>
+                          <option value="male">{trans.male[lang]}</option>
+                          <option value="female">{trans.female[lang]}</option>
+                          <option value="other">{trans.other[lang]}</option>
+                        </Field>
+                        <ErrorMessage name="gender" component="p" />
                       </div>
                     </div>
                   </div>
 
+                  {error && (
+                    <p className={styles.errorMessage + " fs-6 text-danger"}>
+                      {trans.booked_failed[lang]}
+                    </p>
+                  )}
                   <button className="btn btn-dark btn-sm" type="submit">
                     {trans.call_me[lang]}
                   </button>

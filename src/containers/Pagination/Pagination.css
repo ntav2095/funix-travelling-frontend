@@ -4,6 +4,10 @@
   margin-left: 50%;
 }
 
+.travel__pagination ul {
+  list-style-type: none;
+}
+
 .travel__pagination .rc-pagination-item,
 .travel__pagination .rc-pagination-prev,
 .travel__pagination .rc-pagination-next {
