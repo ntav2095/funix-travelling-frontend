@@ -21,7 +21,6 @@ function TourList({ cat_params }) {
   const [sendRequest, isLoading, data, error] = useAxios();
   const location = useLocation();
   const [lazy] = useLazyLoading(loadingImg);
-  console.log("data", data);
   const [search, setSearch] = useState({
     sort: "time-asc",
   });
@@ -54,13 +53,12 @@ function TourList({ cat_params }) {
       },
       option__5: {
         en: "Duration ascending",
-        vi:'Số ngày lưu trú tăng dần'
+        vi: "Số ngày lưu trú tăng dần",
       },
     },
   };
 
   let page = new URLSearchParams(location.search).get("page");
-  console.log("danhmuc");
   if (!page || isNaN(Number(page))) {
     page = 1;
   }

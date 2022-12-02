@@ -5,15 +5,28 @@ import { chevronDown } from "../../../../assets/svgs";
 import QuillReader from "../QuillReader";
 
 function Tabs({ data }) {
-  const [show, setShow] = useState([]);
+  const [show, setShow] = useState("");
+  // const [show, setShow] = useState([]);
 
-  const toggleHandler = (id) => {
-    setShow((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    );
+  // const toggleHandler = (id) => {
+  //   setShow((prev) =>
+  //     prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+  //   );
+  // };
+
+  const toggleHandler = (id, e) => {
+    setShow((prev) => (prev === id ? "" : id));
+    const title = e.currentTarget.querySelector("h5");
+
+    const rect = title.getBoundingClientRect();
+    console.log(rect);
+    // window.scrollTo({
+    //   top: rect.y,
+    // });
   };
 
-  const isActive = (id) => show.includes(id);
+  const isActive = (id) => show === id;
+  // const isActive = (id) => show.includes(id);
 
   return (
     <>
@@ -26,7 +39,10 @@ function Tabs({ data }) {
           }
           key={item.id}
         >
-          <div className={styles.header} onClick={() => toggleHandler(item.id)}>
+          <div
+            className={styles.header}
+            onClick={(e) => toggleHandler(item.id, e)}
+          >
             <h5>{item.title}</h5>
             <button className={styles.toggleBtn}>{chevronDown}</button>
           </div>

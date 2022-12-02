@@ -121,6 +121,7 @@ function Search() {
                       onClick={() => {
                         navigate(`/danh-sach-tour/${tour._id}`);
                         setIsFocus(false);
+                        setText("");
                       }}
                     >
                       <div className={styles.image}>
@@ -178,6 +179,7 @@ function Search() {
                       onClick={() => {
                         navigate(`/cam-nang-du-lich/${article._id}`);
                         setIsFocus(false);
+                        setText("");
                       }}
                     >
                       <div className={styles.image}>

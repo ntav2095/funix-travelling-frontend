@@ -40,8 +40,6 @@ function LayoutManager() {
     sendRequest(layoutApi.get());
   }, []);
 
-  console.log(data);
-
   return (
     <>
       <SpinnerModal show={isLoading} />

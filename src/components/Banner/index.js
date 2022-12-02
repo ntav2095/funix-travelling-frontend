@@ -1,23 +1,19 @@
-import styles from "./Banner.module.css";
 import React, { useEffect, useState } from "react";
 import { brokenImage, hearder as bannerImg } from "../../assets/images";
 import Slider from "react-slick";
 import Placeholder from "../placeholders/Placeholder";
-import { chevronLeft ,chevronRight} from "../../assets/svgs";
+import { chevronLeft, chevronRight } from "../../assets/svgs";
 import { useLocation } from "react-router-dom";
-import "./banner.css";
 import { layoutApi } from "../../services/apis";
 import useAxios from "../../hooks/useAxios";
-
-
-
-
+import styles from "./Banner.module.css";
+import "./banner.css";
+import { SlickArrowLeft, SlickArrowRight } from "../slickArrows";
 
 function Banner() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const pathPage = useLocation();
   const images = data?.data.images;
-  console.log("page path", data);
   // const data={
   //   home:{slider:[giangsinh,hearder,giangsinh2,hearder,giangsinh2], session:[]},
   //   tourEu:hearder,
@@ -47,8 +43,10 @@ function Banner() {
     speed: 1000,
     autoplay: true,
     autoplaySpeed: 2500,
-    nextArrow: <button>{chevronLeft}</button>,
-    prevArrow: <button>{chevronRight}</button>,
+    // nextArrow: <button>{chevronLeft}</button>,
+    // prevArrow: <button>{chevronRight}</button>,
+    nextArrow: <SlickArrowRight />,
+    prevArrow: <SlickArrowRight slidesToShow={1} slidesToScroll={1} />,
   };
 
   const handlerBrokenImg = (e) => {
@@ -61,36 +59,28 @@ function Banner() {
 
   return (
     <>
-    {pathPage.pathname==='/'
-      ?<div className={styles.banner + ' home__banner'}>
-        
-        {!isLoading && (
-        <Slider {...settings} >
-          {images?.home.map((item,index) => (
-          <div
-            key={index}
-            className={styles.image}
-          >
-            <img src={item} alt={'baner'} onError={handlerBrokenImg} />
-          </div>
-          ))}
-        </Slider>)}
-        {isLoading && (
-          <Slider
-            {...settings}
-          >
-            {new Array(4).fill(1).map((item, index) => (
-              <div
-                key={index}
-                className={styles.image}
-              >
-                <Placeholder width="100%" height="100%" />
-              </div>
-            ))}
-          </Slider>
-        )}
-      </div>
-      :(
+      {pathPage.pathname === "/" ? (
+        <div className={styles.banner + " home__banner"}>
+          {!isLoading && (
+            <Slider {...settings}>
+              {images?.home.map((item, index) => (
+                <div key={index} className={styles.image}>
+                  <img src={item} alt={"baner"} onError={handlerBrokenImg} />
+                </div>
+              ))}
+            </Slider>
+          )}
+          {isLoading && (
+            <Slider {...settings}>
+              {new Array(4).fill(1).map((item, index) => (
+                <div key={index} className={styles.image}>
+                  <Placeholder width="100%" height="100%" />
+                </div>
+              ))}
+            </Slider>
+          )}
+        </div>
+      ) : (
         <div className={styles.banner}>
           <img
             src={handleBanner()}

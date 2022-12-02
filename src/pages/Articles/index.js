@@ -9,49 +9,37 @@ import "./articleList.css";
 import SliderCard from "../../containers/SliderCard";
 import { postsApi } from "../../services/apis";
 
-
 function ArticleList() {
   const { i18n } = useTranslation();
   const [lazy] = useLazyLoading(loadingImg);
-
-
 
   const [sendRequestNhatKy, isLoading1, dataNhatKy, error1] = useAxios();
   const [sendRequestDiemDen, isLoading2, dataDiemDen, error2] = useAxios();
   const [sendRequestCamNang, isLoading3, dataCamnang, error3] = useAxios();
   const [sendRequestTraiNghiem, isLoading4, dataTraiNgiem, error4] = useAxios();
-  console.log(dataNhatKy)
-  const handleLoadingSlider= (datacard,isLoading)=>{
-    const loadingSlider=(!isLoading&&datacard)?datacard.length==0?false:true:true
-    return loadingSlider
-  }
+  const handleLoadingSlider = (datacard, isLoading) => {
+    const loadingSlider =
+      !isLoading && datacard ? (datacard.length == 0 ? false : true) : true;
+    return loadingSlider;
+  };
 
-   useEffect(() => {
-     sendRequestDiemDen(
-       postsApi.get({  page_size: 6, cat: "diem-den" })
-     );
-     sendRequestTraiNghiem(
-       postsApi.get({  page_size: 6, cat: "trai-nghiem" })
-     );
-     sendRequestCamNang(
-       postsApi.get({  page_size: 6, cat: "cam-nang" })
-     );
-     sendRequestNhatKy(
-       postsApi.get({  page_size: 6, cat: "nhat-ky" })
-     );
-     window.scroll({
-       top: 0,
-       left: 0,
-       behavior: "smooth",
-     });
-   }, [i18n.language,]);
+  useEffect(() => {
+    sendRequestDiemDen(postsApi.get({ page_size: 6, cat: "diem-den" }));
+    sendRequestTraiNghiem(postsApi.get({ page_size: 6, cat: "trai-nghiem" }));
+    sendRequestCamNang(postsApi.get({ page_size: 6, cat: "cam-nang" }));
+    sendRequestNhatKy(postsApi.get({ page_size: 6, cat: "nhat-ky" }));
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, [i18n.language]);
 
   useEffect(() => {
     lazy();
   }, [isLoading1, isLoading2, isLoading3, isLoading4]);
 
   usePageTitle(`Danh sách tours || Go Travel`);
-console.log('tour New')
   return (
     <div className="article__list">
       <div className={"container__Slider"}>
