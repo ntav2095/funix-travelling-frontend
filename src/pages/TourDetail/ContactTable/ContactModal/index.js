@@ -35,9 +35,14 @@ const trans = {
     en: "Female",
     vi: "Nữ",
   },
+
   other: {
     en: "Other",
     vi: "Khác",
+  },
+  plz_choose_gender: {
+    en: "please choose gender",
+    vi: "Vui lòng chọn giới tính",
   },
   requested_successfully: {
     en: "Requested successfully. We will contact you in 2 hours.",
@@ -219,9 +224,11 @@ function ContactModal(props) {
 
                     <div className="col-12 col-sm-6">
                       <div className={styles.label}>
-                        <h6>{trans.phone[lang]}:</h6>
-                        <Field as="select" name="gender">
-                          <option value="">{trans.gender[lang]}</option>
+                        <h6>{trans.gender[lang]}:</h6>
+                        <Field as="select" name="gender" required>
+                          <option value="" disabled selected>
+                            {trans.plz_choose_gender[lang]}
+                          </option>
                           <option value="male">{trans.male[lang]}</option>
                           <option value="female">{trans.female[lang]}</option>
                           <option value="other">{trans.other[lang]}</option>
