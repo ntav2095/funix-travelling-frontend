@@ -26,6 +26,9 @@
     background-color: rgba(227, 233, 237, 255);
     
 }
+.container__pagination #chevronRight{
+    border-left: 0.5px solid rgb(153, 153, 153); 
+}
 .container__pagination #chevronLeft svg,
 .container__pagination #chevronRight svg{
     width: 12px;
