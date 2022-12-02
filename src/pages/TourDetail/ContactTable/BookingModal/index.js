@@ -151,7 +151,7 @@ function BookingModal(props) {
     formData.append("adults", values.adult);
     formData.append("children", values.children);
 
-    const request1 = axios.post("https://sheetdb.io/api/v1/31iln4h8j6ok", {
+    const request1 = axios.post("https://sheetdb.io/api/v1/31iln4h8j6ok8", {
       data: {
         tour: `${tour.name} [${tour.code}]`,
         firstname: values.firstname,
@@ -207,7 +207,7 @@ function BookingModal(props) {
   useEffect(() => {
     if (error) {
       console.log("error", error);
-     
+      // props.err(true)
     }
   }, [error]);
 
