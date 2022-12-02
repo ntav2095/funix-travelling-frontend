@@ -1,0 +1,8 @@
+/* màu success   */
+
+.success {
+    background-color: rgb(70, 250, 181);
+}
+.success .notification{
+    color:rgb(255, 255, 255)
+}

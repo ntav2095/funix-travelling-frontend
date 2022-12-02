@@ -87,6 +87,8 @@ function TourList({ cat_params }) {
         ...cat_params,
       })
     );
+   const element = document.getElementById("title");
+   element.scrollIntoView();
   }, [i18n.language, location.search, cat_params, search]);
 
   useEffect(() => {
@@ -98,7 +100,7 @@ function TourList({ cat_params }) {
     <>
       <div className="tours__list">
         <div className={"container__header"}>
-          <div className={"title text-uppercase fw-bold"}>
+          <div id="title" className={"title text-uppercase fw-bold"}>
             {cat_params?.cat_not === "vi" && item.title__eu[i18n.language]}
             {cat_params?.cat === "vi" && item.title__vi[i18n.language]}
           </div>

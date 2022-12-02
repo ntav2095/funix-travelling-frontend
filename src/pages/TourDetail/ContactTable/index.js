@@ -8,6 +8,7 @@ import Placeholder from "../../../components/placeholders/Placeholder";
 import DatePickerModal from "./DatePickerModal";
 import { useEffect } from "react";
 import ContactModal from "./ContactModal";
+import NotificationModal from "./notificationModal/notification";
 
 const translation = {
   fullPackage: {
@@ -56,9 +57,16 @@ function ContactTable({ tour, isLoading }) {
   const [modalShow, setModalShow] = useState(""); // "" | "pick-date" | "book" | "contact"
   const [selectedDate, setSelectedDate] = useState(null);
 
+  const [successModal, setSuccessModal] = useState(false);
+
+
   const { i18n } = useTranslation();
   const lang = i18n.language;
 
+
+  const success=(succ)=>{
+    setSuccessModal(succ);
+  }
   const pointOfDeparture = tour ? tour.journey.split("-")[0].trim() : "";
   const destinations = tour
     ? tour.journey
@@ -76,6 +84,7 @@ function ContactTable({ tour, isLoading }) {
           onHide={() => setModalShow("")}
           tour={tour}
           selectedDate={selectedDate}
+          success={success}
         />
       )}
 
@@ -89,9 +98,17 @@ function ContactTable({ tour, isLoading }) {
         />
       )}
 
+      {successModal && (
+        <NotificationModal
+          err={false}
+          message={"Đặt tour thành công."}
+          success={success}
+        />
+      )}
       <ContactModal
         show={modalShow === "contact"}
         onHide={() => setModalShow("")}
+        success={success}
       />
 
       <div

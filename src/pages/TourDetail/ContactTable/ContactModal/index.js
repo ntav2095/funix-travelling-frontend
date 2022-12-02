@@ -94,13 +94,13 @@ function ContactModal(props) {
 
   useEffect(() => {
     if (error) {
-      alert(trans.requested_failed[lang]);
+      // alert(trans.requested_failed[lang]);
     }
   }, [error]);
 
   useEffect(() => {
     if (isSuccess) {
-      alert(trans.requested_successfully[lang]);
+      props.success(true)
       props.onHide();
     }
   }, [isSuccess]);

@@ -7,8 +7,8 @@ import { useState } from "react";
 import Calendar from "../../../../containers/Calendar";
 import { useRef } from "react";
 import { useEffect } from "react";
-
 import { format } from "date-fns";
+import NotificationModal from "../notificationModal/notification";
 
 const trans = {
   firstname: {
@@ -151,7 +151,7 @@ function BookingModal(props) {
     formData.append("adults", values.adult);
     formData.append("children", values.children);
 
-    const request1 = axios.post("https://sheetdb.io/api/v1/31iln4h8j6ok8", {
+    const request1 = axios.post("https://sheetdb.io/api/v1/31iln4h8j6ok", {
       data: {
         tour: `${tour.name} [${tour.code}]`,
         firstname: values.firstname,
@@ -206,13 +206,15 @@ function BookingModal(props) {
 
   useEffect(() => {
     if (error) {
-      alert(trans.booked_failed[lang]);
+      console.log("error", error);
+     
     }
   }, [error]);
 
   useEffect(() => {
     if (isSuccess) {
-      alert(trans.booked_successfully[lang]);
+      props.success(true);
+      console.log("isSuccess", isSuccess);
       props.onHide();
     }
   }, [isSuccess]);
