@@ -4,21 +4,31 @@ import './notification.css'
 import styles from './notification.css'
 export default function NotificationModal({ err, message,errcallback,success }) {
   console.log("NotificationModal");
-  console.log(err,message)
+  console.log(err, message);
   const [state, setState] = useState(true);
-  const time=err?10000:2000
+  const time = err ? 10000 : 2000;
+  const time2 = err ? 96000 : 1600;
 
   const modalTogglehandler = () => {
     setState(!state);
   };
-    const modal = document.querySelector(".fade.modal-backdrop");
-    modal.style.display='none'
-    console.log("modal", modal);
- 
-
   useEffect(() => {
     setTimeout(() => {
-      modalTogglehandler();
+    const modal = document.querySelector(".fade.modal-backdrop");
+    console.log("modal", modal);
+    modal.classList.remove("show");
+    console.log("modal", modal);
+    }, 300);
+ 
+  }, [state]);
+
+  useEffect(() => {
+   setTimeout(() => {
+modalTogglehandler()
+  
+},time2)
+  setTimeout(() => {
+      ;
       // if (errcallback) errcallback(false);
       if (success) success(false);
     }, time);

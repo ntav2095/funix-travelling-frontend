@@ -78,6 +78,10 @@ h6.month {
   cursor: not-allowed;
 }
 
+.dates li.notCurrentMonth {
+  color: #ccc;
+}
+
 .availableNote {
   width: 15px;
   height: 15px;

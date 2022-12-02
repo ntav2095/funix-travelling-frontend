@@ -25,7 +25,6 @@ function TravelHandbookDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const quill = useRef();
   const { id } = useParams();
-  console.log(data);
   useEffect(() => {
     window.scroll({
       top: 0,

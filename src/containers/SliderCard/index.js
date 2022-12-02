@@ -7,6 +7,7 @@ import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
 import { brokenImage } from "../../assets/images";
 import { placeholder } from "../../assets/images";
 import { chevronLeft, chevronRight } from "../../assets/svgs";
+import { SlickArrowLeft, SlickArrowRight } from "../../components/slickArrows";
 
 import Slider from "react-slick";
 import { Col } from "react-bootstrap";
@@ -33,7 +34,6 @@ function SliderCard(props) {
   // page= home hoặc page=article sẽ hiển thị nút xem tất cả
   //
   const { title, data, naviga, isloading, page, loadingCard } = props;
-  console.log("SliderCard", props);
   const { i18n } = useTranslation();
   const lang = i18n.language;
 
@@ -44,8 +44,10 @@ function SliderCard(props) {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
-    nextArrow: <button>{chevronLeft}</button>,
-    prevArrow: <button>{chevronRight}</button>,
+    // nextArrow: <button>{chevronLeft}</button>,
+    // prevArrow: <button>{chevronRight}</button>,
+    nextArrow: <SlickArrowRight />,
+    prevArrow: <SlickArrowLeft />,
     responsive: [
       {
         breakpoint: 1024,
@@ -79,7 +81,6 @@ function SliderCard(props) {
   const handlerBrokenImg = (e) => {
     e.target.src = brokenImage;
   };
-  console.log("slidercard");
   return (
     <>
       {loadingCard && (

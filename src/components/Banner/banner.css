@@ -1,39 +1,38 @@
-@media screen and (max-width:576px)  {
-   .Banner_image__NLH9s{
+@media screen and (max-width: 576px) {
+  .Banner_image__NLH9s {
     height: 232px;
-   }
-   .Banner_banner__I5FzU{
+  }
+  .Banner_banner__I5FzU {
     height: 232px;
-   }
+  }
 }
-
 
 .slick-prev:before,
 .slick-next:before {
-   display: none;
-   font-family: "slick";
-   font-size: 20px;
-   line-height: 1;
-   opacity: 0.75;
-   color: #b9b4b4;
-   -webkit-font-smoothing: antialiased;
+  display: none;
+  font-family: "slick";
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.75;
+  color: #b9b4b4;
+  -webkit-font-smoothing: antialiased;
 }
 
 .home__banner .slick-arrow::before {
-   display: none;
+  display: none;
 }
 
 .slick-initialized .slick-slide {
-   padding: 0px 8px 0px 8px;
-   display: block;
+  padding: 0px 8px 0px 8px;
+  display: block;
 }
 
-.home__banner .slick-next {
-   right: 20px;
+.home__banner .slick-arrow.slick-next {
+  right: 20px;
 }
 
-.home__banner .slick-prev {
-   left: 20px;
+.home__banner .slick-arrow.slick-prev {
+  left: 20px;
 }
 
 /* .slick-arrow::before {
@@ -42,32 +41,32 @@
   color: rgb(255, 255, 255);
 } */
 .home__banner .slick-arrow {
-   top: 50%;
-   transform: translateY(-50%);
-   z-index: 20;
-   width: 40px;
-   height: 40px;
-   background-color: white;
-   border-radius: 50%;
-   border: 0.5px solid rgb(167, 166, 166);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 50%;
+  border: 0.5px solid rgb(167, 166, 166);
 }
 
 .home__banner .slick-next svg {
-   stroke-width: 3;
-   color: black;
-   width: 17px;
+  stroke-width: 3;
+  color: black;
+  width: 17px;
 }
 
 .home__banner .slick-prev svg {
-   stroke-width: 3;
-   color: black;
-   width: 17px;
+  stroke-width: 3;
+  color: black;
+  width: 17px;
 }
 .slick-prev:hover,
 .slick-prev:focus,
 .slick-next:hover,
 .slick-next:focus {
-   color: white !important;
-   outline: none;
-   background: white !important;
+  color: white !important;
+  outline: none;
+  background: white !important;
 }

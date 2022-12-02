@@ -1,7 +1,8 @@
-.slick-arrow.slick-next.slick-disabled ,
-.slick-arrow.slick-prev.slick-disabled  {
+.slick-arrow.slick-next.slick-disabled,
+.slick-arrow.slick-prev.slick-disabled {
   display: none !important;
 }
+
 .slick-prev:before,
 .slick-next:before {
   display: none;
@@ -30,7 +31,7 @@
   text-shadow: var(--box-shadow);
   color: rgb(255, 255, 255);
 } */
-.Slider{
+.Slider {
   margin-bottom: 43px;
 }
 .Slider .slick-arrow {
@@ -43,10 +44,10 @@
   border-radius: 50%;
   border: 0.5px solid rgb(167, 166, 166);
 }
-.Slider .slick-next svg{
+.Slider .slick-next svg {
   stroke-width: 3;
-  color:black ;
-  width:17px;
+  color: black;
+  width: 17px;
 }
 .Slider .slick-prev svg {
   stroke-width: 3;
