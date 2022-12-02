@@ -40,19 +40,19 @@ function Tour(props) {
     infinite: false,
     speed: 300,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     useTransform: false,
     initialSlide: 0,
-    nextArrow: <SlickArrowRight slidesToShow={4} slidesToScroll={1} />,
+    nextArrow: <SlickArrowRight slidesToShow={4} slidesToScroll={2} />,
     prevArrow: <SlickArrowLeft />,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 2,
+          slidesToScroll: 3,
           infinite: false,
-          nextArrow: <SlickArrowRight slidesToShow={3} slidesToScroll={2} />,
+          nextArrow: <SlickArrowRight slidesToShow={3} slidesToScroll={3} />,
           useTransform: false,
           dots: false,
         },
@@ -60,9 +60,9 @@ function Tour(props) {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          nextArrow: <SlickArrowRight slidesToShow={3} slidesToScroll={3} />,
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          nextArrow: <SlickArrowRight slidesToShow={2} slidesToScroll={1} />,
           infinite: false,
           dots: false,
         },
@@ -70,9 +70,9 @@ function Tour(props) {
       {
         breakpoint: 576,
         settings: {
-          slidesToShow: 2,
-          nextArrow: <SlickArrowRight slidesToShow={2} slidesToScroll={2} />,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          nextArrow: <SlickArrowRight slidesToShow={1} slidesToScroll={1} />,
+          slidesToScroll: 1,
           initialSlide: 0,
         },
       },
