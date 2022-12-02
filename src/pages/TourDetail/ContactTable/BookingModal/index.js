@@ -211,16 +211,8 @@ function BookingModal(props) {
   }, [showCalendar]);
 
   useEffect(() => {
-    if (error) {
-      console.log("error", error);
-     
-    }
-  }, [error]);
-
-  useEffect(() => {
     if (isSuccess) {
       props.success(true);
-      console.log("isSuccess", isSuccess);
       props.onHide();
     }
   }, [isSuccess]);
