@@ -213,6 +213,7 @@ function BookingModal(props) {
   useEffect(() => {
     if (error) {
       console.log("error", error);
+     
     }
   }, [error]);
 

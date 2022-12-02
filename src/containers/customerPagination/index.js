@@ -18,7 +18,7 @@ export default function CustomPagination({total,pagenumber,callback}) {
         if(pagenumber==1){
            left.classList.add("color__button__disable");
         //    left.setAttribute("disabled", "");
-           right.classList.remove("color__button__disable");
+           
         //    right.removeAttribute("disabled", "");
         }
         if(pagenumber>1 && pagenumber<total){
@@ -30,7 +30,7 @@ export default function CustomPagination({total,pagenumber,callback}) {
         if(pagenumber==total){
             right.classList.add("color__button__disable");
             // right.setAttribute("disabled", "");
-            left.classList.remove("color__button__disable");
+            
             // left.removeAttribute("disabled", "");
         }
     },[pagenumber])
@@ -39,11 +39,11 @@ export default function CustomPagination({total,pagenumber,callback}) {
         
           <button className='button__number'>{pagenumber}</button>
           <span>{"  of " + total +' '}</span>
-          <button id="chevronLeft" type='button' onClick={() =>pagenumber>1&& setState(state - 1)}>
+          <button id="chevronLeft" type='button' onClick={() =>pagenumber>1 && setState(state - 1)}>
             {" "}
             {chevronRight}{" "}
           </button>
-          <button id="chevronRight" type='button' onClick={() =>pagenumber<total&& setState(state + 1)}>
+          <button id="chevronRight" type='button' onClick={() =>pagenumber<total && setState(state + 1)}>
             {" "}
             {chevronLeft}{" "}
           </button>

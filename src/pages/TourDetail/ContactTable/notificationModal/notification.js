@@ -1,18 +1,34 @@
 import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import './notification.css'
+import styles from './notification.css'
 export default function NotificationModal({ err, message,errcallback,success }) {
   console.log("NotificationModal");
-  console.log(err,message)
+  console.log(err, message);
   const [state, setState] = useState(true);
+  const time = err ? 10000 : 2000;
+  const time2 = err ? 96000 : 1600;
 
   const modalTogglehandler = () => {
     setState(!state);
   };
-  const time=err?10000:2000
   useEffect(() => {
     setTimeout(() => {
-      modalTogglehandler();
+    const modal = document.querySelector(".fade.modal-backdrop");
+    console.log("modal", modal);
+    modal.classList.remove("show");
+    console.log("modal", modal);
+    }, 300);
+ 
+  }, [state]);
+
+  useEffect(() => {
+   setTimeout(() => {
+modalTogglehandler()
+  
+},time2)
+  setTimeout(() => {
+      ;
       // if (errcallback) errcallback(false);
       if (success) success(false);
     }, time);
@@ -23,6 +39,7 @@ export default function NotificationModal({ err, message,errcallback,success }) 
       {err && (
         <div className="error">
           <Modal
+            id="modalSuccess"
             size="sm"
             show={state}
             onHide={() => modalTogglehandler()}
@@ -41,16 +58,19 @@ export default function NotificationModal({ err, message,errcallback,success }) 
         </div>
       )}
       {!err && (
-        <div className="success">
-          <Modal
-            size="sm"
-            show={state}
-            onHide={() => modalTogglehandler()}
-            aria-labelledby="example-modal-sizes-title-sm"
-          >
-            <Modal.Body><p className="notification">{message}</p></Modal.Body>
-          </Modal>
-        </div>
+        <Modal
+          size="sm"
+          show={state}
+          onHide={() => modalTogglehandler()}
+          dialogClassName={styles.modal}
+          aria-labelledby="example-modal-sizes-title-sm "
+        >
+          <div className="success">
+            <Modal.Body>
+              <p className="notification">{message}</p>
+            </Modal.Body>
+          </div>
+        </Modal>
       )}
     </div>
   );

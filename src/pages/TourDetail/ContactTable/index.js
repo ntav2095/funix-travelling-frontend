@@ -58,7 +58,7 @@ function ContactTable({ tour, isLoading }) {
   const [selectedDate, setSelectedDate] = useState(null);
 
   const [successModal, setSuccessModal] = useState(false);
-
+console.log("successModal", successModal);
 
   const { i18n } = useTranslation();
   const lang = i18n.language;
