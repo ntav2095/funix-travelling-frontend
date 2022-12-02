@@ -75,12 +75,13 @@
   margin-bottom: 16px;
 }
 
-.form select:required:invalid {
-  color: gray;
-}
 .form option[value=""][disabled] {
   display: none;
 }
 .form option {
   color: black;
+}
+
+.form select {
+  color: grey;
 }

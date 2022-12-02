@@ -101,6 +101,7 @@ const initialValues = {
   firstname: "",
   surname: "",
   phone: "",
+  gender: "",
 };
 
 function ContactModal(props) {
@@ -115,6 +116,7 @@ function ContactModal(props) {
         firstname: values.firstname,
         surname: values.surname,
         phone: values.phone,
+        gender: values.gender,
       },
     });
 
@@ -195,7 +197,7 @@ function ContactModal(props) {
               validationSchema={contactFormSchema}
               onSubmit={submitHandler}
             >
-              {() => (
+              {({ values }) => (
                 <Form>
                   <div className="row">
                     <div className="col-12 col-sm-6">
@@ -225,7 +227,13 @@ function ContactModal(props) {
                     <div className="col-12 col-sm-6">
                       <div className={styles.label}>
                         <h6>{trans.gender[lang]}:</h6>
-                        <Field as="select" name="gender" required>
+                        <Field
+                          as="select"
+                          name="gender"
+                          style={{
+                            color: values.gender === "" ? "gray" : "#000",
+                          }}
+                        >
                           <option value="" disabled selected>
                             {trans.plz_choose_gender[lang]}
                           </option>
