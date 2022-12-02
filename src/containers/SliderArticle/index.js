@@ -7,14 +7,12 @@ import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
 
 //compument
 import ArticleCard from "../../pages/TravelHandbook/ArticleCard";
-import Arrow from "../customerArrowSlider";
 import { SlickArrowLeft, SlickArrowRight } from "../../components/slickArrows";
 //hook
 
 //css
 import "./article.css";
 import styles from "./slider.module.css";
-import { chevronLeft, chevronRight } from "../../assets/svgs";
 
 function SliderArticle({ title, data, loading, category }) {
   const { i18n } = useTranslation();
@@ -25,9 +23,7 @@ function SliderArticle({ title, data, loading, category }) {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
-    // nextArrow: <button>{chevronLeft}</button>,
-    // prevArrow: <button>{chevronRight}</button>,
-    nextArrow: <SlickArrowRight />,
+    nextArrow: <SlickArrowRight slidesToShow={4} slidesToScroll={1} />,
     prevArrow: <SlickArrowLeft />,
     responsive: [
       {
@@ -37,6 +33,8 @@ function SliderArticle({ title, data, loading, category }) {
           slidesToScroll: 2,
           infinite: false,
           dots: false,
+          nextArrow: <SlickArrowRight slidesToShow={4} slidesToScroll={1} />,
+          prevArrow: <SlickArrowLeft />,
         },
       },
       {
@@ -46,6 +44,8 @@ function SliderArticle({ title, data, loading, category }) {
           slidesToScroll: 3,
           infinite: false,
           dots: false,
+          nextArrow: <SlickArrowRight slidesToShow={4} slidesToScroll={1} />,
+          prevArrow: <SlickArrowLeft />,
         },
       },
       {
@@ -54,6 +54,8 @@ function SliderArticle({ title, data, loading, category }) {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 0,
+          nextArrow: <SlickArrowRight slidesToShow={4} slidesToScroll={1} />,
+          prevArrow: <SlickArrowLeft />,
         },
       },
     ],

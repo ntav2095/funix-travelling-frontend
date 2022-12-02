@@ -27,8 +27,11 @@ export const SlickArrowRight = ({
   infinite,
   ...props
 }) => {
-  console.log(slideCount);
-  console.log(currentSlide);
+  // console.log("count", slideCount);
+  // console.log("current", currentSlide);
+  // console.log(slidesToShow + currentSlide * slidesToScroll);
+  console.log(slidesToShow);
+  console.log(slidesToScroll);
   return (
     <button
       {...props}
