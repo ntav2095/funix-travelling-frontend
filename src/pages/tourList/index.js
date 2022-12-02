@@ -75,6 +75,14 @@ function TourList({ cat_params }) {
       navigate(`/tours-trong-nuoc/?page=${num}&`);
     }
   };
+useEffect(() => {
+  if(page>1){const element = document.getElementById("title");
+ element.scrollIntoView();}
+ if(new URLSearchParams(location.search).get("page")==1){
+  const element = document.getElementById("title");
+  element.scrollIntoView();
+ }
+}, [page])
 
   useEffect(() => {
     sendRequest(
@@ -85,8 +93,7 @@ function TourList({ cat_params }) {
         ...cat_params,
       })
     );
-   const element = document.getElementById("title");
-   element.scrollIntoView();
+   
   }, [i18n.language, location.search, cat_params, search]);
 
   useEffect(() => {
