@@ -1,5 +1,5 @@
 const config = {
-  baseURL: "https://funixxx.herokuapp.com/api",
+  baseURL: "http://18.142.230.189:5000/api",
 };
 
 export default config;
