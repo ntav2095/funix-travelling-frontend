@@ -44,9 +44,7 @@ function SliderCard(props) {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
-    // nextArrow: <button>{chevronLeft}</button>,
-    // prevArrow: <button>{chevronRight}</button>,
-    nextArrow: <SlickArrowRight />,
+    nextArrow: <SlickArrowRight slidesToScroll={1} slidesToShow={4} />,
     prevArrow: <SlickArrowLeft />,
     responsive: [
       {
@@ -56,6 +54,7 @@ function SliderCard(props) {
           slidesToScroll: 2,
           infinite: false,
           dots: false,
+          nextArrow: <SlickArrowRight slidesToScroll={2} slidesToShow={3} />,
         },
       },
       {
@@ -65,6 +64,7 @@ function SliderCard(props) {
           slidesToScroll: 3,
           infinite: false,
           dots: false,
+          nextArrow: <SlickArrowRight slidesToScroll={3} slidesToShow={3} />,
         },
       },
       {
@@ -73,6 +73,7 @@ function SliderCard(props) {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 0,
+          nextArrow: <SlickArrowRight slidesToScroll={2} slidesToShow={2} />,
         },
       },
     ],

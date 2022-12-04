@@ -7,6 +7,7 @@ import {
   starFill,
   openQuotes,
 } from "../../../../assets/svgs";
+import useWindowReSize from "../../../../hooks/useResize";
 import {
   SlickArrowLeft,
   SlickArrowRight,
@@ -84,6 +85,8 @@ const comments = [
 function Rating() {
   const sliderRef = useRef();
 
+  const { width } = useWindowReSize();
+
   const settings = {
     speed: 500,
     infinite: false,
@@ -102,22 +105,11 @@ function Rating() {
           infinite: false,
           dots: false,
           prevArrow: <SlickArrowLeft />,
-          nextArrow: <SlickArrowRight slidesToShow={2} slidesToScroll={1} />,
+          nextArrow: <SlickArrowRight slidesToShow={1} slidesToScroll={1} />,
         },
       },
     ],
   };
-
-  const x = comments.map((item) => (
-    <div key={item.id} className={styles.ratingItem}>
-      <div className={styles.comment + " p-4"}>
-        <p className={styles.quotes + " " + styles.openQuotes}>{openQuotes}</p>
-        <p className="m-0">{item.content}</p>
-        <p className={styles.quotes + " " + styles.closeQuotes}>{openQuotes}</p>
-        <h6>{item.name}</h6>
-      </div>
-    </div>
-  ));
 
   return (
     <div className={styles.wrapper + " tourDetail__rating"}>
@@ -145,7 +137,7 @@ function Rating() {
             </div>
           </div>
 
-          {/* {comments.map((item) => (
+          {comments.map((item) => (
             <div key={item.id} className={styles.ratingItem}>
               <div className={styles.comment + " p-4"}>
                 <p className={styles.quotes + " " + styles.openQuotes}>
@@ -158,13 +150,15 @@ function Rating() {
                 <h6>{item.name}</h6>
               </div>
             </div>
-          ))} */}
+          ))}
 
-          {x}
-
-          <div
-            className={styles.ratingItem + " d-none d-sm-block " + styles.empty}
-          />
+          {width >= 576 && (
+            <div
+              className={
+                styles.ratingItem + " d-none d-sm-block " + styles.empty
+              }
+            />
+          )}
         </Slider>
       </div>
     </div>

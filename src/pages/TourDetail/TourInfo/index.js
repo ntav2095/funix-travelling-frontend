@@ -8,7 +8,7 @@ import "./TourInfo.module.css";
 import { useTranslation } from "react-i18next";
 import "./tourinfo_override.css";
 import Overview from "./Overview";
-import DropdownItems from "./Tabs";
+import DropdownItems from "./DropdownItems";
 import Itinerary from "./Itinerary";
 import styles from "./TourInfo.module.css";
 import Rating from "./Rating";
@@ -147,7 +147,10 @@ const TourInfo = ({ tour, isLoading }) => {
       )}
 
       {/* ==================================================================  */}
-      <Tabs defaultActiveKey="overview" className="mb-0 border-0">
+      <Tabs
+        defaultActiveKey="overview"
+        className={styles.tabs + " mb-0 border-0"}
+      >
         <Tab eventKey="overview" title={trans.tabTitle.overview[lang]}>
           <div className="p-3 border rounded-0">
             {tour && <Overview tour={tour} />}

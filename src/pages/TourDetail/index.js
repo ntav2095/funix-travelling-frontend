@@ -47,11 +47,11 @@ function TourDetail() {
               {isLoading && <Placeholder height={30} width={"60%"} />}
             </h1>
 
-            <div className="row">
-              <div className="col-12 col-lg-8 mb-4">
+            <div className="row ">
+              <div className="col-12 col-lg-8 mb-4 px-0 px-md-1">
                 <TourCarousel tour={tour} isLoading={isLoading} />
 
-                <div className="pt-5">
+                <div className="pt-5 ">
                   <TourInfo tour={tour} isLoading={isLoading} />
                 </div>
               </div>
