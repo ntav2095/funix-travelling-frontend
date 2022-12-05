@@ -71,10 +71,10 @@ function Tours() {
                       <div>Mã tour</div>
                     </th>
                     <th>
-                      <div>Name</div>
+                      <div>Tên tour</div>
                     </th>
                     <th>
-                      <div>Actions</div>
+                      <div>Chức năng</div>
                     </th>
                   </tr>
                 </thead>
@@ -83,7 +83,9 @@ function Tours() {
                   {data.data.map((item, index) => (
                     <tr key={item._id}>
                       <td>
-                        <div>{(page - 1) * PAGE_SIZE + index + 1}</div>
+                        <div className="text-center">
+                          {(page - 1) * PAGE_SIZE + index + 1}
+                        </div>
                       </td>
                       <td>
                         <div>{item.code}</div>

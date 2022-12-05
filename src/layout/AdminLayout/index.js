@@ -47,7 +47,7 @@ function AdminLayout({ children, title, path, text }) {
             <ul className={styles.nav}>
               <li>
                 <NavLink end className={navLinkClasses} to="/">
-                  Client page
+                  Trang khách hàng
                 </NavLink>
               </li>
               <li>
@@ -57,22 +57,22 @@ function AdminLayout({ children, title, path, text }) {
               </li>
               <li>
                 <NavLink className={navLinkClasses} to="/admin/visa-products">
-                  Visa Products
+                  Visa
                 </NavLink>
               </li>
               <li>
                 <NavLink className={navLinkClasses} to="/admin/posts">
-                  Posts
+                  Guides
                 </NavLink>
               </li>
               <li>
                 <NavLink className={navLinkClasses} to="/admin/category">
-                  Category
+                  Quản lý danh mục
                 </NavLink>
-              </li>{" "}
+              </li>
               <li>
                 <NavLink className={navLinkClasses} to="/admin/manage-layout">
-                  Manage Layout
+                  Quản lý hình banners
                 </NavLink>
               </li>
               {!user && (

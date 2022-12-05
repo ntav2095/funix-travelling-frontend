@@ -1,7 +1,6 @@
 .travel__pagination .rc-pagination {
   display: flex;
   padding: 0;
-  margin-left: 50%;
 }
 
 .travel__pagination ul {
@@ -36,4 +35,5 @@
 /* ===== custom ===  */
 .bg-active-green .rc-pagination-item-active {
   background: #1e8553;
+  color: white;
 }

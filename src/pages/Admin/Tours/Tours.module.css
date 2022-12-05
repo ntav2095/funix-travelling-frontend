@@ -38,6 +38,10 @@
   position: relative;
 }
 
+.table th:first-of-type {
+  width: 50px;
+}
+
 .table th:not(:last-of-type)::after {
   position: absolute;
   display: block;

@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import AdminLayout from "../../../layout/AdminLayout/index";
 import { postsApi, adminApis } from "../../../services/apis";
 import useAxios from "../../../hooks/useAxios";
-import { Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./posts.module.css";
 import Pagination from "../../../containers/Pagination";
 import SpinnerModal from "../../../components/SpinnerModal";
@@ -63,7 +62,7 @@ function Posts() {
                   <tr>
                     <th>
                       <div>STT</div>
-                    </th>{" "}
+                    </th>
                     <th>
                       <div>ID</div>
                     </th>
@@ -81,7 +80,7 @@ function Posts() {
                     <tr key={item._id}>
                       <td>
                         <div>{(page - 1) * PAGE_SIZE + index + 1}</div>
-                      </td>{" "}
+                      </td>
                       <td>
                         <div>{item._id}</div>
                       </td>
