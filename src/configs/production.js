@@ -1,5 +1,5 @@
 const config = {
-  baseURL: "https://funixxx.herokuapp.com/api",
+  baseURL: "https://ntav.org/api",
 };
 
 export default config;
