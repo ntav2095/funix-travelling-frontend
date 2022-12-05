@@ -11,6 +11,11 @@
   transform: translateY(-100%);
   z-index: 200;
   display: block;
+  transition: 0.1s;
+}
+
+.tourDetail__rating .slick-arrow:hover {
+  background: rgb(235, 242, 245) !important;
 }
 
 .tourDetail__rating .slick-arrow.slick-disabled {
