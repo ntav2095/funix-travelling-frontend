@@ -111,7 +111,7 @@ const initialValues = {
   date: "",
 };
 
-function BookingModal(props) {
+function BookingModal({ selectedDate, ...props }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -245,7 +245,7 @@ function BookingModal(props) {
           <Formik
             initialValues={{
               ...initialValues,
-              date: props.selectedDate || "",
+              date: selectedDate || "",
             }}
             validationSchema={bookingTourSchema}
             onSubmit={submitHandler}
