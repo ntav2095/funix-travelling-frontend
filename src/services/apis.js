@@ -13,7 +13,7 @@ export const tourApi = {
     data: formData,
   }),
   get: (params = {}) => ({
-    url: `/tour/?hehe=chicken&hehe=bird`,
+    url: `/tour`,
     method: "GET",
     params: params,
   }),
