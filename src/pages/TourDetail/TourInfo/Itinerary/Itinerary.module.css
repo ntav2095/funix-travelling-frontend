@@ -24,14 +24,15 @@
 }
 
 .tabItem .body {
-  height: 0;
+  max-height: 0;
   overflow: hidden;
   border-bottom: 1px solid #ccc;
   padding-top: 16px;
+  transition: 0.8s;
 }
 
 .tabItem.active .body {
-  height: auto;
+  max-height: 1000px;
 }
 
 .header {

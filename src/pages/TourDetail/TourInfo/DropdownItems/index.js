@@ -5,28 +5,15 @@ import { chevronDown } from "../../../../assets/svgs";
 import QuillReader from "../QuillReader";
 
 function Tabs({ data }) {
-  const [show, setShow] = useState("");
-  // const [show, setShow] = useState([]);
+  const [show, setShow] = useState([]);
 
-  // const toggleHandler = (id) => {
-  //   setShow((prev) =>
-  //     prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-  //   );
-  // };
-
-  const toggleHandler = (id, e) => {
-    setShow((prev) => (prev === id ? "" : id));
-    const title = e.currentTarget.querySelector("h5");
-
-    const rect = title.getBoundingClientRect();
-    console.log(rect);
-    // window.scrollTo({
-    //   top: rect.y,
-    // });
+  const toggleHandler = (id) => {
+    setShow((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
   };
 
-  const isActive = (id) => show === id;
-  // const isActive = (id) => show.includes(id);
+  const isActive = (id) => show.includes(id);
 
   return (
     <>
