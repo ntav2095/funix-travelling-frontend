@@ -3,3 +3,8 @@
   margin-bottom: 8px;
   display: block;
 }
+
+.container {
+  padding: 8px;
+  padding-top: 80px;
+}

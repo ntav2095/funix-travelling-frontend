@@ -47,7 +47,6 @@ function Login() {
 
   useEffect(() => {
     if (data) {
-      alert("Login thanh cong");
       dispatch(setUser(data.user));
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("user", JSON.stringify(data.user));

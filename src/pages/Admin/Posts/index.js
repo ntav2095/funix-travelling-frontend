@@ -9,6 +9,7 @@ import SpinnerModal from "../../../components/SpinnerModal";
 import ErrorMessage from "../../../components/ErrorMessage";
 import usePageTitle from "../../../hooks/usePageTitle";
 import "./override.css";
+import StatusBar from "../../../layout/AdminLayout/StatusBar";
 
 const PAGE_SIZE = 6;
 
@@ -49,11 +50,13 @@ function Posts() {
   return (
     <>
       <SpinnerModal show={isLoading || isFetching} />
-      <AdminLayout
-        title="Danh sách các bài viết"
-        path="/admin/new-posts"
-        text="New Posts"
-      >
+      <AdminLayout>
+        <StatusBar title="Guides">
+          <Link to="/admin/new-posts" className="btn btn-sm btn-primary">
+            Tạo bài viết mới
+          </Link>
+        </StatusBar>
+
         <div className={styles.posts}>
           {postsData && postsData.data && postsData.data.length > 0 && (
             <>
@@ -67,10 +70,10 @@ function Posts() {
                       <div>ID</div>
                     </th>
                     <th style={{ width: "70%" }}>
-                      <div>Title</div>
+                      <div>Tiêu đề</div>
                     </th>
                     <th>
-                      <div>Actions</div>
+                      <div>Hành động</div>
                     </th>
                   </tr>
                 </thead>
@@ -93,13 +96,13 @@ function Posts() {
                             className={styles.editBtn}
                             to={`/admin/edit-posts/${item._id}`}
                           >
-                            Edit
+                            Sửa
                           </Link>
                           <button
                             className={styles.removeBtn}
                             onClick={(event) => deletePost(event, item._id)}
                           >
-                            Delete
+                            Xóa
                           </button>
                         </div>
                       </td>

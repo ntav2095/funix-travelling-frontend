@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import './notification.css'
-import styles from './notification.css'
-export default function NotificationModal({ err, message,errcallback,success }) {
+import "./notification.css";
+import styles from "./notification.css";
+export default function NotificationModal({
+  err,
+  message,
+  errcallback,
+  success,
+}) {
   console.log("NotificationModal");
   console.log(err, message);
   const [state, setState] = useState(true);
@@ -14,21 +19,18 @@ export default function NotificationModal({ err, message,errcallback,success }) 
   };
   useEffect(() => {
     setTimeout(() => {
-    const modal = document.querySelector(".fade.modal-backdrop");
-    console.log("modal", modal);
-    modal.classList.remove("show");
-    console.log("modal", modal);
+      const modal = document.querySelector(".fade.modal-backdrop");
+      console.log("modal", modal);
+      modal.classList.remove("show");
+      console.log("modal", modal);
     }, 300);
- 
   }, [state]);
 
   useEffect(() => {
-   setTimeout(() => {
-modalTogglehandler()
-  
-},time2)
-  setTimeout(() => {
-      ;
+    setTimeout(() => {
+      modalTogglehandler();
+    }, time2);
+    setTimeout(() => {
       // if (errcallback) errcallback(false);
       if (success) success(false);
     }, time);
@@ -47,7 +49,7 @@ modalTogglehandler()
           >
             <Modal.Header closeButton>
               <Modal.Title id="example-modal-sizes-title-sm">
-                <i class="fas fa-exclamation"></i>
+                <i className="fas fa-exclamation"></i>
                 <p>ERROR</p>
               </Modal.Title>
             </Modal.Header>

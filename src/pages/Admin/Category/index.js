@@ -15,6 +15,7 @@ import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 import { useState } from "react";
 import CatForm from "./CatForm";
 import usePageTitle from "../../../hooks/usePageTitle";
+import StatusBar from "../../../layout/AdminLayout/StatusBar";
 
 function Category() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -78,9 +79,11 @@ function Category() {
   return (
     <>
       <SpinnerModal show={isLoading || adding || isDeleting} />
-      <AdminLayout title="Category">
+      <AdminLayout>
         <div className={styles.container}>
           {error && <ErrorMessage msg={error.message} />}
+
+          <StatusBar title="Quản lý danh mục" />
 
           {data && (
             <div className="pb-4 border-bottom">

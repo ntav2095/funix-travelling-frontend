@@ -39,10 +39,6 @@ const formPacker = (values, tourId) => {
     notes: values.notes,
   };
 
-  const departureDates = values.departureDates
-    .split("\n")
-    .map((item) => stringToDate(item)[1]);
-
   const formData = new FormData();
 
   formData.append("tourId", tourId);
@@ -54,10 +50,10 @@ const formPacker = (values, tourId) => {
   formData.append("countries", values.countries);
   formData.append("description", values.description);
   formData.append("highlights", JSON.stringify(values.highlights));
-  formData.append("price", values.price);
+  formData.append("price", Number(values.price.replace(/,/g, "")));
   formData.append("duration", JSON.stringify(duration));
   formData.append("price_policies", JSON.stringify(price_policies));
-  formData.append("departureDates", JSON.stringify(departureDates));
+  formData.append("departureDates", JSON.stringify(values.departureDates));
   formData.append("terms", JSON.stringify(terms));
   formData.append("category", JSON.stringify(values.category));
   formData.append("thumb", values.thumb);

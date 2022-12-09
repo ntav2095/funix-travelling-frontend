@@ -11,6 +11,7 @@ import {
   initialValues,
   dataPacker,
 } from "./import";
+import styles from "./NewTour.module.css";
 
 function NewTour() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -44,17 +45,19 @@ function NewTour() {
     <>
       <SpinnerModal show={isLoading || isFetchingCat} />
 
-      <AdminLayout title="Tạo tour mới">
+      <AdminLayout>
         {fetchingCatError && <ErrorMessage msg={fetchingCatError.message} />}
 
-        {cat && (
-          <TourForm
-            key={formKey}
-            initialValues={initialValues}
-            onSubmit={submitHandler}
-            cat={cat.data}
-          />
-        )}
+        <div className={styles.container}>
+          {cat && (
+            <TourForm
+              key={formKey}
+              initialValues={initialValues}
+              onSubmit={submitHandler}
+              cat={cat.data}
+            />
+          )}
+        </div>
       </AdminLayout>
     </>
   );

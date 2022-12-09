@@ -1,25 +1,40 @@
 // main
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { removeUser } from "../../store/user.slice";
 import { useState, useRef } from "react";
+import { toggleSidebar } from "../../store/layout.slice";
 
 // assets
 import {
   exit as exitSvg,
   user as userSVG,
   chevronDoubleUp as upSVG,
+  boxArrowRight,
+  bus,
+  passport,
+  layout,
+  category,
+  book,
 } from "../../assets/svgs";
 
 // css
 import styles from "./AdminLayout.module.css";
 
 function AdminLayout({ children, title, path, text }) {
-  const [hide, setHide] = useState(false);
+  // const [hide, setHide] = useState(false);
+
+  const sidebarIsShow = useSelector((state) => state.layout.sidebar.isShow);
+
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
   const contentRef = useRef();
+
+  const toggleSidebarHandler = () => {
+    dispatch(toggleSidebar());
+  };
+
   const logoutHandler = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("accessToken");
@@ -30,7 +45,8 @@ function AdminLayout({ children, title, path, text }) {
     isActive ? styles.active : undefined;
 
   let sidebarClasses = styles.sidebar;
-  if (hide) {
+
+  if (!sidebarIsShow) {
     sidebarClasses += " " + styles.hide;
   }
   return (
@@ -38,6 +54,10 @@ function AdminLayout({ children, title, path, text }) {
       <div className={styles.wrapper}>
         <main className={styles.main}>
           <div className={sidebarClasses}>
+            <button className={styles.toggleBtn} onClick={toggleSidebarHandler}>
+              {boxArrowRight}
+            </button>
+
             {user && (
               <div className={styles.userInfo}>
                 {userSVG}
@@ -46,35 +66,31 @@ function AdminLayout({ children, title, path, text }) {
             )}
             <ul className={styles.nav}>
               <li>
-                <NavLink end className={navLinkClasses} to="/">
-                  Trang khách hàng
-                </NavLink>
-              </li>
-              <li>
                 <NavLink className={navLinkClasses} to="/admin/tours">
-                  Tours
+                  {!sidebarIsShow ? bus : "Tour"}
                 </NavLink>
               </li>
               <li>
                 <NavLink className={navLinkClasses} to="/admin/visa-products">
-                  Visa
+                  {!sidebarIsShow ? passport : "Visa"}
                 </NavLink>
               </li>
               <li>
                 <NavLink className={navLinkClasses} to="/admin/posts">
-                  Guides
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className={navLinkClasses} to="/admin/category">
-                  Quản lý danh mục
+                  {!sidebarIsShow ? book : "Guides"}
                 </NavLink>
               </li>
               <li>
                 <NavLink className={navLinkClasses} to="/admin/manage-layout">
-                  Quản lý hình banners
+                  {!sidebarIsShow ? layout : "Banner"}
                 </NavLink>
               </li>
+              <li>
+                <NavLink className={navLinkClasses} to="/admin/category">
+                  {!sidebarIsShow ? category : "Danh mục"}
+                </NavLink>
+              </li>
+
               {!user && (
                 <li>
                   <NavLink className={navLinkClasses} to="/admin/login">
@@ -84,31 +100,14 @@ function AdminLayout({ children, title, path, text }) {
               )}
             </ul>
 
-            <div className={styles.logout}>
+            <div className={styles.logout} onClick={logoutHandler}>
               {exitSvg}
-              <button onClick={logoutHandler}>Log out</button>
+              {sidebarIsShow && <button>Log out</button>}
             </div>
           </div>
 
           <div ref={contentRef} className={styles.content}>
-            <div className={styles.contentHeader}>
-              <div className="d-flex align-items-center">
-                <button
-                  className={styles.toggleBtn + " me-4 "}
-                  onClick={() => setHide((prev) => !prev)}
-                >
-                  {hide ? "hiện menu >>" : "<< ẩn menu"}
-                </button>
-                <h2 className={styles.title}>{title}</h2>
-              </div>
-              {path && text && (
-                <Link className={styles.navigateBtn} to={path}>
-                  {text}
-                </Link>
-              )}
-            </div>
-
-            <div className={styles.contentMain}>{children}</div>
+            {children}
           </div>
         </main>
       </div>

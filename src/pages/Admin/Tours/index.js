@@ -15,6 +15,7 @@ import {
 import usePageTitle from "../../../hooks/usePageTitle";
 
 import "./override.css";
+import StatusBar from "../../../layout/AdminLayout/StatusBar";
 
 function Tours() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -58,6 +59,12 @@ function Tours() {
         path="/admin/new-tour"
         text="New Tour"
       >
+        <StatusBar title="Danh sách tours">
+          <Link className="btn btn-primary btn-sm" to="/admin/new-tour">
+            Tạo tour mới
+          </Link>
+        </StatusBar>
+
         <div className={styles.tours}>
           {data && data.data.length > 0 && (
             <>

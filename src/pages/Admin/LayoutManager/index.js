@@ -5,31 +5,36 @@ import { useEffect } from "react";
 import SpinnerModal from "../../../components/SpinnerModal";
 import ImagesManger from "./ImagesManger";
 import styles from "./LayoutManager.module.css";
+import "./LayoutManager.override.css";
+import StatusBar from "../../../layout/AdminLayout/StatusBar";
+
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 
 const LAYOUT_IMAGES = [
   {
     type: "home",
-    name: "Slider trang chủ",
+    name: "Trang chủ",
   },
   {
     type: "vn_tours",
-    name: "Banner tours Việt Nam",
+    name: "Tours Việt Nam",
   },
   {
     type: "eu_tours",
-    name: "Banner tours Châu Âu",
+    name: "Tours Châu Âu",
   },
   {
     type: "tour",
-    name: "Banner chi tiết tour",
+    name: "Chi tiết tour",
   },
   {
     type: "guides",
-    name: "Banner Cẩm nang du lịch",
+    name: "Cẩm nang du lịch",
   },
   {
     type: "article",
-    name: "Banner bài viết cẩm nang du lịch",
+    name: "Bài viết cẩm nang du lịch",
   },
 ];
 
@@ -44,20 +49,29 @@ function LayoutManager() {
     <>
       <SpinnerModal show={isLoading} />
       <AdminLayout>
-        {data &&
-          LAYOUT_IMAGES.map((item) => (
-            <div key={item.type} className="py-3 border-bottom border-success">
-              <ImagesManger
-                type={item.type}
-                name={item.name}
-                initialImages={
-                  Array.isArray(data.images[item.type])
-                    ? data.images[item.type]
-                    : [data.images[item.type]]
-                }
-              />
-            </div>
-          ))}
+        <StatusBar title="Quản lý banners" />
+
+        <div className={styles.container + "  layoutManager"}>
+          {data && (
+            <Tabs defaultActiveKey={LAYOUT_IMAGES[0].type}>
+              {LAYOUT_IMAGES.map((item) => (
+                <Tab key={item.type} eventKey={item.type} title={item.name}>
+                  <div key={item.type} className="py-3 ">
+                    <ImagesManger
+                      type={item.type}
+                      name={item.name}
+                      initialImages={
+                        Array.isArray(data.images[item.type])
+                          ? data.images[item.type]
+                          : [data.images[item.type]]
+                      }
+                    />
+                  </div>
+                </Tab>
+              ))}
+            </Tabs>
+          )}
+        </div>
       </AdminLayout>
     </>
   );

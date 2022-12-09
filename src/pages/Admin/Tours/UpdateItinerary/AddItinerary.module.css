@@ -1,3 +1,8 @@
+.container {
+  padding: 8px;
+  padding-top: 80px;
+}
+
 .plan label {
   display: block;
   margin-bottom: 16px;
@@ -26,12 +31,7 @@
 }
 
 .planItem {
-  margin-bottom: 32px;
-  border-bottom: 2px solid #ccc;
-  padding: 36px;
   background: white;
-  position: relative;
-  box-shadow: var(--box-shadow);
 }
 
 .previewImages {
@@ -53,8 +53,8 @@
   position: absolute;
   top: 0;
   right: 0px;
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  bottom: 0;
   opacity: 0.6;
   transition: 0.1s;
 }
@@ -74,4 +74,11 @@
   margin-left: 6px;
   margin-bottom: 1px;
   cursor: pointer;
+}
+.accordionHeader h6 {
+  font-size: 14px;
+}
+.accordionHeader h5 {
+  font-size: 16px;
+  margin-bottom: 0;
 }
