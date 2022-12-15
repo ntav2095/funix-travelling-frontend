@@ -20,6 +20,7 @@ const initialValues = {
   category: [],
 
   code: "",
+  is_special: false,
   name: "",
   journey: "",
   countries: "",
@@ -66,6 +67,7 @@ const dataPacker = (values) => {
   const formData = new FormData();
 
   formData.append("code", values.code);
+  formData.append("is_special", values.is_special);
   formData.append("name", values.name);
   formData.append("journey", values.journey);
   formData.append("countries", values.countries);

@@ -36,3 +36,9 @@
   padding: 3px 6px;
   margin-top: 2px;
 }
+
+/* ********************* home slider ****************************  */
+
+.homeSliderImage img {
+  width: 100%;
+}

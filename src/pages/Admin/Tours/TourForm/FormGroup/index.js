@@ -1,11 +1,11 @@
 import { Field, ErrorMessage } from "formik";
 import Editor from "../../../../../containers/Editor";
-import styles from "./FormGroup.module.css";
 import {
   isSameDate,
   stringToDate,
 } from "../../../../../services/helpers/dateHandler";
 import { format } from "date-fns";
+import styles from "./FormGroup.module.css";
 
 const requiredField = <em title="Bắt buộc">(bắt buộc)</em>;
 
@@ -153,6 +153,49 @@ function FormGroup(props) {
               </span>
             </p>
           ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "checkbox") {
+    form_field = (
+      <input
+        type="checkbox"
+        checked={values.is_special}
+        name={name}
+        onChange={() => setFieldValue(name, !values.is_special)}
+      />
+    );
+  }
+
+  if (type === "home-slider") {
+    form_field = (
+      <div>
+        <span
+          className="btn btn-primary mb-4 btn-sm"
+          onClick={() => setFieldValue(name, "")}
+        >
+          Bỏ chọn
+        </span>
+
+        <div className={styles.homeSliderImages}>
+          <div className="row">
+            {values.images.map((url) => (
+              <label className="col-2" key={url}>
+                <div className={styles.homeSliderImage}>
+                  <input
+                    className={styles.homeSliderImageCheckbox}
+                    type="checkbox"
+                    value={url}
+                    checked={url === values.slider}
+                    onChange={() => setFieldValue(name, url)}
+                  />
+                  <img src={url} />
+                </div>
+              </label>
+            ))}
+          </div>
         </div>
       </div>
     );

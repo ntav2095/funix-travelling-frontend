@@ -73,6 +73,17 @@ function TourForm({ initialValues, onSubmit, cat }) {
                     </div>
                   </div>
 
+                  {!not_vi && (
+                    <FormGroup
+                      label="Tour nổi bật"
+                      type="checkbox"
+                      setFieldValue={setFieldValue}
+                      setFieldTouched={setFieldTouched}
+                      name="is_special"
+                      values={values}
+                    />
+                  )}
+
                   <FormGroup
                     label="Lộ trình"
                     isRequired
@@ -261,6 +272,18 @@ function TourForm({ initialValues, onSubmit, cat }) {
                     type="City"
                     values={values}
                     setFieldValue={setFieldValue}
+                  />
+                </Tab>
+              )}
+
+              {!not_vi && (
+                <Tab eventKey="slider" title="Home slider">
+                  <FormGroup
+                    type="home-slider"
+                    setFieldValue={setFieldValue}
+                    setFieldTouched={setFieldTouched}
+                    name="slider"
+                    values={values}
                   />
                 </Tab>
               )}

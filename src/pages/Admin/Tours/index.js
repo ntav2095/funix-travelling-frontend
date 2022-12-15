@@ -110,9 +110,10 @@ function Tours() {
               />
               <button
                 className="border ms-2 bg-secondary text-light"
-                onClick={() =>
-                  setFilter((prev) => ({ ...prev, search: searchInput }))
-                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  setFilter((prev) => ({ ...prev, search: searchInput }));
+                }}
               >
                 search
               </button>

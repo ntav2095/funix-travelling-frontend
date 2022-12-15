@@ -55,6 +55,10 @@ function EditTour() {
     }
   }, [editingError]);
 
+  const images = tour
+    ? tour.itinerary.reduce((p, c) => [...p, ...c.images], [])
+    : [];
+
   const initialValues = tour
     ? {
         ...tour,
@@ -76,6 +80,7 @@ function EditTour() {
 
         language: lang,
         price: tour.price.toLocaleString("en-US"),
+        images,
       }
     : null;
 

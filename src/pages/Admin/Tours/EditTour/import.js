@@ -45,6 +45,8 @@ const formPacker = (values, tourId) => {
   formData.append("language", values.language);
 
   formData.append("code", values.code);
+  formData.append("is_special", values.is_special);
+  formData.append("slider", values.slider);
   formData.append("name", values.name);
   formData.append("journey", values.journey);
   formData.append("countries", values.countries);
