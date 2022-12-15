@@ -6,9 +6,9 @@ import { tourApi } from "../../services/apis";
 import Tour from "./tour";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import DefaultLayout from "../../layout/DefaultLayout";
-import Banner from "../../components/Banner";
 import useLazyLoading, { loadingImg } from "../../hooks/uselazyLoading";
+import ErrorPage from '../../containers/ErrorPage'
+
 
 function HomeNew() {
   const { i18n } = useTranslation();
@@ -35,7 +35,6 @@ function HomeNew() {
           title={i18next.t("homeMain.titleTourChauAu")}
           naviga={"/tours-chau-au"}
           isloading={isLoading}
-          
         />
       </div>
 
@@ -56,6 +55,7 @@ function HomeNew() {
           isloading={isLoading}
         />
       </div>
+      {error && <ErrorPage code={error.httpCode} message={error.message} />}
     </>
   );
 }

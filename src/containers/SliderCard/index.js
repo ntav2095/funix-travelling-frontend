@@ -150,7 +150,9 @@ function SliderCard(props) {
             </Link>
           )}
         </div>
-      )}
+      )
+      
+      }
     </>
   );
 }
