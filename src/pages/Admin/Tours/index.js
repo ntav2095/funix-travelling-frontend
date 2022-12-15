@@ -22,6 +22,11 @@ function Tours() {
   const [sendDelete, isDeleting, deleted, deleteError, deletingReset] =
     useAxios();
   const [page, setPage] = useState(1);
+  const [searchInput, setSearchInput] = useState("");
+  const [filter, setFilter] = useState({
+    category: "all",
+    search: "",
+  });
 
   const deleteHandler = (tourId) => {
     if (window.confirm("Bạn có chắc là muốn xóa không?")) {
@@ -30,8 +35,23 @@ function Tours() {
   };
 
   useEffect(() => {
-    sendRequest(tourApi.get({ page, page_size: PAGE_SIZE }));
-  }, [page]);
+    const reqQueries = { page, page_size: PAGE_SIZE };
+    if (filter.category === "europe") {
+      reqQueries.cat = "europe";
+    }
+
+    if (filter.category === "vi") {
+      reqQueries.cat_not = "europe";
+    }
+
+    console.log(filter);
+
+    if (filter.search.trim()) {
+      reqQueries.search = filter.search.trim();
+    }
+
+    sendRequest(tourApi.get(reqQueries));
+  }, [page, filter]);
 
   useEffect(() => {
     if (deleteError) {
@@ -46,6 +66,10 @@ function Tours() {
       sendRequest(tourApi.get({ page, page_size: PAGE_SIZE }));
     }
   }, [deleted, page]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [filter]);
 
   let errMsg = error ? error.message : null;
 
@@ -66,6 +90,35 @@ function Tours() {
         </StatusBar>
 
         <div className={styles.tours}>
+          <div className="mb-2">
+            <select
+              value={filter}
+              onChange={(e) =>
+                setFilter((prev) => ({ ...prev, category: e.target.value }))
+              }
+            >
+              <option value="all">Tất cả</option>
+              <option value="eu">Tour châu Âu</option>
+              <option value="vi">Tour Việt Nam</option>
+            </select>
+
+            <form className="mt-2">
+              <input
+                type="text"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+              />
+              <button
+                className="border ms-2 bg-secondary text-light"
+                onClick={() =>
+                  setFilter((prev) => ({ ...prev, search: searchInput }))
+                }
+              >
+                search
+              </button>
+            </form>
+          </div>
+
           {data && data.data.length > 0 && (
             <>
               <table className={styles.table}>
@@ -118,7 +171,13 @@ function Tours() {
                             className={styles.editItineraryBtn}
                             to={`/admin/update-itinerary/${item._id}`}
                           >
-                            Thêm/sửa lộ trình
+                            Sửa lộ trình
+                          </Link>
+                          <Link
+                            className={styles.editItineraryBtn + " bg-success"}
+                            to={`/admin/rate-tour/${item._id}`}
+                          >
+                            Đánh giá
                           </Link>
                         </div>
                       </td>

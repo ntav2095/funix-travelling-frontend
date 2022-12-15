@@ -81,6 +81,11 @@ function AdminLayout({ children, title, path, text }) {
                 </NavLink>
               </li>
               <li>
+                <NavLink className={navLinkClasses} to="/admin/terms">
+                  {!sidebarIsShow ? book : "Điều khoản"}
+                </NavLink>
+              </li>
+              <li>
                 <NavLink className={navLinkClasses} to="/admin/manage-layout">
                   {!sidebarIsShow ? layout : "Banner"}
                 </NavLink>
@@ -106,7 +111,7 @@ function AdminLayout({ children, title, path, text }) {
             </div>
           </div>
 
-          <div ref={contentRef} className={styles.content}>
+          <div ref={contentRef} className={styles.content} id="admin__content">
             {children}
           </div>
         </main>

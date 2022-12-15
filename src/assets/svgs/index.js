@@ -602,7 +602,7 @@ export const starHalfFill = (
   </svg>
 );
 
-export const start = (
+export const star = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"

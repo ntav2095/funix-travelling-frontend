@@ -8,11 +8,6 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import StatusBar from "../../../../layout/AdminLayout/StatusBar";
 import "./TourForm.override.css";
-import {
-  isSameDate,
-  stringToDate,
-} from "../../../../services/helpers/dateHandler";
-import { format } from "date-fns";
 
 function TourForm({ initialValues, onSubmit, cat }) {
   let cat_continent = useMemo(
@@ -144,6 +139,35 @@ function TourForm({ initialValues, onSubmit, cat }) {
                       values={values}
                     />
                   )}
+
+                  {!not_vi && (
+                    <div>
+                      <FormGroup
+                        label="Chọn ảnh preview"
+                        isRequired
+                        name="thumb"
+                        type="file"
+                        setFieldValue={setFieldValue}
+                      />
+
+                      {values.thumb && (
+                        <div className={styles.currentImages}>
+                          <h6>Hình đại diện</h6>
+                          <div className={styles.preview}>
+                            <label>
+                              <img
+                                src={
+                                  typeof values.thumb === "string"
+                                    ? values.thumb
+                                    : URL.createObjectURL(values.thumb)
+                                }
+                              />
+                            </label>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </Tab>
 
@@ -214,35 +238,6 @@ function TourForm({ initialValues, onSubmit, cat }) {
                   values={values}
                 />
               </Tab>
-
-              {!not_vi && (
-                <Tab eventKey="thumb" title="Ảnh preview">
-                  <FormGroup
-                    label="Chọn ảnh preview"
-                    isRequired
-                    name="thumb"
-                    type="file"
-                    setFieldValue={setFieldValue}
-                  />
-
-                  {values.thumb && (
-                    <div className={styles.currentImages}>
-                      <h6>Hình đại diện</h6>
-                      <div className={styles.preview}>
-                        <label>
-                          <img
-                            src={
-                              typeof values.thumb === "string"
-                                ? values.thumb
-                                : URL.createObjectURL(values.thumb)
-                            }
-                          />
-                        </label>
-                      </div>
-                    </div>
-                  )}
-                </Tab>
-              )}
 
               {/* ----------------------- categories ------------------------  */}
               {!not_vi && (

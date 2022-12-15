@@ -154,7 +154,7 @@ export const adminApis = {
     }),
     getSingle: (tourId, language) => ({
       method: "GET",
-      url: `/admin/tour/${tourId}/?language=${language}`,
+      url: `/admin/tour/${tourId}/?language=${language || "vi"}`,
     }),
     edit: (formData) => ({
       method: "PUT",
@@ -168,6 +168,21 @@ export const adminApis = {
       method: "DELETE",
       url: "/admin/tour",
       data: { tourId },
+    }),
+    rate: (data) => ({
+      method: "POST",
+      url: "/admin/tour/rating",
+      data,
+    }),
+    editRatingItem: (data) => ({
+      method: "PUT",
+      url: "/admin/tour/rating",
+      data,
+    }),
+    deleteRatingItem: (data) => ({
+      method: "DELETE",
+      url: "/admin/tour/rating",
+      data,
     }),
   },
 
@@ -212,7 +227,23 @@ export const adminApis = {
       },
     }),
   },
+  term: {
+    getAll: () => ({
+      method: "GET",
+      url: "/admin/term",
+    }),
+    getSingle: (type) => ({
+      method: "GET",
+      url: `/admin/term/${type}`,
+    }),
+    update: (data) => ({
+      method: "PUT",
+      url: "/admin/term",
+      data,
+    }),
+  },
 };
+
 export const layoutApi = {
   get: () => ({
     url: `/layout`,

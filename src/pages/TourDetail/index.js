@@ -20,7 +20,6 @@ import styles from "./TourDetail.module.css";
 import FacebookComment from "../../containers/facebookComment";
 import { useTranslation } from "react-i18next";
 import Placeholder from "../../components/placeholders/Placeholder";
-import Calendar from "../../containers/Calendar";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();

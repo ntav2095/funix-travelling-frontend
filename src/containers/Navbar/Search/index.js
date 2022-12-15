@@ -131,8 +131,15 @@ function Search() {
                         />
                       </div>
                       <div className={styles.textbox}>
-                        <p>{tour.name}</p>
-                        <em>{tour.countries || tour.journey}</em>
+                        <p>
+                          {tour.name} [{tour.code}]
+                        </p>
+                        {tour.countries && (
+                          <em className="d-block">{tour.countries}</em>
+                        )}
+                        {tour.journey && (
+                          <em className="d-block">{tour.journey}</em>
+                        )}
                       </div>
                     </Link>
                   </li>
@@ -158,6 +165,7 @@ function Search() {
             )}
           </div>
 
+          {/* ***************************** ARTICLE *******************************  */}
           <div className="articles py-2">
             <h6>
               {trans.articles[lang]}{" "}

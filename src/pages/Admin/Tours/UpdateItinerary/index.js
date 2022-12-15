@@ -91,7 +91,13 @@ function UpdateItinerary() {
   const addDayHandler = () => {
     setPlan((prev) => [
       ...prev,
-      { id: uuid(), day: "", destination: "", content: null, images: [] },
+      {
+        id: uuid(),
+        day: "NGÀY MỚI",
+        destination: "NGÀY MỚI",
+        content: null,
+        images: [],
+      },
     ]);
   };
 
@@ -122,6 +128,14 @@ function UpdateItinerary() {
   };
 
   usePageTitle("Cập nhật lộ tình tour | Admin | Travel Funix");
+
+  useEffect(() => {
+    const scrollingElement = document.getElementById("admin__content");
+    scrollingElement.scroll({
+      top: scrollingElement.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [plan]);
 
   return (
     <>
@@ -200,7 +214,7 @@ function UpdateItinerary() {
                         <h6>{planItem.day}</h6>
                         <h5>{planItem.destination}</h5>
                         <button
-                          title="Xóa ngày này"
+                          title="Xóa"
                           className={styles.removeDayBtn}
                           onClick={(e) => {
                             e.stopPropagation();
@@ -280,7 +294,7 @@ function UpdateItinerary() {
                                     removeImagesHandler(planItem.id, e)
                                   }
                                 >
-                                  Xóa hết hình của ngày này
+                                  Xóa hình
                                 </button>
                               )}
                             </div>
