@@ -104,7 +104,7 @@ const initialValues = {
   gender: "",
 };
 
-function ContactModal(props) {
+function ContactModal({ success, ...props }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -157,14 +157,8 @@ function ContactModal(props) {
   });
 
   useEffect(() => {
-    if (error) {
-      // alert(trans.requested_failed[lang]);
-    }
-  }, [error]);
-
-  useEffect(() => {
     if (isSuccess) {
-      props.success(true);
+      success(true);
       props.onHide();
     }
   }, [isSuccess]);
@@ -234,7 +228,7 @@ function ContactModal(props) {
                             color: values.gender === "" ? "gray" : "#000",
                           }}
                         >
-                          <option value="" disabled selected>
+                          <option value="" disabled defaultValue>
                             {trans.plz_choose_gender[lang]}
                           </option>
                           <option value="male">{trans.male[lang]}</option>

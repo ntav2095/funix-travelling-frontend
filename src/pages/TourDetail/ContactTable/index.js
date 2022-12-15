@@ -56,17 +56,14 @@ const translation = {
 function ContactTable({ tour, isLoading }) {
   const [modalShow, setModalShow] = useState(""); // "" | "pick-date" | "book" | "contact"
   const [selectedDate, setSelectedDate] = useState(null);
-
   const [successModal, setSuccessModal] = useState(false);
-console.log("successModal", successModal);
 
   const { i18n } = useTranslation();
   const lang = i18n.language;
 
-
-  const success=(succ)=>{
+  const success = (succ) => {
     setSuccessModal(succ);
-  }
+  };
   const pointOfDeparture = tour ? tour.journey.split("-")[0].trim() : "";
   const destinations = tour
     ? tour.journey

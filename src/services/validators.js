@@ -21,18 +21,8 @@ export const tourValidator = (values) => {
     errors.description = REQUIRED;
   }
 
-  if (!values.departureDates) {
+  if (values.departureDates.length === 0) {
     errors.departureDates = REQUIRED;
-  } else {
-    values.departureDates
-      .split("\n")
-      .filter((item) => item.trim())
-      .forEach((dateString) => {
-        const [error, timeStamp] = stringToDate(dateString);
-        if (error) {
-          errors.departureDates = "Ngày không hợp lệ: " + dateString;
-        }
-      });
   }
 
   if (!values.days) {

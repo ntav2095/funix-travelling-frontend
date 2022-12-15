@@ -23,3 +23,9 @@ a:active {
 a {
   text-decoration: none;
 }
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+  appearance: textfield;
+}

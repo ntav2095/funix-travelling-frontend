@@ -1,6 +1,8 @@
 .tours {
   overflow: auto;
   width: 100%;
+  padding: 8px;
+  padding-top: 80px;
 }
 
 .table {
@@ -36,6 +38,10 @@
 
 .table th {
   position: relative;
+}
+
+.table th:first-of-type {
+  width: 50px;
 }
 
 .table th:not(:last-of-type)::after {

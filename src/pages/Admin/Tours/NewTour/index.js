@@ -11,11 +11,14 @@ import {
   initialValues,
   dataPacker,
 } from "./import";
+import styles from "./NewTour.module.css";
+import { useNavigate } from "react-router-dom";
 
 function NewTour() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const [fetchCat, isFetchingCat, cat, fetchingCatError] = useAxios();
   const [formKey, setFormKey] = useState(1);
+  const navigate = useNavigate();
 
   const submitHandler = (values) => {
     const formData = dataPacker(values);
@@ -24,8 +27,8 @@ function NewTour() {
 
   useEffect(() => {
     if (data) {
-      alert("Tạo tour mới thành công.");
-      setFormKey((prev) => prev + 1); // re-render form mới
+      alert("Tạo tour mới thành công. Bạn sẽ được chuyển tới tạo lộ trình");
+      navigate(`/admin/update-itinerary/${data.data._id}`);
     }
   }, [data]);
 
@@ -44,17 +47,19 @@ function NewTour() {
     <>
       <SpinnerModal show={isLoading || isFetchingCat} />
 
-      <AdminLayout title="Tạo tour mới">
+      <AdminLayout>
         {fetchingCatError && <ErrorMessage msg={fetchingCatError.message} />}
 
-        {cat && (
-          <TourForm
-            key={formKey}
-            initialValues={initialValues}
-            onSubmit={submitHandler}
-            cat={cat.data}
-          />
-        )}
+        <div className={styles.container}>
+          {cat && (
+            <TourForm
+              key={formKey}
+              initialValues={initialValues}
+              onSubmit={submitHandler}
+              cat={cat.data}
+            />
+          )}
+        </div>
       </AdminLayout>
     </>
   );

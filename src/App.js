@@ -7,11 +7,13 @@ import Loading from "./components/loading";
 import GoToTop from "./components/GoToTop";
 import { liveChat } from "./containers/Livechat";
 import Category from "./pages/Admin/Category";
+import Terms from "./pages/Admin/Terms";
 import DefaultLayout from "./layout/DefaultLayout";
 
 import Spinner from "./components/Spinner";
 import EditCatModal from "./pages/Admin/Category/EditCatModal";
 import ArticleCategory from "./pages/articleCategory";
+import TourRating from "./pages/Admin/Tours/Rating";
 import LayoutManager from "./pages/Admin/LayoutManager";
 // components
 
@@ -110,6 +112,7 @@ function App() {
 
               {/* tour  */}
               <Route path="/admin/new-tour" element={<NewTour />} />
+              <Route path="/admin/rate-tour/:tourId" element={<TourRating />} />
               <Route path="/admin/edit-tour/:tourId" element={<EditTour />} />
               <Route path="/admin/tours" element={<Tours />} />
               <Route
@@ -131,6 +134,9 @@ function App() {
                 path="/admin/edit-posts/:articleId"
                 element={<EditPosts />}
               />
+
+              {/* terms  */}
+              <Route path="/admin/terms" element={<Terms />} />
 
               {/* layout */}
               <Route path="/admin/manage-layout" element={<LayoutManager />} />

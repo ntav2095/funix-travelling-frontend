@@ -55,13 +55,15 @@ function EditTour() {
     }
   }, [editingError]);
 
+  const images = tour
+    ? tour.itinerary.reduce((p, c) => [...p, ...c.images], [])
+    : [];
+
   const initialValues = tour
     ? {
         ...tour,
         removedImages: [],
-        departureDates: tour.departureDates
-          .map((item) => format(new Date(item), "dd/MM/yyyy"))
-          .join("\n"),
+        departureDates: tour.departureDates,
         highlights: tour.highlights,
 
         days: tour.duration.days,
@@ -77,6 +79,8 @@ function EditTour() {
         paymentPolicy: tour.terms.payment,
 
         language: lang,
+        price: tour.price.toLocaleString("en-US"),
+        images,
       }
     : null;
 
@@ -91,7 +95,7 @@ function EditTour() {
         path={`/admin/update-itinerary/${tourId}`}
         text="Cập nhật lộ trình tour"
       >
-        <div className={styles.editPost}>
+        <div className={styles.container}>
           {langs && (
             <label className={styles.langSelect}>
               <span>Ngôn ngữ</span>
@@ -106,14 +110,12 @@ function EditTour() {
           )}
 
           {initialValues && !fetching && fetchedData && (
-            <div className={styles.container}>
-              <TourForm
-                key={lang}
-                initialValues={initialValues}
-                onSubmit={submitHandler}
-                cat={fetchedData.metadata.categories}
-              />
-            </div>
+            <TourForm
+              key={lang}
+              initialValues={initialValues}
+              onSubmit={submitHandler}
+              cat={fetchedData.metadata.categories}
+            />
           )}
 
           {!initialValues && !fetchingError && fetchedData && (

@@ -1,6 +1,5 @@
 import React from "react";
 
-import { useRef } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 
@@ -174,7 +173,7 @@ const TourInfo = ({ tour, isLoading }) => {
         </Tab>
         <Tab eventKey="rating" title={trans.tabTitle.rating[lang]}>
           <div className="p-3 border rounded-0">
-            <Rating />
+            {tour && <Rating tour={tour} />}
           </div>
         </Tab>
       </Tabs>

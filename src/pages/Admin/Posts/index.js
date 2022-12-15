@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import AdminLayout from "../../../layout/AdminLayout/index";
 import { postsApi, adminApis } from "../../../services/apis";
 import useAxios from "../../../hooks/useAxios";
-import { Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./posts.module.css";
 import Pagination from "../../../containers/Pagination";
 import SpinnerModal from "../../../components/SpinnerModal";
 import ErrorMessage from "../../../components/ErrorMessage";
 import usePageTitle from "../../../hooks/usePageTitle";
 import "./override.css";
+import StatusBar from "../../../layout/AdminLayout/StatusBar";
 
 const PAGE_SIZE = 6;
 
@@ -50,11 +50,13 @@ function Posts() {
   return (
     <>
       <SpinnerModal show={isLoading || isFetching} />
-      <AdminLayout
-        title="Danh sách các bài viết"
-        path="/admin/new-posts"
-        text="New Posts"
-      >
+      <AdminLayout>
+        <StatusBar title="Guides">
+          <Link to="/admin/new-posts" className="btn btn-sm btn-primary">
+            Tạo bài viết mới
+          </Link>
+        </StatusBar>
+
         <div className={styles.posts}>
           {postsData && postsData.data && postsData.data.length > 0 && (
             <>
@@ -63,15 +65,15 @@ function Posts() {
                   <tr>
                     <th>
                       <div>STT</div>
-                    </th>{" "}
+                    </th>
                     <th>
                       <div>ID</div>
                     </th>
                     <th style={{ width: "70%" }}>
-                      <div>Title</div>
+                      <div>Tiêu đề</div>
                     </th>
                     <th>
-                      <div>Actions</div>
+                      <div>Hành động</div>
                     </th>
                   </tr>
                 </thead>
@@ -81,7 +83,7 @@ function Posts() {
                     <tr key={item._id}>
                       <td>
                         <div>{(page - 1) * PAGE_SIZE + index + 1}</div>
-                      </td>{" "}
+                      </td>
                       <td>
                         <div>{item._id}</div>
                       </td>
@@ -94,13 +96,13 @@ function Posts() {
                             className={styles.editBtn}
                             to={`/admin/edit-posts/${item._id}`}
                           >
-                            Edit
+                            Sửa
                           </Link>
                           <button
                             className={styles.removeBtn}
                             onClick={(event) => deletePost(event, item._id)}
                           >
-                            Delete
+                            Xóa
                           </button>
                         </div>
                       </td>

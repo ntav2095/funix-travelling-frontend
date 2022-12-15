@@ -1,3 +1,8 @@
+.container {
+  padding: 8px;
+  padding-top: 80px;
+}
+
 .addLangBtn {
   padding: 8px 16px;
   background: var(--main-color);

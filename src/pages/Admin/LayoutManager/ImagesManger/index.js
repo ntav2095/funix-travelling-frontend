@@ -49,7 +49,7 @@ function ImagesManger({ name, type, initialImages = [], reFetch }) {
 
   return (
     <form>
-      <h5>{name}</h5>
+      {/* <h5>{name}</h5> */}
       <div className="row mb-2">
         <h6 className="col-12">Ảnh hiện tại</h6>
         {curImgs.map((item, index) => (

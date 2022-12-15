@@ -2,14 +2,12 @@ import React, { useEffect } from "react";
 import styles from "./tour.module.css";
 import { Link } from "react-router-dom";
 import { brokenImage } from "../../../assets/images";
-import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "./tour.css";
 import { useTranslation } from "react-i18next";
 import CardPlaceholder from "../../../components/placeholders/CardPlaceholder";
 import { Col } from "react-bootstrap";
 import { placeholder } from "../../../assets/images";
-import { chevronLeft, chevronRight } from "../../../assets/svgs";
 import {
   SlickArrowLeft,
   SlickArrowRight,
@@ -94,7 +92,7 @@ function Tour(props) {
             tour &&
             tour.map((item, id) => (
               <div key={id} className={styles.carouselItem}>
-                <Link to={`/danh-sach-tour/${item._id}`}>
+                <Link to={`/danh-sach-tour/${item.code}`}>
                   <div className={styles.img}>
                     <img
                       src={placeholder}

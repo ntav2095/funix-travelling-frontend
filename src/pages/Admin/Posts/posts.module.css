@@ -1,6 +1,7 @@
 .posts {
   display: block;
-  padding: 1em;
+  padding: 8px;
+  padding-top: 80px;
 }
 
 .table {
