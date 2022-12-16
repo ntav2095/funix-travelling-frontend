@@ -19,9 +19,12 @@ import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
 import { useTranslation } from "react-i18next";
 import { brokenImage } from "../../assets/images";
 import Sidebar from "../../containers/Sidebar";
+import { useDispatch } from "react-redux";
+import { articleDetail } from "../../store/banner.slice";
 
 function TravelHandbookDetail() {
   const { i18n } = useTranslation();
+  const dispatch=useDispatch()
   const [sendRequest, isLoading, data, error] = useAxios();
   const quill = useRef();
   const { id } = useParams();
@@ -32,6 +35,12 @@ function TravelHandbookDetail() {
     });
     sendRequest(postsApi.getSingleArticle(id));
   }, [i18n.language, id]);
+
+  useEffect(()=>{
+    if(data){
+      dispatch(articleDetail({id:data.data.item._id,image:data.data.item.thumb}));
+    }
+  },[data])
 
   useEffect(() => {
     if (quill.current) {

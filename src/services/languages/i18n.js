@@ -18,9 +18,9 @@ const resources = {
         title1: "Dịch vụ đẳng cấp",
         title2: "Hành trình ấn tượng",
         title3: "Đối tác tin cậy",
-        titleTourChauAu: "TOUR CHÂU ÂU",
-        titleTourTrongNuoc: "TOUR TRONG NƯỚC",
-        titleCamNang: "CẨM NANG DU LỊCH",
+        titleTourChauAu: "DU LỊCH CHÂU ÂU",
+        titleTourTrongNuoc: "DU LỊCH TRONG NƯỚC",
+        titleCamNang: "GUIDES",
         session1:
           "Chúng tôi cam kết đem lại cho quý khách những dịch vụ uy tín nhất về lữ hành, khách sạn và nghỉ dưỡng, đảm bảo các tiêu chuẩn quốc tế về an toàn trong toàn bộ hành trình.",
         session2:

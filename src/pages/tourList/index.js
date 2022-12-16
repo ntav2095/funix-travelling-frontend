@@ -16,6 +16,7 @@ import { tourApi } from "../../services/apis";
 
 // css
 import "./tours.css";
+import ErrorPage from "../../containers/ErrorPage";
 
 function TourList({ cat_params }) {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -167,6 +168,7 @@ useEffect(() => {
           )}
         </div>
       </div>
+      {error && <ErrorPage code={error.httpCode} message={error.message} />}
     </>
   );
 }

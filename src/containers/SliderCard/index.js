@@ -33,10 +33,10 @@ const trans = {
 function SliderCard(props) {
   // page= home hoặc page=article sẽ hiển thị nút xem tất cả
   //
-  const { title, data, naviga, isloading, page, loadingCard } = props;
+  const { title, data, naviga, page, loadingCard } = props;
   const { i18n } = useTranslation();
   const lang = i18n.language;
-
+  console.log('data',data)
   const settings = {
     dots: false,
     infinite: false,
@@ -82,6 +82,19 @@ function SliderCard(props) {
   const handlerBrokenImg = (e) => {
     e.target.src = brokenImage;
   };
+
+  const textCategory = (item) => {
+    if(item=='diem-den'){
+      return 'Điểm đến hấp đẫn'
+    }else if(item=='trai-nghiem'){
+      return 'Trải nghiệm - khám phá'
+    }else if(item=='cam-nang'){
+      return 'Cẩm nang du lịch'
+    }else{
+      return 'Nhật kí hành trình'
+    }
+  };
+
   return (
     <>
       {loadingCard && (
@@ -115,7 +128,7 @@ function SliderCard(props) {
                         {page == "article" ? (
                           <>
                             <h5 className="text-uppercase">{item.title}</h5>
-                            <p>{title}</p>
+                            <p>{textCategory(item.category[0])}</p>
                           </>
                         ) : (
                           <>

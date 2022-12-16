@@ -50,37 +50,40 @@ function ArticleList({ page }) {
   }, [isLoading1, isLoading2, isLoading3, isLoading4]);
 
   return (
-        <div className={styles.slider}>
-          <SliderArticle
-            title={"điểm dến hấp dẫn"}
-            data={dataDiemDen}
-            loading={isLoading1}
-            category={"diem-den"}
-            error={error1}
-          />
-          <SliderArticle
-            title={"trải nghiệm - khám phá"}
-            data={dataTraiNgiem}
-            loading={isLoading2}
-            category={"trai-nghiem"}
-            error={error2}
-          />
-          <SliderArticle
-            title={"cẩm nang du lịch"}
-            data={dataCamnang}
-            loading={isLoading3}
-            category={"cam-nang"}
-            error={error3}
-          />
-          <SliderArticle
-            title={"nhật ký hành trình"}
-            data={dataNhatKy}
-            loading={isLoading4}
-            category={"nhat-ky"}
-            error={error4}
-          />
-        </div>
-     
+    <div className={styles.slider}>
+      <SliderArticle
+        title={"điểm dến hấp dẫn"}
+        data={dataDiemDen}
+        loading={isLoading1}
+        category={"diem-den"}
+        error={error1}
+      />
+      <SliderArticle
+        title={"trải nghiệm - khám phá"}
+        data={dataTraiNgiem}
+        loading={isLoading2}
+        category={"trai-nghiem"}
+        error={error2}
+      />
+      <SliderArticle
+        title={"cẩm nang du lịch"}
+        data={dataCamnang}
+        loading={isLoading3}
+        category={"cam-nang"}
+        error={error3}
+      />
+      <SliderArticle
+        title={"nhật ký hành trình"}
+        data={dataNhatKy}
+        loading={isLoading4}
+        category={"nhat-ky"}
+        error={error4}
+      />
+      {error1 && <ErrorPage code={error1.httpCode} message={error1.message} />}
+      {error2 && <ErrorPage code={error2.httpCode} message={error2.message} />}
+      {error3 && <ErrorPage code={error3.httpCode} message={error3.message} />}
+      {error4 && <ErrorPage code={error4.httpCode} message={error4.message} />}
+    </div>
   );
 }
 
