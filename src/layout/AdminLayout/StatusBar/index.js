@@ -1,5 +1,5 @@
 import styles from "./StatusBar.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function StatusBar({ children, title }) {
   const sidebarIsShow = useSelector((state) => state.layout.sidebar.isShow);

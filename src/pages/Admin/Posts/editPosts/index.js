@@ -23,8 +23,18 @@ function EditPost() {
     : null;
 
   const submitHandler = async (values) => {
-    const { title, author, origin, lead, thumb, content, language, category } =
-      values;
+    const {
+      title,
+      author,
+      origin,
+      lead,
+      thumb,
+      content,
+      language,
+      category,
+      hot,
+    } = values;
+
     const formData = new FormData();
     formData.append("articleId", articleId);
     formData.append("language", language);
@@ -32,6 +42,7 @@ function EditPost() {
     formData.append("author", author);
     formData.append("origin", origin);
     formData.append("lead", lead);
+    formData.append("hot", hot);
     formData.append("category", JSON.stringify(category));
     formData.append("content", JSON.stringify(content));
     if (typeof thumb !== "string") {
@@ -71,6 +82,8 @@ function EditPost() {
         lead: article.lead,
         thumb: article.thumb,
         content: article.content,
+        hot: article.hot,
+        banner: article.banner,
         language: lang,
         category: article.category || [],
       }

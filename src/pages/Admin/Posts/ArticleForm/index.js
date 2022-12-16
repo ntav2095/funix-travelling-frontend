@@ -52,6 +52,25 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
                 <ErrorMessage name="title" component="p" />
               </div>
             </label>
+
+            <label>
+              <h6>Bài viết nổi bật</h6>
+              <input
+                type="checkbox"
+                checked={values.hot}
+                onChange={() => setFieldValue("hot", !values.hot)}
+              />
+            </label>
+
+            <label>
+              <h6>Banner</h6>
+              <input
+                type="checkbox"
+                checked={values.banner}
+                onChange={() => setFieldValue("banner", !values.banner)}
+              />
+            </label>
+
             <label>
               <h6>Tác giả</h6>
               <Field type="text" name="author" />

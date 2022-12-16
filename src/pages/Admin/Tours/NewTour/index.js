@@ -13,6 +13,7 @@ import {
 } from "./import";
 import styles from "./NewTour.module.css";
 import { useNavigate } from "react-router-dom";
+import StatusBar from "../../../../layout/AdminLayout/StatusBar";
 
 function NewTour() {
   const [sendRequest, isLoading, data, error] = useAxios();

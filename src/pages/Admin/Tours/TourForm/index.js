@@ -79,7 +79,7 @@ function TourForm({ initialValues, onSubmit, cat }) {
                       type="checkbox"
                       setFieldValue={setFieldValue}
                       setFieldTouched={setFieldTouched}
-                      name="is_special"
+                      name="hot"
                       values={values}
                     />
                   )}
@@ -276,13 +276,14 @@ function TourForm({ initialValues, onSubmit, cat }) {
                 </Tab>
               )}
 
+              {/* ----------------------------- banner -----------------------------  */}
               {!not_vi && (
-                <Tab eventKey="slider" title="Home slider">
+                <Tab eventKey="banner" title="Banner">
                   <FormGroup
-                    type="home-slider"
+                    type="banner"
                     setFieldValue={setFieldValue}
                     setFieldTouched={setFieldTouched}
-                    name="slider"
+                    name="banner"
                     values={values}
                   />
                 </Tab>

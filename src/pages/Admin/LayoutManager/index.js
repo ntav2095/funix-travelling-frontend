@@ -18,23 +18,15 @@ const LAYOUT_IMAGES = [
   },
   {
     type: "vn_tours",
-    name: "Tours Việt Nam",
+    name: "Du lịch Việt Nam",
   },
   {
     type: "eu_tours",
-    name: "Tours Châu Âu",
-  },
-  {
-    type: "tour",
-    name: "Chi tiết tour",
+    name: "Du lịch Châu Âu",
   },
   {
     type: "guides",
-    name: "Cẩm nang du lịch",
-  },
-  {
-    type: "article",
-    name: "Bài viết cẩm nang du lịch",
+    name: "Guides",
   },
 ];
 

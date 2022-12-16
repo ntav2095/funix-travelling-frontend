@@ -85,14 +85,16 @@ function AdminLayout({ children, title, path, text }) {
                   {!sidebarIsShow ? book : "Điều khoản"}
                 </NavLink>
               </li>
-              <li>
-                <NavLink className={navLinkClasses} to="/admin/manage-layout">
-                  {!sidebarIsShow ? layout : "Banner"}
-                </NavLink>
-              </li>
+
               <li>
                 <NavLink className={navLinkClasses} to="/admin/category">
                   {!sidebarIsShow ? category : "Danh mục"}
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink className={navLinkClasses} to="/admin/users">
+                  User
                 </NavLink>
               </li>
 

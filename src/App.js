@@ -2,8 +2,6 @@
 import { Route, Routes } from "react-router-dom";
 import React, { Suspense, useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-// import HomeNew from "./pages/HomeNew";
-import Loading from "./components/loading";
 import GoToTop from "./components/GoToTop";
 import { liveChat } from "./containers/Livechat";
 import Category from "./pages/Admin/Category";
@@ -15,6 +13,9 @@ import EditCatModal from "./pages/Admin/Category/EditCatModal";
 import ArticleCategory from "./pages/articleCategory";
 import TourRating from "./pages/Admin/Tours/Rating";
 import LayoutManager from "./pages/Admin/LayoutManager";
+import Users from "./pages/Admin/Users";
+import CreateUser from "./pages/Admin/Users/CreateUser";
+import ChangePassword from "./pages/Admin/Users/ChangePassword";
 // components
 
 const RequireAuth = React.lazy(() => import("./components/RequireAuth"));
@@ -137,6 +138,14 @@ function App() {
 
               {/* terms  */}
               <Route path="/admin/terms" element={<Terms />} />
+
+              {/* users */}
+              <Route path="/admin/users" element={<Users />} />
+              <Route path="/admin/users/create-user" element={<CreateUser />} />
+              <Route
+                path="/admin/users/change-password/:username"
+                element={<ChangePassword />}
+              />
 
               {/* layout */}
               <Route path="/admin/manage-layout" element={<LayoutManager />} />

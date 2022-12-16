@@ -26,6 +26,7 @@ function Tours() {
   const [filter, setFilter] = useState({
     category: "all",
     search: "",
+    banner: "",
   });
 
   const deleteHandler = (tourId) => {
@@ -44,10 +45,12 @@ function Tours() {
       reqQueries.cat_not = "europe";
     }
 
-    console.log(filter);
-
     if (filter.search.trim()) {
       reqQueries.search = filter.search.trim();
+    }
+
+    if (filter.banner) {
+      reqQueries.banner = filter.banner;
     }
 
     sendRequest(tourApi.get(reqQueries));
@@ -120,6 +123,20 @@ function Tours() {
             </form>
           </div>
 
+          <div className="mb-2">
+            Banner
+            <select
+              onChange={(e) => {
+                setFilter((prev) => ({ ...prev, banner: e.target.value }));
+              }}
+            >
+              <option value="">Không lọc</option>
+              <option value="home">home</option>
+              <option value="vn-tours">Du lịch VN</option>
+              <option value="eu-tours">Du lịch EU</option>
+            </select>
+          </div>
+
           {data && data.data.length > 0 && (
             <>
               <table className={styles.table}>
@@ -136,6 +153,17 @@ function Tours() {
                     </th>
                     <th>
                       <div>Chức năng</div>
+                    </th>
+                    <th>
+                      <div>home slider</div>
+                    </th>
+
+                    <th>
+                      <div>banner vn tours</div>
+                    </th>
+
+                    <th>
+                      <div>banner eu tours</div>
                     </th>
                   </tr>
                 </thead>
@@ -180,6 +208,21 @@ function Tours() {
                           >
                             Đánh giá
                           </Link>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          {item.banner.includes("home") ? "true" : "false"}
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          {item.banner.includes("vn-tours") ? "true" : "false"}
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          {item.banner.includes("eu-tours") ? "true" : "false"}
                         </div>
                       </td>
                     </tr>

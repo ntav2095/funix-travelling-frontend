@@ -12,7 +12,6 @@ import useAxios from "../../../../hooks/useAxios";
 import { adminApis } from "../../../../services/apis";
 
 // other
-import { stringToDate } from "../../../../services/helpers/dateHandler";
 import usePageTitle from "../../../../hooks/usePageTitle";
 
 const initialValues = {
@@ -20,12 +19,14 @@ const initialValues = {
   category: [],
 
   code: "",
-  is_special: false,
+  hot: false,
   name: "",
   journey: "",
   countries: "",
   description: "",
   highlights: null,
+
+  banner: [],
 
   price: 0,
   days: 0,
@@ -67,12 +68,13 @@ const dataPacker = (values) => {
   const formData = new FormData();
 
   formData.append("code", values.code);
-  formData.append("is_special", values.is_special);
+  formData.append("hot", values.hot);
   formData.append("name", values.name);
   formData.append("journey", values.journey);
   formData.append("countries", values.countries);
   formData.append("description", values.description);
   formData.append("highlights", JSON.stringify(values.highlights));
+  formData.append("banner", JSON.stringify(values.banner));
   formData.append("price", Number(values.price.replace(/,/g, "")));
   formData.append("duration", JSON.stringify(duration));
   formData.append("price_policies", JSON.stringify(price_policies));

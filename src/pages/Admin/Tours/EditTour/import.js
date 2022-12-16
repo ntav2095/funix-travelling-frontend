@@ -45,13 +45,13 @@ const formPacker = (values, tourId) => {
   formData.append("language", values.language);
 
   formData.append("code", values.code);
-  formData.append("is_special", values.is_special);
-  formData.append("slider", values.slider);
+  formData.append("hot", values.hot);
   formData.append("name", values.name);
   formData.append("journey", values.journey);
   formData.append("countries", values.countries);
   formData.append("description", values.description);
   formData.append("highlights", JSON.stringify(values.highlights));
+  formData.append("banner", JSON.stringify(values.banner));
   formData.append("price", Number(values.price.replace(/,/g, "")));
   formData.append("duration", JSON.stringify(duration));
   formData.append("price_policies", JSON.stringify(price_policies));

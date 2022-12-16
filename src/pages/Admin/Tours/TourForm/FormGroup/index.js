@@ -162,9 +162,9 @@ function FormGroup(props) {
     form_field = (
       <input
         type="checkbox"
-        checked={values.is_special}
+        checked={values.hot}
         name={name}
-        onChange={() => setFieldValue(name, !values.is_special)}
+        onChange={() => setFieldValue(name, !values.hot)}
       />
     );
   }
@@ -197,6 +197,53 @@ function FormGroup(props) {
             ))}
           </div>
         </div>
+      </div>
+    );
+  }
+
+  if (type === "banner") {
+    const changeBannerHandler = (e) => {
+      if (values.banner.includes(e.target.value)) {
+        setFieldValue(
+          name,
+          values.banner.filter((item) => item !== e.target.value)
+        );
+      } else {
+        setFieldValue(name, [...values.banner, e.target.value]);
+      }
+      console.log(values.banner);
+    };
+
+    form_field = (
+      <div>
+        <label>
+          <p>Home</p>
+
+          <input
+            type="checkbox"
+            value="home"
+            checked={values.banner.includes("home")}
+            onChange={changeBannerHandler}
+          />
+        </label>
+        <label>
+          <p>Du lịch châu Âu</p>
+          <input
+            type="checkbox"
+            value="eu-tours"
+            checked={values.banner.includes("eu-tours")}
+            onChange={changeBannerHandler}
+          />
+        </label>
+        <label>
+          <p>Du lịch Việt Nam</p>
+          <input
+            type="checkbox"
+            value="vn-tours"
+            checked={values.banner.includes("vn-tours")}
+            onChange={changeBannerHandler}
+          />
+        </label>
       </div>
     );
   }
