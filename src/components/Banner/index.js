@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 function Banner() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const pathPage = useLocation();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const images = data?.data.images;
   const imagehome = useSelector((state) => state.banner.image.home);
   const imagetourdetail = useSelector((state) => state.banner.image.tourdetail);
@@ -28,7 +28,7 @@ function Banner() {
 
   const handleBanner = () => {
     const path = pathPage.pathname;
-  
+
     if (images) {
       if (path == "/tours-chau-au") {
         return images.eu_tours;
@@ -64,8 +64,6 @@ function Banner() {
   useEffect(() => {
     sendRequest(layoutApi.get());
   }, []);
-
- 
 
   return (
     <>

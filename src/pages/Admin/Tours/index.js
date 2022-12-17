@@ -42,7 +42,7 @@ function Tours() {
     }
 
     if (filter.category === "vi") {
-      reqQueries.cat_not = "europe";
+      reqQueries.cat = "vi";
     }
 
     if (filter.search.trim()) {
@@ -52,6 +52,8 @@ function Tours() {
     if (filter.banner) {
       reqQueries.banner = filter.banner;
     }
+
+    console.log(reqQueries);
 
     sendRequest(tourApi.get(reqQueries));
   }, [page, filter]);
@@ -76,16 +78,12 @@ function Tours() {
 
   let errMsg = error ? error.message : null;
 
-  usePageTitle("Danh sách tours | Admin | Travel Funix");
+  usePageTitle("Danh sách tours | Admin | Joya Travel");
 
   return (
     <>
       <SpinnerModal show={isLoading || isDeleting} />
-      <AdminLayout
-        title="Danh sách tours"
-        path="/admin/new-tour"
-        text="New Tour"
-      >
+      <AdminLayout>
         <StatusBar title="Danh sách tours">
           <Link className="btn btn-primary btn-sm" to="/admin/new-tour">
             Tạo tour mới
@@ -95,13 +93,14 @@ function Tours() {
         <div className={styles.tours}>
           <div className="mb-2">
             <select
-              value={filter}
+              value={filter.category}
               onChange={(e) =>
                 setFilter((prev) => ({ ...prev, category: e.target.value }))
               }
             >
               <option value="all">Tất cả</option>
-              <option value="eu">Tour châu Âu</option>
+              <option value="all">Chưa phân loại --- chưa làm</option>
+              <option value="europe">Tour châu Âu</option>
               <option value="vi">Tour Việt Nam</option>
             </select>
 
@@ -119,6 +118,15 @@ function Tours() {
                 }}
               >
                 search
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setFilter((prev) => ({ ...prev, search: "" }));
+                  setSearchInput("");
+                }}
+              >
+                clear search
               </button>
             </form>
           </div>
@@ -152,6 +160,9 @@ function Tours() {
                       <div>Tên tour</div>
                     </th>
                     <th>
+                      <div>Danh mục</div>
+                    </th>
+                    <th>
                       <div>Chức năng</div>
                     </th>
                     <th>
@@ -181,6 +192,15 @@ function Tours() {
                       </td>
                       <td>
                         <div>{item.name}</div>
+                      </td>
+                      <td>
+                        <div>
+                          {item.category.includes("europe")
+                            ? "Tour châu Âu"
+                            : item.category.includes("vi")
+                            ? "Tour trong nước"
+                            : "Chưa phân loại"}
+                        </div>
                       </td>
                       <td>
                         <div className={styles.actionBtns}>

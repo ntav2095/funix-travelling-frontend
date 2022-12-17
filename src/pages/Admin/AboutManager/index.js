@@ -2,6 +2,7 @@ import QuillReader from "../../../components/QuillReader";
 import StatusBar from "../../../layout/AdminLayout/StatusBar";
 import { AdminLayout, useEffect } from "../Category/import";
 import useAxios from "../../../hooks/useAxios";
+import usePageTitle from "../../../hooks/usePageTitle";
 import styles from "./AboutManager.module.css";
 import Editor from "../../../containers/Editor";
 import { useState } from "react";
@@ -63,6 +64,8 @@ function AboutManager() {
       setEditorKey((prev) => prev + 1);
     }
   }, [language]);
+
+  usePageTitle("Quản lý about | Admin | Joya");
 
   return (
     <AdminLayout>
