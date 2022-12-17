@@ -7,6 +7,8 @@ import { liveChat } from "./containers/Livechat";
 import Category from "./pages/Admin/Category";
 import Terms from "./pages/Admin/Terms";
 import DefaultLayout from "./layout/DefaultLayout";
+import Term from "./pages/Term";
+import AboutManager from "./pages/Admin/AboutManager";
 
 import Spinner from "./components/Spinner";
 import EditCatModal from "./pages/Admin/Category/EditCatModal";
@@ -85,10 +87,12 @@ function App() {
               />
               <Route path="/danh-sach-tour/:tourId" element={<TourDetail />} />
               <Route path="/lien-he" element={<Contact />} />
-              <Route path="/ve-cong-ty" element={<About />} />
+              <Route path="/gioi-thieu" element={<About />} />
               <Route path="/dich-vu-visa/1" element={<Visa />} />
               <Route path="/dich-vu-visa" element={<VisaService />} />
               <Route path="/cam-nang-du-lich" element={<TravelHandbook />} />
+              <Route path="/dieu-khoan/:type" element={<Term />} />
+
               <Route path="/*" element={<NotFound />} />
               <Route
                 path="/cam-nang-du-lich/:id"
@@ -138,6 +142,7 @@ function App() {
 
               {/* terms  */}
               <Route path="/admin/terms" element={<Terms />} />
+              <Route path="/admin/about" element={<AboutManager />} />
 
               {/* users */}
               <Route path="/admin/users" element={<Users />} />

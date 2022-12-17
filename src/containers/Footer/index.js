@@ -112,37 +112,40 @@ const footerItems = {
     classes: "col-12  col-sm-9 col-lg-3",
     items: [
       {
-        url: "https://www.facebook.com",
-        path: "",
+        url: "",
+        path: "/dieu-khoan/dieu-kien-dang-ky",
         label: {
           vi: `Điều kiện đăng ký`,
           en: `Registration Conditions`,
         },
       },
       {
-        url: "https://www.facebook.com",
-        path: "",
-        label: `Điều kiện hủy đổi`,
+        url: "",
+        path: "/dieu-khoan/dieu-kien-huy-doi",
+        label: {
+          vi: `Điều kiện hủy đổi`,
+          en: "Cancellation policy",
+        },
       },
       {
-        url: "https://www.facebook.com",
-        path: "",
+        url: "",
+        path: "/dieu-khoan/luu-y",
         label: {
           vi: `Thông tin cần lưu ý`,
           en: `Notes`,
         },
       },
       {
-        url: "https://www.facebook.com",
-        path: "",
+        url: "",
+        path: "/dieu-khoan/phuong-thuc-thanh-toan",
         label: {
           vi: `Phương thức thanh toán`,
           en: "Payment method",
         },
       },
       {
-        url: "https://www.facebook.com",
-        path: "",
+        url: "",
+        path: "/dieu-khoan/chinh-sach-bao-mat",
         label: {
           vi: `Bảo mật dữ liệu khách hàng`,
           en: "Privacy policy",

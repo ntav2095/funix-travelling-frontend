@@ -26,6 +26,10 @@ const TERM_ITEMS = [
     type: "privacy",
     name: "Bảo mật dữ liệu khách hàng",
   },
+  {
+    type: "cancellation",
+    name: "Điều kiện hủy đổi",
+  },
 ];
 
 function Terms() {

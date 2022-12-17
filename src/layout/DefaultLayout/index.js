@@ -5,7 +5,7 @@ import Sidebar from "../../containers/Sidebar";
 import Navbar from "../../containers/Navbar";
 import Footer from "../../containers/Footer";
 
-function DefaultLayout() {
+function DefaultLayout({ noBanner }) {
   return (
     <>
       <Navbar />

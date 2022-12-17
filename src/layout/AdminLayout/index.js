@@ -98,6 +98,12 @@ function AdminLayout({ children, title, path, text }) {
                 </NavLink>
               </li>
 
+              <li>
+                <NavLink className={navLinkClasses} to="/admin/about">
+                  About
+                </NavLink>
+              </li>
+
               {!user && (
                 <li>
                   <NavLink className={navLinkClasses} to="/admin/login">
