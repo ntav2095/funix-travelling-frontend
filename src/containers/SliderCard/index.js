@@ -36,7 +36,6 @@ function SliderCard(props) {
   const { title, data, naviga, page, loadingCard } = props;
   const { i18n } = useTranslation();
   const lang = i18n.language;
-  console.log('data',data)
   const settings = {
     dots: false,
     infinite: false,
@@ -84,14 +83,14 @@ function SliderCard(props) {
   };
 
   const textCategory = (item) => {
-    if(item=='diem-den'){
-      return 'Điểm đến hấp đẫn'
-    }else if(item=='trai-nghiem'){
-      return 'Trải nghiệm - khám phá'
-    }else if(item=='cam-nang'){
-      return 'Cẩm nang du lịch'
-    }else{
-      return 'Nhật kí hành trình'
+    if (item == "diem-den") {
+      return "Điểm đến hấp đẫn";
+    } else if (item == "trai-nghiem") {
+      return "Trải nghiệm - khám phá";
+    } else if (item == "cam-nang") {
+      return "Cẩm nang du lịch";
+    } else {
+      return "Nhật kí hành trình";
     }
   };
 

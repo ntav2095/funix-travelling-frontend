@@ -3,17 +3,13 @@ import HomeHeader from "./HomeHeader";
 import "./home.css";
 import useAxios from "../../hooks/useAxios";
 import { postsApi, tourApi } from "../../services/apis";
-import Tour from "./tour";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import useLazyLoading, { loadingImg } from "../../hooks/uselazyLoading";
 import ErrorPage from "../../containers/ErrorPage";
 import SliderCard from "../../containers/SliderCard";
-import {  homesliderChauAu, homesliderTrongNuoc } from "../../store/banner.slice";
-import { useDispatch } from "react-redux";
 
 function HomeNew() {
-  const dispatch = useDispatch();
   const { i18n } = useTranslation();
   const [lazy] = useLazyLoading(loadingImg);
 
@@ -23,69 +19,57 @@ function HomeNew() {
     dataTourTrongNuoc,
     errorTourTrongNuoc,
   ] = useAxios();
+
   const [
     sendRequestTourChauAu,
     isLoadingTourChauAu,
     dataTourChauAu,
     errorTourChauAu,
   ] = useAxios();
+
   const [sendRequestGuides, isLoadingGuides, dataGuides, errorGuides] =
     useAxios();
+
   useEffect(() => {
     sendRequestTourTrongNuoc(tourApi.get({ page: 1, page_size: 6 }));
     sendRequestGuides(postsApi.get({ page: 1, page_size: 6 }));
   }, [i18n.language]);
 
-  useEffect(() => {
-    const randomnumber = Math.random() * 2;
-    if (dataTourTrongNuoc) {
-      const arrdata = [];
-      
-      dataTourTrongNuoc.data.map((item, id) => {
-        if (randomnumber < 1) {
-          if (id % 2 == 0) {
-            arrdata.push({ id: item._id, image: item.thumb });
-          }
-        } else {
-          if (id % 2 == 1) {
-            arrdata.push({ id: item._id, image: item.thumb });
-          }
-        }
-      });
-      dispatch(homesliderTrongNuoc(arrdata));
-    }
-    if (dataTourChauAu) {
-      const arrdata = [];
-      dataTourChauAu.data.map((item, id) => {
-        if (randomnumber < 1) {
-          if (id % 2 == 0) {
-            arrdata.push({ id: item._id, image: item.thumb });
-          }
-        } else {
-          if (id % 2 == 1) {
-            arrdata.push({ id: item._id, image: item.thumb });
-          }
-        }
-      });
-      dispatch(homesliderChauAu(arrdata));
-    }
-    // if (dataGuides) {
-    //   const arrdata = [];
-    //   dataGuides.data.map((item, id) => {
-    //     if (randomnumber < 1) {
-    //       if (id % 2 == 0) {
-    //         arrdata.push({ id: item._id, image: item.thumb });
-    //       }
-    //     } else {
-    //       if (id % 2 == 1) {
-    //         arrdata.push({ id: item._id, image: item.thumb });
-    //       }
-    //     }
-    //   });
-    //   dispatch(homesliderTrongNuoc(arrdata));
-    // }
+  // useEffect(() => {
+  //   const randomnumber = Math.random() * 2;
+  //   if (dataTourTrongNuoc) {
+  //     const arrdata = [];
 
-  });
+  //     dataTourTrongNuoc.data.map((item, id) => {
+  //       if (randomnumber < 1) {
+  //         if (id % 2 == 0) {
+  //           arrdata.push({ id: item._id, image: item.thumb });
+  //         }
+  //       } else {
+  //         if (id % 2 == 1) {
+  //           arrdata.push({ id: item._id, image: item.thumb });
+  //         }
+  //       }
+  //     });
+  //     dispatch(homesliderTrongNuoc(arrdata));
+  //   }
+  //   if (dataTourChauAu) {
+  //     const arrdata = [];
+  //     dataTourChauAu.data.map((item, id) => {
+  //       if (randomnumber < 1) {
+  //         if (id % 2 == 0) {
+  //           arrdata.push({ id: item._id, image: item.thumb });
+  //         }
+  //       } else {
+  //         if (id % 2 == 1) {
+  //           arrdata.push({ id: item._id, image: item.thumb });
+  //         }
+  //       }
+  //     });
+
+  //     dispatch(homesliderChauAu(arrdata));
+  //   }
+  // });
 
   useEffect(() => {
     lazy();

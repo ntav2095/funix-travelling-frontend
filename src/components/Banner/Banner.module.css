@@ -1,15 +1,14 @@
-.container{
+.container {
   max-width: 1500px;
 }
 
 .banner {
-  
   padding: 0;
 }
 
 .banner img {
   display: flex;
-    aspect-ratio: 2.5;
+  aspect-ratio: 2.5;
   object-fit: cover;
   object-position: center;
 }

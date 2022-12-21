@@ -3,11 +3,14 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Tabs, Tab } from "react-bootstrap";
 
 // components
-import Editor from "../Editor";
 import VisaFormGroup from "./VisaFormGroup";
+
+import useAxios from "../../../../hooks/useAxios";
+import { adminApis } from "../../../../services/apis";
 
 // css
 import styles from "./VisaForm.module.css";
+import { useEffect } from "react";
 
 const isEmptyDelta = (delta) => {
   const ops = delta.ops;
@@ -46,6 +49,8 @@ const templateValues = {
 };
 
 function VisaForm({ visaProduct, onSubmit }) {
+  const [fetchCat, isFetchingCat, cat, fetchingCatError] = useAxios();
+
   const submitHandler = (values) => {
     onSubmit(values);
   };
@@ -53,6 +58,14 @@ function VisaForm({ visaProduct, onSubmit }) {
   const initialValues = visaProduct || templateValues;
 
   const fieldMessage = (msg) => <p className={styles.fieldMessage}>{msg}</p>;
+
+  useEffect(() => {
+    fetchCat(adminApis.category.get());
+  }, []);
+
+  const countries = cat
+    ? cat.data.filter((item) => item.type === "country")
+    : [];
 
   return (
     <div className={styles.visaForm}>
@@ -83,6 +96,15 @@ function VisaForm({ visaProduct, onSubmit }) {
                   <p className={styles.label}>Giá sản phẩm</p>
                   <Field type="number" name="price" />
                   <ErrorMessage name="price">{fieldMessage}</ErrorMessage>
+                </div>
+
+                <div className="d-flex">
+                  {countries.map((item) => (
+                    <label className="d-flex align-items-center me-2 border p-2 bg-white rounded">
+                      <p className="mb-0 me-2 text-nowrap">{item.name}</p>
+                      <input type="checkbox" value={item.code} />
+                    </label>
+                  ))}
                 </div>
 
                 <div className="bg-white">

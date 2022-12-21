@@ -18,29 +18,36 @@ import ArticlePlaceholder from "../../components/placeholders/ArticlePlaceholder
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
 import { useTranslation } from "react-i18next";
 import { brokenImage } from "../../assets/images";
-import Sidebar from "../../containers/Sidebar";
 import { useDispatch } from "react-redux";
-import { articleDetail } from "../../store/banner.slice";
+import { updateBanner } from "../../store/banner.slice";
 
 function TravelHandbookDetail() {
   const { i18n } = useTranslation();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const [sendRequest, isLoading, data, error] = useAxios();
   const quill = useRef();
-  const { id } = useParams();
+  const { articleId } = useParams();
   useEffect(() => {
     window.scroll({
       top: 0,
       behavior: "smooth",
     });
-    sendRequest(postsApi.getSingleArticle(id));
-  }, [i18n.language, id]);
+    sendRequest(postsApi.getSingleArticle(articleId));
+  }, [i18n.language, articleId]);
 
-  useEffect(()=>{
-    if(data){
-      dispatch(articleDetail({id:data.data.item._id,image:data.data.item.thumb}));
+  useEffect(() => {
+    if (data) {
+      dispatch(
+        updateBanner({
+          type: "articleDetail",
+          bannerItem: {
+            _id: data.data.item._id,
+            banner: data.data.item.banner,
+          },
+        })
+      );
     }
-  },[data])
+  }, [data]);
 
   useEffect(() => {
     if (quill.current) {
@@ -60,7 +67,7 @@ function TravelHandbookDetail() {
     <>
       {!error && (
         <div className="row">
-          <div className= {styles.containner + " col-12 col-lg-12"}>
+          <div className={styles.containner + " col-12 col-lg-12"}>
             {article && !isLoading && (
               <div className={styles.storyHeader + " pt-4"}>
                 <h1 className="mb-4 pb-1">{article.title}</h1>
@@ -120,10 +127,6 @@ function TravelHandbookDetail() {
               </div>
             </div>
           </div>
-
-          {/* <div className="col-12 col-lg-3">
-            <Sidebar />
-          </div> */}
         </div>
       )}
 

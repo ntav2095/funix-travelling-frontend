@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 // components
 import AdminLayout from "../../../../layout/AdminLayout";
-import VisaForm from "../../../../containers/VisaForm";
+import VisaForm from "../VisaForm";
 import SpinnerModal from "../../../../components/SpinnerModal";
 
 // hooks

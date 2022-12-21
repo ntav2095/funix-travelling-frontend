@@ -21,26 +21,33 @@ import FacebookComment from "../../containers/facebookComment";
 import { useTranslation } from "react-i18next";
 import Placeholder from "../../components/placeholders/Placeholder";
 import { useDispatch } from "react-redux";
-import { tourdetail } from "../../store/banner.slice";
+import { updateBanner } from "../../store/banner.slice";
 
 function TourDetail() {
   const [sendRequest, isLoading, data, error] = useAxios();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const { tourId } = useParams();
   const { i18n } = useTranslation();
-  
+
   const tour = data ? data.data.item : null;
-  console.log("tour", tour);
   const tourName = tour ? tour.name : "Tour du lịch";
-  usePageTitle(`${tourName} || Go Travel`);
-  useEffect(()=>{
-    if(tour){
-      dispatch(tourdetail({id:tour._id,image:tour.thumb}));
+
+  useEffect(() => {
+    if (tour) {
+      dispatch(
+        updateBanner({
+          type: "tourDetail",
+          bannerItem: { _id: tour._id, banner: tour.banner },
+        })
+      );
     }
-  },[tour])
+  }, [tour]);
+
   useEffect(() => {
     sendRequest(tourApi.getSingleTour(tourId));
   }, [i18n.language, tourId]);
+
+  usePageTitle(`${tourName} || Go Travel`);
 
   return (
     <>

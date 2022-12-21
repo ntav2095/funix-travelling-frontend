@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { brokenImage, hearder as bannerImg } from "../../assets/images";
 import Slider from "react-slick";
 import Placeholder from "../placeholders/Placeholder";
@@ -10,43 +10,30 @@ import useAxios from "../../hooks/useAxios";
 import styles from "./Banner.module.css";
 import "./banner.css";
 import { SlickArrowLeft, SlickArrowRight } from "../slickArrows";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateBanner, setBanners } from "../../store/banner.slice";
+
+const BANNERS_MAP = new Map([
+  ["/", "homeSliders"],
+
+  ["/tours-chau-au", "euTours"],
+  ["/tours-trong-nuoc", "vnTours"],
+
+  ["/cam-nang-du-lich/danh-muc/cam-nang", "handbook"],
+  ["/cam-nang-du-lich/danh-muc/nhat-ky", "diary"],
+  ["/cam-nang-du-lich/danh-muc/trai-nghiem", "experience"],
+  ["//cam-nang-du-lich/danh-muc/diem-den", "destination"],
+  ["/cam-nang-du-lich", "handbook"],
+]);
 
 function Banner() {
   const [sendRequest, isLoading, data, error] = useAxios();
-  const pathPage = useLocation();
+  const { tourId, articleId } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const images = data?.data.images;
-  const imagehome = useSelector((state) => state.banner.image.home);
-  const imagetourdetail = useSelector((state) => state.banner.image.tourdetail);
-  const imageArticleDetail = useSelector(
-    (state) => state.banner.image.articledetail
-  );
-  const imageArr = [...imagehome.trongNuoc];
-  if (imagehome.chauAu) {
-    imageArr.concat(imagehome.chauAu);
-  }
-
-  const handleBanner = () => {
-    const path = pathPage.pathname;
-
-    if (images) {
-      if (path.includes("/tours-chau-au")) {
-        return images.eu_tours;
-      } else if (path.includes("/tours-trong-nuoc") ) {
-        return images.vn_tours;
-      } else if (path == "/cam-nang-du-lich") {
-        return images.guides;
-      } else if (path == `/danh-sach-tour/${imagetourdetail?.id}`) {
-        return imagetourdetail?.image;
-      } else if (path == `/danh-sach-tour/${imagetourdetail?.id}`) {
-        return imagetourdetail?.image;
-      } else if (path == `/cam-nang-du-lich/${imageArticleDetail?.id}`) {
-        return imageArticleDetail?.image;
-      }
-      return "pathnot";
-    }
-  };
+  const location = useLocation();
+  const path = location.pathname;
+  const banners = useSelector((state) => state.banner);
 
   const settings = {
     infinite: true,
@@ -67,35 +54,35 @@ function Banner() {
     sendRequest(layoutApi.get());
   }, []);
 
+  useEffect(() => {
+    if (data) {
+      dispatch(setBanners(data.data));
+    }
+  }, [data]);
+
   return (
     <div className={styles.container}>
-      {pathPage.pathname === "/" ? (
-        <div
-          className={
-            styles.banner + handleBanner() == "pathnotpound"
-              ? styles.notbanner
-              : "" + " home__banner"
-          }
-        >
-          {console.log("handleBanner", handleBanner())}
-          {imagehome && (
+      {path === "/" && (
+        <div className={styles.banner + " home__banner"}>
+          {banners.homeSliders && (
             <Slider {...settings}>
-              {imageArr?.map((item, index) => (
+              {banners.homeSliders.map((item, index) => (
                 <div
-                  key={index}
+                  key={item._id}
                   className={styles.image}
-                  onClick={() => navigate(`/danh-sach-tour/${item.id}`)}
+                  onClick={() => navigate(`/danh-sach-tour/${item._id}`)}
                 >
                   <img
-                    src={item.image}
-                    alt={"baner"}
+                    src={item.banner}
+                    alt={"banner"}
                     onError={handlerBrokenImg}
                   />
                 </div>
               ))}
             </Slider>
           )}
-          {!imagehome && (
+
+          {!banners.homeSliders && (
             <Slider {...settings}>
               {new Array(4).fill(1).map((item, index) => (
                 <div key={index} className={styles.image}>
@@ -105,22 +92,22 @@ function Banner() {
             </Slider>
           )}
         </div>
-      ) : (
+      )}
+
+      {path !== "/" && (
         <div className={styles.banner}>
-          {console.log("pathbannersee", handleBanner())}
-          {!handleBanner()  ? (
-            <></>
-            // <div className={styles.image}>
-            //   <Placeholder width="100%" height="100%" />
-            // </div>
-          ) : handleBanner() === "pathnot" ? null : (
-            <img
-              src={handleBanner()}
-              className="img-fluid w-100"
-              alt="banner"
-              onError={handlerBrokenImg}
-            />
-          )}
+          <img
+            src={
+              tourId
+                ? banners.tourDetail?.banner
+                : articleId
+                ? banners.articleDetail?.banner
+                : banners[BANNERS_MAP.get(path)]?.banner
+            }
+            className="img-fluid w-100"
+            alt="banner"
+            onError={handlerBrokenImg}
+          />
         </div>
       )}
     </div>

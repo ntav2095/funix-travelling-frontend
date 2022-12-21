@@ -8,8 +8,6 @@ export default function NotificationModal({
   errcallback,
   success,
 }) {
-  console.log("NotificationModal");
-  console.log(err, message);
   const [state, setState] = useState(true);
   const time = err ? 10000 : 2000;
   const time2 = err ? 96000 : 1600;
@@ -20,9 +18,7 @@ export default function NotificationModal({
   useEffect(() => {
     setTimeout(() => {
       const modal = document.querySelector(".fade.modal-backdrop");
-      console.log("modal", modal);
       modal.classList.remove("show");
-      console.log("modal", modal);
     }, 300);
   }, [state]);
 

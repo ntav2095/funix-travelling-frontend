@@ -69,8 +69,6 @@ function Term() {
     [data]
   );
 
-  console.log("re-render");
-
   useEffect(() => {
     sendRequest({
       method: "GET",

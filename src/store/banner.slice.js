@@ -1,42 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  image: {
-    home: {
-      trongNuoc: "",
-      chauAu: "",
-    },
-    tourdetail: {
-      id: "",
-      image: "",
-    },
-    articledetail: {
-      id: "",
-      image: "",
-      // title:''
-    },
-  },
+  homeSliders: null,
+
+  // tours
+  vnTours: null,
+  euTours: null,
+
+  // guides
+  guides: null,
+  experience: null,
+  destination: null,
+  diary: null,
+  handbook: null,
+
+  // detail
+  tourDetail: null,
+  articleDetail: null,
 };
 
 const banner = createSlice({
   name: "user",
   initialState,
   reducers: {
-    homesliderTrongNuoc(state, action) {
-      state.image.home.trongNuoc = action.payload;
+    updateBanner(state, action) {
+      const { type, bannerItem } = action.payload; // bannerItem: { _id, banner: url }
+      state[type] = bannerItem;
     },
-    homesliderChauAu(state, action) {
-      state.image.home.chauAu = action.payload;
-    },
-    tourdetail(state, action) {
-      state.image.tourdetail = action.payload;
-    },
-    articleDetail(state, action) {
-      state.image.articledetail = action.payload;
+    setBanners(state, action) {
+      return { ...state, ...action.payload };
     },
   },
 });
 
-export const { homesliderTrongNuoc, homesliderChauAu, tourdetail, articleDetail } =
-  banner.actions;
+export const { updateBanner, setBanners } = banner.actions;
 export default banner.reducer;

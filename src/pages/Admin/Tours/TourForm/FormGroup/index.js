@@ -108,7 +108,6 @@ function FormGroup(props) {
           name="todo"
           onKeyDown={(e) => {
             if (e.code === "Enter") {
-              console.log("hehe");
               e.preventDefault();
               return false;
             }

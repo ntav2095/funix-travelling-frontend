@@ -4,7 +4,7 @@ import { useEffect } from "react";
 // components
 import AdminLayout from "../../../../layout/AdminLayout";
 import StatusBar from "../../../../layout/AdminLayout/StatusBar";
-import VisaForm from "../../../../containers/VisaForm";
+import VisaForm from "../VisaForm";
 import SpinnerModal from "../../../../components/SpinnerModal";
 
 // hooks

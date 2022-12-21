@@ -95,7 +95,7 @@ function App() {
 
               <Route path="/*" element={<NotFound />} />
               <Route
-                path="/cam-nang-du-lich/:id"
+                path="/cam-nang-du-lich/:articleId"
                 element={<TravelHandbookDetail />}
               />
               <Route
