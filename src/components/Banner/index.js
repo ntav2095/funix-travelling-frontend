@@ -33,7 +33,7 @@ function Banner() {
     if (images) {
       if (path.includes("/tours-chau-au")) {
         return images.eu_tours;
-      } else if (path.includes("/tours-trong-nuoc") ) {
+      } else if (path.includes("/tours-trong-nuoc")) {
         return images.vn_tours;
       } else if (path == "/cam-nang-du-lich") {
         return images.guides;
@@ -70,13 +70,7 @@ function Banner() {
   return (
     <div className={styles.container}>
       {pathPage.pathname === "/" ? (
-        <div
-          className={
-            styles.banner + handleBanner() == "pathnotpound"
-              ? styles.notbanner
-              : "" + " home__banner"
-          }
-        >
+        <div className={styles.banner + " home__banner"}>
           {console.log("handleBanner", handleBanner())}
           {imagehome && (
             <Slider {...settings}>
@@ -107,13 +101,10 @@ function Banner() {
         </div>
       ) : (
         <div className={styles.banner}>
-          {console.log("pathbannersee", handleBanner())}
-          {!handleBanner()  ? (
+          {!handleBanner() ? (
             <></>
-            // <div className={styles.image}>
-            //   <Placeholder width="100%" height="100%" />
-            // </div>
-          ) : handleBanner() === "pathnot" ? null : (
+          ) :
+          handleBanner() === "pathnot" ? null : (
             <img
               src={handleBanner()}
               className="img-fluid w-100"
