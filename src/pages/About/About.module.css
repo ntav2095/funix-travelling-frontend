@@ -24,3 +24,8 @@
   margin: 0 0 1em;
   line-height: 1.4285em;
 }
+.content {
+  width: 70%;
+  padding: 8px;
+  margin: auto auto 20px auto;
+}

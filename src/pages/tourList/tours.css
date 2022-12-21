@@ -1,14 +1,64 @@
+@media screen and (max-width:600px) {
+    .tours__list {
+            margin: 18px 3px !important;
+            padding: 0px 0px !important;
+        }
+    .tours__list .container__header {
+        margin: 20px auto 18px auto !important;
+        padding: 0px 8px !important;
+    }
+        .tours__list .container__tours {
+            padding: 0px 8px !important;
+            margin: 0px auto 58px auto;
+        }
+    .tours__list .title {
+        margin-bottom: 8px;
+        width: 100% !important;
+    }
+    .tours__list .container__sort {
+        width: 100% !important;
+      
+    }
+}
+
+@media screen and (min-width:600px) {
+    .tours__list {
+            margin: 26px 8px !important;
+            padding: 0px 12px !important;
+        }
+    .tours__list .container__header {
+        margin: 30px auto 26px auto ;
+        padding: 0px 12px ;
+    }
+
+    .tours__list .container__tours {
+        padding: 0px 12px ;
+        margin: 0px auto 35px auto;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .tours__list {
+            margin: 43px 14px ;
+            padding: 0px 20px ;
+        }
+    .tours__list .container__header {
+        width: 100%;
+        margin: 50px auto 44px auto;
+        padding: 0px 20px;
+    }
+    .tours__list .container__tours {
+        width: 100%;
+        padding: 0px 20px;
+        margin: 0px auto 58px auto;
+    }
+}
+
 .tours__list{
-    margin: 43px 14px !important;
-    padding: 0px 20px !important;
-    margin: auto;
+    margin: 43px 14px ;
+    padding: 0px 20px ;
 }
-.tours__list .container__header {
-    width: 100%;
-    max-width: 1500px;
-    margin: 50px auto 44px auto;
-    padding: 0px 20px;
-}
+
 .tours__list .title {
     font-size: 17px;
     font-weight: 600;
@@ -24,7 +74,7 @@
 }
 
 .tours__list .container__sort .sort {
-    width: 30%;
+    width: 220px;
     height: 36px;
     padding: 0px 5px;
     border-radius: 5px;
@@ -39,10 +89,4 @@
     font-size: 16px;
     background-color: rgba(239, 243, 246, 255);
     /* transform: translateX(-10px); */
-}
-.tours__list .container__tours{
-    width: 100%;
-        max-width: 1500px;
-        padding: 0px 20px;
-        margin: 0px auto 58px auto;
 }

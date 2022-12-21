@@ -60,10 +60,10 @@ function TravelHandbookDetail() {
     <>
       {!error && (
         <div className="row">
-          <div className="col-12 col-lg-9">
+          <div className= {styles.containner + " col-12 col-lg-12"}>
             {article && !isLoading && (
               <div className={styles.storyHeader + " pt-4"}>
-                <h1 className="mb-4 pb-1 fs-4">{article.title}</h1>
+                <h1 className="mb-4 pb-1">{article.title}</h1>
                 <p className={styles.date}>
                   Posted on{" "}
                   <span>
@@ -121,9 +121,9 @@ function TravelHandbookDetail() {
             </div>
           </div>
 
-          <div className="col-12 col-lg-3">
+          {/* <div className="col-12 col-lg-3">
             <Sidebar />
-          </div>
+          </div> */}
         </div>
       )}
 
