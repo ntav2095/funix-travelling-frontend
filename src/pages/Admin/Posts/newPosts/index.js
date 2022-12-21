@@ -17,7 +17,8 @@ const initialValues = {
   thumb: null,
   category: [],
   hot: false,
-  banner: false,
+  banner: null,
+  layout: [],
 };
 
 function NewPosts() {
@@ -31,10 +32,11 @@ function NewPosts() {
     formData.append("title", values.title);
     formData.append("author", values.author);
     formData.append("origin", values.origin);
-    formData.append("banner", values.banner);
     formData.append("lead", values.lead);
     formData.append("content", JSON.stringify(values.content));
-    formData.append("image", values.thumb);
+    formData.append("thumb", values.thumb);
+    formData.append("banner", values.banner);
+    formData.append("layout", JSON.stringify(values.layout));
     formData.append("category", JSON.stringify(values.category));
 
     await sendRequest(adminApis.article.add(formData));

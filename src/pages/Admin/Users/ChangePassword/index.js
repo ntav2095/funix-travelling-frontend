@@ -5,6 +5,7 @@ import useAxios from "../../../../hooks/useAxios";
 import { useEffect } from "react";
 import { Field, ErrorMessage, Formik, Form } from "formik";
 import { useParams } from "react-router-dom";
+import SpinnerModal from "../../../../components/SpinnerModal";
 import styles from "./ChangePassword.module.css";
 
 const validator = (values) => {
@@ -22,9 +23,9 @@ const validator = (values) => {
   }
 
   if (
-    values.re_password &&
+    values.new_password &&
     values.re_new_password &&
-    values.re_password !== values.re_new_password
+    values.new_password !== values.re_new_password
   ) {
     errors.re_new_password = "Mật khẩu nhập lại không đúng";
   }
@@ -72,6 +73,8 @@ function ChangePassword() {
 
   return (
     <>
+      <SpinnerModal show={isLoading || isFetching} />
+
       <AdminLayout>
         <StatusBar title="Đổi mật khẩu"></StatusBar>
         <div className={styles.container}>
@@ -83,7 +86,7 @@ function ChangePassword() {
             >
               {({ values, setFieldValue }) => (
                 <Form>
-                  <label>
+                  <label className={styles.username}>
                     <h6>Username</h6>
                     <Field type="text" name="username" readOnly />
                     <ErrorMessage name="username" component="p" />

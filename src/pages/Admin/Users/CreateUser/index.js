@@ -49,6 +49,7 @@ function CreateUser() {
         username: values.username.trim(),
         password: values.password,
         re_password: values.password,
+        role: values.role,
       },
     });
   };
@@ -73,18 +74,16 @@ function CreateUser() {
                   <ErrorMessage name="username" component="p" />
                 </label>
 
-                <div>
+                <div className={styles.role}>
                   <h6>Role</h6>
 
                   <div className="d-flex">
-                    <label>
-                      <h5>client</h5>
+                    <label className="d-flex align-items-center border p-2 mx-2 rounded">
+                      <h5 className="fs-6 fw-normal mb-0 me-2">client</h5>
                       <input
                         type="checkbox"
                         value="client"
-                        checked={
-                          values.role !== "moderator" && values.role !== "admin"
-                        }
+                        checked={values.role === "client"}
                         onChange={() => {
                           if (values.role !== "client") {
                             setFieldValue("role", "client");
@@ -93,8 +92,8 @@ function CreateUser() {
                       />
                     </label>
 
-                    <label>
-                      <h5>moderator</h5>
+                    <label className="d-flex align-items-center border p-2 mx-2 rounded">
+                      <h5 className="fs-6 fw-normal mb-0 me-2">moderator</h5>
                       <input
                         type="checkbox"
                         value="moderator"
@@ -107,8 +106,8 @@ function CreateUser() {
                       />
                     </label>
 
-                    <label>
-                      <h5>admin</h5>
+                    <label className="d-flex align-items-center border p-2 mx-2 rounded">
+                      <h5 className="fs-6 fw-normal mb-0 me-2">admin</h5>
                       <input
                         type="checkbox"
                         value="admin"

@@ -36,7 +36,7 @@ const initialValues = {
 };
 
 function Login() {
-  const [sendRequest, isLoading, data, error] = useAxios();
+  const [sendRequest, isLoading, data, error, resetAxios] = useAxios();
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -79,21 +79,27 @@ function Login() {
           validate={validator}
           onSubmit={submitHandler}
         >
-          {() => (
-            <Form>
-              <label>
-                <Field type="text" name="username" placeholder="username" />
-                <ErrorMessage name="username" component="span" />
-              </label>
-              <label>
-                <Field type="password" name="password" placeholder="password" />
-                <ErrorMessage name="password" component="span" />
-              </label>
+          {({ errors }) => {
+            return (
+              <Form>
+                <label>
+                  <Field type="text" name="username" placeholder="username" />
+                  <ErrorMessage name="username" component="span" />
+                </label>
+                <label>
+                  <Field
+                    type="password"
+                    name="password"
+                    placeholder="password"
+                  />
+                  <ErrorMessage name="password" component="span" />
+                </label>
 
-              {error && <p className={styles.errorMessage}>{error.message}</p>}
-              <button type="submit">Login</button>
-            </Form>
-          )}
+                <p className={styles.errorMessage}>{error && error.message}</p>
+                <button type="submit">Login</button>
+              </Form>
+            );
+          }}
         </Formik>
       </div>
     </>

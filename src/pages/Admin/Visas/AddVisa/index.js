@@ -2,13 +2,14 @@
 import { useEffect } from "react";
 
 // components
-import AdminLayout from "../../../layout/AdminLayout";
-import VisaForm from "../../../containers/VisaForm";
-import SpinnerModal from "../../../components/SpinnerModal";
+import AdminLayout from "../../../../layout/AdminLayout";
+import StatusBar from "../../../../layout/AdminLayout/StatusBar";
+import VisaForm from "../../../../containers/VisaForm";
+import SpinnerModal from "../../../../components/SpinnerModal";
 
 // hooks
-import useAxios from "../../../hooks/useAxios";
-import { visaApi } from "../../../services/apis";
+import useAxios from "../../../../hooks/useAxios";
+import { visaApi } from "../../../../services/apis";
 
 // css
 import styles from "./AddVisa.module.css";
@@ -34,7 +35,9 @@ function AddVisa() {
   return (
     <>
       <SpinnerModal show={isLoading} />
-      <AdminLayout title="Thêm dịch vụ visa mới">
+      <AdminLayout>
+        <StatusBar title="Tạo sản phẩm visa mới"></StatusBar>
+
         <div className={styles.addVisa}>
           <VisaForm onSubmit={submitHandler} />
         </div>

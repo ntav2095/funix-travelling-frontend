@@ -30,6 +30,8 @@
 
 .login label span {
   color: red;
+  margin-top: 2px;
+  display: block;
 }
 
 .errorMessage {

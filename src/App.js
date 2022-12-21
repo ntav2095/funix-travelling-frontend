@@ -14,7 +14,7 @@ import Spinner from "./components/Spinner";
 import EditCatModal from "./pages/Admin/Category/EditCatModal";
 import ArticleCategory from "./pages/articleCategory";
 import TourRating from "./pages/Admin/Tours/Rating";
-import LayoutManager from "./pages/Admin/LayoutManager";
+import BannerManager from "./pages/Admin/BannerManager";
 import Users from "./pages/Admin/Users";
 import CreateUser from "./pages/Admin/Users/CreateUser";
 import ChangePassword from "./pages/Admin/Users/ChangePassword";
@@ -50,8 +50,8 @@ const UpdateItinerary = React.lazy(() =>
 );
 
 // visa
-const EditVisa = React.lazy(() => import("./pages/Admin/EditVisa"));
-const AddVisa = React.lazy(() => import("./pages/Admin/AddVisa"));
+const EditVisa = React.lazy(() => import("./pages/Admin/Visas/EditVisa"));
+const AddVisa = React.lazy(() => import("./pages/Admin/Visas/AddVisa"));
 const Visas = React.lazy(() => import("./pages/Admin/Visas"));
 
 // others
@@ -153,7 +153,7 @@ function App() {
               />
 
               {/* layout */}
-              <Route path="/admin/manage-layout" element={<LayoutManager />} />
+              <Route path="/admin/banner" element={<BannerManager />} />
             </Route>
           </Routes>
         </Suspense>

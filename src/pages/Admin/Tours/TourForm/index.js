@@ -75,8 +75,7 @@ function TourForm({ initialValues, onSubmit, cat }) {
 
                   {!not_vi && (
                     <FormGroup
-                      label="Tour nổi bật"
-                      type="checkbox"
+                      type="hot"
                       setFieldValue={setFieldValue}
                       setFieldTouched={setFieldTouched}
                       name="hot"
@@ -152,32 +151,61 @@ function TourForm({ initialValues, onSubmit, cat }) {
                   )}
 
                   {!not_vi && (
-                    <div>
-                      <FormGroup
-                        label="Chọn ảnh preview"
-                        isRequired
-                        name="thumb"
-                        type="file"
-                        setFieldValue={setFieldValue}
-                      />
+                    <>
+                      <div>
+                        <FormGroup
+                          label="Chọn ảnh preview"
+                          isRequired
+                          name="thumb"
+                          type="file"
+                          setFieldValue={setFieldValue}
+                        />
 
-                      {values.thumb && (
-                        <div className={styles.currentImages}>
-                          <h6>Hình đại diện</h6>
-                          <div className={styles.preview}>
-                            <label>
-                              <img
-                                src={
-                                  typeof values.thumb === "string"
-                                    ? values.thumb
-                                    : URL.createObjectURL(values.thumb)
-                                }
-                              />
-                            </label>
+                        {values.thumb && (
+                          <div className={styles.currentImages}>
+                            <h6>Hình đại diện</h6>
+                            <div className={styles.preview}>
+                              <label>
+                                <img
+                                  src={
+                                    typeof values.thumb === "string"
+                                      ? values.thumb
+                                      : URL.createObjectURL(values.thumb)
+                                  }
+                                />
+                              </label>
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </div>
+                        )}
+                      </div>
+
+                      <div className="mt-4">
+                        <FormGroup
+                          label="Chọn ảnh banner"
+                          isRequired
+                          name="banner"
+                          type="file"
+                          setFieldValue={setFieldValue}
+                        />
+
+                        {values.banner && (
+                          <div className={styles.currentImages}>
+                            <h6>Hình banner</h6>
+                            <div className={styles.preview}>
+                              <label>
+                                <img
+                                  src={
+                                    typeof values.banner === "string"
+                                      ? values.banner
+                                      : URL.createObjectURL(values.banner)
+                                  }
+                                />
+                              </label>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </>
                   )}
                 </div>
               </Tab>
@@ -276,15 +304,16 @@ function TourForm({ initialValues, onSubmit, cat }) {
                 </Tab>
               )}
 
-              {/* ----------------------------- banner -----------------------------  */}
+              {/* ----------------------- layout ------------------------  */}
+
               {!not_vi && (
-                <Tab eventKey="banner" title="Banner">
+                <Tab eventKey="layout" title="Layout">
                   <FormGroup
-                    type="banner"
-                    setFieldValue={setFieldValue}
-                    setFieldTouched={setFieldTouched}
-                    name="banner"
+                    label="Chọn làm banner"
+                    name="layout"
+                    type="layout"
                     values={values}
+                    setFieldValue={setFieldValue}
                   />
                 </Tab>
               )}

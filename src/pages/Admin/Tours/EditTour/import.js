@@ -51,7 +51,6 @@ const formPacker = (values, tourId) => {
   formData.append("countries", values.countries);
   formData.append("description", values.description);
   formData.append("highlights", JSON.stringify(values.highlights));
-  formData.append("banner", JSON.stringify(values.banner));
   formData.append("price", Number(values.price.replace(/,/g, "")));
   formData.append("duration", JSON.stringify(duration));
   formData.append("price_policies", JSON.stringify(price_policies));
@@ -59,6 +58,8 @@ const formPacker = (values, tourId) => {
   formData.append("terms", JSON.stringify(terms));
   formData.append("category", JSON.stringify(values.category));
   formData.append("thumb", values.thumb);
+  formData.append("banner", values.banner);
+  formData.append("layout", JSON.stringify(values.layout));
 
   return formData;
 };

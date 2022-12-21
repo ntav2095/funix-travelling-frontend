@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 // components
 import AdminLayout from "../../../layout/AdminLayout";
+import StatusBar from "../../../layout/AdminLayout/StatusBar";
 
 // hooks
 import useAxios from "../../../hooks/useAxios";
@@ -26,10 +27,16 @@ function Visas() {
   const ActionButtons = ({ id }) => {
     return (
       <>
-        <Link className={styles.editBtn} to={`/admin/edit-visa-product/${id}`}>
+        <Link
+          className="btn btn-warning me-2"
+          to={`/admin/edit-visa-product/${id}`}
+        >
           Edit
         </Link>
-        <button onClick={() => deleteHandler(id)} className={styles.removeBtn}>
+        <button
+          className="btn btn-danger me-2"
+          onClick={() => deleteHandler(id)}
+        >
           Remove
         </button>
       </>
@@ -61,10 +68,16 @@ function Visas() {
         path="/admin/add-visa-product"
         text="New Visa "
       >
-        <div className="visaProducts">
+        <StatusBar title="Dịch vụ visa">
+          <Link className="btn btn-primary" to="/admin/add-visa-product">
+            Tạo sản phẩm visa
+          </Link>
+        </StatusBar>
+
+        <div className={styles.container}>
           {data && data.items.length > 0 && (
-            <table className="table">
-              <thead>
+            <table className="table table-bordered">
+              <thead className="bg-dark text-light">
                 <tr>
                   <th>
                     <div>STT</div>
@@ -87,7 +100,7 @@ function Visas() {
                 </tr>
               </thead>
 
-              <tbody>
+              <tbody className="bg-light">
                 {data.items.map((visa, index) => (
                   <tr key={visa._id}>
                     <td>

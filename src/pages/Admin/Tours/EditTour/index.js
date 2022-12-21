@@ -65,7 +65,6 @@ function EditTour() {
         removedImages: [],
         departureDates: tour.departureDates,
         highlights: tour.highlights,
-        banner: tour.banner,
 
         days: tour.duration.days,
         nights: tour.duration.nights,
@@ -84,8 +83,6 @@ function EditTour() {
         images,
       }
     : null;
-
-  console.log(initialValues);
 
   usePageTitle("Cập nhật tour | Admin | Travel Funix");
 

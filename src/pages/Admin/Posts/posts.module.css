@@ -4,111 +4,17 @@
   padding-top: 80px;
 }
 
-.table {
-  width: 100%;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border-collapse: collapse;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.tours table td,
-.tours table tr {
-  border: 0.5px solid #1e8553;
-}
-
-.table thead {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background: #1e8553;
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.table thead div {
-  padding: 2px 6px;
-  font-weight: 500;
-  position: relative;
-}
-
-.table td,
-.table tr {
-  border: 0.5px solid #1e8553;
-}
-
-.table td {
-  background: white;
-}
-
-.table td:first-of-type {
+.checkSVG {
+  display: block;
   text-align: center;
 }
 
-.table th {
-  position: relative;
-  padding: 6px;
+.checkSVG svg {
+  width: 18px !important;
+  font-size: 15px;
+  color: rgb(7, 154, 58);
 }
 
-.table th:not(:last-of-type)::after {
-  position: absolute;
-  display: block;
-  content: "";
-  height: 70%;
-  width: 1px;
-  background: rgb(238, 234, 234);
-  right: 0;
-  top: 50%;
-  transform: translate(0.5px, -50%);
-  z-index: 2;
-}
-
-.table tbody div {
-  padding: 3px 6px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 200px;
-  overflow: hidden;
-}
-
-.actionBtns {
-  display: flex;
-  align-items: center;
-  padding: 2px;
-}
-
-.table button,
-.table a {
-  border: none;
-  outline: none;
-  margin-right: 8px;
-  min-width: 70px;
+.posts th {
   text-align: center;
-  border-radius: 3.8px;
-  display: block;
-  line-height: 1.6;
-  font-size: 14px;
-  display: block;
-  padding: 4px 8px;
-  color: rgb(244, 237, 237);
-  transition: 0.2s;
-  font-weight: 300;
-}
-
-.table .editBtn {
-  background: #1e8553;
-}
-
-.table .editBtn:hover {
-  background: #259961;
-}
-
-.table .removeBtn {
-  background: rgb(166 64 64);
-}
-
-.table .removeBtn:hover {
-  background: rgb(184, 75, 75);
 }

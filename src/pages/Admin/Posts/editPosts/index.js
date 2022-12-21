@@ -7,6 +7,8 @@ import ArticleForm from "../ArticleForm";
 import styles from "./editposts.module.css";
 import usePageTitle from "../../../../hooks/usePageTitle";
 import ErrorMessage from "../../../../components/ErrorMessage";
+import StatusBar from "../../../../layout/AdminLayout/StatusBar";
+import SpinnerModal from "../../../../components/SpinnerModal";
 
 function EditPost() {
   const [goEdit, editing, isSuccess, editingError] = useAxios();
@@ -33,6 +35,8 @@ function EditPost() {
       language,
       category,
       hot,
+      banner,
+      layout,
     } = values;
 
     const formData = new FormData();
@@ -45,9 +49,9 @@ function EditPost() {
     formData.append("hot", hot);
     formData.append("category", JSON.stringify(category));
     formData.append("content", JSON.stringify(content));
-    if (typeof thumb !== "string") {
-      formData.append("image", thumb);
-    }
+    formData.append("thumb", thumb);
+    formData.append("banner", banner);
+    formData.append("layout", JSON.stringify(layout));
 
     goEdit(adminApis.article.edit(formData));
   };
@@ -81,9 +85,10 @@ function EditPost() {
         origin: article.origin,
         lead: article.lead,
         thumb: article.thumb,
+        banner: article.banner,
         content: article.content,
         hot: article.hot,
-        banner: article.banner,
+        layout: article.layout,
         language: lang,
         category: article.category || [],
       }
@@ -92,46 +97,52 @@ function EditPost() {
   usePageTitle("Sửa bài viết | Go Travel");
 
   return (
-    <AdminLayout title={`Cập nhật bài viết ID: ${articleId}`}>
-      <div className={styles.editPost}>
-        {langs && (
-          <label className="d-flex align-items-center mb-4">
-            <h6 className="mb-0 me-2">Ngôn ngữ</h6>
-            <select value={lang} onChange={(e) => setLang(e.target.value)}>
-              {langs.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-          </label>
-        )}
+    <>
+      <SpinnerModal show={editing} />
 
-        {!initialValues && fetchedData && (
-          <div>
-            <h6>Hiện chưa có version ngôn ngữ "{lang}" của bài viết này</h6>
-            <button
-              className={styles.addLangBtn}
-              onClick={() => setArticle(fetchedData.metadata.original)}
-            >
-              Thêm version tiếng "{lang}"
-            </button>
-          </div>
-        )}
+      <AdminLayout title={`Cập nhật bài viết ID: ${articleId}`}>
+        <StatusBar title="Cập nhật bài viết"></StatusBar>
 
-        {initialValues && !fetching && (
-          <div className={styles.container}>
-            <ArticleForm
-              initialValues={initialValues}
-              onSubmit={submitHandler}
-              cat={fetchedData.metadata.categories}
-            />
-          </div>
-        )}
+        <div className={styles.editPost}>
+          {langs && (
+            <label className="d-flex align-items-center mb-4">
+              <h6 className="mb-0 me-2">Ngôn ngữ</h6>
+              <select value={lang} onChange={(e) => setLang(e.target.value)}>
+                {langs.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
 
-        {fetchingError && <ErrorMessage msg={fetchingError.message} />}
-      </div>
-    </AdminLayout>
+          {!initialValues && fetchedData && (
+            <div>
+              <h6>Hiện chưa có version ngôn ngữ "{lang}" của bài viết này</h6>
+              <button
+                className={styles.addLangBtn}
+                onClick={() => setArticle(fetchedData.metadata.original)}
+              >
+                Thêm version tiếng "{lang}"
+              </button>
+            </div>
+          )}
+
+          {initialValues && !fetching && (
+            <div className={styles.container}>
+              <ArticleForm
+                initialValues={initialValues}
+                onSubmit={submitHandler}
+                cat={fetchedData.metadata.categories}
+              />
+            </div>
+          )}
+
+          {fetchingError && <ErrorMessage msg={fetchingError.message} />}
+        </div>
+      </AdminLayout>
+    </>
   );
 }
 

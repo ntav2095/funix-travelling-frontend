@@ -1,8 +1,11 @@
 // main
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Tabs, Tab } from "react-bootstrap";
 
 // components
 import Editor from "../Editor";
+import VisaFormGroup from "./VisaFormGroup";
+
 // css
 import styles from "./VisaForm.module.css";
 
@@ -19,37 +22,27 @@ const validator = (values) => {
   if (!values.country) {
     errors.country = "Required";
   }
-  if (!values.detail || isEmptyDelta(values.detail)) {
-    errors.detail = "Required";
-  }
-  if (!values.term || isEmptyDelta(values.term)) {
-    errors.term = "Required";
-  }
-  if (!values.priceIncludes || isEmptyDelta(values.priceIncludes)) {
-    errors.priceIncludes = "Required";
-  }
-  if (values.price === "") {
-    errors.price = "Required";
-  } else if (isNaN(Number(values.price))) {
-    errors.price = "Must be number";
-  } else if (!isNaN(Number(values.price)) && Number(values.price) <= 0) {
-    errors.price = "Must be larger than 0";
-  }
-  if (!values.cancellationPolicy || isEmptyDelta(values.cancellationPolicy)) {
-    errors.cancellationPolicy = "Required";
-  }
 
   return errors;
 };
 
 const templateValues = {
+  language: "vi",
+
   name: "",
   country: "",
   price: "",
-  priceIncludes: "",
-  detail: "",
-  term: "",
-  cancellationPolicy: "",
+
+  priceIncludes: null,
+  priceExcludes: null,
+  priceOther: null,
+
+  cancellationPolicy: null,
+  registrationPolicy: null,
+  paymentPolicy: null,
+  notes: null,
+
+  detail: null,
 };
 
 function VisaForm({ visaProduct, onSubmit }) {
@@ -70,90 +63,100 @@ function VisaForm({ visaProduct, onSubmit }) {
       >
         {({ setFieldValue, setFieldTouched, values }) => (
           <Form>
-            <div className={styles.formGroup}>
-              <p className={styles.label}>Tên sản phẩm visa</p>
-              <Field type="text" name="name" />
-              <ErrorMessage name="name">{fieldMessage}</ErrorMessage>
-            </div>
+            <Tabs defaultActiveKey="generalInfo" className="bg-light">
+              <Tab
+                eventKey="generalInfo"
+                title="Thông tin chung"
+                className="p-2 bg-light"
+              >
+                <div className={styles.formGroup}>
+                  <p className={styles.label}>Tên sản phẩm visa</p>
+                  <Field type="text" name="name" />
+                  <ErrorMessage name="name">{fieldMessage}</ErrorMessage>
+                </div>
+                <div className={styles.formGroup}>
+                  <p className={styles.label}>Tên nước</p>
+                  <Field type="text" name="country" />
+                  <ErrorMessage name="country">{fieldMessage}</ErrorMessage>
+                </div>
+                <div className={styles.formGroup}>
+                  <p className={styles.label}>Giá sản phẩm</p>
+                  <Field type="number" name="price" />
+                  <ErrorMessage name="price">{fieldMessage}</ErrorMessage>
+                </div>
 
-            <div className={styles.formGroup}>
-              <p className={styles.label}>Tên nước</p>
-              <Field type="text" name="country" />
-              <ErrorMessage name="country">{fieldMessage}</ErrorMessage>
-            </div>
+                <div className="bg-white">
+                  <VisaFormGroup
+                    type="editor"
+                    label="Chi tiết phiếu dịch vụ"
+                    values={values}
+                    setFieldValue={setFieldValue}
+                    name="detail"
+                  />
+                </div>
+              </Tab>
 
-            <div className={styles.formGroup}>
-              <p className={styles.label}>Giá sản phẩm</p>
-              <Field type="number" name="price" />
-              <ErrorMessage name="price">{fieldMessage}</ErrorMessage>
-            </div>
+              <Tab eventKey="terms" title="Điều khoản" className="p-2 bg-light">
+                <VisaFormGroup
+                  type="editor"
+                  label="Điều kiện đăng ký"
+                  values={values}
+                  setFieldValue={setFieldValue}
+                  name="registrationPolicy"
+                />
+                <VisaFormGroup
+                  type="editor"
+                  label="Phương thức thanh toán"
+                  values={values}
+                  setFieldValue={setFieldValue}
+                  name="paymentPolicy"
+                />
+                <VisaFormGroup
+                  type="editor"
+                  label="Chính sách hoàn hủy đổi"
+                  values={values}
+                  setFieldValue={setFieldValue}
+                  name="cancellationPolicy"
+                />
+                <VisaFormGroup
+                  type="editor"
+                  label="Lưu ý"
+                  setFieldValue={setFieldValue}
+                  values={values}
+                  name="notes"
+                />
+              </Tab>
 
-            <div className={styles.formGroup}>
-              <p className={styles.label}>Chi tiết phiếu dịch vụ</p>
-              <Editor
-                placeholder="Chi tiết phiếu dịch vụ"
-                initialValue={initialValues.detail}
-                onChange={setFieldValue.bind(null, "detail")}
-                onBlur={setFieldTouched.bind(null, "detail", true, true)}
-                onFocus={setFieldTouched.bind(null, "detail", false, false)}
-              />
-              <ErrorMessage name="detail">{fieldMessage}</ErrorMessage>
-            </div>
+              <Tab eventKey="price" title="Bảng giá" className="p-2 bg-light">
+                <VisaFormGroup
+                  label="Giá bao gồm"
+                  name="priceIncludes"
+                  type="editor"
+                  setFieldValue={setFieldValue}
+                  values={values}
+                />
 
-            <div className={styles.formGroup}>
-              <p className={styles.label}>Giá đã bao gồm</p>
-              <Editor
-                placeholder="Giá đã bao gồm"
-                initialValue={initialValues.price}
-                onChange={setFieldValue.bind(null, "priceIncludes")}
-                onBlur={setFieldTouched.bind(null, "priceIncludes", true, true)}
-                onFocus={setFieldTouched.bind(
-                  null,
-                  "priceIncludes",
-                  false,
-                  false
-                )}
-              />
-              <ErrorMessage name="priceIncludes">{fieldMessage}</ErrorMessage>
-            </div>
+                <VisaFormGroup
+                  label="Giá không bao gồm"
+                  name="priceExcludes"
+                  type="editor"
+                  setFieldValue={setFieldValue}
+                  values={values}
+                />
 
-            <div className={styles.formGroup}>
-              <p className={styles.label}>Điều kiện và điều khoản</p>
-              <Editor
-                placeholder="Điều kiện và điều khoản"
-                initialValue={initialValues.term}
-                onChange={setFieldValue.bind(null, "term")}
-                onBlur={setFieldTouched.bind(null, "term", true, true)}
-                onFocus={setFieldTouched.bind(null, "term", false, false)}
-              />
-              <ErrorMessage name="term">{fieldMessage}</ErrorMessage>
-            </div>
+                <VisaFormGroup
+                  label="Giá trẻ em và phụ thu"
+                  name="priceOther"
+                  type="editor"
+                  setFieldValue={setFieldValue}
+                  values={values}
+                />
+              </Tab>
+            </Tabs>
 
-            <div className={styles.formGroup}>
-              <p className={styles.label}>Chính sách hủy đặt chỗ</p>
-              <Editor
-                placeholder="Chính sách hủy đặt chỗ"
-                initialValue={initialValues.cancellationPolicy}
-                onChange={setFieldValue.bind(null, "cancellationPolicy")}
-                onBlur={setFieldTouched.bind(
-                  null,
-                  "cancellationPolicy",
-                  true,
-                  true
-                )}
-                onFocus={setFieldTouched.bind(
-                  null,
-                  "cancellationPolicy",
-                  false,
-                  false
-                )}
-              />
-              <ErrorMessage name="cancellationPolicy">
-                {fieldMessage}
-              </ErrorMessage>
-            </div>
-
-            <button type="submit">Submit</button>
+            <button className="btn btn-primary" type="submit">
+              Submit
+            </button>
           </Form>
         )}
       </Formik>

@@ -72,7 +72,8 @@ const footerItems = {
     classes: "col-12 col-sm-3 col-lg-2",
     items: [
       {
-        url: "/tours-chau-au",
+        url: "",
+        path: "/tours-chau-au",
         label: {
           vi: `Du lịch châu Âu`,
           en: "Europe tours",

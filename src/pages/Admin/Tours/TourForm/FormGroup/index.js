@@ -158,90 +158,77 @@ function FormGroup(props) {
     );
   }
 
-  if (type === "checkbox") {
+  if (type === "hot") {
     form_field = (
-      <input
-        type="checkbox"
-        checked={values.hot}
-        name={name}
-        onChange={() => setFieldValue(name, !values.hot)}
-      />
-    );
-  }
-
-  if (type === "home-slider") {
-    form_field = (
-      <div>
-        <span
-          className="btn btn-primary mb-4 btn-sm"
-          onClick={() => setFieldValue(name, "")}
-        >
-          Bỏ chọn
-        </span>
-
-        <div className={styles.homeSliderImages}>
-          <div className="row">
-            {values.images.map((url) => (
-              <label className="col-2" key={url}>
-                <div className={styles.homeSliderImage}>
-                  <input
-                    className={styles.homeSliderImageCheckbox}
-                    type="checkbox"
-                    value={url}
-                    checked={url === values.slider}
-                    onChange={() => setFieldValue(name, url)}
-                  />
-                  <img src={url} />
-                </div>
-              </label>
-            ))}
-          </div>
-        </div>
+      <div className="d-flex">
+        <label className="d-flex rounded border w-auto p-2">
+          <h6 className="m-0 me-2">Tour nổi bật</h6>
+          <input
+            className="w-auto"
+            type="checkbox"
+            checked={values.hot}
+            name={name}
+            onChange={() => setFieldValue(name, !values.hot)}
+          />
+        </label>
       </div>
     );
   }
 
-  if (type === "banner") {
-    const changeBannerHandler = (e) => {
-      if (values.banner.includes(e.target.value)) {
-        setFieldValue(
-          name,
-          values.banner.filter((item) => item !== e.target.value)
-        );
-      } else {
-        setFieldValue(name, [...values.banner, e.target.value]);
-      }
-      console.log(values.banner);
-    };
-
+  if (type === "layout") {
     form_field = (
-      <div>
-        <label>
-          <p>Home</p>
+      <div className="d-flex align-items-center">
+        <label className="d-flex align-items-center me-3 border rounded p-2">
+          <p className="mb-0 me-2 text-nowrap">Home slider</p>
+          <input
+            type="checkbox"
+            value="home-slider"
+            checked={values.layout.includes("home-slider")}
+            name={name}
+            onChange={(e) =>
+              setFieldValue(
+                name,
+                values.layout.includes(e.target.value)
+                  ? values.layout.filter((item) => item !== e.target.value)
+                  : [...values.layout, e.target.value]
+              )
+            }
+          />
+        </label>
 
-          <input
-            type="checkbox"
-            value="home"
-            checked={values.banner.includes("home")}
-            onChange={changeBannerHandler}
-          />
-        </label>
-        <label>
-          <p>Du lịch châu Âu</p>
-          <input
-            type="checkbox"
-            value="eu-tours"
-            checked={values.banner.includes("eu-tours")}
-            onChange={changeBannerHandler}
-          />
-        </label>
-        <label>
-          <p>Du lịch Việt Nam</p>
+        <label className="d-flex align-items-center me-3 border rounded p-2">
+          <p className="mb-0 me-2 text-nowrap">Tours VN</p>
           <input
             type="checkbox"
             value="vn-tours"
-            checked={values.banner.includes("vn-tours")}
-            onChange={changeBannerHandler}
+            checked={values.layout.includes("vn-tours")}
+            name={name}
+            onChange={(e) =>
+              setFieldValue(
+                name,
+                values.layout.includes(e.target.value)
+                  ? values.layout.filter((item) => item !== e.target.value)
+                  : [...values.layout, e.target.value]
+              )
+            }
+          />
+        </label>
+
+        <label className="d-flex align-items-center me-3 border rounded p-2">
+          <p className="mb-0 me-2 text-nowrap">Tours EU</p>
+          <input
+            type="checkbox"
+            value="eu-tours"
+            checked={values.layout.includes("eu-tours")}
+            name={name}
+            onChange={(e) =>
+              setFieldValue(
+                name,
+                values.layout.includes(e.target.value)
+                  ? values.layout.filter((item) => item !== e.target.value)
+                  : [...values.layout, e.target.value]
+              )
+            }
           />
         </label>
       </div>

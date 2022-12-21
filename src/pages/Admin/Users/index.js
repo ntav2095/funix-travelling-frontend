@@ -5,11 +5,14 @@ import useAxios from "../../../hooks/useAxios";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Users.module.css";
+import SpinnerModal from "../../../components/SpinnerModal";
+import { useSelector } from "react-redux";
 
 function Users() {
   const [sendRequest, isLoading, data, error, resetStates] = useAxios();
   const [changeRole, isChangingRole, changedRole, changingError] = useAxios();
   const [deleteUser, isDeleting, deleted, deletingError] = useAxios();
+  const { user: auth } = useSelector((state) => state.user);
 
   const changeRoleHandler = (newRole, currentRole, username) => {
     if (currentRole !== newRole) {
@@ -40,7 +43,6 @@ function Users() {
 
   useEffect(() => {
     if (changedRole) {
-      alert("change role");
       sendRequest({
         method: "GET",
         url: "http://localhost:5000/user",
@@ -50,7 +52,6 @@ function Users() {
 
   useEffect(() => {
     if (deleted) {
-      alert("deleted");
       sendRequest({
         method: "GET",
         url: "http://localhost:5000/user",
@@ -63,16 +64,35 @@ function Users() {
 
   return (
     <>
+      <SpinnerModal show={isLoading || isChangingRole || isDeleting} />
       <AdminLayout>
         <StatusBar title="Quản lý users">
           <Link className="btn btn-primary" to="/admin/users/create-user">
             Tạo user mới
           </Link>
         </StatusBar>
+
         <div className={styles.container}>
+          <div className="auth mb-3 bg-light p-2 border">
+            <p className="fs-5 mb-2 fw-bold">Tài khoản của bạn</p>
+            <p className="mb-1">
+              <span className="fw-bold">username:</span> {auth.username}
+            </p>
+            <p>
+              {" "}
+              <span className="fw-bold">role:</span> {auth.role}
+            </p>
+            <Link
+              className="btn btn-sm btn-warning"
+              to={`/admin/users/change-password/${auth.username}`}
+            >
+              Đổi password
+            </Link>
+          </div>
+
           {users && (
-            <table className="table">
-              <thead>
+            <table className="table table-bordered">
+              <thead className="bg-dark text-light text-center">
                 <tr>
                   <th>
                     <div>_id</div>
@@ -95,7 +115,7 @@ function Users() {
                 </tr>
               </thead>
 
-              <tbody>
+              <tbody className="bg-light">
                 {users.map((user) => (
                   <tr key={user._id}>
                     <td>
@@ -149,13 +169,6 @@ function Users() {
                     </td>
                     <td>
                       <div>
-                        <Link
-                          className="btn btn-sm btn-warning"
-                          to={`/admin/users/change-password/${user.username}`}
-                        >
-                          Đổi password
-                        </Link>
-
                         <button
                           onClick={() => deleteUserHandler(user.username)}
                           className="btn btn-sm btn-danger ms-2"

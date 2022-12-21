@@ -14,15 +14,33 @@ import {
 } from "./import";
 import usePageTitle from "../../../hooks/usePageTitle";
 
-import "./override.css";
+import "./Tours.override.css";
 import StatusBar from "../../../layout/AdminLayout/StatusBar";
+import Filter from "./Filter";
+import NotifyModal from "../../../components/NotifyModal";
+
+const checkCircle = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="w-6 h-6"
+  >
+    <path
+      fillRule="evenodd"
+      d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
+
+const checkMark = <span className={styles.checkSVG}>{checkCircle}</span>;
 
 function Tours() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const [sendDelete, isDeleting, deleted, deleteError, deletingReset] =
     useAxios();
   const [page, setPage] = useState(1);
-  const [searchInput, setSearchInput] = useState("");
   const [filter, setFilter] = useState({
     category: "all",
     search: "",
@@ -53,21 +71,11 @@ function Tours() {
       reqQueries.banner = filter.banner;
     }
 
-    console.log(reqQueries);
-
     sendRequest(tourApi.get(reqQueries));
   }, [page, filter]);
 
   useEffect(() => {
-    if (deleteError) {
-      alert(`Có lỗi xảy ra: ${deleteError.message}`);
-    }
-  }, [deleteError]);
-
-  useEffect(() => {
     if (deleted) {
-      deletingReset("data");
-      alert(`Xóa thành công`);
       sendRequest(tourApi.get({ page, page_size: PAGE_SIZE }));
     }
   }, [deleted, page]);
@@ -76,13 +84,34 @@ function Tours() {
     setPage(1);
   }, [filter]);
 
-  let errMsg = error ? error.message : null;
+  useEffect(() => {
+    if (data && deleted) {
+      if (data.metadata.page_count < page) {
+        setPage(data.metadata.page_count);
+      }
+    }
+  }, [data, page, deleted]);
 
   usePageTitle("Danh sách tours | Admin | Joya Travel");
 
+  const showNotify = deleted || deleteError;
+  const notifyType = deleted ? "success" : deleteError ? "error" : "";
+  const notifyMessage = deleted
+    ? "Xóa thành công"
+    : deleteError?.message || "Có lỗi xảy ra";
+
   return (
     <>
+      <NotifyModal
+        type={notifyType}
+        show={showNotify}
+        message={notifyMessage}
+        onHide={() => deletingReset()}
+        time={1500}
+      />
+
       <SpinnerModal show={isLoading || isDeleting} />
+
       <AdminLayout>
         <StatusBar title="Danh sách tours">
           <Link className="btn btn-primary btn-sm" to="/admin/new-tour">
@@ -91,95 +120,48 @@ function Tours() {
         </StatusBar>
 
         <div className={styles.tours}>
-          <div className="mb-2">
-            <select
-              value={filter.category}
-              onChange={(e) =>
-                setFilter((prev) => ({ ...prev, category: e.target.value }))
-              }
-            >
-              <option value="all">Tất cả</option>
-              <option value="all">Chưa phân loại --- chưa làm</option>
-              <option value="europe">Tour châu Âu</option>
-              <option value="vi">Tour Việt Nam</option>
-            </select>
-
-            <form className="mt-2">
-              <input
-                type="text"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-              />
-              <button
-                className="border ms-2 bg-secondary text-light"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setFilter((prev) => ({ ...prev, search: searchInput }));
-                }}
-              >
-                search
-              </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setFilter((prev) => ({ ...prev, search: "" }));
-                  setSearchInput("");
-                }}
-              >
-                clear search
-              </button>
-            </form>
-          </div>
-
-          <div className="mb-2">
-            Banner
-            <select
-              onChange={(e) => {
-                setFilter((prev) => ({ ...prev, banner: e.target.value }));
-              }}
-            >
-              <option value="">Không lọc</option>
-              <option value="home">home</option>
-              <option value="vn-tours">Du lịch VN</option>
-              <option value="eu-tours">Du lịch EU</option>
-            </select>
-          </div>
+          <Filter setFilter={setFilter} filter={filter} />
 
           {data && data.data.length > 0 && (
             <>
-              <table className={styles.table}>
-                <thead>
+              <table className="table table-bordered ">
+                <thead className="bg-dark text-light">
                   <tr>
-                    <th>
+                    <th rowSpan={2}>
                       <div>STT</div>
                     </th>
-                    <th>
+                    <th rowSpan={2}>
                       <div>Mã tour</div>
                     </th>
-                    <th>
+                    <th rowSpan={2}>
                       <div>Tên tour</div>
                     </th>
-                    <th>
+                    <th rowSpan={2}>
                       <div>Danh mục</div>
                     </th>
-                    <th>
-                      <div>Chức năng</div>
+                    <th colSpan={3}>
+                      <div className="text-center">Banner</div>
                     </th>
+                    <th rowSpan={2}>
+                      <div className="text-center">Chức năng</div>
+                    </th>
+                  </tr>
+                  <tr>
                     <th>
-                      <div>home slider</div>
+                      <div>home</div>
                     </th>
 
                     <th>
-                      <div>banner vn tours</div>
+                      <div>eu</div>
                     </th>
 
                     <th>
-                      <div>banner eu tours</div>
+                      <div>vn</div>
                     </th>
                   </tr>
                 </thead>
 
-                <tbody>
+                <tbody className="bg-light">
                   {data.data.map((item, index) => (
                     <tr key={item._id}>
                       <td>
@@ -203,46 +185,47 @@ function Tours() {
                         </div>
                       </td>
                       <td>
+                        <div>
+                          {item.layout.includes("home-slider") && checkMark}
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          {item.layout.includes("vn-tours") && checkMark}
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          {item.layout.includes("eu-tours") && checkMark}
+                        </div>
+                      </td>
+                      <td>
                         <div className={styles.actionBtns}>
                           <Link
                             to={`/admin/edit-tour/${item._id}`}
-                            className={styles.editBtn}
+                            className="btn btn-warning me-2"
                           >
                             Sửa
                           </Link>
-                          <button
-                            className={styles.removeTourBtn}
-                            onClick={() => deleteHandler(item._id)}
-                          >
-                            Xóa
-                          </button>
+
                           <Link
-                            className={styles.editItineraryBtn}
+                            className="btn btn-secondary me-2"
                             to={`/admin/update-itinerary/${item._id}`}
                           >
                             Sửa lộ trình
                           </Link>
                           <Link
-                            className={styles.editItineraryBtn + " bg-success"}
+                            className="btn btn-success me-2"
                             to={`/admin/rate-tour/${item._id}`}
                           >
                             Đánh giá
                           </Link>
-                        </div>
-                      </td>
-                      <td>
-                        <div>
-                          {item.banner.includes("home") ? "true" : "false"}
-                        </div>
-                      </td>
-                      <td>
-                        <div>
-                          {item.banner.includes("vn-tours") ? "true" : "false"}
-                        </div>
-                      </td>
-                      <td>
-                        <div>
-                          {item.banner.includes("eu-tours") ? "true" : "false"}
+                          <button
+                            className="btn btn-danger me-2"
+                            onClick={() => deleteHandler(item._id)}
+                          >
+                            Xóa
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -264,9 +247,9 @@ function Tours() {
             </>
           )}
 
-          {data && data.data.length === 0 && <h5>Hiện không có tour nào</h5>}
+          {data && data.data.length === 0 && <h5>Không có tour nào</h5>}
 
-          <ErrorMessage msg={errMsg} />
+          {error && <ErrorMessage msg={error.message} />}
         </div>
       </AdminLayout>
     </>

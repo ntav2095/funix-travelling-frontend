@@ -1,4 +1,4 @@
-import { manifyingGlass as searchSVG } from "../../../assets/svgs";
+import { magnifyingGlass as searchSVG } from "../../../assets/svgs";
 
 import { useEffect } from "react";
 import { useState } from "react";

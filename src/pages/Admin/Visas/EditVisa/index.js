@@ -3,13 +3,13 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 // components
-import AdminLayout from "../../../layout/AdminLayout";
-import VisaForm from "../../../containers/VisaForm";
-import SpinnerModal from "../../../components/SpinnerModal";
+import AdminLayout from "../../../../layout/AdminLayout";
+import VisaForm from "../../../../containers/VisaForm";
+import SpinnerModal from "../../../../components/SpinnerModal";
 
 // hooks
-import useAxios from "../../../hooks/useAxios";
-import { visaApi } from "../../../services/apis";
+import useAxios from "../../../../hooks/useAxios";
+import { visaApi } from "../../../../services/apis";
 
 // css
 import styles from "./AddVisa.module.css";

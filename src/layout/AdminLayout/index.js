@@ -87,12 +87,6 @@ function AdminLayout({ children, title, path, text }) {
               </li>
 
               <li>
-                <NavLink className={navLinkClasses} to="/admin/category">
-                  {!sidebarIsShow ? category : "Danh mục"}
-                </NavLink>
-              </li>
-
-              <li>
                 <NavLink className={navLinkClasses} to="/admin/users">
                   User
                 </NavLink>
@@ -101,6 +95,12 @@ function AdminLayout({ children, title, path, text }) {
               <li>
                 <NavLink className={navLinkClasses} to="/admin/about">
                   About
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink className={navLinkClasses} to="/admin/category">
+                  {!sidebarIsShow ? category : "Danh mục"}
                 </NavLink>
               </li>
 

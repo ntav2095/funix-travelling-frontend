@@ -26,8 +26,6 @@ const initialValues = {
   description: "",
   highlights: null,
 
-  banner: [],
-
   price: 0,
   days: 0,
   nights: 0,
@@ -44,6 +42,8 @@ const initialValues = {
   notes: null,
 
   thumb: null,
+  banner: null,
+  layout: [],
 };
 
 const dataPacker = (values) => {
@@ -74,14 +74,15 @@ const dataPacker = (values) => {
   formData.append("countries", values.countries);
   formData.append("description", values.description);
   formData.append("highlights", JSON.stringify(values.highlights));
-  formData.append("banner", JSON.stringify(values.banner));
   formData.append("price", Number(values.price.replace(/,/g, "")));
   formData.append("duration", JSON.stringify(duration));
   formData.append("price_policies", JSON.stringify(price_policies));
   formData.append("departureDates", JSON.stringify(values.departureDates));
   formData.append("terms", JSON.stringify(terms));
   formData.append("category", JSON.stringify(values.category));
-  formData.append("image", values.thumb);
+  formData.append("thumb", values.thumb);
+  formData.append("banner", values.banner);
+  formData.append("layout", JSON.stringify(values.layout));
 
   return formData;
 };
