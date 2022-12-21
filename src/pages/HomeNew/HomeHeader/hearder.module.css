@@ -29,3 +29,20 @@
    height: 3rem ;
    margin-bottom: 8px;
 }
+@media screen and (max-width:600px) {
+    .hearder>.container {
+            padding: 14px 8px 0px 8px;
+        }
+}
+
+@media screen and (min-width:600px) {
+.hearder>.container {
+        padding: 20px 12px 0px 12px;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .hearder>.container {
+            padding: 32px 20px 0px 20px;
+        }
+}

@@ -39,8 +39,23 @@
     display: inline-table;
     background-color: rgba(239,243,246,255);
 } */
-.slider{
-    margin: 43px 14px !important;
+
+@media screen and (max-width:600px) {
+    .slider {
+            margin: 18px 6px ;
+        }
+}
+
+@media screen and (min-width:600px) {
+    .slider {
+            margin: 26px 8px ;
+        }
+}
+
+@media screen and (min-width:1024px) {
+    .slider {
+            margin: 43px 14px ;
+        }
 }
 .articleCategory{
     width: 9rem;

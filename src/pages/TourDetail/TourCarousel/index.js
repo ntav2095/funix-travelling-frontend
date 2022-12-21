@@ -56,7 +56,9 @@ function TourCarousel({ tour, isLoading, height, size = "md" }) {
 
   return (
     <>
-      <div style={{ height: height }} className={classes}>
+      <div 
+      // style={{ height: height }} 
+      className={classes}>
         {tour && !isLoading && (
           <Slider
             {...settings}

@@ -30,7 +30,7 @@ function TourDetail() {
   const { i18n } = useTranslation();
   
   const tour = data ? data.data.item : null;
-
+  console.log("tour", tour);
   const tourName = tour ? tour.name : "Tour du lịch";
   usePageTitle(`${tourName} || Go Travel`);
   useEffect(()=>{

@@ -11,12 +11,11 @@ function DefaultLayout({ noBanner }) {
       <Navbar />
       <div className={styles.main}>
         <Banner />
-        <div className={styles.body + " container-fluid"}>
+        <div className={styles.body }>
           <Outlet />
         </div>
-
-        <Footer />
       </div>
+      <Footer />
     </>
   );
 }

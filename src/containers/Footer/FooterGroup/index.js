@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 function FooterGroup({ footerItem }) {
@@ -16,7 +16,17 @@ function FooterGroup({ footerItem }) {
                 {item.icon} {item.label[lang]}
               </a>
             ) : item.path ? (
-              <Link className="d-block mb-1 " to={item.path}>
+              <Link
+                className="d-block mb-1 "
+                to={item.path}
+                onClick={() =>
+                  window.scroll({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth",
+                  })
+                }
+              >
                 {item.icon} {item.label[lang]}
               </Link>
             ) : (

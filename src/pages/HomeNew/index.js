@@ -96,7 +96,7 @@ function HomeNew() {
         <HomeHeader />
       </div>
 
-      <div className="containerHome">
+      <div className="containerHomeabout">
         <SliderCard
           title={i18next.t("homeMain.titleTourChauAu")}
           data={dataTourTrongNuoc?.data}
@@ -106,7 +106,7 @@ function HomeNew() {
         />
       </div>
 
-      <div className="containerHome">
+      <div className="containerHomeabout">
         <SliderCard
           title={i18next.t("homeMain.titleTourTrongNuoc")}
           data={dataTourTrongNuoc?.data}
@@ -116,7 +116,7 @@ function HomeNew() {
         />
       </div>
 
-      <div className="containerHome">
+      <div className="containerHomeabout">
         <SliderCard
           title={i18next.t("homeMain.titleCamNang")}
           data={dataGuides?.data}

@@ -77,11 +77,19 @@ function TourList({ cat_params }) {
     }
   };
 useEffect(() => {
-  if(page>1){const element = document.getElementById("title");
- element.scrollIntoView();}
+  if(page>1){
+    window.scroll({
+      top: 500,
+      left: 0,
+      behavior: "smooth",
+    });
+}
  if(new URLSearchParams(location.search).get("page")==1){
-  const element = document.getElementById("title");
-  element.scrollIntoView();
+window.scroll({
+  top:500,
+  left: 0,
+  behavior: "smooth",
+});
  }
 }, [page])
 
@@ -140,7 +148,7 @@ useEffect(() => {
               data.data.map((tour) => (
                 <div
                   key={tour._id}
-                  className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+                  className="col-6 col-sm-6 col-md-4 col-lg-3 mb-4"
                 >
                   <TourCard tour={tour} />
                 </div>
@@ -150,7 +158,7 @@ useEffect(() => {
               new Array(18).fill(1).map((item, index) => (
                 <div
                   key={index}
-                  className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+                  className="col-6 col-sm-6 col-md-4 col-lg-3 mb-4"
                 >
                   <CardPlaceholder key={index} />
                 </div>

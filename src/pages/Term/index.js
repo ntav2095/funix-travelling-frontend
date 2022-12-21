@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import { useTranslation } from "react-i18next";
 import QuillReader from "../../components/QuillReader";
+import Styles from "./Term.module.css";
 
 const TERM_ITEMS = new Map([
   [
@@ -78,10 +79,14 @@ function Term() {
   }, [type, lang]);
 
   return (
-    <div className="bg-light p-0 m-0">
+    <div className=" p-0 m-0">
       <div className="container-lg pt-5">
-        <h1 className="fs-3 mb-4">{TERM_ITEMS.get(type).title[lang]}</h1>
-        <QuillReader delta={delta} />
+        <h1 className={Styles.h1 + " fs-3 mb-4"}>
+          {TERM_ITEMS.get(type).title[lang]}
+        </h1>
+        <div className={Styles.content + " bg-light"}>
+          <QuillReader className delta={delta} />
+        </div>
       </div>
     </div>
   );

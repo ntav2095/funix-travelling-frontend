@@ -21,7 +21,7 @@ function About() {
   const delta = data ? data.data.content : null;
 
   return (
-    <div>
+    <div className={styles.content}>
       <div>{delta && <QuillReader delta={delta} />}</div>
     </div>
   );

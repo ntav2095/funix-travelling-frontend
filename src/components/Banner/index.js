@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 import { brokenImage, hearder as bannerImg } from "../../assets/images";
 import Slider from "react-slick";
 import Placeholder from "../placeholders/Placeholder";
@@ -14,7 +15,7 @@ import { useSelector } from "react-redux";
 function Banner() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const pathPage = useLocation();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const images = data?.data.images;
   const imagehome = useSelector((state) => state.banner.image.home);
   const imagetourdetail = useSelector((state) => state.banner.image.tourdetail);
@@ -28,11 +29,11 @@ function Banner() {
 
   const handleBanner = () => {
     const path = pathPage.pathname;
-  
+
     if (images) {
-      if (path == "/tours-chau-au") {
+      if (path.includes("/tours-chau-au")) {
         return images.eu_tours;
-      } else if (path == "/tours-trong-nuoc") {
+      } else if (path.includes("/tours-trong-nuoc") ) {
         return images.vn_tours;
       } else if (path == "/cam-nang-du-lich") {
         return images.guides;
@@ -43,6 +44,7 @@ function Banner() {
       } else if (path == `/cam-nang-du-lich/${imageArticleDetail?.id}`) {
         return imageArticleDetail?.image;
       }
+      return "pathnot";
     }
   };
 
@@ -65,12 +67,17 @@ function Banner() {
     sendRequest(layoutApi.get());
   }, []);
 
- 
-
   return (
-    <>
+    <div className={styles.container}>
       {pathPage.pathname === "/" ? (
-        <div className={styles.banner + " home__banner"}>
+        <div
+          className={
+            styles.banner + handleBanner() == "pathnotpound"
+              ? styles.notbanner
+              : "" + " home__banner"
+          }
+        >
+          {console.log("handleBanner", handleBanner())}
           {imagehome && (
             <Slider {...settings}>
               {imageArr?.map((item, index) => (
@@ -100,12 +107,13 @@ function Banner() {
         </div>
       ) : (
         <div className={styles.banner}>
-          {console.log("handleBanner", handleBanner())}
-          {!handleBanner() ? (
-            <div className={styles.image}>
-              <Placeholder width="100%" height="100%" />
-            </div>
-          ) : (
+          {console.log("pathbannersee", handleBanner())}
+          {!handleBanner()  ? (
+            <></>
+            // <div className={styles.image}>
+            //   <Placeholder width="100%" height="100%" />
+            // </div>
+          ) : handleBanner() === "pathnot" ? null : (
             <img
               src={handleBanner()}
               className="img-fluid w-100"
@@ -115,7 +123,7 @@ function Banner() {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
 

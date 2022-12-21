@@ -32,7 +32,7 @@ function Tour(props) {
   const { title, tour, naviga, isLoading } = props;
   const { i18n } = useTranslation();
   const lang = i18n.language;
-
+  console.log(tour)
   const settings = {
     dots: false,
     infinite: false,
