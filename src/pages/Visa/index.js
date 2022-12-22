@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./Visa.module.css";
 import { useTranslation } from "react-i18next";
+import VisaSteps from "../VisaService/VisaSteps";
 
 function Visa() {
   const [color, setColor] = useState({
@@ -27,12 +28,12 @@ function Visa() {
 
   const products = data ? data.data : null;
   return (
-    <>
-      <div className="border border-dark p-2 mb-5">
-        <h4>Chỉnh layout</h4>
-        <div className="d-flex gap-5 mb-5">
-          <div>
-            <h6>Nút 'CHỌN'</h6>
+    <div className="bg-light">
+      <div className="container-lg pt-3">
+        <div className=" d-flex gap-5 mb-3 border p-2 bg-white">
+          <p className="m-0 fw-bold">Chỉnh màu các nút:</p>
+          <div className="d-flex gap-2 align-items-center">
+            <p className="m-0">Nút 'CHỌN'</p>
             <input
               type="color"
               onChange={(e) =>
@@ -41,8 +42,8 @@ function Visa() {
             />
           </div>
 
-          <div>
-            <h6>Nút 'ĐẶT'</h6>
+          <div className="d-flex gap-2 align-items-center">
+            <p className="m-0">Nút 'ĐẶT'</p>
             <input
               type="color"
               onChange={(e) =>
@@ -51,28 +52,29 @@ function Visa() {
             />
           </div>
         </div>
-      </div>
 
-      <h1>Dịch vụ làm visa Ý</h1>
+        <h1 className="fs-3">Dịch vụ làm visa Ý</h1>
 
-      <div className="bg-light p-1">
-        <div className="Body-content-2 container">
-          <div>
-            <h2 className={styles.chooseProductTitle}>Chọn gói dịch vụ</h2>
+        <div className="p-1">
+          <VisaSteps />
+          <div className="Body-content-2 container">
+            <div>
+              <h5 className={styles.chooseProductTitle}>Chọn gói dịch vụ</h5>
 
-            <ul className={styles.products}>
-              {products &&
-                products.length > 0 &&
-                products.map((product) => (
-                  <li key={product._id}>
-                    <VisaProduct product={product} color={color} />
-                  </li>
-                ))}
-            </ul>
+              <ul className={styles.products}>
+                {products &&
+                  products.length > 0 &&
+                  products.map((product) => (
+                    <li key={product._id}>
+                      <VisaProduct product={product} color={color} />
+                    </li>
+                  ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

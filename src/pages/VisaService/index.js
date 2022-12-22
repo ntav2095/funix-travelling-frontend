@@ -3,7 +3,6 @@
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import styles from "./Visa.module.css";
-import { steps } from "./mock";
 import settings from "./responsiveCarousel";
 import usePageTitle from "../../hooks/usePageTitle";
 import SignupConsultModal from "./SignupConsultModal";
@@ -12,6 +11,7 @@ import SearchResults from "./SearchResults";
 import { useSelector } from "react-redux";
 import accentsRemover from "../../services/helpers/accentsRemover";
 import { countriesImages } from "./mockImages";
+import VisaSteps from "./VisaSteps";
 
 function VisaService() {
   const [show, setShow] = useState(false);
@@ -33,7 +33,7 @@ function VisaService() {
     <>
       <SignupConsultModal handleClose={handleClose} show={show} />
 
-      <div>
+      <div className="container-lg">
         <div className={styles.container}>
           <div className="p-2">
             <form
@@ -107,24 +107,7 @@ function VisaService() {
           </div>
         </div>
 
-        {/* cac buoc lam visa  */}
-        <div className={styles.container}>
-          <div className={styles.steps}>
-            <h2>Các bước làm Visa tại YOJA</h2>
-
-            <ul>
-              {steps.map((item) => (
-                <li key={item.num}>
-                  <p className={styles.num}>{item.num}</p>
-
-                  <p className={styles.name}>{item.name}</p>
-
-                  <p className={styles.desc}>{item.desc}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <VisaSteps />
       </div>
     </>
   );

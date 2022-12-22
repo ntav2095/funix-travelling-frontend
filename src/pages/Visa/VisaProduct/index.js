@@ -19,7 +19,7 @@ function VisaProduct({ product, color }) {
       <div className="row">
         <div className="col-4">
           <div>
-            <h3 className="fw-bold fs-5">{product.name}</h3>
+            <h5 className="fw-bold ">{product.name}</h5>
           </div>
         </div>
 
