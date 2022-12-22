@@ -128,6 +128,10 @@ function Category() {
           {data && (
             <CatGroup type="article" cat={data.data} onDelete={deleteHandler} />
           )}
+
+          {data && (
+            <CatGroup type="visa" cat={data.data} onDelete={deleteHandler} />
+          )}
         </div>
       </AdminLayout>
       <Outlet />

@@ -60,31 +60,27 @@ export const reasons = [
 export const visaProducts = [
   {
     image: one,
-    name: "Visa Ý Du Lịch, Công Tác & Thăm Thân (Người lớn)",
+    name: "Visa Ý",
   },
   {
     image: one,
-    name: "Visa Ý (Trẻ em 6 - 12 tuổi)",
+    name: "Visa Pháp",
   },
   {
     image: one,
-    name: "Visa Ý (Trẻ em dưới 6 tuổi)",
+    name: "Visa Vatican",
   },
   {
     image: one,
-    name: "Dịch vụ chứng minh tài chính xin visa Ý",
+    name: "Visa Anh",
   },
   {
     image: one,
-    name: "Dịch vụ chứng minh công việc xin visa Ý",
+    name: "Visa Ba lan",
   },
   {
     image: one,
-    name: "Dịch vụ điền tờ khai xin visa Ý",
-  },
-  {
-    image: one,
-    name: "Dịch vụ dịch thuật văn phòng (một trang)",
+    name: "Visa Thụy Sỹ",
   },
 ];
 

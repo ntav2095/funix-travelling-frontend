@@ -1,0 +1,98 @@
+.visa-content-feature ul li {
+  font-size: 18px;
+  color: #1d1d1d;
+  font-family: "os_regular";
+  margin-bottom: 15px;
+}
+.visa-info-feature ul li {
+  display: inline-block;
+  font-size: 18px;
+  color: #1d1d1d;
+  font-family: "os_regular";
+  padding: 20px 15px;
+}
+.visa-info-feature ul li:first-child {
+  padding-left: 0px;
+}
+.type-visa.box-rating-comment p {
+  display: block;
+  line-height: 32px;
+  margin: 20px 0px;
+  color: #00b874;
+}
+
+#visa-item-box-services
+  .visa-single-services-main
+  .content-services-main
+  ul
+  li {
+  background: #fff;
+  padding: 25px 20px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  border: solid 1px #e6e6e6;
+}
+.btn-open-book-visa {
+  border-radius: 5px;
+  background-color: #f98713;
+  border: 0px;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 14px;
+  font-family: "os_bold";
+  min-width: 140px;
+  outline: 0;
+  margin-left: 30%;
+  margin-top: 3%;
+}
+
+.price-current {
+  font-size: 20px;
+  color: #ff9000;
+  margin-left: 30%;
+  margin-top: 5%;
+  font-weight: bold;
+}
+
+.products {
+  padding: 5px;
+
+  list-style: none;
+}
+.products li {
+  background: #fff;
+  padding: 25px 20px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  border: solid 1px #e6e6e6;
+  max-width: 1170px;
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 30px;
+}
+.chooseProductTitle {
+  color: #15284a;
+  font-size: 28px;
+  border-bottom: 4px solid #0090fe;
+  margin: 0px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+#box-btn-submit > button {
+  border-radius: 5px;
+  background-color: #ec4325;
+  color: #ffffff;
+  font-family: "os_bold";
+  font-size: 14px;
+  text-transform: uppercase;
+  line-height: 40px;
+  min-width: 140px;
+  outline: 0;
+  border: 0px;
+
+  border: 0px;
+}

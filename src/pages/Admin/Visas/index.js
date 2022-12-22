@@ -7,50 +7,37 @@ import StatusBar from "../../../layout/AdminLayout/StatusBar";
 
 // hooks
 import useAxios from "../../../hooks/useAxios";
-import { visaApi } from "../../../services/apis";
+import { adminApis } from "../../../services/apis";
 
 // css
 import styles from "./Visas.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SpinnerModal from "../../../components/SpinnerModal";
+import useFetchVisaCountries from "./visaHooks/useFetchVisasCountries";
 
 function Visas() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const [startDeleting, isDeleting, deleted, deletingError] = useAxios();
+  const { continents, countries, getCountries, getCountryName } =
+    useFetchVisaCountries();
+  const [filter, setFilter] = useState({
+    country: "",
+  });
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure to delete this visa product?")) {
-      startDeleting(visaApi.deleteVisa(id));
+      startDeleting(adminApis.visa.deleteOne(id));
     }
   };
 
-  const ActionButtons = ({ id }) => {
-    return (
-      <>
-        <Link
-          className="btn btn-warning me-2"
-          to={`/admin/edit-visa-product/${id}`}
-        >
-          Edit
-        </Link>
-        <button
-          className="btn btn-danger me-2"
-          onClick={() => deleteHandler(id)}
-        >
-          Remove
-        </button>
-      </>
-    );
-  };
-
   useEffect(() => {
-    sendRequest(visaApi.getVisas());
-  }, []);
+    sendRequest(adminApis.visa.get(filter));
+  }, [filter]);
 
   useEffect(() => {
     if (deleted) {
       alert("Deleted");
-      sendRequest(visaApi.getVisas());
+      sendRequest(adminApis.visa.get(filter));
     }
   }, [deleted]);
 
@@ -75,7 +62,38 @@ function Visas() {
         </StatusBar>
 
         <div className={styles.container}>
-          {data && data.items.length > 0 && (
+          <select
+            onChange={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                country: getCountries(e.target.value),
+              }));
+            }}
+          >
+            <option value="">--- châu lục ---</option>
+            {continents &&
+              continents.map((item) => (
+                <option key={item.code} value={item.code}>
+                  {item.name}
+                </option>
+              ))}
+          </select>
+
+          <select
+            onChange={(e) =>
+              setFilter((prev) => ({ ...prev, country: e.target.value }))
+            }
+          >
+            <option value="">--- nước ---</option>
+            {countries &&
+              countries.map((item) => (
+                <option key={item.code} value={item.code}>
+                  {item.name}
+                </option>
+              ))}
+          </select>
+
+          {data && data.data.length > 0 && (
             <table className="table table-bordered">
               <thead className="bg-dark text-light">
                 <tr>
@@ -101,7 +119,7 @@ function Visas() {
               </thead>
 
               <tbody className="bg-light">
-                {data.items.map((visa, index) => (
+                {data.data.map((visa, index) => (
                   <tr key={visa._id}>
                     <td>
                       <div>{index + 1}</div>
@@ -113,14 +131,25 @@ function Visas() {
                       <div>{visa.name}</div>
                     </td>
                     <td>
-                      <div>{visa.country}</div>
+                      <div>{getCountryName(visa.country)}</div>
                     </td>
                     <td>
                       <div>{visa.price}</div>
                     </td>
                     <td>
                       <div className={styles.actionBtns}>
-                        <ActionButtons id={visa._id} />
+                        <Link
+                          className="btn btn-warning me-2"
+                          to={`/admin/edit-visa-product/${visa._id}`}
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          className="btn btn-danger me-2"
+                          onClick={() => deleteHandler(visa._id)}
+                        >
+                          Remove
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -129,7 +158,7 @@ function Visas() {
             </table>
           )}
 
-          {data && data.items.length === 0 && (
+          {data && data.data.length === 0 && (
             <h2 className={styles.noProducts}>No visa products</h2>
           )}
         </div>

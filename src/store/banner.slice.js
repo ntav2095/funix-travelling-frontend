@@ -14,9 +14,18 @@ const initialState = {
   diary: null,
   handbook: null,
 
+  // visa
+  visa: {
+    banner: "http://www.maashaktivisaservices.com/img/TOurist1.jpg",
+  },
+
   // detail
   tourDetail: null,
   articleDetail: null,
+  visaCountry: {
+    banner:
+      "https://cdn.travelpulse.com/images/31aaedf4-a957-df11-b491-006073e71405/bb73aab8-f2bf-4278-88c3-33dd628df23f/630x355.jpg",
+  },
 };
 
 const banner = createSlice({

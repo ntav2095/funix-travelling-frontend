@@ -70,7 +70,11 @@ function UpdateItinerary() {
   // set plan
   useEffect(() => {
     if (fetchedData) {
-      setPlan(fetchedData.data.itinerary);
+      if (fetchedData.data) {
+        setPlan(fetchedData.data.itinerary);
+      } else {
+        setPlan([]);
+      }
     }
   }, [fetchedData]);
 
@@ -85,8 +89,6 @@ function UpdateItinerary() {
       alert("Thất bại");
     }
   }, [updatingError]);
-
-  const langs = fetchedData ? fetchedData.metadata.available_lang : [];
 
   const addDayHandler = () => {
     setPlan((prev) => [
@@ -159,18 +161,16 @@ function UpdateItinerary() {
 
         <div className={styles.container + " pb-5"}>
           {/* select languages  */}
+
           <div className="d-flex justify-content-between align-items-center pb-4">
             <label className="d-flex align-items-center">
               <h6 className="mb-0 me-2 text-nowrap">Phiên bản ngôn ngữ</h6>
               <select value={lang} onChange={(e) => setLang(e.target.value)}>
-                {langs.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
+                <option value="vi">Tiếng Việt</option>
+                <option value="en">Tiếng Anh</option>
               </select>
               <span
-                title="Bạn cần tạo tour phiên bản tiếng Anh trước để tạo được lộ trình tiếng Anh"
+                title="Bạn cần tạo tour phiên bản tiếng Việt trước để tạo được lộ trình tiếng Anh"
                 className={styles.questionMark}
               >
                 {questionSVG}

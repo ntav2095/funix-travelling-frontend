@@ -12,6 +12,7 @@ import "./banner.css";
 import { SlickArrowLeft, SlickArrowRight } from "../slickArrows";
 import { useDispatch, useSelector } from "react-redux";
 import { updateBanner, setBanners } from "../../store/banner.slice";
+import { countriesImages } from "../../pages/VisaService/mockImages";
 
 const BANNERS_MAP = new Map([
   ["/", "homeSliders"],
@@ -24,11 +25,14 @@ const BANNERS_MAP = new Map([
   ["/cam-nang-du-lich/danh-muc/trai-nghiem", "experience"],
   ["//cam-nang-du-lich/danh-muc/diem-den", "destination"],
   ["/cam-nang-du-lich", "handbook"],
+
+  ["/dich-vu-visa", "visa"],
 ]);
 
 function Banner() {
   const [sendRequest, isLoading, data, error] = useAxios();
-  const { tourId, articleId } = useParams();
+  const { tourId, articleId, visaCountry } = useParams();
+  console.log(visaCountry);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -59,6 +63,8 @@ function Banner() {
       dispatch(setBanners(data.data));
     }
   }, [data]);
+
+  console.log(location);
 
   return (
     <div className={styles.container}>
@@ -102,6 +108,8 @@ function Banner() {
                 ? banners.tourDetail?.banner
                 : articleId
                 ? banners.articleDetail?.banner
+                : visaCountry
+                ? countriesImages[visaCountry]
                 : banners[BANNERS_MAP.get(path)]?.banner
             }
             className="img-fluid w-100"

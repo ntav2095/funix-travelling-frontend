@@ -1,4 +1,9 @@
 // main
+import useAxios from "./hooks/useAxios";
+import { visaApi } from "./services/apis";
+import { useDispatch } from "react-redux";
+import { setVisaTypes } from "./store/visa.slice";
+
 import { Route, Routes } from "react-router-dom";
 import React, { Suspense, useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -59,6 +64,19 @@ const Dashboard = React.lazy(() => import("./pages/Admin/Dashboard"));
 const Login = React.lazy(() => import("./pages/Admin/Login"));
 
 function App() {
+  const dispatch = useDispatch();
+  // ******************** handle visa *********************************
+  const [sendRequest, isLoading, data, error, resetStates] = useAxios();
+
+  useEffect(() => {
+    sendRequest(visaApi.getVisasCountries());
+  }, []);
+
+  useEffect(() => {
+    if (data) dispatch(setVisaTypes(data.data));
+  }, [data]);
+  // ******************** handle visa end *********************************
+
   useEffect(() => {
     setTimeout(() => {
       liveChat();
@@ -88,7 +106,7 @@ function App() {
               <Route path="/danh-sach-tour/:tourId" element={<TourDetail />} />
               <Route path="/lien-he" element={<Contact />} />
               <Route path="/gioi-thieu" element={<About />} />
-              <Route path="/dich-vu-visa/1" element={<Visa />} />
+              <Route path="/dich-vu-visa/:visaCountry" element={<Visa />} />
               <Route path="/dich-vu-visa" element={<VisaService />} />
               <Route path="/cam-nang-du-lich" element={<TravelHandbook />} />
               <Route path="/dieu-khoan/:type" element={<Term />} />

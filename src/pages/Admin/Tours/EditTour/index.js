@@ -21,13 +21,6 @@ function EditTour() {
   const [lang, setLang] = useState("vi");
   const { tourId } = useParams();
 
-  // lấy các ngôn ngữ hiện có (trong category type = language)
-  const langs = fetchedData
-    ? fetchedData.metadata.categories
-        .filter((item) => item.type === "language")
-        .map((item) => item.code)
-    : null;
-
   const submitHandler = (values) => {
     const formData = formPacker(values, tourId);
     goEdit(adminApis.tour.edit(formData));
@@ -96,18 +89,13 @@ function EditTour() {
         text="Cập nhật lộ trình tour"
       >
         <div className={styles.container}>
-          {langs && (
-            <label className={styles.langSelect}>
-              <span>Ngôn ngữ</span>
-              <select value={lang} onChange={(e) => setLang(e.target.value)}>
-                {langs.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </label>
-          )}
+          <label className={styles.langSelect}>
+            <span>Ngôn ngữ</span>
+            <select value={lang} onChange={(e) => setLang(e.target.value)}>
+              <option value="vi">Tiếng Việt</option>
+              <option value="en">Tiếng Anh</option>
+            </select>
+          </label>
 
           {initialValues && !fetching && fetchedData && (
             <TourForm

@@ -11,6 +11,7 @@ import { adminApis } from "../../../../services/apis";
 // css
 import styles from "./VisaForm.module.css";
 import { useEffect } from "react";
+import StatusBar from "../../../../layout/AdminLayout/StatusBar";
 
 const isEmptyDelta = (delta) => {
   const ops = delta.ops;
@@ -29,33 +30,12 @@ const validator = (values) => {
   return errors;
 };
 
-const templateValues = {
-  language: "vi",
-
-  name: "",
-  country: "",
-  price: "",
-
-  priceIncludes: null,
-  priceExcludes: null,
-  priceOther: null,
-
-  cancellationPolicy: null,
-  registrationPolicy: null,
-  paymentPolicy: null,
-  notes: null,
-
-  detail: null,
-};
-
-function VisaForm({ visaProduct, onSubmit }) {
+function VisaForm({ visaProduct, onSubmit, initialValues }) {
   const [fetchCat, isFetchingCat, cat, fetchingCatError] = useAxios();
 
   const submitHandler = (values) => {
     onSubmit(values);
   };
-
-  const initialValues = visaProduct || templateValues;
 
   const fieldMessage = (msg) => <p className={styles.fieldMessage}>{msg}</p>;
 
@@ -66,6 +46,8 @@ function VisaForm({ visaProduct, onSubmit }) {
   const countries = cat
     ? cat.data.filter((item) => item.type === "country")
     : [];
+
+  const types = cat ? cat.data.filter((item) => item.type === "visa") : [];
 
   return (
     <div className={styles.visaForm}>
@@ -87,25 +69,47 @@ function VisaForm({ visaProduct, onSubmit }) {
                   <Field type="text" name="name" />
                   <ErrorMessage name="name">{fieldMessage}</ErrorMessage>
                 </div>
-                <div className={styles.formGroup}>
-                  <p className={styles.label}>Tên nước</p>
-                  <Field type="text" name="country" />
-                  <ErrorMessage name="country">{fieldMessage}</ErrorMessage>
-                </div>
-                <div className={styles.formGroup}>
-                  <p className={styles.label}>Giá sản phẩm</p>
-                  <Field type="number" name="price" />
-                  <ErrorMessage name="price">{fieldMessage}</ErrorMessage>
-                </div>
 
-                <div className="d-flex">
-                  {countries.map((item) => (
-                    <label className="d-flex align-items-center me-2 border p-2 bg-white rounded">
-                      <p className="mb-0 me-2 text-nowrap">{item.name}</p>
-                      <input type="checkbox" value={item.code} />
-                    </label>
-                  ))}
-                </div>
+                {values.language === "vi" && (
+                  <div className={styles.formGroup}>
+                    <p className={styles.label}>Giá sản phẩm</p>
+                    <Field type="number" name="price" />
+                    <ErrorMessage name="price">{fieldMessage}</ErrorMessage>
+                  </div>
+                )}
+
+                {values.language === "vi" && (
+                  <div className="d-flex">
+                    <Field as="select" name="country">
+                      <option value="">--- Chọn nước ---</option>
+                      {countries.map((item) => (
+                        <option
+                          className="d-flex align-items-center me-2 border p-2 bg-white rounded"
+                          value={item.code}
+                        >
+                          {item.name}
+                        </option>
+                      ))}
+                    </Field>
+                  </div>
+                )}
+
+                {values.language === "vi" && (
+                  <div className="my-4">
+                    <Field as="select" name="type">
+                      <option value="">--- Chọn loại dịch vụ visa ---</option>
+
+                      {types.map((item) => (
+                        <option
+                          className="d-flex align-items-center me-2 border p-2 bg-white rounded"
+                          value={item.code}
+                        >
+                          {item.name}
+                        </option>
+                      ))}
+                    </Field>
+                  </div>
+                )}
 
                 <div className="bg-white">
                   <VisaFormGroup
@@ -176,9 +180,11 @@ function VisaForm({ visaProduct, onSubmit }) {
               </Tab>
             </Tabs>
 
-            <button className="btn btn-primary" type="submit">
-              Submit
-            </button>
+            <StatusBar title="hehe visa">
+              <button className="btn btn-primary" type="submit">
+                Submit
+              </button>
+            </StatusBar>
           </Form>
         )}
       </Formik>

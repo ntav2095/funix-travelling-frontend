@@ -14,6 +14,27 @@ import { visaApi } from "../../../../services/apis";
 // css
 import styles from "./AddVisa.module.css";
 //
+
+const initialValues = {
+  language: "vi",
+
+  name: "",
+  price: "",
+  type: "",
+  country: "",
+
+  priceIncludes: null,
+  priceExcludes: null,
+  priceOther: null,
+
+  cancellationPolicy: null,
+  registrationPolicy: null,
+  paymentPolicy: null,
+  notes: null,
+
+  detail: null,
+};
+
 function AddVisa() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const submitHandler = (values) => {
@@ -39,7 +60,7 @@ function AddVisa() {
         <StatusBar title="Tạo sản phẩm visa mới"></StatusBar>
 
         <div className={styles.addVisa}>
-          <VisaForm onSubmit={submitHandler} />
+          <VisaForm onSubmit={submitHandler} initialValues={initialValues} />
         </div>
       </AdminLayout>
     </>

@@ -97,6 +97,10 @@ export const visaApi = {
     url: "/visa",
     data: { visaId },
   }),
+  getVisasCountries: () => ({
+    method: "GET",
+    url: "/visa",
+  }),
 };
 
 export const categoryApi = {
@@ -240,6 +244,18 @@ export const adminApis = {
       method: "PUT",
       url: "/admin/term",
       data,
+    }),
+  },
+  visa: {
+    get: (params) => ({
+      method: "GET",
+      url: "/admin/visa",
+      params,
+    }),
+    deleteOne: (id) => ({
+      method: "GET",
+      url: "/admin/visa",
+      data: { id },
     }),
   },
 };
