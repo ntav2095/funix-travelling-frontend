@@ -1,112 +1,168 @@
 import { useEffect, useState } from "react";
-import AdminLayout from "../../../layout/AdminLayout/index";
-import { postsApi, adminApis } from "../../../services/apis";
-import useAxios from "../../../hooks/useAxios";
 import { Link } from "react-router-dom";
-import styles from "./posts.module.css";
+
+// components
+import AdminLayout from "../../../layout/AdminLayout/index";
 import Pagination from "../../../containers/Pagination";
 import SpinnerModal from "../../../components/SpinnerModal";
 import ErrorMessage from "../../../components/ErrorMessage";
-import usePageTitle from "../../../hooks/usePageTitle";
-import "./override.css";
 import StatusBar from "../../../layout/AdminLayout/StatusBar";
 import ArticlesFilter from "./ArticlesFilter";
+import NotifyModal from "../../../components/NotifyModal";
 
-const checkCircle = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className="w-6 h-6"
-  >
-    <path
-      fillRule="evenodd"
-      d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-      clipRule="evenodd"
-    />
-  </svg>
-);
+// apis
+import { articleApis } from "../../../services/apis/admin.apis";
+import useAxios from "../../../hooks/useAxios";
 
-const checkMark = <span className={styles.checkSVG}>{checkCircle}</span>;
+// other
+import usePageTitle from "../../../hooks/usePageTitle";
+import * as svg from "../../../assets/svgs";
+
+// css
+import styles from "./Articles.module.css";
+import "./Articles.override.css";
+
+const categoryDisplayer = (category) => {
+  let textArr = [];
+  if (category.includes("diem-den")) {
+    textArr.push("Điểm đến hấp dẫn");
+  }
+
+  if (category.includes("cam-nang")) {
+    textArr.push("Cẩm nang du lịch");
+  }
+
+  if (category.includes("trai-nghiem")) {
+    textArr.push("Trải nghiệm");
+  }
+
+  if (category.includes("nhat-ky")) {
+    textArr.push("Nhật ký hành trình");
+  }
+
+  return textArr.join(" - ");
+};
+
+const checkMark = <span className={styles.checkSVG}>{svg.checkCircle}</span>;
 
 const PAGE_SIZE = 6;
 
-function Posts() {
-  const [sendRequest, isLoading, deleted, error] = useAxios();
-  const [fetchPost, isFetching, postsData, fetchingError] = useAxios();
-  const [page, setPage] = useState(1);
+function Articles() {
+  const [sendDelete, deleting, deleted, deleteError, resetDelete] = useAxios();
+  const [fetchArticles, isFetching, data, fetchingError] = useAxios();
+  const [confirmDelete, setConfirmDelete] = useState(null); // null | { articleId }
   const [filter, setFilter] = useState({
-    category: "all",
+    category: "",
     search: "",
     banner: "",
+    page: 1,
   });
 
-  const deletePost = async (e, Id) => {
-    await sendRequest(adminApis.article.delete(Id));
-  };
+  const query = { page: filter.page, page_size: PAGE_SIZE };
+  if (filter.category) {
+    query.cat = filter.category;
+  }
+
+  if (filter.search.trim()) {
+    query.search = filter.search.trim();
+  }
+
+  if (filter.banner) {
+    query.banner = filter.banner;
+  }
 
   useEffect(() => {
-    const reqQueries = { page, page_size: PAGE_SIZE };
-    if (filter.category !== "all") {
-      reqQueries.cat = filter.category;
-    }
-
-    if (filter.search.trim()) {
-      reqQueries.search = filter.search.trim();
-    }
-
-    if (filter.banner) {
-      reqQueries.banner = filter.banner;
-    }
-
-    fetchPost(postsApi.get(reqQueries));
-  }, [page, deleted, filter]);
-
-  useEffect(() => {
-    if (error) {
-      alert(`Có lỗi xảy ra khi xóa bài viết: ${error.message}`);
-    }
-  }, [error]);
-
-  useEffect(() => {
-    if (deleted) {
-      alert(`Xóa thành công.`);
-    }
-  }, [deleted]);
-
-  useEffect(() => {
-    setPage(1);
+    fetchArticles(articleApis.get(query));
   }, [filter]);
+
+  useEffect(() => {
+    if (deleted || deleteError) {
+      fetchArticles(articleApis.get(query));
+    }
+  }, [deleted, deleteError]);
+
+  // nếu xóa tour xong mà bị tụt 1 trang
+  useEffect(() => {
+    if (data && deleted) {
+      if (data.metadata.page_count < filter.page) {
+        setFilter((prev) => ({ ...prev, page: data.metadata.page_count }));
+      }
+    }
+  }, [data, filter, deleted]);
 
   usePageTitle("Danh sách bài viết | Admin | Travel Funix");
 
-  const categoryDisplayer = (category) => {
-    let textArr = [];
-    if (category.includes("diem-den")) {
-      textArr.push("Điểm đến hấp dẫn");
-    }
+  // handle notification modal
+  let notify = {};
+  if (confirmDelete) {
+    notify = {
+      show: confirmDelete,
+      type: "normal",
+      message: `Bạn có chắc muốn xóa bài viết ${confirmDelete.articleId} không?`,
+      leftBtn: {
+        text: "Có",
+        component: "button",
+        cb: () => {
+          sendDelete(articleApis.delete(confirmDelete.articleId));
+          setConfirmDelete(null);
+        },
+      },
+      rightBtn: {
+        text: "Không",
+        component: "button",
+        cb: () => {
+          setConfirmDelete(null);
+        },
+      },
+    };
+  }
 
-    if (category.includes("cam-nang")) {
-      textArr.push("Cẩm nang du lịch");
-    }
+  if (deleted) {
+    notify = {
+      show: deleted,
+      type: "success",
+      message: `Xóa thành công`,
+      btn: {
+        text: "OK",
+        cb: () => {
+          resetDelete();
+        },
+        component: "button",
+      },
+      onHide: () => {
+        resetDelete();
+      },
+      time: 2000,
+    };
+  }
 
-    if (category.includes("trai-nghiem")) {
-      textArr.push("Trải nghiệm");
-    }
-
-    if (category.includes("nhat-ky")) {
-      textArr.push("Nhật ký hành trình");
-    }
-
-    return textArr.join(" - ");
-  };
+  if (deleteError) {
+    notify = {
+      show: deleteError,
+      type: "error",
+      message: deleteError.message,
+      btn: {
+        text: "OK",
+        cb: () => {
+          resetDelete();
+        },
+        component: "button",
+      },
+      onHide: () => {
+        resetDelete();
+      },
+    };
+  }
 
   return (
     <>
-      <SpinnerModal show={isLoading || isFetching} />
+      <NotifyModal {...notify} />
+
+      <SpinnerModal show={deleting || isFetching} />
+
       <AdminLayout>
         <StatusBar title="Guides">
-          <Link to="/admin/new-posts" className="btn btn-sm btn-primary">
+          <Link to="/admin/new-article" className="btn btn-sm btn-primary">
             Tạo bài viết mới
           </Link>
         </StatusBar>
@@ -114,7 +170,7 @@ function Posts() {
         <div className={styles.posts}>
           <ArticlesFilter setFilter={setFilter} filter={filter} />
 
-          {postsData && postsData.data && postsData.data.length > 0 && (
+          {data && data.data && data.data.length > 0 && (
             <>
               <table className="table table-bordered">
                 <thead className="bg-dark text-light">
@@ -159,10 +215,10 @@ function Posts() {
                 </thead>
 
                 <tbody className="bg-light">
-                  {postsData.data.map((item, index) => (
+                  {data.data.map((item, index) => (
                     <tr key={item._id}>
                       <td>
-                        <div>{(page - 1) * PAGE_SIZE + index + 1}</div>
+                        <div>{(filter.page - 1) * PAGE_SIZE + index + 1}</div>
                       </td>
                       <td>
                         <div>{item._id}</div>
@@ -200,13 +256,15 @@ function Posts() {
                         <div className="d-flex flex-nowrap">
                           <Link
                             className="btn btn-warning me-2"
-                            to={`/admin/edit-posts/${item._id}`}
+                            to={`/admin/edit-article/${item._id}`}
                           >
                             Sửa
                           </Link>
                           <button
                             className="btn btn-danger me-2"
-                            onClick={(event) => deletePost(event, item._id)}
+                            onClick={() =>
+                              setConfirmDelete({ articleId: item._id })
+                            }
                           >
                             Xóa
                           </button>
@@ -219,19 +277,17 @@ function Posts() {
 
               <Pagination
                 bgGreen
-                current={page}
+                current={filter.page}
                 pageSize={PAGE_SIZE}
-                total={postsData.metadata.total_count}
+                total={data.metadata.total_count}
                 onChange={(current) => {
-                  setPage(current);
+                  setFilter((prev) => ({ ...prev, page: current }));
                 }}
               />
             </>
           )}
 
-          {postsData && postsData.data && postsData.data.length === 0 && (
-            <h2>No articles</h2>
-          )}
+          {data && data.data && data.data.length === 0 && <h2>No articles</h2>}
 
           {fetchingError && <ErrorMessage msg={fetchingError.message} />}
         </div>
@@ -240,4 +296,4 @@ function Posts() {
   );
 }
 
-export default Posts;
+export default Articles;

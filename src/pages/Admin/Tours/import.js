@@ -7,13 +7,19 @@ import Pagination from "../../../containers/Pagination";
 import AdminLayout from "../../../layout/AdminLayout";
 import SpinnerModal from "../../../components/SpinnerModal";
 import ErrorMessage from "../../../components/ErrorMessage";
+import StatusBar from "../../../layout/AdminLayout/StatusBar";
+import Filter from "./Filter";
+import NotifyModal from "../../../components/NotifyModal";
 
 // apis
 import useAxios from "../../../hooks/useAxios";
-import { tourApi, adminApis } from "../../../services/apis";
+import { tourApis } from "../../../services/apis/admin.apis";
 
 // assets
 import * as svg from "../../../assets/svgs";
+
+// hooks
+import usePageTitle from "../../../hooks/usePageTitle";
 
 // css
 import styles from "./Tours.module.css";
@@ -28,10 +34,13 @@ export {
   ErrorMessage,
   SpinnerModal,
   useAxios,
-  tourApi,
+  tourApis,
   svg,
   Pagination,
-  adminApis,
-  styles,
   PAGE_SIZE,
+  usePageTitle,
+  StatusBar,
+  Filter,
+  NotifyModal,
+  styles,
 };

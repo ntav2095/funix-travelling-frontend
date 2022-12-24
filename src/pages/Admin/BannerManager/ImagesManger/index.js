@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import useAxios from "../../../../hooks/useAxios";
-import { adminApis } from "../../../../services/apis";
-import SpinnerModal from "../../../../components/SpinnerModal";
+import { layoutApis } from "../../../../services/apis/admin.apis";
 
 const spinner = (
   <span
@@ -36,7 +35,7 @@ function ImagesManger({ name, type, initialImages = [], reFetch }) {
       formData.append("images", item);
     });
 
-    sendRequest(adminApis.layout.updateImages(formData));
+    sendRequest(layoutApis.updateImages(formData));
   };
 
   useEffect(() => {

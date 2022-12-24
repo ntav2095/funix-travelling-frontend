@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import useAxios from "../../../../hooks/useAxios";
 import AdminLayout from "../../../../layout/AdminLayout";
-import { adminApis } from "../../../../services/apis";
+import { articleApis } from "../../../../services/apis/admin.apis";
 import { useNavigate, useParams } from "react-router-dom";
 import ArticleForm from "../ArticleForm";
-import styles from "./editposts.module.css";
+import styles from "./EditArticle.module.css";
 import usePageTitle from "../../../../hooks/usePageTitle";
 import ErrorMessage from "../../../../components/ErrorMessage";
 import StatusBar from "../../../../layout/AdminLayout/StatusBar";
@@ -15,6 +15,7 @@ function EditPost() {
   const [fetchArticle, fetching, fetchedData, fetchingError] = useAxios();
   const [lang, setLang] = useState("vi");
   const [article, setArticle] = useState(null);
+  const submitRef = useRef();
 
   const { articleId } = useParams();
 
@@ -53,11 +54,11 @@ function EditPost() {
     formData.append("banner", banner);
     formData.append("layout", JSON.stringify(layout));
 
-    goEdit(adminApis.article.edit(formData));
+    goEdit(articleApis.edit(formData));
   };
 
   useEffect(() => {
-    fetchArticle(adminApis.article.getSingle(articleId, lang));
+    fetchArticle(articleApis.getSingle(articleId, lang));
   }, [lang]);
 
   useEffect(() => {
@@ -101,7 +102,18 @@ function EditPost() {
       <SpinnerModal show={editing} />
 
       <AdminLayout title={`Cập nhật bài viết ID: ${articleId}`}>
-        <StatusBar title="Cập nhật bài viết"></StatusBar>
+        <StatusBar title="Cập nhật bài viết">
+          <button
+            onClick={() => {
+              if (submitRef.current) {
+                submitRef.current.click();
+              }
+            }}
+            className="btn btn-primary"
+          >
+            Cập nhật
+          </button>
+        </StatusBar>
 
         <div className={styles.editPost}>
           {langs && (
@@ -132,6 +144,7 @@ function EditPost() {
           {initialValues && !fetching && (
             <div className={styles.container}>
               <ArticleForm
+                ref={submitRef}
                 initialValues={initialValues}
                 onSubmit={submitHandler}
                 cat={fetchedData.metadata.categories}

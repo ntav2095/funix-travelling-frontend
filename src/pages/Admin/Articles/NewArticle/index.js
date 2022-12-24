@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import useAxios from "../../../../hooks/useAxios";
 import AdminLayout from "../../../../layout/AdminLayout";
-import styles from "./newPost.module.css";
-import { adminApis } from "../../../../services/apis";
+import styles from "./NewArticle.module.css";
 import SpinnerModal from "../../../../components/SpinnerModal";
 import ArticleForm from "../ArticleForm";
 import usePageTitle from "../../../../hooks/usePageTitle";
 import StatusBar from "../../../../layout/AdminLayout/StatusBar";
+import {
+  articleApis,
+  categoryApis,
+} from "../../../../services/apis/admin.apis";
 
 const initialValues = {
+  language: "vi",
   title: "",
   author: "",
   origin: "",
@@ -39,11 +43,11 @@ function NewPosts() {
     formData.append("layout", JSON.stringify(values.layout));
     formData.append("category", JSON.stringify(values.category));
 
-    await sendRequest(adminApis.article.add(formData));
+    await sendRequest(articleApis.add(formData));
   };
 
   useEffect(() => {
-    fetchCat(adminApis.category.get());
+    fetchCat(categoryApis.get());
   }, []);
 
   useEffect(() => {

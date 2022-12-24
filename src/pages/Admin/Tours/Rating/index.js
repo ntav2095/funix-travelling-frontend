@@ -6,14 +6,14 @@ import { useParams, Link } from "react-router-dom";
 import AdminLayout from "../../../../layout/AdminLayout";
 import SpinnerModal from "../../../../components/SpinnerModal";
 import StatusBar from "../../../../layout/AdminLayout/StatusBar";
+import RatingModal from "./RatingModal";
 
 // apis
 import useAxios from "../../../../hooks/useAxios";
-import { adminApis } from "../import";
+import { tourApis } from "../../../../services/apis/admin.apis";
 
 // css
 import styles from "./Rating.module.css";
-import RatingModal from "./RatingModal";
 
 function Rating() {
   const [sendRequest, isLoading, data, error] = useAxios();
@@ -29,11 +29,11 @@ function Rating() {
   const ratingItems = tour ? tour.rating : [];
 
   const deleteRatingItemHandler = (ratingId) => {
-    goDelete(adminApis.tour.deleteRatingItem({ tourId: tour?._id, ratingId }));
+    goDelete(tourApis.deleteRatingItem({ tourId: tour?._id, ratingId }));
   };
 
   const fetchTour = () => {
-    sendRequest(adminApis.tour.getSingle(tourId));
+    sendRequest(tourApis.getSingle(tourId));
   };
 
   useEffect(() => {
@@ -78,14 +78,15 @@ function Rating() {
 
         <div className={styles.container}>
           {data && ratingItems.length === 0 && (
-            <h2>Hiện không có đánh giá nào</h2>
+            <h5>Hiện không có đánh giá nào</h5>
           )}
 
           {data && ratingItems.length > 0 && (
             <>
-              <h2>Điểm trung bình: {average}</h2>
+              <h5>Điểm trung bình: {average}</h5>
+
               <table className="table table-bordered bg-light">
-                <thead className="bg-success text-light">
+                <thead className="bg-dark text-light text-center">
                   <tr>
                     <th>
                       <div>STT</div>
@@ -109,47 +110,49 @@ function Rating() {
                 </thead>
 
                 <tbody>
-                  {ratingItems.map((item, index) => (
-                    <tr key={item._id}>
-                      <td>
-                        <div>{index + 1}</div>
-                      </td>
-                      <td>
-                        <div>{item._id}</div>
-                      </td>
-                      <td>
-                        <div>{item.name}</div>
-                      </td>
-                      <td>
-                        <div>{item.stars}</div>
-                      </td>
-                      <td>
-                        <div>{item.content}</div>
-                      </td>
-                      <td>
-                        <div>
-                          <button
-                            onClick={() =>
-                              setModal({
-                                isShow: true,
-                                ratingId: item._id,
-                                mode: "edit",
-                              })
-                            }
-                            className="btn btn-warning mx-1"
-                          >
-                            Sửa
-                          </button>
-                          <button
-                            onClick={() => deleteRatingItemHandler(item._id)}
-                            className="btn btn-danger mx-1"
-                          >
-                            Xóa
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                  {ratingItems
+                    .sort((a, b) => a.stars - b.stars)
+                    .map((item, index) => (
+                      <tr key={item._id}>
+                        <td>
+                          <div className="text-center">{index + 1}</div>
+                        </td>
+                        <td>
+                          <div>{item._id}</div>
+                        </td>
+                        <td>
+                          <div>{item.name}</div>
+                        </td>
+                        <td>
+                          <div>{item.stars}</div>
+                        </td>
+                        <td>
+                          <div>{item.content}</div>
+                        </td>
+                        <td>
+                          <div>
+                            <button
+                              onClick={() =>
+                                setModal({
+                                  isShow: true,
+                                  ratingId: item._id,
+                                  mode: "edit",
+                                })
+                              }
+                              className="btn btn-warning mx-1"
+                            >
+                              Sửa
+                            </button>
+                            <button
+                              onClick={() => deleteRatingItemHandler(item._id)}
+                              className="btn btn-danger mx-1"
+                            >
+                              Xóa
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </>

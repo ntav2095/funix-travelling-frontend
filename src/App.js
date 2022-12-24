@@ -47,9 +47,13 @@ const NotFound = React.lazy(() => import("./pages/NotFound"));
 const NewTour = React.lazy(() => import("./pages/Admin/Tours/NewTour"));
 const EditTour = React.lazy(() => import("./pages/Admin/Tours/EditTour"));
 const Tours = React.lazy(() => import("./pages/Admin/Tours"));
-const Posts = React.lazy(() => import("./pages/Admin/Posts"));
-const NewPosts = React.lazy(() => import("./pages/Admin/Posts/newPosts"));
-const EditPosts = React.lazy(() => import("./pages/Admin/Posts/editPosts"));
+const Articles = React.lazy(() => import("./pages/Admin/Articles"));
+const NewArticle = React.lazy(() =>
+  import("./pages/Admin/Articles/NewArticle")
+);
+const EditArticle = React.lazy(() =>
+  import("./pages/Admin/Articles/EditArticle")
+);
 const UpdateItinerary = React.lazy(() =>
   import("./pages/Admin/Tours/UpdateItinerary")
 );
@@ -151,11 +155,11 @@ function App() {
                 element={<EditVisa />}
               />
               {/* posts */}
-              <Route path="/admin/posts" element={<Posts />} />
-              <Route path="/admin/new-posts" element={<NewPosts />} />
+              <Route path="/admin/articles" element={<Articles />} />
+              <Route path="/admin/new-article" element={<NewArticle />} />
               <Route
-                path="/admin/edit-posts/:articleId"
-                element={<EditPosts />}
+                path="/admin/edit-article/:articleId"
+                element={<EditArticle />}
               />
 
               {/* terms  */}

@@ -1,17 +1,28 @@
 import {
+  // main
   useState,
+  useRef,
   useEffect,
+  Link,
   useParams,
-  format,
+
+  // components
   AdminLayout,
   SpinnerModal,
+  StatusBar,
   TourForm,
-  useAxios,
-  adminApis,
   ErrorMessage,
-  styles,
+
+  // apis
+  useAxios,
+  tourApis,
+
+  // other
   formPacker,
   usePageTitle,
+
+  // css
+  styles,
 } from "./import";
 
 function EditTour() {
@@ -20,14 +31,15 @@ function EditTour() {
   const [tour, setTour] = useState(null);
   const [lang, setLang] = useState("vi");
   const { tourId } = useParams();
+  const submitRef = useRef();
 
   const submitHandler = (values) => {
     const formData = formPacker(values, tourId);
-    goEdit(adminApis.tour.edit(formData));
+    goEdit(tourApis.edit(formData));
   };
 
   useEffect(() => {
-    fetchTour(adminApis.tour.getSingle(tourId, lang));
+    fetchTour(tourApis.getSingle(tourId, lang));
   }, [lang]);
 
   useEffect(() => {
@@ -83,11 +95,30 @@ function EditTour() {
     <>
       <SpinnerModal show={editing || fetching} />
 
-      <AdminLayout
-        title={`Cập nhật tour ${tourId}`}
-        path={`/admin/update-itinerary/${tourId}`}
-        text="Cập nhật lộ trình tour"
-      >
+      <AdminLayout>
+        <StatusBar
+          title={`Cập nhật tour: ${fetchedData?.metadata.original.code || ""}`}
+        >
+          <Link
+            className="btn btn-secondary"
+            to={`/admin/update-itinerary/${tourId}`}
+          >
+            Sửa lộ trình tour
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => {
+              if (submitRef.current) {
+                submitRef.current.click();
+              }
+            }}
+            className="btn btn-primary btn-sm"
+          >
+            Cập nhật
+          </button>
+        </StatusBar>
+
         <div className={styles.container}>
           <label className={styles.langSelect}>
             <span>Ngôn ngữ</span>
@@ -99,6 +130,7 @@ function EditTour() {
 
           {initialValues && !fetching && fetchedData && (
             <TourForm
+              ref={submitRef}
               key={lang}
               initialValues={initialValues}
               onSubmit={submitHandler}

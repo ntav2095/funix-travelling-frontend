@@ -7,7 +7,7 @@ import StatusBar from "../../../layout/AdminLayout/StatusBar";
 
 // hooks
 import useAxios from "../../../hooks/useAxios";
-import { adminApis } from "../../../services/apis";
+import { visaApis } from "../../../services/apis/admin.apis";
 
 // css
 import styles from "./Visas.module.css";
@@ -26,18 +26,18 @@ function Visas() {
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure to delete this visa product?")) {
-      startDeleting(adminApis.visa.deleteOne(id));
+      startDeleting(visaApis.deleteOne(id));
     }
   };
 
   useEffect(() => {
-    sendRequest(adminApis.visa.get(filter));
+    sendRequest(visaApis.get(filter));
   }, [filter]);
 
   useEffect(() => {
     if (deleted) {
       alert("Deleted");
-      sendRequest(adminApis.visa.get(filter));
+      sendRequest(visaApis.get(filter));
     }
   }, [deleted]);
 

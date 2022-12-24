@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { forwardRef } from "react";
 import Editor from "../../../../containers/Editor";
-
 import styles from "./ArticleForm.module.css";
 
 const validator = (values) => {
@@ -28,15 +28,27 @@ const validator = (values) => {
   if (!values.thumb) {
     errors.thumb = "Bắt buộc";
   }
+
+  if (!values.banner) {
+    errors.banner = "Bắt buộc";
+  }
+
+  if (values.category.length === 0) {
+    errors.category = "Bắt buộc";
+  }
   return errors;
 };
 
-function ArticleForm({ onSubmit, initialValues, cat }) {
+function ArticleForm({ onSubmit, initialValues, cat }, ref) {
   const previewImageHandler = (img) =>
     typeof img === "string" ? img : URL.createObjectURL(img);
 
   const articlesCat = cat.filter((item) => item.type === "article");
-  const lang = initialValues.language;
+  const language = initialValues.language;
+
+  const isRequired = (
+    <em className="text-italic fw-normal text-secondary">(bắt buộc)</em>
+  );
   return (
     <div className={styles.container}>
       <Formik
@@ -44,17 +56,19 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
         onSubmit={onSubmit}
         validate={validator}
       >
-        {({ setFieldValue, values, setFieldTouched }) => (
+        {({ setFieldValue, values, setFieldTouched, touched }) => (
           <Form>
             <label>
-              <h6>Tiêu đề</h6>
+              <h6>Tiêu đề {isRequired}</h6>
               <Field type="text" name="title" />
-              <div className={styles.errorMsg}>
-                <ErrorMessage name="title" component="p" />
-              </div>
+              <ErrorMessage
+                name="title"
+                component="p"
+                className="text-danger"
+              />
             </label>
 
-            {lang === "vi" && (
+            {language === "vi" && (
               <div className="d-flex justiy-content-start">
                 <label className="d-flex align-items-center w-auto bg-white p-2 border rounded">
                   <h6 className="mb-0 text-nowrap me-2">Bài viết nổi bật</h6>
@@ -68,7 +82,8 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
               </div>
             )}
 
-            {lang === "vi" && (
+            {/* ================== layout ===================  */}
+            {language === "vi" && (
               <div className={styles.layout}>
                 <h6>Chọn làm banner</h6>
                 <div className="d-flex">
@@ -175,17 +190,20 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
               </div>
             )}
 
-            {lang === "vi" && (
+            {/* ================== tác giả ===================  */}
+            {language === "vi" && (
               <label>
-                <h6>Tác giả</h6>
+                <h6>Tác giả {isRequired}</h6>
                 <Field type="text" name="author" />
-                <div className={styles.errorMsg}>
-                  <ErrorMessage name="author" component="p" />
-                </div>
+                <ErrorMessage
+                  name="author"
+                  component="p"
+                  className="text-danger"
+                />
               </label>
             )}
 
-            {lang === "vi" && (
+            {language === "vi" && (
               <label>
                 <h6>Nguồn bài viết</h6>
                 <Field type="text" name="origin" />
@@ -195,16 +213,15 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
             <label>
               <h6>
                 Đoạn mở đầu{" "}
-                <em>(đoạn văn đầu tiên hoặc một đoạn mô tả ngắn)</em>
+                <em>(đoạn văn đầu tiên hoặc một đoạn mô tả ngắn)</em>{" "}
+                {isRequired}
               </h6>
               <Field component="textarea" name="lead" className="w-100 p-2" />
-              <div className={styles.errorMsg}>
-                <ErrorMessage name="lead" component="p" />
-              </div>
+              <ErrorMessage name="lead" component="p" className="text-danger" />
             </label>
 
             <div className={styles.label}>
-              <h6>Nội dung</h6>
+              <h6>Nội dung {isRequired}</h6>
               <div className={styles.quillEditor}>
                 <Editor
                   placeholder="Nội dung"
@@ -213,22 +230,28 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
                   onBlur={() => setFieldTouched("content", true, true)}
                 />
               </div>
-              <div className={styles.errorMsg}>
-                <ErrorMessage name="content" component="p" />
-              </div>
+              <ErrorMessage
+                name="content"
+                component="p"
+                className="text-danger"
+              />
             </div>
 
             {/* ----------------------- categories ------------------------  */}
 
-            {lang == "vi" && (
+            {language == "vi" && (
               <div className={styles.cat}>
-                <h6>Categories</h6>
+                <h6>Categories {isRequired}</h6>
 
-                <div className={styles.catItems}>
+                <div className={" d-flex gap-2 justify-content-start"}>
                   {articlesCat.map((catItem) => (
-                    <label key={catItem._id}>
+                    <label
+                      key={catItem._id}
+                      className="bg-white p-2 d-flex gap-2 rounded w-auto align-items-center border mb-0"
+                    >
                       <span>{catItem.name || catItem.code}</span>
                       <input
+                        className="w-auto"
                         type="checkbox"
                         value={catItem.code}
                         checked={values.category.includes(catItem.code)}
@@ -240,24 +263,37 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
                             : [...values.category, catItem.code];
 
                           setFieldValue("category", newCat);
+                          if (!touched.category) {
+                            setFieldTouched("category", true, false);
+                          }
                         }}
                       />
                     </label>
                   ))}
                 </div>
+                <ErrorMessage
+                  className="text-danger my-0"
+                  name="category"
+                  component="p"
+                />
               </div>
             )}
 
-            {lang === "vi" && (
+            {language === "vi" && (
               <label className={styles.previewImage}>
-                <h6>Hình hiển thị trước </h6>
+                <h6>
+                  Hình hiển thị trước <em>(Hình nhỏ, tỷ lệ ngang/cao = 1.6)</em>{" "}
+                  {isRequired}
+                </h6>
                 <input
                   type="file"
                   onChange={(e) => setFieldValue("thumb", e.target.files[0])}
                 />
-                <div className={styles.errorMsg}>
-                  <ErrorMessage name="thumb" component="p" />
-                </div>
+                <ErrorMessage
+                  name="thumb"
+                  component="p"
+                  className="text-danger"
+                />
 
                 {values.thumb && (
                   <label className={styles.currentThumb}>
@@ -267,16 +303,21 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
               </label>
             )}
 
-            {lang === "vi" && (
+            {language === "vi" && (
               <label className={styles.previewImage}>
-                <h6>Hình banner</h6>
+                <h6>
+                  Hình banner <em>(Hình nhỏ, tỷ lệ ngang/cao = 2.5)</em>{" "}
+                  {isRequired}
+                </h6>
                 <input
                   type="file"
                   onChange={(e) => setFieldValue("banner", e.target.files[0])}
                 />
-                <div className={styles.errorMsg}>
-                  <ErrorMessage name="banner" component="p" />
-                </div>
+                <ErrorMessage
+                  name="banner"
+                  component="p"
+                  className="text-danger"
+                />
 
                 {values.banner && (
                   <label className={styles.currentThumb}>
@@ -286,7 +327,7 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
               </label>
             )}
 
-            <button className={styles.submitBtn} type="submit">
+            <button ref={ref} hidden type="submit">
               Submit
             </button>
           </Form>
@@ -296,4 +337,4 @@ function ArticleForm({ onSubmit, initialValues, cat }) {
   );
 }
 
-export default ArticleForm;
+export default forwardRef(ArticleForm);

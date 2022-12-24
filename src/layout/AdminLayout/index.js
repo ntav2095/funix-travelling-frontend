@@ -21,7 +21,7 @@ import {
 // css
 import styles from "./AdminLayout.module.css";
 
-function AdminLayout({ children, title, path, text }) {
+function AdminLayout({ children }) {
   // const [hide, setHide] = useState(false);
 
   const sidebarIsShow = useSelector((state) => state.layout.sidebar.isShow);
@@ -76,7 +76,7 @@ function AdminLayout({ children, title, path, text }) {
                 </NavLink>
               </li>
               <li>
-                <NavLink className={navLinkClasses} to="/admin/posts">
+                <NavLink className={navLinkClasses} to="/admin/articles">
                   {!sidebarIsShow ? book : "Guides"}
                 </NavLink>
               </li>

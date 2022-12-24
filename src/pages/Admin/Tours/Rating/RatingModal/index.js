@@ -1,19 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { adminApis, useEffect } from "../../import";
+import { tourApis } from "../../../../../services/apis/admin.apis";
 import useAxios from "../../../../../hooks/useAxios";
 import NotifyModal from "../../../../../components/NotifyModal";
 import styles from "./RatingModal.module.css";
+import { isInteger } from "lodash";
 
 const validator = (values) => {
   const errors = {};
   if (!values.name) {
     errors.name = "Bắt buộc";
-  }
-
-  if (!values.stars) {
-    errors.stars = "Bắt buộc";
   }
 
   if (!values.content) {
@@ -24,12 +21,11 @@ const validator = (values) => {
 };
 
 function RatingModal({ tour, ratingId, mode, fetchTour, ...props }) {
-  const [sendRequest, isLoading, data, error] = useAxios();
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [sendRequest, isLoading, data, error, resetData] = useAxios();
 
   let initialValues = {
     name: "",
-    stars: "",
+    stars: 5,
     content: "",
   };
 
@@ -45,7 +41,7 @@ function RatingModal({ tour, ratingId, mode, fetchTour, ...props }) {
   const submitHandler = (values) => {
     if (mode === "edit") {
       sendRequest(
-        adminApis.tour.editRatingItem({
+        tourApis.editRatingItem({
           ratingId,
           tourId: tour._id,
           ...values,
@@ -53,7 +49,7 @@ function RatingModal({ tour, ratingId, mode, fetchTour, ...props }) {
       );
     } else {
       sendRequest(
-        adminApis.tour.rate({
+        tourApis.rate({
           tourId: tour._id,
           ...values,
         })
@@ -63,26 +59,44 @@ function RatingModal({ tour, ratingId, mode, fetchTour, ...props }) {
 
   useEffect(() => {
     if (data) {
-      setIsSuccess(true);
       props.onHide();
-      fetchTour();
     }
   }, [data]);
 
+  let notify = {};
+  if (data) {
+    notify = {
+      btn: {
+        text: "OK",
+        cb: () => {
+          fetchTour();
+          resetData();
+        },
+        component: "button",
+      },
+      message: "Thêm đánh giá thành công",
+      type: "success",
+      show: data,
+      time: 2000,
+      onHide: () => {
+        fetchTour();
+        resetData();
+      },
+    };
+  }
+
   return (
     <>
-      <NotifyModal
-        show={isSuccess && !props.show}
-        onHide={() => setIsSuccess(false)}
-        time={2000}
-        type="success"
-        message="Thanh cong"
-      />
+      <NotifyModal {...notify} />
 
       <Modal
         contentClassName={styles.container}
         {...props}
-        size="lg"
+        onHide={() => {
+          props.onHide();
+          resetData();
+        }}
+        size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -93,9 +107,7 @@ function RatingModal({ tour, ratingId, mode, fetchTour, ...props }) {
         )}
 
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Thêm đánh giá tour - {tour.code}
-          </Modal.Title>
+          <h5>Thêm đánh giá tour - {tour.code}</h5>
         </Modal.Header>
         <Modal.Body>
           <Formik
@@ -103,45 +115,55 @@ function RatingModal({ tour, ratingId, mode, fetchTour, ...props }) {
             onSubmit={submitHandler}
             validate={validator}
           >
-            {() => (
-              <Form>
-                <label className="d-block mb-4">
-                  <h5 className="fs-6 mb-1">Tên</h5>
-                  <Field type="text" name="name" className="w-100 p-1" />
-                  <ErrorMessage
-                    name="name"
-                    component="p"
-                    className="text-danger"
-                  />
-                </label>
+            <Form>
+              <div className="row">
+                <div className="col-8">
+                  <label className="d-block mb-4">
+                    <h6 className="fs-6 mb-1">Tên</h6>
+                    <Field type="text" name="name" className="w-100 p-1" />
+                    <ErrorMessage
+                      name="name"
+                      component="p"
+                      className="text-danger"
+                    />
+                  </label>
+                </div>
 
-                <label className="d-block mb-4">
-                  <h5 className="fs-6 mb-1">Số sao</h5>
-                  <Field type="number" name="stars" className="w-100 p-1" />
-                  <ErrorMessage
-                    name="stars"
-                    component="p"
-                    className="text-danger"
-                  />
-                </label>
+                <div className="col-4">
+                  <label className="d-block mb-4">
+                    <h6 className="fs-6 mb-1">Số sao</h6>
+                    <Field as="select" name="stars" className="w-100 p-1">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </Field>
+                    <ErrorMessage
+                      name="stars"
+                      component="p"
+                      className="text-danger"
+                    />
+                  </label>
+                </div>
+              </div>
 
-                <label className="d-block mb-4">
-                  <h5 className="fs-6 mb-1">Bình luận</h5>
-                  <Field type="text" name="content" className="w-100 p-1" />
-                  <ErrorMessage
-                    name="content"
-                    component="p"
-                    className="text-danger"
-                  />
-                </label>
+              <label className="d-block mb-4">
+                <h6 className="fs-6 mb-1">Bình luận</h6>
+                <Field as="textarea" name="content" className="w-100 p-1" />
+                <ErrorMessage
+                  name="content"
+                  component="p"
+                  className="text-danger"
+                />
+              </label>
 
-                {error && <p className="text-danger">{error.message}</p>}
+              {error && <p className="text-danger mb-2">{error.message}</p>}
 
-                <button className="btn btn-primary" type="submit">
-                  Đánh giá
-                </button>
-              </Form>
-            )}
+              <button className="btn btn-primary" type="submit">
+                Đánh giá
+              </button>
+            </Form>
           </Formik>
         </Modal.Body>
       </Modal>

@@ -1,5 +1,5 @@
 import Editor from "../../../../containers/Editor";
-import { adminApis } from "../../../../services/apis";
+import { termApis } from "../../../../services/apis/admin.apis";
 import useAxios from "../../../../hooks/useAxios";
 import { useEffect, useState } from "react";
 
@@ -11,7 +11,7 @@ function TermTab({ type }) {
   const [editorKey, setEditorKey] = useState(0);
 
   const submitHandler = () => {
-    update(adminApis.term.update({ type, content: content, language }));
+    update(termApis.update({ type, content: content, language }));
   };
 
   const changeHandler = (delta) => {
@@ -19,7 +19,7 @@ function TermTab({ type }) {
   };
 
   useEffect(() => {
-    sendRequest(adminApis.term.getSingle(type));
+    sendRequest(termApis.getSingle(type));
   }, []);
 
   useEffect(() => {
