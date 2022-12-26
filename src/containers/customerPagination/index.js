@@ -41,8 +41,27 @@ export default function CustomPagination({ total, pagenumber, callback }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setState(pageInput);
+    setState(Number(pageInput));
     setShow(false);
+  };
+
+  const changeHandler = (e) => {
+    const val = e.target.value;
+    const valNum = Number(val);
+
+    if (isNaN(valNum)) {
+      return;
+    }
+
+    if (!Number.isInteger(valNum)) {
+      return;
+    }
+
+    if (valNum < 1 || valNum > total) {
+      return;
+    }
+
+    setPageInput(val);
   };
 
   return (
@@ -64,7 +83,7 @@ export default function CustomPagination({ total, pagenumber, callback }) {
                 type="text"
                 placeholder="nhập số trang"
                 value={pageInput}
-                onChange={(e) => setPageInput(Number(e.target.value))}
+                onChange={changeHandler}
               />
               <button type="submit">Go</button>
             </form>

@@ -112,7 +112,6 @@ function TourList({ cat_params }) {
   return (
     <>
       <div className="tours__list">
-        <h1>hehe</h1>
         <div className="container__header">
           <div id="title" className={"title text-uppercase fw-bold"}>
             {cat_params?.cat_not === "vi" && item.title__eu[i18n.language]}
