@@ -41,6 +41,7 @@ export default function CustomPagination({ total, pagenumber, callback }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (Number(pageInput) > total || Number(pageInput) < 1) return;
     setState(Number(pageInput));
     setShow(false);
   };
@@ -54,10 +55,6 @@ export default function CustomPagination({ total, pagenumber, callback }) {
     }
 
     if (!Number.isInteger(valNum)) {
-      return;
-    }
-
-    if (valNum < 1 || valNum > total) {
       return;
     }
 
