@@ -35,42 +35,6 @@ function HomeNew() {
     sendRequestGuides(postsApi.get({ page: 1, page_size: 6 }));
   }, [i18n.language]);
 
-  // useEffect(() => {
-  //   const randomnumber = Math.random() * 2;
-  //   if (dataTourTrongNuoc) {
-  //     const arrdata = [];
-
-  //     dataTourTrongNuoc.data.map((item, id) => {
-  //       if (randomnumber < 1) {
-  //         if (id % 2 == 0) {
-  //           arrdata.push({ id: item._id, image: item.thumb });
-  //         }
-  //       } else {
-  //         if (id % 2 == 1) {
-  //           arrdata.push({ id: item._id, image: item.thumb });
-  //         }
-  //       }
-  //     });
-  //     dispatch(homesliderTrongNuoc(arrdata));
-  //   }
-  //   if (dataTourChauAu) {
-  //     const arrdata = [];
-  //     dataTourChauAu.data.map((item, id) => {
-  //       if (randomnumber < 1) {
-  //         if (id % 2 == 0) {
-  //           arrdata.push({ id: item._id, image: item.thumb });
-  //         }
-  //       } else {
-  //         if (id % 2 == 1) {
-  //           arrdata.push({ id: item._id, image: item.thumb });
-  //         }
-  //       }
-  //     });
-
-  //     dispatch(homesliderChauAu(arrdata));
-  //   }
-  // });
-
   useEffect(() => {
     lazy();
   }, [isLoadingGuides, isLoadingTourTrongNuoc, isLoadingTourChauAu]);

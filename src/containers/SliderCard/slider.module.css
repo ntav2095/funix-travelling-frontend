@@ -43,7 +43,7 @@
 }
 
 .content p {
-  margin-bottom: 6px;
+  margin-bottom: 2px;
   line-height: 1.4;
   max-width: 300px;
   overflow: hidden;
@@ -55,37 +55,32 @@
   padding-right: 6px;
 }
 /* reposive */
-@media screen and (max-width:600px) {
-  .title p{
+@media screen and (max-width: 600px) {
+  .title p {
     margin-left: 14px;
     margin-bottom: 8px;
   }
-.tourdetail {
-  padding: 0 !important;
-  height: 2rem !important;
-  width: 7rem !important;
-  line-height: 1.9rem !important;
-  margin: 2px 0px 0px 0.8rem !important;
-}
+  .tourdetail {
+    padding: 0 !important;
+    height: 2rem !important;
+    width: 7rem !important;
+    line-height: 1.9rem !important;
+    margin: 2px 0px 0px 0.8rem !important;
+  }
 }
 
-@media screen and (min-width:600px) {
-  .title p{
+@media screen and (min-width: 600px) {
+  .title p {
     margin-left: 14px;
     margin-bottom: 0.7rem;
   }
-
-
 }
 
-@media screen and (min-width:1024px) {
-  .title p{
+@media screen and (min-width: 1024px) {
+  .title p {
     margin-left: 14px;
-    
   }
-
 }
-
 
 /* ============== button ===============  */
 

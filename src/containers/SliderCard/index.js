@@ -156,6 +156,7 @@ function SliderCard(props) {
                 ))}
             </Slider>
           </div>
+
           {(page == "home" || page == "article") && (
             <Link className={styles.tourdetail} to={naviga}>
               {i18n.language == "vi" ? "Xem tất cả" : "ALL"}
