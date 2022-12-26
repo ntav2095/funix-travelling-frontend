@@ -158,6 +158,7 @@ function ToursList({ cat_params }) {
             </div>
           </div>
         </div>
+
         <div className={styles.slider}>
           {!data && (
             <div className={styles.container}>
@@ -287,7 +288,7 @@ function ToursList({ cat_params }) {
           </div>
         </div>
 
-        {data && (
+        {/* {data && (
           <div className="mt-4">
             <Pagination
               className="xxx"
@@ -297,7 +298,7 @@ function ToursList({ cat_params }) {
               onChange={changePageHandler}
             />
           </div>
-        )}
+        )} */}
       </div>
     </>
   );

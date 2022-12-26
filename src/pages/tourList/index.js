@@ -76,22 +76,22 @@ function TourList({ cat_params }) {
       navigate(`/tours-trong-nuoc/?page=${num}&`);
     }
   };
-useEffect(() => {
-  if(page>1){
-    window.scroll({
-      top: 500,
-      left: 0,
-      behavior: "smooth",
-    });
-}
- if(new URLSearchParams(location.search).get("page")==1){
-window.scroll({
-  top:500,
-  left: 0,
-  behavior: "smooth",
-});
- }
-}, [page])
+  useEffect(() => {
+    if (page > 1) {
+      window.scroll({
+        top: 500,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+    if (new URLSearchParams(location.search).get("page") == 1) {
+      window.scroll({
+        top: 500,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [page]);
 
   useEffect(() => {
     sendRequest(
@@ -102,7 +102,6 @@ window.scroll({
         ...cat_params,
       })
     );
-   
   }, [i18n.language, location.search, cat_params, search]);
 
   useEffect(() => {
@@ -113,27 +112,28 @@ window.scroll({
   return (
     <>
       <div className="tours__list">
-        <div className={"container__header"}>
+        <h1>hehe</h1>
+        <div className="container__header">
           <div id="title" className={"title text-uppercase fw-bold"}>
             {cat_params?.cat_not === "vi" && item.title__eu[i18n.language]}
             {cat_params?.cat === "vi" && item.title__vi[i18n.language]}
           </div>
-          <div className={"container__sort"}>
-            <div className={"sort"}>
+          <div className="container__sort">
+            <div className="sort">
               <select onChange={hangdleChangeSelect}>
-                <option value={"time-desc"}>
+                <option value="time-desc">
                   {item.sort.option__1[i18n.language]}
                 </option>
-                <option value={"price-asc"}>
+                <option value="price-asc">
                   {item.sort.option__2[i18n.language]}
                 </option>
-                <option value={"price-desc"}>
+                <option value="price-desc">
                   {item.sort.option__3[i18n.language]}
                 </option>
-                <option value={"duration-desc"}>
+                <option value="duration-desc">
                   {item.sort.option__4[i18n.language]}
                 </option>
-                <option value={"duration-asc"}>
+                <option value="duration-asc">
                   {item.sort.option__5[i18n.language]}
                 </option>
               </select>
