@@ -1,117 +1,66 @@
 import useAxios from "../../../hooks/useAxios";
 import { useEffect, useState } from "react";
-import { tourApi, postsApi } from "../../../services/apis";
 import { debounce } from "debounce";
 
-function useSearch() {
-  const [tourPage, setTourPage] = useState(1);
-  const [articlePage, setArticlePage] = useState(1);
-  const [text, setText] = useState("");
+// chưa handle error
+function useSearch({ searchApi, searchTerm }) {
+  const [page, setPage] = useState(1);
+  const [search, isSearching, data, error, resetSearch] = useAxios();
+  const [results, setResults] = useState(null);
 
-  const [searchTours, isSearchingTours, tourData, tourError, resetTourResults] =
-    useAxios();
-  const [
-    searchArticles,
-    isSearchingArticles,
-    articleData,
-    articleError,
-    resetSearchArticles,
-  ] = useAxios();
-
-  const [tours, setTours] = useState(null);
-  const [articles, setArticles] = useState(null);
-
-  const searchToursNext = () => {
-    setTourPage((prev) => prev + 1);
+  const searchNext = () => {
+    setPage((prev) => prev + 1);
   };
 
-  const searchArticlesNext = () => {
-    setArticlePage((prev) => prev + 1);
-  };
-
-  const searchBoth = debounce((query) => {
-    searchTours(tourApi.get({ search: query }));
-    searchArticles(postsApi.get({ search: query }));
+  // search lần đầu:
+  // user nhập search term và nhấn enter
+  const searchFirstTime = debounce((text) => {
+    setPage(1);
+    setResults(null);
+    search(searchApi({ search: text })); // không set page tức là page = 1 (server handle việc này)
   }, 300);
 
-  // khi text thay đổi thì set page = 1, reset lại kết quả, search cả 2
+  // khi user thay đổi search term
   useEffect(() => {
-    if (text.trim()) {
-      setTourPage(1);
-      setArticlePage(1);
-      setTours(null);
-      setArticles(null);
-      searchBoth(text);
-      return () => searchBoth.clear();
+    // nếu thay đổi search term thì search lần đầu
+    if (searchTerm.trim()) {
+      searchFirstTime(searchTerm);
+      return () => searchFirstTime.clear();
     }
 
-    if (!text.trim()) {
-      resetSearchArticles();
-      resetTourResults();
-
-      setTours(null);
-      setArticles(null);
+    // nếu xóa hết search term thì xóa hết data
+    if (!searchTerm.trim()) {
+      resetSearch();
+      setResults(null);
     }
-  }, [text]);
+  }, [searchTerm]);
 
-  // khi page thay đổi và > 1 thì search cái thay đổi
+  // khi page thay đổi và > 1 thì search tiếp
   useEffect(() => {
-    if (text && tourPage > 1) {
-      searchTours(tourApi.get({ text, page: tourPage }));
+    if (searchTerm && page > 1) {
+      search(searchApi({ search: searchTerm, page }));
     }
-  }, [tourPage]);
-
-  useEffect(() => {
-    if (text && articlePage > 1) {
-      searchArticles(postsApi.get({ text, page: articlePage }));
-    }
-  }, [articlePage]);
+  }, [page]);
 
   // fetched được data thì push/thêm vô mảng kết quả
-  // tùy vào search từ đầu hay search tiếp mà push hoặc thêm
+  // tùy vào search từ đầu hay search tiếp mà push hoặc set
   useEffect(() => {
-    if (tourData) {
-      if (!tours) {
-        setTours(tourData.data);
+    if (data) {
+      // nếu results là null => search lần đầu => set data
+      if (!results) {
+        setResults(data.data);
       } else {
-        setTours((prev) => [...prev, ...tourData.data]);
+        // nếu results !== null => search lần 2,3... => push data
+        setResults((prev) => [...prev, ...data.data]);
       }
     }
-  }, [tourData]);
+  }, [data]);
 
-  useEffect(() => {
-    if (articleData) {
-      if (!articles) {
-        setArticles(articleData.data);
-      } else {
-        setArticles((prev) => [...prev, ...articleData.data]);
-      }
-    }
-  }, [articleData]);
+  const total = data?.metadata.total_count;
+  const count = results?.length;
+  const hasMore = data?.metadata.has_more;
 
-  const total_tours = tourData?.metadata.total_count;
-  const total_articles = articleData?.metadata.total_count;
-  const tours_count = tours?.length;
-  const articles_count = articles?.length;
-  const has_more_tours = tourData?.metadata.has_more;
-  const has_more_articles = articleData?.metadata.has_more;
-
-  return {
-    text,
-    setText,
-    tours,
-    articles,
-    isSearchingTours,
-    isSearchingArticles,
-    searchToursNext,
-    searchArticlesNext,
-    total_tours,
-    total_articles,
-    tours_count,
-    articles_count,
-    has_more_tours,
-    has_more_articles,
-  };
+  return [results, isSearching, searchNext, count, total, hasMore, error];
 }
 
 export default useSearch;
