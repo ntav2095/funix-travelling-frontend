@@ -6,6 +6,35 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import QuillReader from "../../components/QuillReader";
 
+const trans = {
+  ourMission: {
+    vi: "Sứ mệnh của chúng tôi",
+    en: "Our mission",
+  },
+  slogan: {
+    top: {
+      vi: "Là người bạn đồng hành",
+      en: "To be your companion to",
+    },
+    bottom: {
+      vi: "dắt bạn đi khắp thế gian!",
+      en: "take you around the world!",
+    },
+  },
+  about: {
+    vi: "Về chúng tôi",
+    en: "About Joya",
+  },
+  aboutContent: {
+    vi: "Thành lập vào năm 2022, Joya là công ty cổ phần du lịch uy tín. Thành lập vào năm 2022, Joya là công ty cổ phần du lịch uy tín. Thành lập vào năm 2022, Joya là công ty cổ phần du lịch uy tín. Thành lập vào năm 2022, Joya là công ty cổ phần du lịch uy tín. Thành lập vào năm 2022, Joya là công ty cổ phần du lịch uy tín. Thành lập vào năm 2022, Joya là công ty cổ phần du lịch uy tín.",
+    en: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati distinctio fuga et nulla officia rerum, eius perferendis soluta eum molestias officiis fugiat necessitatibus doloremque corrupti maxime nostrum iure assumenda quas quaerat vel vitae enim aliquid nisi esse? Officiis reprehenderit, mollitia sit distinctio porro necessitatibus. Distinctio, dignissimos itaque! Molestiae, ab dolorem.",
+  },
+  findOutMore: {
+    vi: "Tìm hiểu thêm",
+    en: "Find out more",
+  },
+};
+
 function About() {
   const [sendRequest, isLoading, data, error, resetStates] = useAxios();
   const lang = useTranslation().i18n.language;
@@ -25,11 +54,11 @@ function About() {
       <div className={styles.fluid + " bg-dark text-light "}>
         <div className={styles.content + " " + styles.slogan}>
           <div>
-            <h6 className="mb-1 fw-normal">Our mission</h6>
+            <h6 className="mb-1 fw-normal">{trans.ourMission[lang]}</h6>
             <h1>
-              To be your companion to
+              {trans.slogan.top[lang]}
               <br />
-              take you around the world!
+              {trans.slogan.bottom[lang]}
             </h1>
           </div>
         </div>
@@ -43,16 +72,8 @@ function About() {
                 styles.aboutDescription + " p-4 border rounded bg-white"
               }
             >
-              <h1>About Joya</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati distinctio fuga et nulla officia rerum, eius
-                perferendis soluta eum molestias officiis fugiat necessitatibus
-                doloremque corrupti maxime nostrum iure assumenda quas quaerat
-                vel vitae enim aliquid nisi esse? Officiis reprehenderit,
-                mollitia sit distinctio porro necessitatibus. Distinctio,
-                dignissimos itaque! Molestiae, ab dolorem.
-              </p>
+              <h2>{trans.about[lang]}</h2>
+              <p>{trans.aboutContent[lang]}</p>
             </div>
           </div>
           <div className="col-6">
@@ -63,7 +84,7 @@ function About() {
         </div>
 
         <div className="my-5">
-          <h3 className="fw-bold pb-2">Find out more</h3>
+          <h3 className="fw-bold pb-2">{trans.findOutMore[lang]}</h3>
 
           <div className={styles.links + " row"}>
             <div className="col-4">

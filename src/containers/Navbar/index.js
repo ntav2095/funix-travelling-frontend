@@ -69,6 +69,8 @@ function Header() {
       setExpanded(false);
     }
   }, [location]);
+
+  const LogoComponent = location.pathname === "/" ? "a" : Link;
   return (
     <>
       <div className="travel__navbar">
@@ -82,10 +84,14 @@ function Header() {
           >
             <Container fluid>
               <Navbar.Brand>
-                <Link to="/" className="travel__navbar__branch">
+                <LogoComponent
+                  to="/"
+                  href="http://localhost:3000"
+                  className="travel__navbar__branch"
+                >
                   <h5 className="m-0 text-center">JOYA LOGO</h5>
                   <h6 className="m-0 text-center">Slogan here</h6>
-                </Link>
+                </LogoComponent>
               </Navbar.Brand>
 
               <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />

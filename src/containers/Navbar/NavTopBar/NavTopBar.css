@@ -17,6 +17,17 @@
   margin-right: 1px;
 }
 
+.travel__topbar__tel {
+  color: #050505;
+}
+
+.travel__topbar__tel:hover {
+  color: #050505;
+  text-decoration: underline;
+}
+
+/* .travel__topbar__tel:hover {} */
+
 @media screen and (max-width: 992px) {
   .travel__topbar__contact {
     border-right: 0.5px solid #e5e5e5;

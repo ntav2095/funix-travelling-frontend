@@ -21,7 +21,10 @@ function NavTopBar() {
     <div className="container-fluid travel__topbar d-flex align-items-center justify-content-lg-between">
       <div className="travel__topbar__contact  pe-2">
         <p className="m-0 text-nowrap ">
-          <strong>Hotline:</strong> 123.456.789
+          <strong>Hotline:</strong>{" "}
+          <a className="travel__topbar__tel" href="tel:123.456.789">
+            123.456.789
+          </a>
         </p>
       </div>
       <div className="ms-2 travel__language">
