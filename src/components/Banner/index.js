@@ -14,25 +14,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateBanner, setBanners } from "../../store/banner.slice";
 import { countriesImages } from "../../pages/VisaService/mockImages";
 
-const BANNERS_MAP = new Map([
-  ["/", "homeSliders"],
-
-  ["/tours-chau-au", "euTours"],
-  ["/tours-trong-nuoc", "vnTours"],
-
-  ["/cam-nang-du-lich/danh-muc/cam-nang", "handbook"],
-  ["/cam-nang-du-lich/danh-muc/nhat-ky", "diary"],
-  ["/cam-nang-du-lich/danh-muc/trai-nghiem", "experience"],
-  ["//cam-nang-du-lich/danh-muc/diem-den", "destination"],
-  ["/cam-nang-du-lich", "handbook"],
-
-  ["/dich-vu-visa", "visa"],
-]);
+const BANNERS_MAP = [
+  { path: "/", type: "homeSliders" },
+  { path: "/tours-chau-au", type: "euTours" },
+  { path: "/tours-trong-nuoc", type: "vnTours" },
+  { path: "/cam-nang-du-lich/danh-muc/cam-nang", type: "handbook" },
+  { path: "/cam-nang-du-lich/danh-muc/nhat-ky", type: "diary" },
+  { path: "/cam-nang-du-lich/danh-muc/trai-nghiem", type: "experience" },
+  { path: "/cam-nang-du-lich/danh-muc/diem-den", type: "destination" },
+  { path: "/cam-nang-du-lich", type: "handbook" },
+  { path: "/dich-vu-visa", type: "visa" },
+];
 
 function Banner() {
   const [sendRequest, isLoading, data, error] = useAxios();
   const { tourId, articleId, visaCountry } = useParams();
-  console.log(visaCountry);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -64,7 +60,8 @@ function Banner() {
     }
   }, [data]);
 
-  console.log(location);
+  if (path.startsWith("/dieu-khoan") || path.startsWith("/gioi-thieu"))
+    return null;
 
   return (
     <div className={styles.container}>
@@ -110,7 +107,12 @@ function Banner() {
                 ? banners.articleDetail?.banner
                 : visaCountry
                 ? countriesImages[visaCountry]
-                : banners[BANNERS_MAP.get(path)]?.banner
+                : banners[
+                    BANNERS_MAP.find((item) => {
+                      console.log("---", item.path);
+                      return path.startsWith(item.path) && item.path !== "/";
+                    })?.type
+                  ]?.banner
             }
             className="img-fluid w-100"
             alt="banner"

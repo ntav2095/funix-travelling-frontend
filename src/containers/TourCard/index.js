@@ -44,7 +44,7 @@ function TourCard({ tour }) {
         <div className={styles.textBox}>
           <h2>{tour.name}</h2>
 
-          <p>{tour.journey}</p>
+          <p>{tour.countries || tour.journey}</p>
           <p>
             {tour.duration.days} {translation.days[lang]} {tour.duration.nights}{" "}
             {translation.nights[lang]}

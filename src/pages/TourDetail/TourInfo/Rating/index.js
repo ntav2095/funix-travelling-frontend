@@ -99,7 +99,7 @@ function Rating({ tour }) {
             </div>
 
             {tour.rating.map((item) => (
-              <div key={item.id} className={styles.ratingItem}>
+              <div key={item._id} className={styles.ratingItem + " mx-2"}>
                 <div className={styles.comment + " p-4"}>
                   <p className={styles.quotes + " " + styles.openQuotes}>
                     {openQuotes}

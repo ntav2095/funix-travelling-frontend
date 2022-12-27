@@ -8,14 +8,12 @@ function CardPlaceholder() {
         className={styles.image}
         style={{ backgroundImage: `url(${placeholder})` }}
       ></div>
-      <div className="card-body">
+      <div className={styles.textBox}>
         <h5 className="card-title placeholder-glow">
-          <span className="placeholder  bg-secondary col-6"></span>
+          <span className="placeholder  bg-secondary col-10"></span>
         </h5>
         <p className="card-text placeholder-glow">
-          <span className="placeholder bg-secondary col-7"></span>
-          <span className="placeholder bg-secondary col-4"></span>
-          <span className="placeholder bg-secondary col-4"></span>
+          <span className="placeholder bg-secondary col-12"></span>
           <span className="placeholder bg-secondary col-6"></span>
           <span className="placeholder bg-secondary col-8"></span>
         </p>

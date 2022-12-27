@@ -107,7 +107,7 @@ function TourList({ cat_params }) {
   useEffect(() => {
     lazy();
   }, [isLoading]);
-  usePageTitle(`Danh sách bài viết || Go Travel`);
+  usePageTitle(`Duc lịch Châu Âu || JOYA Travel`);
 
   return (
     <>
@@ -139,6 +139,7 @@ function TourList({ cat_params }) {
             </div>
           </div>
         </div>
+
         <div className="container__tours">
           <div className="row">
             {data &&
@@ -147,7 +148,7 @@ function TourList({ cat_params }) {
               data.data.map((tour) => (
                 <div
                   key={tour._id}
-                  className="col-6 col-sm-6 col-md-4 col-lg-3 mb-4"
+                  className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
                 >
                   <TourCard tour={tour} />
                 </div>
@@ -157,7 +158,7 @@ function TourList({ cat_params }) {
               new Array(18).fill(1).map((item, index) => (
                 <div
                   key={index}
-                  className="col-6 col-sm-6 col-md-4 col-lg-3 mb-4"
+                  className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
                 >
                   <CardPlaceholder key={index} />
                 </div>
