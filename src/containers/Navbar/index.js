@@ -1,4 +1,4 @@
-import { NavLink, useLocation, Link } from "react-router-dom";
+import { NavLink, useLocation, Link, json } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 // lang
@@ -63,7 +63,9 @@ function Header() {
 
   const location = useLocation();
   const lang = useTranslation().i18n.language;
-
+  useEffect(() => {
+    localStorage.setItem('lang',JSON.stringify(lang))
+  }, [lang]);
   useEffect(() => {
     if (expanded) {
       setExpanded(false);

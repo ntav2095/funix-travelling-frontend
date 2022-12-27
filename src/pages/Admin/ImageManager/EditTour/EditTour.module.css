@@ -1,0 +1,28 @@
+.container {
+  padding: 8px;
+  padding-top: 80px;
+}
+
+.addLangBtn {
+  padding: 8px 16px;
+  background: var(--main-color);
+  color: white;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.langSelect {
+  padding-bottom: 16px;
+}
+
+.langSelect span {
+  padding-right: 16px;
+}
+
+.addLangBtn {
+  padding: 8px 16px;
+  background: #131b2a;
+  color: rgb(244, 237, 237);
+  cursor: pointer;
+  border-radius: 3.8px;
+}

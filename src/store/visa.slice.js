@@ -13,7 +13,7 @@ const visaSlice = createSlice({
     setVisaTypes(state, action) {
       const types = action.payload;
       state.types = action.payload;
-
+      console.log('type',types)
       const availableContinents = Object.entries(types)
         .filter(([key, value]) => value.length > 0)
         .map(([key, value]) => key);

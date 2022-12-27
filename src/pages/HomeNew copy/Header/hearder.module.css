@@ -1,0 +1,37 @@
+@media screen and (max-width:600px) {
+    .hearder > .container {
+        padding: 14px 8px 0px 8px;
+    }
+}
+
+@media screen and (min-width:600px) {
+    .hearder > .container {
+        padding: 20px 12px 0px 12px;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .hearder > .container {
+        padding: 32px 20px 0px 20px;
+    }
+}
+
+.hearder{
+    width: 100%;
+}
+.hearder > .image >img{
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.hearder > .container{
+    width: 100%;
+    padding: 32px 20px 0px 20px;
+}
+.content{
+    width: 50%;
+    
+}
+.image{
+    width: 50%;
+}

@@ -71,6 +71,11 @@ function AdminLayout({ children, title, path, text }) {
                 </NavLink>
               </li>
               <li>
+                <NavLink className={navLinkClasses} to="/admin/image-manager">
+                  {!sidebarIsShow ? bus : "Tour"}
+                </NavLink>
+              </li>
+              <li>
                 <NavLink className={navLinkClasses} to="/admin/visa-products">
                   {!sidebarIsShow ? passport : "Visa"}
                 </NavLink>

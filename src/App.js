@@ -47,6 +47,7 @@ const NotFound = React.lazy(() => import("./pages/NotFound"));
 const NewTour = React.lazy(() => import("./pages/Admin/Tours/NewTour"));
 const EditTour = React.lazy(() => import("./pages/Admin/Tours/EditTour"));
 const Tours = React.lazy(() => import("./pages/Admin/Tours"));
+const ImageManager = React.lazy(() => import("./pages/Admin/ImageManager"));
 const Posts = React.lazy(() => import("./pages/Admin/Posts"));
 const NewPosts = React.lazy(() => import("./pages/Admin/Posts/newPosts"));
 const EditPosts = React.lazy(() => import("./pages/Admin/Posts/editPosts"));
@@ -73,7 +74,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (data) dispatch(setVisaTypes(data.data));
+    if (data) {dispatch(setVisaTypes(data.data))}
+    console.log('data',data)
   }, [data]);
   // ******************** handle visa end *********************************
 
@@ -133,7 +135,8 @@ function App() {
                 />
               </Route>
 
-              {/* tour  */}
+              {/* tour ImageManager  */}
+              <Route path="/admin/image-manager" element={<ImageManager />} />
               <Route path="/admin/new-tour" element={<NewTour />} />
               <Route path="/admin/rate-tour/:tourId" element={<TourRating />} />
               <Route path="/admin/edit-tour/:tourId" element={<EditTour />} />
