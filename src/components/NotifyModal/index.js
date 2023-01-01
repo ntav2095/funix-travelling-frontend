@@ -36,11 +36,25 @@ const errorSVG = (
   </svg>
 );
 
-function NotifyModal({ time, message, type = "normal", ...props }) {
+function NotifyModal({
+  time,
+  message,
+  type = "normal",
+  leftBtn,
+  rightBtn,
+  btn,
+  ...props
+}) {
   useEffect(() => {
     if (time && props.show) {
       setTimeout(() => {
-        props.onHide();
+        if (btn?.cb) {
+          btn.cb();
+        }
+
+        if (props.onHide) {
+          props.onHide();
+        }
       }, time);
     }
   }, [props.show]);
@@ -53,6 +67,14 @@ function NotifyModal({ time, message, type = "normal", ...props }) {
   if (type === "error") {
     contentClasses += " " + styles.error;
   }
+
+  let btnClasses = styles.btn;
+  if (type === "error") {
+    btnClasses += " " + styles.errorBtn;
+  }
+  if (type === "success") {
+    btnClasses += " " + styles.successBtn;
+  }
   return (
     <Modal
       {...props}
@@ -64,6 +86,32 @@ function NotifyModal({ time, message, type = "normal", ...props }) {
       </div>
       <div className="pt-2">
         <p className="text-center">{message}</p>
+        {leftBtn && rightBtn && (
+          <div className="pb-2 d-flex gap-2 justify-content-center">
+            <leftBtn.component
+              to={leftBtn.to}
+              onClick={leftBtn.cb}
+              className={btnClasses + " " + styles.leftBtn}
+            >
+              {leftBtn.text}
+            </leftBtn.component>
+            <rightBtn.component
+              className={styles.btn}
+              to={rightBtn.to}
+              onClick={rightBtn.cb || props.onHide}
+            >
+              {rightBtn.text || "Cancel"}
+            </rightBtn.component>
+          </div>
+        )}
+
+        {btn && (
+          <div className="pb-2 d-flex  justify-content-center">
+            <btn.component to={btn.to} onClick={btn.cb} className={btnClasses}>
+              OK
+            </btn.component>
+          </div>
+        )}
       </div>
     </Modal>
   );

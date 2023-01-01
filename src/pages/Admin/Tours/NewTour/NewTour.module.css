@@ -2,3 +2,25 @@
   padding: 8px;
   padding-top: 80px;
 }
+
+.successBtn {
+  margin-bottom: 4px;
+  padding: 4px 16px;
+  color: white;
+  background: #29c465;
+}
+
+.successBtn:hover {
+  color: white;
+}
+
+.errorBtn {
+  margin-bottom: 4px;
+  padding: 4px 16px;
+  color: white;
+  background: rgb(232, 97, 97);
+}
+
+.errorBtn:hover {
+  background: rgb(231, 75, 75);
+}

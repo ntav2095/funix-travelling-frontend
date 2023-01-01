@@ -54,7 +54,6 @@ function TourCarousel({ tour, isLoading, height, size = "md" }) {
     classes += "sm";
   }
 
-  console.log(tour?.slider);
   return (
     <>
       <div className={classes}>

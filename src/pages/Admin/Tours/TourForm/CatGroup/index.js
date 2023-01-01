@@ -1,7 +1,14 @@
 import { useState } from "react";
 import styles from "./CatGroup.module.css";
 
-function CatGroup({ cat, type, values, setFieldValue }) {
+function CatGroup({
+  cat,
+  type,
+  values,
+  setFieldValue,
+  setFieldTouched,
+  touched,
+}) {
   const [filter, setFilter] = useState("");
 
   const changeHandler = (code) => {
@@ -10,6 +17,7 @@ function CatGroup({ cat, type, values, setFieldValue }) {
       : [...values.category, code];
 
     setFieldValue("category", newCat);
+    if (!touched.category) setFieldTouched("category", true, false);
   };
 
   const filteredCat = cat.filter((item) =>

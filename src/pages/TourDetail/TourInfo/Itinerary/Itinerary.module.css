@@ -72,8 +72,8 @@
 }
 
 .slider {
-  width: 500px;
-  max-width: calc(100vw - 40px);
+  width: 100%;
+  max-width: 500px;
   margin: 0 auto;
   margin-bottom: 24px;
 }

@@ -4,8 +4,7 @@ import {
   SpinnerModal,
   EditCatModal,
   useAxios,
-  adminApis,
-  categoryApi,
+  categoryApis,
   useRef,
   CatGroup,
   styles,
@@ -26,12 +25,12 @@ function Category() {
   const edited = location.state?.edited;
 
   const deleteHandler = (catId) => {
-    goDelete(adminApis.category.delete(catId));
+    goDelete(categoryApis.delete(catId));
   };
 
   const submitHandler = (values) => {
     add(
-      adminApis.category.add({
+      categoryApis.add({
         type: values.type,
         code: values.code,
         name: values.name,
@@ -41,12 +40,12 @@ function Category() {
   };
 
   useEffect(() => {
-    sendRequest(categoryApi.get());
+    sendRequest(categoryApis.get());
   }, [deleted, added]);
 
   useEffect(() => {
     if (edited) {
-      sendRequest(categoryApi.get());
+      sendRequest(categoryApis.get());
     }
   }, [edited]);
 

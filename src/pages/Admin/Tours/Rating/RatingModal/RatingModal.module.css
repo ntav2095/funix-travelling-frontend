@@ -15,3 +15,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.container textarea {
+  min-height: 200px;
+}

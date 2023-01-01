@@ -4,8 +4,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAxios } from "../import";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import styles from "./EditCatModal.module.css";
-import { adminApis } from "../import";
 import { SpinnerModal, useEffect } from "../import";
+import { categoryApis } from "../../../../services/apis/admin.apis";
 import Spinner from "../../../../components/Spinner";
 
 import CatForm from "../CatForm";
@@ -35,7 +35,7 @@ function EditCatModal() {
 
   const submitHandler = (values) => {
     sendRequest(
-      adminApis.category.update({
+      categoryApis.update({
         catId: catItem._id,
         ...values,
       })

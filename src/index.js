@@ -28,6 +28,8 @@ import "./App.css";
 storeInjector(store);
 i18nInjector(i18n);
 
+console.log("environment: ", process.env.NODE_ENV);
+
 const user = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user"))
   : null;

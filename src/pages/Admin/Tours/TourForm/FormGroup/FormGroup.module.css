@@ -30,10 +30,9 @@
 .errorMessage h6 {
   font-weight: 400;
   font-size: 13px;
-  padding-top: 2px;
-  background: rgb(209, 58, 58);
   color: white;
   padding: 3px 6px;
+  padding-left: 0;
   margin-top: 2px;
 }
 

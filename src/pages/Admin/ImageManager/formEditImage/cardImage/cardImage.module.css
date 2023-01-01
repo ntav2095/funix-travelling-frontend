@@ -1,0 +1,27 @@
+.containner__image{
+    display: flex;
+    aspect-ratio: 1.6;
+    width: 150px;
+    padding: 8px;
+    position: relative;
+}
+.containner__image img{
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
+}
+.btnclose{
+    opacity: 0.5;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 16px;
+    padding: 5px;
+    background-color: rgb(248, 212, 212);
+}
+.btnclose:hover{
+    z-index: 99;
+    opacity: 1;
+    background-color: rgb(236, 88, 88);
+}

@@ -239,7 +239,7 @@ function FormGroup(props) {
       {form_label}
       {form_field}
       <div className={styles.errorMessage}>
-        <ErrorMessage name={name} component="h6" />
+        <ErrorMessage name={name} component="h6" className="text-danger" />
       </div>
     </div>
   );

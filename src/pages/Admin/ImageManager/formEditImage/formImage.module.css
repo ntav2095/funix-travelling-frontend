@@ -1,0 +1,14 @@
+.name{
+    padding: 20px;
+    margin-top: 40px;
+    text-align: center;
+    font-size: 40px;
+}
+
+
+
+.container__itinerary{
+    display: flex;
+    flex-direction: row;
+    max-width: 1300px;
+}

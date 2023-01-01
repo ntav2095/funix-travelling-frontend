@@ -15,4 +15,5 @@ export const giangsinh = require("./cho_giang_sinh_o_paris_12.jpg");
 export const giangsinh2 = require("./cho_giang_sinh_o_paris_2.jpg");
 export const imagevietnam = require("./la-co-viet-nam.png");
 export const imageMy = require("./american-flag-g1192aabb9_640.png");
+export const altThumbnail = require("./alt_thumb.jpg");
 export const nhanVien = require('./nhan-vien-cong-ty.jpg')

@@ -11,7 +11,7 @@ import CatGroup from "./CatGroup";
 
 // hooks
 import useAxios from "../../../hooks/useAxios";
-import { adminApis, categoryApi } from "../../../services/apis";
+import { categoryApis } from "../../../services/apis/admin.apis";
 
 // css
 import styles from "./Category.module.css";
@@ -21,8 +21,7 @@ export {
   AdminLayout,
   SpinnerModal,
   useAxios,
-  adminApis,
-  categoryApi,
+  categoryApis,
   EditCatModal,
   useRef,
   styles,

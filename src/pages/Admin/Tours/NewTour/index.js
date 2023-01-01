@@ -1,60 +1,98 @@
 import {
-  useState,
+  // main
   useEffect,
+  useNavigate,
+  useRef,
+
+  // components
   AdminLayout,
   SpinnerModal,
   TourForm,
   ErrorMessage,
+  NotifyModal,
+  StatusBar,
+
+  // apis
   useAxios,
-  adminApis,
+  tourApis,
+  categoryApis,
+
+  // other
   usePageTitle,
   initialValues,
   dataPacker,
+
+  // css
+  styles,
 } from "./import";
-import styles from "./NewTour.module.css";
-import { useNavigate } from "react-router-dom";
-import StatusBar from "../../../../layout/AdminLayout/StatusBar";
 
 function NewTour() {
-  const [sendRequest, isLoading, data, error] = useAxios();
+  const [create, creating, created, creatingError, resetCreating] = useAxios();
   const [fetchCat, isFetchingCat, cat, fetchingCatError] = useAxios();
-  const [formKey, setFormKey] = useState(1);
   const navigate = useNavigate();
+  const submitRef = useRef();
 
   const submitHandler = (values) => {
     const formData = dataPacker(values);
-    sendRequest(adminApis.tour.add(formData));
+    create(tourApis.add(formData));
   };
 
   useEffect(() => {
-    if (data) {
-      alert("Tạo tour mới thành công. Bạn sẽ được chuyển tới tạo lộ trình");
-      navigate(`/admin/update-itinerary/${data.data._id}`);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (error) {
-      alert(`Có lỗi xảy ra: ${error.message}`);
-    }
-  }, [error]);
-
-  useEffect(() => {
-    fetchCat(adminApis.category.get());
+    fetchCat(categoryApis.get());
   }, []);
 
   usePageTitle("Tạo tour mới | Admin | Travel Funix");
+
+  const notifyType = created ? "success" : creatingError ? "error" : "";
+  const showNotify = created || creatingError;
+  const notifyMessage = created
+    ? "Tạo tour mới thành công. Bạn sẽ được chuyển đến trang tạo lộ trình"
+    : creatingError
+    ? creatingError.message
+    : "";
+
   return (
     <>
-      <SpinnerModal show={isLoading || isFetchingCat} />
+      <SpinnerModal show={creating || isFetchingCat} />
+      <NotifyModal
+        type={notifyType}
+        show={showNotify}
+        message={notifyMessage}
+        time={1500}
+        btn={{
+          component: "button",
+          text: "OK",
+          cb:
+            notifyType === "error"
+              ? function () {
+                  resetCreating();
+                }
+              : function () {
+                  navigate(`/admin/update-itinerary/${created?.data?._id}`);
+                },
+        }}
+      />
 
       <AdminLayout>
         {fetchingCatError && <ErrorMessage msg={fetchingCatError.message} />}
+        <StatusBar title="Tạo tour mới">
+          <button
+            type="button"
+            onClick={() => {
+              if (submitRef.current) {
+                submitRef.current.click();
+              }
+            }}
+            className="btn btn-primary btn-sm"
+          >
+            Xác nhận
+          </button>
+        </StatusBar>
 
         <div className={styles.container}>
           {cat && (
             <TourForm
-              key={formKey}
+              ref={submitRef}
               initialValues={initialValues}
               onSubmit={submitHandler}
               cat={cat.data}

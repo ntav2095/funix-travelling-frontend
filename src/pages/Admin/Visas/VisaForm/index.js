@@ -1,17 +1,18 @@
 // main
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Tabs, Tab } from "react-bootstrap";
+import { useEffect } from "react";
 
 // components
 import VisaFormGroup from "./VisaFormGroup";
+import StatusBar from "../../../../layout/AdminLayout/StatusBar";
 
+// apis
 import useAxios from "../../../../hooks/useAxios";
-import { adminApis } from "../../../../services/apis";
+import { categoryApis } from "../../../../services/apis/admin.apis";
 
 // css
 import styles from "./VisaForm.module.css";
-import { useEffect } from "react";
-import StatusBar from "../../../../layout/AdminLayout/StatusBar";
 
 const isEmptyDelta = (delta) => {
   const ops = delta.ops;
@@ -40,7 +41,7 @@ function VisaForm({ visaProduct, onSubmit, initialValues }) {
   const fieldMessage = (msg) => <p className={styles.fieldMessage}>{msg}</p>;
 
   useEffect(() => {
-    fetchCat(adminApis.category.get());
+    fetchCat(categoryApis.get());
   }, []);
 
   const countries = cat

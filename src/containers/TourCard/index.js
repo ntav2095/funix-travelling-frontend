@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 // assets
-import { brokenImage,placeholder } from "../../assets/images";
+import { altThumbnail, placeholder } from "../../assets/images";
 
 // css
 import styles from "./TourCard.module.css";
@@ -28,13 +28,18 @@ function TourCard({ tour }) {
   };
 
   const errorHandler = (e) => {
-    e.target.src = brokenImage;
+    e.target.src = altThumbnail;
   };
   return (
     <div className={styles.card}>
       <Link to={`/danh-sach-tour/${tour._id}`}>
         <div className={styles.image}>
-          <img src={placeholder} lazy={tour.thumb} alt={tour.name} onError={errorHandler} />
+          <img
+            src={placeholder}
+            lazy={tour.thumb}
+            alt={tour.name}
+            onError={errorHandler}
+          />
         </div>
         <div className={styles.textBox}>
           <h2>{tour.name}</h2>

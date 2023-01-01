@@ -1,6 +1,6 @@
 // main
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { format } from "date-fns";
 
 // components
@@ -8,10 +8,11 @@ import AdminLayout from "../../../../layout/AdminLayout";
 import SpinnerModal from "../../../../components/SpinnerModal";
 import TourForm from "../TourForm";
 import ErrorMessage from "../../../../components/ErrorMessage";
+import StatusBar from "../../../../layout/AdminLayout/StatusBar";
 
 // apis
 import useAxios from "../../../../hooks/useAxios";
-import { adminApis } from "../../../../services/apis";
+import { tourApis } from "../../../../services/apis/admin.apis";
 
 // helpers
 import { stringToDate } from "../../../../services/helpers/dateHandler";
@@ -67,14 +68,17 @@ const formPacker = (values, tourId) => {
 export {
   useState,
   useEffect,
+  useRef,
   useNavigate,
   useParams,
+  Link,
   format,
   AdminLayout,
   SpinnerModal,
+  StatusBar,
   TourForm,
   useAxios,
-  adminApis,
+  tourApis,
   stringToDate,
   ErrorMessage,
   formPacker,

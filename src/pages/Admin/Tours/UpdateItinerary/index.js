@@ -1,71 +1,61 @@
-// main
-import { useState, useEffect } from "react";
-import { v4 as uuid } from "uuid";
-import { useParams } from "react-router-dom";
-import Accordion from "react-bootstrap/Accordion";
-
-// components
-import AdminLayout from "../../../../layout/AdminLayout";
-import SpinnerModal from "../../../../components/SpinnerModal";
-import ErrorMessage from "../../../../components/ErrorMessage";
-import Editor from "../../../../containers/Editor";
-import StatusBar from "../../../../layout/AdminLayout/StatusBar";
-
-// apis
-import useAxios from "../../../../hooks/useAxios";
-import { adminApis } from "../../../../services/apis";
-
-// hooks
-import usePageTitle from "../../../../hooks/usePageTitle";
-
-// assets
 import {
-  xMark as closeSVG,
-  questionMark as questionSVG,
-} from "../../../../assets/svgs";
+  // main
+  useState,
+  useEffect,
+  uuid,
+  useParams,
+  Link,
+  Accordion,
 
-// css
-import styles from "./AddItinerary.module.css";
-import "./AddItinerary.override.css";
+  // components
+  AdminLayout,
+  SpinnerModal,
+  ErrorMessage,
+  Editor,
+  StatusBar,
+  NotifyModal,
+
+  // apis
+  useAxios,
+  tourApis,
+
+  // other
+  usePageTitle,
+  closeSVG,
+  questionSVG,
+  formDataPacker,
+  planValidator,
+
+  // css
+  styles,
+} from "./UpdateItinerary.import";
+import "./UpdateItinerary.override.css";
 
 function UpdateItinerary() {
   const [plan, setPlan] = useState([]);
-  const [lang, setLang] = useState("vi");
-  const [goUpdate, updating, updated, updatingError] = useAxios();
+  const [planErrors, setPlanErrors] = useState(null);
+  const [language, setLanguage] = useState("vi");
+  const [goUpdate, updating, updated, updatingError, updatingReset] =
+    useAxios();
   const [fetchTour, fetching, fetchedData, fetchingError] = useAxios();
   const { tourId } = useParams();
 
   // submit handler
   const submitHandler = async () => {
-    const sliders = plan.map((item) => item.images);
+    const errors = planValidator(plan);
+    if (errors) {
+      setPlanErrors(errors);
+      return;
+    }
 
-    const textPlan = plan.map((item) =>
-      item.images.length > 0 && typeof item.images[0] === "string"
-        ? item
-        : { ...item, images: [] }
-    );
-
-    const f = new FormData();
-
-    sliders.forEach((slider, index) => {
-      if (slider.length > 0) {
-        slider.forEach((img) => {
-          f.append(`plan${index}`, img);
-        });
-      }
-    });
-
-    f.append("itinerary", JSON.stringify(textPlan));
-    f.append("tourId", tourId);
-    f.append("language", lang);
-
-    goUpdate(adminApis.itinerary.update(f));
+    const formData = formDataPacker(plan, tourId, language);
+    goUpdate(tourApis.updateItinerary.update(formData));
   };
 
   // fetch tour
   useEffect(() => {
-    fetchTour(adminApis.tour.getSingle(tourId, lang));
-  }, [lang]);
+    fetchTour(tourApis.getSingle(tourId, language));
+  }, [language]);
 
   // set plan
   useEffect(() => {
@@ -77,18 +67,6 @@ function UpdateItinerary() {
       }
     }
   }, [fetchedData]);
-
-  useEffect(() => {
-    if (updated) {
-      alert("Thành công");
-    }
-  }, [updated]);
-
-  useEffect(() => {
-    if (updatingError) {
-      alert("Thất bại");
-    }
-  }, [updatingError]);
 
   const addDayHandler = () => {
     setPlan((prev) => [
@@ -129,8 +107,6 @@ function UpdateItinerary() {
     );
   };
 
-  usePageTitle("Cập nhật lộ tình tour | Admin | Travel Funix");
-
   useEffect(() => {
     const scrollingElement = document.getElementById("admin__content");
     scrollingElement.scroll({
@@ -139,43 +115,122 @@ function UpdateItinerary() {
     });
   }, [plan]);
 
+  usePageTitle("Cập nhật lộ tình tour | Admin | Travel Funix");
+
+  // handle show notification submit status
+  let notify = {};
+  if (updated) {
+    notify = {
+      type: "success",
+      message: "Cập nhật lộ trình tour thành công",
+      time: 1500,
+      leftBtn: {
+        text: "OK",
+        cb: () => {
+          updatingReset();
+        },
+        component: "button",
+      },
+      rightBtn: {
+        text: "Về trang danh sách tours",
+        to: `/admin/tours`,
+        component: Link,
+      },
+      onHide: () => {
+        updatingReset();
+      },
+    };
+  }
+
+  if (updatingError) {
+    notify = {
+      type: "error",
+      message: updatingError.message,
+      btn: {
+        text: "OK",
+        component: "button",
+        cb: () => {
+          updatingReset();
+        },
+      },
+    };
+  }
+
+  if (planErrors) {
+    notify = {
+      type: "error",
+      message: planErrors,
+      btn: {
+        text: "OK",
+        component: "button",
+        cb: () => {
+          setPlanErrors(null);
+        },
+      },
+    };
+  }
+
+  const isShowNotify = updated || updatingError || planErrors;
+  const titleAttr = `Các phiên bản ngôn ngữ hiện có: ${fetchedData?.metadata.available_lang
+    .map((item) => item.name)
+    .join(", ")}`;
+
   return (
     <>
       <SpinnerModal show={fetching || updating} />
-      <AdminLayout
-        title="Cập nhật lộ trình tour"
-        path={`/admin/edit-tour/${tourId}`}
-        text="Edit tour"
-      >
+      <NotifyModal show={isShowNotify} {...notify} />
+
+      <AdminLayout>
         {fetchingError && <ErrorMessage msg={fetchingError.message} />}
 
-        <StatusBar title="Cập nhật lộ trình tour">
+        <StatusBar
+          title={`Cập nhật lộ trình tour: ${
+            fetchedData?.metadata.original.code || ""
+          }`}
+        >
+          <Link className="btn btn-secondary" to={`/admin/edit-tour/${tourId}`}>
+            Sửa tour
+          </Link>
+
           <button onClick={addDayHandler} className="btn btn-info  btn-sm">
-            add item
+            Thêm item
           </button>
 
-          <button onClick={submitHandler} className="btn btn-primary btn-sm">
-            Submit
-          </button>
+          {plan.length > 0 && (
+            <button onClick={submitHandler} className="btn btn-primary btn-sm">
+              Xác nhận
+            </button>
+          )}
         </StatusBar>
 
         <div className={styles.container + " pb-5"}>
           {/* select languages  */}
 
           <div className="d-flex justify-content-between align-items-center pb-4">
-            <label className="d-flex align-items-center">
-              <h6 className="mb-0 me-2 text-nowrap">Phiên bản ngôn ngữ</h6>
-              <select value={lang} onChange={(e) => setLang(e.target.value)}>
-                <option value="vi">Tiếng Việt</option>
-                <option value="en">Tiếng Anh</option>
-              </select>
-              <span
-                title="Bạn cần tạo tour phiên bản tiếng Việt trước để tạo được lộ trình tiếng Anh"
-                className={styles.questionMark}
-              >
-                {questionSVG}
-              </span>
-            </label>
+            {fetchedData && (
+              <label className="d-flex align-items-center">
+                <h6 className="mb-0 me-2 text-nowrap">
+                  Chọn phiên bản ngôn ngữ
+                </h6>
+                <select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                >
+                  {fetchedData.metadata.available_lang.map((item) => (
+                    <option key={item.code} value={item.code}>
+                      {item.name}
+                    </option>
+                  ))}
+                  {/* <option value="en">Tiếng Anh</option> */}
+                </select>
+                <span
+                  title={`Bạn cần tạo tour ngôn ngữ tướng ứng trước để tạo được lộ trình ngôn ngữ đó.\n${titleAttr}`}
+                  className={styles.questionMark}
+                >
+                  {questionSVG}
+                </span>
+              </label>
+            )}
 
             {plan.length > 0 && (
               <button
@@ -187,7 +242,7 @@ function UpdateItinerary() {
             )}
           </div>
 
-          {lang !== "vi" && // không phải tiếng Việt
+          {language !== "vi" && // không phải tiếng Việt
             plan.length === 0 && // plan đang trống
             fetchedData.metadata.original.itinerary.length > 0 && ( // đã có lộ trình tiếng Việt
               <div>
@@ -208,12 +263,12 @@ function UpdateItinerary() {
             <Accordion defaultActiveKey={["0"]} alwaysOpen>
               {!fetching &&
                 plan.map((planItem) => (
-                  <Accordion.Item eventKey={planItem.id}>
+                  <Accordion.Item eventKey={planItem.id} key={planItem.id}>
                     <Accordion.Header>
                       <div className={styles.accordionHeader}>
                         <h6>{planItem.day}</h6>
                         <h5>{planItem.destination}</h5>
-                        <button
+                        <span
                           title="Xóa"
                           className={styles.removeDayBtn}
                           onClick={(e) => {
@@ -222,7 +277,7 @@ function UpdateItinerary() {
                           }}
                         >
                           {closeSVG}
-                        </button>
+                        </span>
                       </div>
                     </Accordion.Header>
                     <Accordion.Body>
@@ -272,7 +327,7 @@ function UpdateItinerary() {
                         </div>
 
                         {/* images  */}
-                        {lang === "vi" && (
+                        {language === "vi" && (
                           <>
                             <div>
                               <h6>Hình ảnh</h6>

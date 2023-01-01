@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import CardPlaceholder from "../../components/placeholders/CardPlaceholder";
 
-import { brokenImage } from "../../assets/images";
+import { brokenImage, altThumbnail } from "../../assets/images";
 import { placeholder } from "../../assets/images";
 import { chevronLeft, chevronRight } from "../../assets/svgs";
 import { SlickArrowLeft, SlickArrowRight } from "../../components/slickArrows";
@@ -75,11 +75,20 @@ function SliderCard(props) {
           nextArrow: <SlickArrowRight slidesToScroll={2} slidesToShow={2} />,
         },
       },
+      {
+        breakpoint: 400,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 0,
+          nextArrow: <SlickArrowRight slidesToScroll={1} slidesToShow={1} />,
+        },
+      },
     ],
   };
 
   const handlerBrokenImg = (e) => {
-    e.target.src = brokenImage;
+    e.target.src = altThumbnail;
   };
 
   const textCategory = (item) => {
@@ -156,6 +165,7 @@ function SliderCard(props) {
                 ))}
             </Slider>
           </div>
+
           {(page == "home" || page == "article") && (
             <Link className={styles.tourdetail} to={naviga}>
               {i18n.language == "vi" ? "Xem tất cả" : "ALL"}
