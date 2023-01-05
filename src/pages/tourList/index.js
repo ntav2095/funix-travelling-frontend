@@ -21,7 +21,7 @@ import ErrorPage from "../../containers/ErrorPage";
 function TourList({ cat_params }) {
   const [sendRequest, isLoading, data, error] = useAxios();
   const location = useLocation();
-  const [lazy] = useLazyLoading(loadingImg);
+  // const [lazy] = useLazyLoading();
   const [search, setSearch] = useState({
     sort: "time-asc",
   });
@@ -104,9 +104,9 @@ function TourList({ cat_params }) {
     );
   }, [i18n.language, location.search, cat_params, search]);
 
-  useEffect(() => {
-    lazy();
-  }, [isLoading]);
+  // useEffect(() => {
+  //   lazy();
+  // }, [isLoading]);
   usePageTitle(`Danh sách bài viết || Go Travel`);
 
   return (

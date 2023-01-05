@@ -11,7 +11,7 @@ import SliderCard from "../../containers/SliderCard";
 
 function HomeNew() {
   const { i18n } = useTranslation();
-  const [lazy] = useLazyLoading(loadingImg);
+  // const [lazy] = useLazyLoading();
 
   const [
     sendRequestTourTrongNuoc,
@@ -35,9 +35,9 @@ function HomeNew() {
     sendRequestGuides(postsApi.get({ page: 1, page_size: 6 }));
   }, [i18n.language]);
 
-  useEffect(() => {
-    lazy();
-  }, [isLoadingGuides, isLoadingTourTrongNuoc, isLoadingTourChauAu]);
+  // useEffect(() => {
+  //   lazy();
+  // }, [isLoadingGuides, isLoadingTourTrongNuoc, isLoadingTourChauAu]);
   return (
     <>
       <div className="containerHomeabout">

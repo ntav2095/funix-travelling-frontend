@@ -12,6 +12,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import "./navbar.css";
 import Search from "./Search";
 import NavTopBar from "./NavTopBar";
+import useLazyLoading from "../../hooks/uselazyLoading";
 
 const navItems = [
   {
@@ -60,7 +61,7 @@ const navItems = [
 
 function Header() {
   const [expanded, setExpanded] = useState(false);
-
+  
   const location = useLocation();
   const lang = useTranslation().i18n.language;
   useEffect(() => {
@@ -71,6 +72,7 @@ function Header() {
       setExpanded(false);
     }
   }, [location]);
+  
   return (
     <>
       <div className="travel__navbar">

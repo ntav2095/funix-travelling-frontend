@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import FooterGroup from "./FooterGroup";
 import styles from "./Footer.module.css";
 import { useTranslation } from "react-i18next";
+import useLazyLoading from "../../hooks/uselazyLoading";
+import { useEffect } from "react";
 
 const footerItems = {
   contact: {
@@ -193,6 +195,7 @@ const footerItems = {
 };
 
 export default function Footer() {
+  
   return (
     <div className={styles.footer}>
       <div className="container-fluid  pt-5">

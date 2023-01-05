@@ -4,80 +4,117 @@ import React, { useEffect } from "react";
 import * as yup from "yup";
 import { brokenImage } from "../../../../assets/images";
 import { imagesApis } from "../../../../services/apis/admin.apis";
-import { useAxios } from "../import";
+import { NotifyModal, useAxios } from "../import";
 import CardAddImage from "./CardAddimage";
 import CardImage from "./cardImage";
-import FormContent from "./form";
 import styles from "./formImage.module.css";
 
-function FormEditImage({ data }, ref) {
-  const [goEdit, editing, isSuccess, editingError] = useAxios();
+function FormEditImage({ data, handleSusses }, ref) {
+  const [goEdit, editing, isSuccess, editingError, reset] = useAxios();
 
   const images = data
     ? data.itinerary.map((item, index) => {
         return { [`ngày ${index + 1}`]: item.images };
       })
     : [];
-  // console.log("dataaa", data);
-  // console.log("images", images);
+
+  const initialValues = {
+    thumb: data.thumb,
+    banner: data.banner,
+  };
+
+  images.forEach((item, index) => {
+    initialValues[`ngày ${index + 1}`] = item[`ngày ${index + 1}`];
+  });
+
   const handleSumit = (e) => {
     const formdata = new FormData();
-    formdata.append("tourid", data._id);
-    formdata.append("thumb", [e.thumb]);
-    formdata.append("banner", [e.banner]);
-  console.log("formdata1", data._id);
-  console.log("formdata2", e.thumb);
-  console.log("formdata3", e.banner );
-  
+    formdata.append("tourId", data._id);
+    formdata.append("thumb", e.thumb);
+    formdata.append("banner", e.banner);
+
     data.itinerary.forEach((item, index) => {
       const dayindexfile = e[`ngày ${index + 1}`]?.filter(
         (item) => typeof item !== "string"
       );
       const dayindexurl = e[`ngày ${index + 1}`]?.filter(
         (item) => typeof item === "string"
-        );
-       
+      );
+
       if (dayindexurl && dayindexurl.length > 0) {
-        formdata.append(`plan ${index}`, JSON.stringify(dayindexurl));
+        formdata.append(`plan${index}`, JSON.stringify(dayindexurl));
+      } else {
+        formdata.append(`plan${index}`, JSON.stringify([]));
       }
       if (dayindexfile && dayindexfile.length > 0) {
         dayindexfile.forEach((item) => {
-          formdata.append(`plan ${index}`, item);
+          formdata.append(`plan${index}`, item);
         });
       }
     });
-   
-      goEdit(imagesApis.update(formdata));
+
+    goEdit(imagesApis.update(formdata));
   };
-  const initialValues = {
-    thumb: data.thumb,
-    banner: data.banner,
-  };
-  images.forEach((item, index) => {
-    initialValues[`ngày ${index + 1}`] = item[`ngày ${index + 1}`];
-  });
-useEffect(() => {
-  console.log("isSuccess", isSuccess);
-}, [isSuccess]);
-  //{container,title,lable,type,name,place,errmess, onchange}
+
+  useEffect(() => {
+    console.log("isSuccess", isSuccess);
+  }, [isSuccess]);
+
+  useEffect(() => {
+    console.log("lỗi", editingError);
+  }, [editingError]);
+
+  let notify = {};
+  if (isSuccess) {
+    notify = {
+      type: "success",
+      message: "Cập nhật ảnh thành công",
+      btn: {
+        text: "OK",
+        cb: () => {
+          reset();
+          handleSusses();
+        },
+        component: "button",
+      },
+      onHide: () => {
+        reset();
+      },
+      time: 2000,
+      show: isSuccess,
+    };
+  }
+
+  if (editingError) {
+    notify = {
+      type: "error",
+      message: editingError.message,
+      btn: {
+        text: "OK",
+        cb: () => {
+          reset();
+        },
+        component: "button",
+      },
+      onHide: () => {
+        reset();
+      },
+      show: editingError,
+    };
+  }
+
   return (
     <>
+      <NotifyModal {...notify} />
+
       <div className={styles.name}>{data.name}</div>
+
       <Formik initialValues={initialValues} onSubmit={(e) => handleSumit(e)}>
         {(formikProps) => {
           const { values, setFieldValue } = formikProps;
           console.log("values", values);
           return (
             <Form>
-              {/* <FastField
-                name={"avata"}
-                component={FormContent}
-                label={"Hình preview"}
-                placeholder="Chọn hình"
-                setFieldValue={setFieldValue}
-                type="file"
-              /> */}
-
               <div className={styles.currentImages}>
                 <h3>Hình đại diện</h3>
                 <div className={styles.preview}>
@@ -98,16 +135,6 @@ useEffect(() => {
                   )}
                 </div>
               </div>
-
-              {/* <FastField
-                name={"banner"}
-                component={FormContent}
-                label={"Hình Banner"}
-                setFieldValue={setFieldValue}
-                placeholder="Chọn hình"
-                type="file"
-              /> */}
-
               <div className={styles.currentImages}>
                 <h3>Hình banner</h3>
                 <div className={styles.preview}>

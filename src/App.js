@@ -4,7 +4,7 @@ import { visaApi } from "./services/apis";
 import { useDispatch } from "react-redux";
 import { setVisaTypes } from "./store/visa.slice";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import React, { Suspense, useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import GoToTop from "./components/GoToTop";
@@ -23,6 +23,7 @@ import BannerManager from "./pages/Admin/BannerManager";
 import Users from "./pages/Admin/Users";
 import CreateUser from "./pages/Admin/Users/CreateUser";
 import ChangePassword from "./pages/Admin/Users/ChangePassword";
+import useLazyLoading from "./hooks/uselazyLoading";
 // components
 
 const RequireAuth = React.lazy(() => import("./components/RequireAuth"));
@@ -44,7 +45,6 @@ const NotFound = React.lazy(() => import("./pages/NotFound"));
 // admin pages
 
 const ImageManager = React.lazy(() => import("./pages/Admin/ImageManager"));
-const EditImage = React.lazy(() => import("./pages/Admin/ImageManager/editImageTour"));
 
 // tours
 const NewTour = React.lazy(() => import("./pages/Admin/Tours/NewTour"));
@@ -71,7 +71,16 @@ const Dashboard = React.lazy(() => import("./pages/Admin/Dashboard"));
 const Login = React.lazy(() => import("./pages/Admin/Login"));
 
 function App() {
+  const location = useLocation();
+  console.log("location", location.pathname);
   const dispatch = useDispatch();
+  const [lazy] = useLazyLoading();
+  const image = document.querySelectorAll("img[lazy]");
+  image.forEach((item)=>{
+    item.addEventListener('load',()=>{
+      
+    })
+  })
   // ******************** handle visa *********************************
   const [sendRequest, isLoading, data, error, resetStates] = useAxios();
 
@@ -144,10 +153,6 @@ function App() {
               </Route>
               {/* imageManager */}
               <Route path="/admin/image-manager" element={<ImageManager />} />
-              <Route
-                path="/admin/edit-image-tour/:tourId"
-                element={<EditImage />}
-              />
 
               {/* `/admin/edit-image-tour/ */}
               {/* tour ImageManager  */}

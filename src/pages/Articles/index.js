@@ -11,7 +11,7 @@ import { postsApi } from "../../services/apis";
 
 function ArticleList() {
   const { i18n } = useTranslation();
-  const [lazy] = useLazyLoading(loadingImg);
+  const [lazy] = useLazyLoading();
 
   const [sendRequestNhatKy, isLoading1, dataNhatKy, error1] = useAxios();
   const [sendRequestDiemDen, isLoading2, dataDiemDen, error2] = useAxios();

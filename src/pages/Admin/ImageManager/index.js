@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { PageItem } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import FormEditImage from "./formEditImage";
 import {
@@ -32,11 +33,11 @@ import "./Tours.override.css";
 const checkMark = <span className={styles.checkSVG}>{svg.checkCircle}</span>;
 
 function Tours() {
+  
   const [sendRequest, isLoading, data, error] = useAxios();
   const [sendRequestTour, loadingTour, tour, tourError] = useAxios();
-  const [sendDelete, isDeleting, deleted, deleteError, deletingReset] =
-    useAxios();
-    const submitRef=useRef()
+
+  const submitRef = useRef();
   const [state, setState] = useState(null);
   const [filter, setFilter] = useState({
     category: "",
@@ -44,8 +45,6 @@ function Tours() {
     banner: "",
     page: 1,
   });
-
-  console.log("tour", tour);
 
   const query = { page: filter.page, page_size: PAGE_SIZE };
   if (filter.category) {
@@ -60,26 +59,22 @@ function Tours() {
     query.banner = filter.banner;
   }
 
-  const handleImage = async (id) => {
-    await sendRequestTour(tourApis.getSingle(id, "vi"));
+  const handleSusses = () => {
+    setState("");
   };
-useEffect(() => {
-  if(tour){
-    setState(tour.data)
-  }
-}, [tour]);
+  const handleImage = async (id) => {
+    await sendRequestTour(tourApis.getSingle(id));
+  };
+
+  useEffect(() => {
+    if (tour) {
+      setState(tour.data);
+    }
+  }, [tour]);
+
   useEffect(() => {
     sendRequest(tourApis.get(query));
   }, [filter]);
-
-  // nếu xóa tour xong mà bị tụt 1 trang
-  useEffect(() => {
-    if (data && deleted) {
-      if (data.metadata.page_count < filter.page) {
-        setFilter((prev) => ({ ...prev, page: data.metadata.page_count }));
-      }
-    }
-  }, [data, filter, deleted]);
 
   usePageTitle("Danh sách tours | Admin | Joya Travel");
 
@@ -121,6 +116,9 @@ useEffect(() => {
                   </th>
                   <th colSpan={3}>
                     <div className="text-center">Banner</div>
+                  </th>
+                  <th rowSpan={2}>
+                    <div>lộ trình</div>
                   </th>
                 </tr>
 
@@ -181,12 +179,15 @@ useEffect(() => {
                     <td>
                       <div>{item.layout.includes("eu-tours") && checkMark}</div>
                     </td>
+                    <td>
+                      <div>{item.missingitineraryImages && checkMark}</div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           )}
-          
+
           {console.log("tourComponent", tour)}
           {data && data.data.length > 0 && (
             <div className="pt-3 ps-1">
@@ -201,7 +202,13 @@ useEffect(() => {
               />
             </div>
           )}
-          {state &&!loadingTour&& <FormEditImage data={state} ref={submitRef} />}
+          {state && !loadingTour && (
+            <FormEditImage
+              data={state}
+              ref={submitRef}
+              handleSusses={handleSusses}
+            />
+          )}
           {data && data.data.length === 0 && <h5>Không có tour nào</h5>}
 
           {error && <ErrorMessage msg={error.message} />}
