@@ -12,7 +12,6 @@
 }
 
 .container__itinerary{
-    display: flex;
-    flex-direction: row;
-    max-width: 1300px;
+    display: block;
+    width: 100%;
 }

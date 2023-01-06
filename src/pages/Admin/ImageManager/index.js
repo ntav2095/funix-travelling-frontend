@@ -33,10 +33,10 @@ import "./Tours.override.css";
 const checkMark = <span className={styles.checkSVG}>{svg.checkCircle}</span>;
 
 function Tours() {
-  
+
   const [sendRequest, isLoading, data, error] = useAxios();
   const [sendRequestTour, loadingTour, tour, tourError] = useAxios();
-
+  const [update,setUpdate]=useState(false)
   const submitRef = useRef();
   const [state, setState] = useState(null);
   const [filter, setFilter] = useState({
@@ -59,6 +59,9 @@ function Tours() {
     query.banner = filter.banner;
   }
 
+  const handleUpdate=()=>{
+    setUpdate(false)
+  }
   const handleSusses = () => {
     setState("");
   };
@@ -86,6 +89,7 @@ function Tours() {
             type="button"
             onClick={() => {
               if (submitRef.current) {
+                setUpdate(true)
                 submitRef.current.click();
               }
             }}
@@ -180,7 +184,7 @@ function Tours() {
                       <div>{item.layout.includes("eu-tours") && checkMark}</div>
                     </td>
                     <td>
-                      <div>{item.missingitineraryImages && checkMark}</div>
+                      <div>{!item.missingitineraryImages && checkMark}</div>
                     </td>
                   </tr>
                 ))}
@@ -207,6 +211,8 @@ function Tours() {
               data={state}
               ref={submitRef}
               handleSusses={handleSusses}
+              update={update}
+              handleUpdate={handleUpdate}
             />
           )}
           {data && data.data.length === 0 && <h5>Không có tour nào</h5>}

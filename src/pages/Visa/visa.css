@@ -1,0 +1,211 @@
+.visa-content-feature ul li {
+  font-size: 18px;
+  color: #1d1d1d;
+  font-family: "os_regular";
+  margin-bottom: 15px;
+}
+.visa-info-feature ul li {
+  display: inline-block;
+  font-size: 18px;
+  color: #1d1d1d;
+  font-family: "os_regular";
+  padding: 20px 15px;
+}
+.visa-info-feature ul li:first-child {
+  padding-left: 0px;
+}
+.type-visa.box-rating-comment p {
+  display: block;
+  line-height: 32px;
+  margin: 20px 0px;
+  color: #00b874;
+}
+#xem-chi-tiet:hover {
+  color: #00b874;
+  cursor: pointer;
+}
+#xem-chi-tiet {
+  font-size: 20px;
+  color: #f98713;
+}
+#visa-item-box-services
+  .visa-single-services-main
+  .content-services-main
+  ul
+  li {
+  background: #fff;
+  padding: 25px 20px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  border: solid 1px #e6e6e6;
+}
+.btn-open-book-visa {
+  border-radius: 5px;
+  background-color: #f98713;
+  border: 0px;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 14px;
+  font-family: "os_bold";
+  min-width: 140px;
+  outline: 0;
+  margin-left: 30%;
+  margin-top: 3%;
+}
+.box-top {
+  grid-template-columns: auto auto;
+}
+.price-current {
+  font-size: 20px;
+  color: #ff9000;
+  margin-left: 30%;
+  margin-top: 5%;
+  font-weight: bold;
+}
+.chi-tiet-dich-vu {
+  padding: 5px;
+
+  list-style: none;
+}
+.chi-tiet-dich-vu li {
+  background: #fff;
+  padding: 25px 20px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  border: solid 1px #e6e6e6;
+  max-width: 1170px;
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 30px;
+}
+.dich-vu h2 {
+  color: #15284a;
+  font-size: 28px;
+  font-family: "os_bold";
+  border-bottom: 4px solid #0090fe;
+  margin: 0px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 5em;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+.col-sm-9 {
+  background: whitesmoke;
+  border-radius: 8px;
+  border: 1px solid;
+}
+.dich-vu {
+  background-color: rgb(244, 244, 244);
+
+  border-radius: 8px;
+  border: 1px solid floralwhite;
+}
+
+.box-info {
+  font-size: 15px;
+  color: #1d1d1d;
+  font-family: "os_semi_bold";
+  margin-top: 15px;
+}
+#box-info {
+  justify-content: center;
+  align-items: center;
+}
+.box-form {
+  display: inline-block;
+}
+#box-btn-submit > button {
+  border-radius: 5px;
+  background-color: #ec4325;
+  color: #ffffff;
+  font-family: "os_bold";
+  font-size: 14px;
+  text-transform: uppercase;
+  line-height: 40px;
+  min-width: 140px;
+  outline: 0;
+  border: 0px;
+
+  border: 0px;
+}
+.box-info-customer.col {
+  font-size: 15px;
+  color: #191919;
+  font-family: "os_semi_bold";
+  user-select: none;
+  margin-left: 8em;
+}
+span.fas {
+  border: 1px solid;
+  border-radius: 50%;
+  background-color: #d4d4d5;
+  font-size: 10px;
+  padding: 3px;
+  margin: 5px;
+  cursor: pointer;
+}
+.box-info-customer > label {
+  margin-left: 10px;
+}
+#box-info-price .col {
+  text-align: left;
+  margin-right: 100px;
+  min-width: 200px;
+  font-family: "os_semi_bold";
+}
+.info-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+div#box-info-customer {
+  margin-left: 4em;
+}
+div#box-info-customer label {
+  margin-left: 0.5em;
+}
+.type-0.box-book {
+  font-size: 16px;
+}
+span.type-text {
+  font-weight: bold;
+}
+.box-top .title-name {
+}
+.content-services-main ul li {
+  background: #fff;
+  padding: 25px 20px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  border: solid 1px #e6e6e6;
+}
+.box-banner-default {
+}
+.banner-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media only screen and (max-width: 850px) {
+  img.banner {
+    width: 100vw;
+    height: 350px;
+    object-fit: cover;
+    object-position: 72% 0px;
+  }
+  #Body-content-3 {
+    padding: 2em 1em;
+  }
+  .dich-vu h2 {
+    margin-left: 1em;
+  }
+  input.with100 {
+    font-size: 2vw;
+  }
+}
+@media only screen and (min-width: 851px) {
+  #Body-content-3 {
+    padding: 2em 8em;
+  }
+}

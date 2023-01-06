@@ -1,15 +1,17 @@
 .containner__image{
-    display: flex;
-    aspect-ratio: 1.6;
+    display: inline-table;
     width: 150px;
+    height: 95px;
     padding: 8px;
     position: relative;
 }
 .containner__image img{
-    width: 100%;
+width: 150px;
+    height: 95px;
     object-fit: cover;
     object-position: center;
     border-radius: 5px;
+    border: 0.2px solid gray;
 }
 .btnclose{
     opacity: 0.5;
@@ -17,11 +19,12 @@
     right: 0;
     top: 0;
     width: 16px;
-    padding: 5px;
-    background-color: rgb(248, 212, 212);
+    height: 18px;
+    padding: 0px;
+    background-color: rgb(250, 192, 192);
 }
 .btnclose:hover{
     z-index: 99;
     opacity: 1;
-    background-color: rgb(236, 88, 88);
+    background-color: rgb(245, 63, 63);
 }

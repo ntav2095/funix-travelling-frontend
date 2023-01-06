@@ -4,12 +4,13 @@ import React, { useEffect } from "react";
 import * as yup from "yup";
 import { brokenImage } from "../../../../assets/images";
 import { imagesApis } from "../../../../services/apis/admin.apis";
+import Dropfile from "../dropfile";
 import { NotifyModal, useAxios } from "../import";
 import CardAddImage from "./CardAddimage";
 import CardImage from "./cardImage";
 import styles from "./formImage.module.css";
 
-function FormEditImage({ data, handleSusses }, ref) {
+function FormEditImage({ data, handleSusses, update, handleUpdate }, ref) {
   const [goEdit, editing, isSuccess, editingError, reset] = useAxios();
 
   const images = data
@@ -28,32 +29,37 @@ function FormEditImage({ data, handleSusses }, ref) {
   });
 
   const handleSumit = (e) => {
-    const formdata = new FormData();
-    formdata.append("tourId", data._id);
-    formdata.append("thumb", e.thumb);
-    formdata.append("banner", e.banner);
+    if (update) {
+      const formdata = new FormData();
+      formdata.append("tourId", data._id);
+      formdata.append("thumb", e.thumb);
+      formdata.append("banner", e.banner);
 
-    data.itinerary.forEach((item, index) => {
-      const dayindexfile = e[`ngày ${index + 1}`]?.filter(
-        (item) => typeof item !== "string"
-      );
-      const dayindexurl = e[`ngày ${index + 1}`]?.filter(
-        (item) => typeof item === "string"
-      );
+      data.itinerary.forEach((item, index) => {
+        const dayindexfile = e[`ngày ${index + 1}`]?.filter(
+          (item) => typeof item !== "string"
+        );
+        const dayindexurl = e[`ngày ${index + 1}`]?.filter(
+          (item) => typeof item === "string"
+        );
 
-      if (dayindexurl && dayindexurl.length > 0) {
-        formdata.append(`plan${index}`, JSON.stringify(dayindexurl));
-      } else {
-        formdata.append(`plan${index}`, JSON.stringify([]));
-      }
-      if (dayindexfile && dayindexfile.length > 0) {
-        dayindexfile.forEach((item) => {
-          formdata.append(`plan${index}`, item);
-        });
-      }
-    });
+        if (dayindexurl && dayindexurl.length > 0) {
+          formdata.append(`plan${index}`, JSON.stringify(dayindexurl));
+        } else {
+          formdata.append(`plan${index}`, JSON.stringify([]));
+        }
+        if (dayindexfile && dayindexfile.length > 0) {
+          dayindexfile.forEach((item) => {
+            formdata.append(`plan${index}`, item);
+          });
+        }
+      });
 
-    goEdit(imagesApis.update(formdata));
+      goEdit(imagesApis.update(formdata));
+      handleUpdate();
+      return;
+    }
+    e.preventDefault();
   };
 
   useEffect(() => {
@@ -161,7 +167,8 @@ function FormEditImage({ data, handleSusses }, ref) {
                       <FieldArray name={`ngày ${index + 1}`}>
                         {({ insert, remove, push }) => (
                           <>
-                            <h3>{"Ảnh lộ trình ngày " + `${index + 1}`}</h3>
+                            <h3>{"Ảnh lộ trình ngày " + `${index + 1}`} </h3>
+
                             <div className={styles.container__itinerary}>
                               {values[`ngày ${index + 1}`].map(
                                 (item, index1) => {
@@ -177,12 +184,16 @@ function FormEditImage({ data, handleSusses }, ref) {
                                   );
                                 }
                               )}
-                              <CardAddImage
+                              {/* <CardAddImage
                                 callback={insert}
                                 index={values[`ngày ${index + 1}`].length}
                                 arr={true}
-                              />
+                              /> */}
                             </div>
+                            <Dropfile
+                              callback={insert}
+                              index={values[`ngày ${index + 1}`].length}
+                            />
                           </>
                         )}
                       </FieldArray>
