@@ -1,6 +1,7 @@
 import { FastField, FieldArray, Form, Formik, insert } from "formik";
 import { forEach } from "lodash";
 import React, { useEffect } from "react";
+import { Button } from "react-bootstrap";
 import * as yup from "yup";
 import { brokenImage } from "../../../../assets/images";
 import { imagesApis } from "../../../../services/apis/admin.apis";
@@ -189,6 +190,13 @@ function FormEditImage({ data, handleSusses, update, handleUpdate }, ref) {
                                 index={values[`ngày ${index + 1}`].length}
                                 arr={true}
                               /> */}
+                              <div style={{textAlign:'right'}}>
+                                <Button style={{backgroundColor:'red',color:'white'}} onClick={()=>{
+                                  values[`ngày ${index + 1}`].map((item,index)=>{
+                                    remove(index);
+                                  })
+                                }}>remove all</Button>
+                              </div>
                             </div>
                             <Dropfile
                               callback={insert}

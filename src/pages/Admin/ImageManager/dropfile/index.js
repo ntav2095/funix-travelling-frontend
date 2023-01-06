@@ -51,8 +51,8 @@ function Dropfile({ callback,index }) {
     border: "1px solid #eaeaea",
     marginBottom: "8px",
     marginRight: "8px",
-    width: "100px",
-    height: "100px",
+    width: "150px",
+    height: "95px",
     padding: "4px",
     boxSizing: "border-box",
   };
